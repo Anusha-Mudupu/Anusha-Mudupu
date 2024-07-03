@@ -1,0 +1,171 @@
+<div class="row" >
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+          <h2>View User</h2>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+
+
+                    <li class="breadcrumb-item active">Chits</li>
+                    <li class="breadcrumb-item active" style="cursor:pointer" (click)="user()">User</li>
+
+                </ol>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card" style="position: relative; top:-30px">
+            <!-- <div class="card-header">
+                <h2>View User</h2>
+            </div> -->
+            <div class="card-body">
+                <div class="row">
+
+                    <div class="col-xxl-8">
+                        <form style="position: relative; top:-40px" [formGroup]="updateUserForm">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="productTitle" class="form-label">First Name <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" readonly placeholder="{{userId.firstName}}"
+                                        formControlName="firstName">
+                                    <input hidden type="text" class="form-control" placeholder="{{userId.id}}"
+                                        formControlName="id">
+                                </div>
+                                <div class="col">
+                                    <label for="productCategories" class="form-label">Last Name <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" readonly placeholder="{{userId.lastName}}"
+                                        formControlName="lastName">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col">
+                                    <label for="productType" class="form-label">Phone Number <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" readonly
+                                        placeholder="{{userId.phoneNumber}}" formControlName="phoneNumber">
+                                </div>
+                                <div class="col">
+                                    <label for="shortDecs" class="form-label">Email <span
+                                            class="text-danger">*</span></label>
+                                    <input type="email" class="form-control" placeholder="Role" readonly
+                                        placeholder="{{userId.email}}" formControlName="email">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col">
+                                    <label class="form-label">User Name
+                                        <span style="color:red">*</span></label>
+                                    <input type="text" class="form-control" formControlName="userName"
+                                        placeholder="{{userId.userName}}" readonly>
+
+
+                                </div>
+                                <div class="col">
+                                    <label class="form-label">PAN Number <span style="color:red">*</span>
+                                    </label>
+                                    <input type="text" class="form-control" formControlName="panNo"
+                                        placeholder="{{userId.panNo}}" readonly>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label for="productBrand" class="form-label">Branch <span
+                                                class="text-danger">*</span></label>
+
+                                        <!-- <select formControlName="branchId" class="form-select mb-3"
+                                            aria-label="Default select example" readonly>
+                                            @for(branch of baranchList; track $index){
+                                            <option [value]="branch.id">{{branch.name}}</option>
+                                            
+
+                                            } 
+
+                                        </select> -->
+                                        <input type="text" class="form-control" formControlName="branchName"
+                                            placeholder="{{userId.branchName}}" readonly>
+                                        <input hidden="password" class="form-control" formControlName="password"
+                                            placeholder="{{userId.password}}" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label for="productUnit" class="form-label">Agent Code
+                                        </label>
+                                        <input type="test" class="form-control" formControlName="agentCode"
+                                            placeholder="{{userId.agentCode}}" readonly>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <br>
+                            <!-- <div>
+
+                                <div class="container">
+                                    <h2>Role</h2>
+
+
+                                    <div>
+                                        <div class="image-item" class="row" id="dfcv">
+
+                                            <div class="col-lg-3 col-md-12 mb-4 mb-lg-0" *ngFor="let role of roles"
+                                                id="dfcv">
+
+
+                                                <div style="position: relative; margin-left: 50px; padding-top:20px;">
+                                                    {{role}}
+                                                    <div class="form-check form-switch mb-3" dir="ltr"
+                                                        style="position: relative; margin-left: 10px; ">
+
+                                                        <input type="checkbox" class="form-check-input"
+                                                            [checked]="isSelectedRole(role)"  disabled >
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+
+                                </div>
+                            </div> -->
+                            <div class="row" style="position: relative; widows: 300px;">
+                                <h2>Role</h2>
+                                <ng-container *ngFor="let role of roles; let i = index">
+                                    <div class="col-lg-{{ calculateColumnSize(roles.length) }} col-md-12 mb-4 mb-lg-0" id="dfcv">
+                                        <div style="position: relative; margin-left: 50px; padding-top: 20px;">
+                                            {{ role }}
+                                            <div class="form-check form-switch mb-3" dir="ltr"
+                                                style="position: relative; margin-left: 10px;">
+                                                <input type="checkbox" class="form-check-input" [checked]="isSelectedRole(role)" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </div>
+                            <br>
+                            <div class="hstack gap-2 justify-content-end mb-3">
+                                <button class="btn btn-danger" (click)="onCloseHandled()" style="cursor: pointer;"><i
+                                        class="ph-x align-middle"></i> Cancel</button>
+                                
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

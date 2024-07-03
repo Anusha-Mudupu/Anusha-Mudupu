@@ -1,0 +1,335 @@
+<div class="row">
+  
+
+    <div class="col-12">
+        <!-- <div class="card"> -->
+            <!-- <div class="card-header">
+            </div>
+            <div class="card-body"> -->
+                
+                <accordion [closeOthers]="false"
+                    class="accordion custom-accordionwithicon custom-accordion-border accordion-border-box accordion-success"
+                    id="accordionBordered">
+                    <accordion-group class="accordion-item" [isOpen]="isFirstOpen">
+                        <h2 accordion-heading class="accordion-header" id="accordionborderedExample1">
+                            <button class="accordion-button" type="button">
+                                Add FollowUp
+                            </button>
+                        </h2>
+                        <div id="accor_borderedExamplecollapse1" class="accordion-collapse collapse show">
+                            <div class="accordion-body">
+                                <div class="row align-items-start">
+                                    <div class="col-sm-7 followupscreen">
+                                        <form  [formGroup]="LeadForm" class="tablelist-form" novalidate>
+                                            <div class="card-body">
+                            
+                            
+                                                <div class="mb-3">
+                                            
+                                                    <div class="mb-3">
+                                                        <label for="exampleFormControlTextarea5" class="form-label">Remark</label>
+                                                            <textarea class="form-control" id="exampleFormControlTextarea5" formControlName="remarks" rows="3"></textarea>
+                                                       
+                                                    </div>
+                                                </div>
+                                                            <div class="row gy-2">
+                            
+                                               
+                                                <!--end col-->
+                            
+                                                <div class="col-3 col-md-6">
+                            
+                                                    <label for="exampleInputPassword1"
+                                                    class="form-label">Status</label>
+                                                    
+                                                        <div class="input-group">
+                            
+                                                            <!-- <label class="input-group-text" for="inputGroupSelect01">Options</label> -->
+                                                            <select formControlName="followUpStatus" class="form-select mb-3" aria-label="Default select example">
+                                                                @for(user of status;track $index){
+                                                                    <option value="" disabled selected
+                                                                        style="display:none;">Select Status</option>
+                                
+                                                                    <option [value]="user.id">
+                                                                        {{user.title}}
+                                                                    </option>
+                                                                    }
+                                                            </select>
+                                                        </div>
+                                                
+                                                </div>
+                                                <div class=" col-md-6">
+                                                    <label for="exampleInputPassword1" class="form-label">FollowUp Through</label>
+                                                    <div>
+                                                        <div class="input-group">
+                                                            <select formControlName="followupType" class="form-select mb-3" aria-label="Default select example">
+                                                                <option value="" disabled selected>Select FollowUp Through</option>
+                                                                <ng-container *ngFor="let user of getFollowUpThroughdata; let i = index">
+                                                                    <option [value]="user.id">{{ user.title }}</option>
+                                                                </ng-container>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                
+                                                
+                                                
+                                                <div class=" col-md-6">
+                                                    <div class="">
+                                                        <label class="form-label">Next Followup Date</label>
+                             
+                                                        <input type="text" formControlName="nextFollowUpDate" class="form-control flatpickr-input" mwlFlatpickr [altInput]="true" [convertModelValue]="true" altFormat="F j, Y" dateFormat="Y-m-d">
+                                                    </div>
+                                                </div>
+                            
+                                                <div class=" col-md-6">
+                                                    <div class="">
+                                                        <label for="cleave-time-format" class="form-label">Time Formatting</label>
+                                                        <input type="text" class="form-control" formControlName="followupBy" mask="00:00" placeholder="hh:mm"
+                                                            id="cleave-time-format">
+                                                    </div>
+                                                </div>
+                            
+                                                 <div class=" col-md-6">
+                                                    <label for="exampleInputPassword1"
+                                                    class="form-label">Next Followup Through</label>
+                                                    <div class="input-group">
+                                                        <!-- <label class="input-group-text" for="inputGroupSelect01">Options</label> -->
+                                                        <select formControlName="nextFollowupType" class="form-select mb-3" aria-label="Default select example">
+                                                            @for(product of getFollowUpThroughdata; track $index){
+                                                                <option [value]="product.id">{{product.title}}</option>
+                                                                <option value="" disabled selected
+                                                                    style="display:none;">Select Next FollowUp Through</option>
+                            
+                                                                }
+                                                        </select>
+                                                    </div>
+                            
+                                                </div>
+                                              
+                            
+                                                
+                                            </div>                  
+                                            <div class="modal-footer mt-2">
+                                                <div class="hstack gap-2 justify-content-end">
+                                                    <button type="submit" class="btn btn-success" id="add-btn" (click)="savefollowup()" [disabled]="!LeadForm.valid"[ngClass]="{'disabled-button': !LeadForm.valid}">Submit</button>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-sm-5">
+                                    <div class="border border-2  bg-light p-2" style="font-size: 18px;">Followup History of shaik</div>
+
+                                    <!-- <div class="border border-2  bg-light p-2 mt-4" style="font-size: 18px;">Followup History of {{nextfollowupwith}}</div> -->
+                                    </div>
+                                    
+                                    </div>
+                            </div>
+                        </div>
+                    </accordion-group>
+                    <accordion-group class="accordion-item">
+                        <h2 accordion-heading class="accordion-header" id="accordionborderedExample2">
+                            <button class="accordion-button" type="button">
+                                FollowUp History
+                            </button>
+                        </h2>
+                        <div id="accor_borderedExamplecollapse2" class="accordion-collapse collapse show">
+                            <div class="accordion-body">
+                                <div class="card">
+                                    <div class="">
+                                        
+                                    </div>
+                        
+                                    <div class="card-body">
+                                        <div id="customerList">
+                                            <div class="row g-4 mb-3">
+                                              
+                        
+                                            <div class="table-responsive table-card mt-3 mb-1">
+                                                <table class="table align-middle table-nowrap" id="customerTable">
+                                                    <thead class="table-light">
+                                                        <tr>
+                                                            
+                                                            <!-- <th class="sort"   >Lead Name
+                                                            </th>
+                                                            <th class="sort"   >Source</th>
+                                                            <th class="sort"   >sub Source</th> -->
+                                                            <th class="sort "   >Next Followup Through
+                                                            </th>
+                                                            <th class="sort "  >Follow Up
+                                                            </th>
+                                                            <th class="sort"   >Next Followup Date</th>
+                                                            <th class="sort"   >Remark</th>
+                        
+                        
+                                                            <th class="sort">Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="list form-check-all">
+                                                        @for (data of followupData[0]; track $index) {
+                                                        <tr id="a_{{data.id}}">
+                                                           
+                                                            <td class="id" style="display:none;"><a href="javascript:void(0);" class="fw-medium link-primary">#VZ2101</a></td>
+                                                            <!-- <td class="customer_name" >{{data.leadid}}</td> -->
+                                                            <td class="phone">{{data.nextFollowupTypeName}}</td>
+                                                            <td class="date">{{data.followupTypeName}}</td>
+                                                            <td class="email">{{data.nextFollowUpDate}}</td>
+                        
+                                                            <td class="date">{{data.remarks}}</td>
+                        
+                                                            <td >
+                                                                <div class="d-flex gap-2">
+                                                                    <!-- <div class="edit" (click)="followup(data.id)"> -->
+                                                                    <div class="edit" >
+                                                                        <button class="btn btn-sm btn-success edit-item-btn" (click)="getfollowup(data.id)">Follow Up</button>
+                                                                    </div>
+                                                                                                              
+                                                                </div>
+                                                            </td>
+                                                            <!-- <td>
+                                                                <div class="d-flex gap-2">
+                                                                    <div class="edit" >
+                                                                        <button class="btn btn-sm btn-success edit-item-btn" ><i class="ri-pencil-line"></i></button>
+                                                                    </div>
+                                                                    <div class="remove">
+                                                                        <button class="btn btn-sm btn-danger remove-item-btn" ><i class="ri-delete-bin-2-line"></i></button>
+                                                                    </div>
+                                                                    
+                                                                </div>
+                                                            </td> -->
+                                                        </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                               
+                                            </div>
+                        
+                                            <div class="d-flex justify-content-end">
+                                                <div class="pagination-wrap hstack gap-2">
+                                                    <pagination class="pagination-wrap hstack gap-2" [totalItems]="followups.length" [itemsPerPage]="15" (pageChanged)="tablepageChanged($event)"></pagination>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><!-- end card -->
+                                </div>
+                                <!-- end col -->
+                            </div>
+                            </div>
+                        </div>
+                    </accordion-group>
+                   
+                </accordion>
+            <!-- </div> -->
+           
+            <div class="modal-footer mt-2" >
+                <div class="hstack gap-2 justify-content-end">
+                    <button type="button" class="btn btn-light" (click)="close()">Close</button>
+                </div>
+            </div>
+        <!-- </div>end card -->
+    </div>
+    <!--end col-->
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="">
+                
+            </div>
+
+            <div class="card-body">
+                <div id="customerList">
+                    <div class="row g-4 mb-3">
+                        <div class="col-sm-auto">
+                            <div class="" style="    font-size: large;
+                font-weight: 500;
+            ">
+                    Follow Up Screen
+                 </div>
+                        </div>
+                        <div class="col-sm">
+                            <div class="d-flex justify-content-sm-end">
+                                <button type="button" class="btn btn-success add-btn me-2" id="create-btn" (click)="followup()" ><i class="ri-add-line align-bottom me-1"></i>
+                                    Add</button>
+                                    <div class="search-box ms-2">
+                                        <input type="text" class="form-control search" placeholder="Search..." >
+                                        <i class="ri-search-line search-icon"></i>
+                                      </div>
+                                      
+                                      
+                        </div>
+                    </div>
+
+                    <div class="table-responsive table-card mt-3 mb-1">
+                        <table class="table align-middle table-nowrap" id="customerTable">
+                            <thead class="table-light">
+                                <tr>
+                                    
+                                    
+                                    <th class="sort "   >Next Followup Through
+                                    </th>
+                                    <th class="sort "  >Follow Up
+                                    </th>
+                                    <th class="sort"   >Next Followup Date</th>
+                                    <th class="sort"   >Remark</th>
+
+
+                                    <th class="sort">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="list form-check-all">
+                                @for (data of leadsData2; track $index) {
+                                <tr id="a_{{data.id}}">
+                                   
+                                    <td class="id" style="display:none;"><a href="javascript:void(0);" class="fw-medium link-primary">#VZ2101</a></td>
+                                    <td class="phone">{{data.nextFollowupTypeName}}</td>
+                                    <td class="date">{{data.followupTypeName}}</td>
+                                    <td class="email">{{data.nextFollowUpDate}}</td>
+
+                                    <td class="date">{{data.remarks}}</td>
+
+                                    <td >
+                                        <div class="d-flex gap-2">
+                                            <div class="edit" >
+                                                <button class="btn btn-sm btn-success edit-item-btn" >Follow Up</button>
+                                            </div>
+                                                                                      
+                                        </div>
+                                    </td>
+                                   
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                       
+                    </div>
+
+                    <div class="d-flex justify-content-end">
+                        <div class="pagination-wrap hstack gap-2">
+                            <pagination class="pagination-wrap hstack gap-2" [totalItems]="leadsData2.length" [itemsPerPage]="15" (pageChanged)="tablepageChanged($event)"></pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+</div>
+</div> -->
+
+
+

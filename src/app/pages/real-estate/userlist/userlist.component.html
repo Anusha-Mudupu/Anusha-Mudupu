@@ -1,0 +1,391 @@
+<div class="container">
+
+    <div class="container">
+        <div class="row row-cols-2 row-cols-lg-3">
+
+            <div class="col-4 col-lg-2" style="font-weight:normal; font-size: 25px;">
+                User List</div>
+
+            <div class="col-4 col-lg-2" style="left:350px;position:relative">
+                <input type="search" [(ngModel)]="searchText" style="position: relative; top:10px; left: -180px;"
+                    placeholder="Search Name/Email">
+            </div>
+            <div class="col-4 col-lg-2" style="left:480px;position:relative"><button type="button"
+                    class="btn btn-success"
+                    style="left:-290px;width:85px; position: relative; top:10px;border-radius: 5px;; height: 30px; padding-top:1px; color: white; font-weight: bold; padding-left:25px;">
+                    Search
+                    <i class="bi bi-search"
+                        style="position: relative; top:-19px ; left:-20px;font-weight: bold;font-size: 13px;"></i>
+                </button>
+
+
+            </div>
+            <!-- <div class="col-4 col-lg-2" style="left:20px;position:relative; cursor: pointer;" (click)="openModal()">
+                <button   class="btn btn-success" style="margin-left:100px;width: 70px; 
+                    position: relative; top:10px;border-radius: 5px;
+                    height: 30px; padding-top:1px;
+                     color: white; font-weight: bold;">+ADD</button>
+            </div> -->
+            <div>
+                <button class="btn btn-success" id="add" (click)="openModal()" data-toggle="tooltip"
+                    data-placement="top" title="click Add">+ADD</button>
+            </div>
+            <div class="col-4 col-lg-2" style="position:relative">
+                <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="DOWNLOADPDF"
+                    style="left:-125px;width:auto; position: relative; top:10px;border-radius: 5px;; height: 30px; padding-top:1px; color: white; font-weight: bold;">
+                    DOWNLOADPDF</button>
+                <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="DOWNLOADEXCEL"
+                    style="left:15px;width:auto; position: relative; top:-20px;border-radius: 5px;; height: 30px; padding-top:1px; color: white; font-weight: bold;">
+                    DOWNLOADEXCEL</button>
+            </div>
+            <!-- <div class="col-4 col-lg-2" style="position:relative"><button class="btn btn-success"
+                    style="width:auto; position: relative; top:10px;border-radius: 5px;; height: 30px; padding-top:1px; color: white; font-weight: bold;">DOWNLOADEXCEL</button>
+            </div> -->
+        </div>
+    </div>
+</div>
+<div class="container" style="background-color:white;
+box-shadow: 1px 1px 1px 1px #888888; height: 100%; width:100%;top:40px; position: relative;">
+    <table class="table" id="sortable-table">
+
+        <thead style="background-color: whitesmoke;">
+            <tr>
+                <th scope="col" (click)="sortTable(0)">Name<i class="fa-solid fa-sort"></i></th>
+                <th scope="col"(click)="sortTable(1)">Role<i class="fa-solid fa-sort"></i></th>
+                <th scope="col"(click)="sortTable(2)">Username<i class="fa-solid fa-sort"></i></th>
+                <th scope="col"(click)="sortTable(3)">Email<i class="fa-solid fa-sort"></i></th>
+                <th scope="col"(click)="sortTable(4)">Mobile No<i class="fa-solid fa-sort"></i></th>
+                <th scope="col"(click)="sortTable(5)">Reports To<i class="fa-solid fa-sort"></i></th>
+                <th scope="col"(click)="sortTable(6)">Branch<i class="fa-solid fa-sort"></i></th>
+                <th scope="col"(click)="sortTable(7)">Status<i class="fa-solid fa-sort"></i></th>
+                <th scope="col">Actions</th>
+
+
+            </tr>
+        </thead>
+        @for (list of userlist | orderBy:searchText; track $index) {
+        <tbody>
+            <tr>
+                <th scope="row">{{list.lastName}}&nbsp;{{list.firstName}}</th>
+                <td>Agent</td>
+                <td>076543</td>
+                <td>{{list.email}}</td>
+                <td>{{list.phoneNumber}}</td>
+                <td>Raghav</td>
+                <td>Hyderabad</td>
+                <td>Active</td>
+
+
+                <td>
+                    <i class="bi bi-pen" style="color:gray" data-toggle="tooltip" data-placement="top"
+                        title="Click Edit" (click)="userClick(list.id)"></i>
+                    <i class="bi bi-key" data-toggle="tooltip" data-placement="top" title="click"
+                        (click)="openPassword()"></i>
+                    <i class="bi bi-x-square" style="color:red;border-radius:100px" data-toggle="tooltip"
+                        data-placement="top" title="click" (click)="openActive()"></i>
+                    <i class="bi bi-trash3" style="color:red" data-toggle="tooltip" data-placement="top"
+                        title="click Delete" (click)="openDelete()"></i>
+                </td>
+
+            </tr>
+
+        </tbody>
+        }
+    </table>
+    <i style="font-size:16px;color:navy;position: relative;left:10px" class="fa">&#xf021;</i>
+    <nav aria-label="Page navigation example"
+        style="margin-left: 350px;position: relative;top:-20px;border-radius: 30px;">
+        <ul class="pagination">
+            <li class="page-item" style="border-radius: 300px;"><a class="page-link"
+                    style="border-radius: 30px; width:30px"><i class="fas fa-chevron-left"
+                        (click)="openModal()"></i></a>
+            </li>
+            <li class="page-item"><a class="page-link" style="background-color: yellow;border-radius: 30px;">1</a></li>
+            <li class="page-item"><a class="page-link" style="border-radius: 30px;">2</a></li>
+            <li class="page-item" style="border-radius: 30px;"><a class="page-link" style="border-radius: 30px;">3</a>
+            </li>
+            <li class="page-item"><a class="page-link" style="border-radius: 30px;width:30px"><i
+                        class="fas fa-chevron-right"></i></a></li>
+        </ul>
+    </nav>
+</div>
+
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"> Create User</h4>
+                <span class="close" aria-label="Close" (click)="onCloseHandled()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="userData">
+                    <div class="row">
+
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label"> First Name</label>
+                            <input type="text" class="form-control" placeholder="First Name"
+                                formControlName="firstName">
+                            <div *ngIf="submitted && userData.get('firstName').invalid">
+                            </div>
+                            <!-- <div *ngIf="userData.get('firstName').errors.required" class="text-danger"> first Name is
+                                required.</div> -->
+
+                        </div>
+
+                    </div>
+                    <br>
+                    <div class="row">
+
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Last Name</label>
+                            <input type="text" class="form-control" placeholder="Last Name" formControlName="lastName">
+                            <div *ngIf="submitted && userData.get('lastName').invalid">
+                            </div>
+                            <div *ngIf="userData.get('lastName').errors.required" class="text-danger"> lastName is
+                                required.</div>
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Phone Number</label>
+                            <input type="text" class="form-control" placeholder="phoneNumber"
+                                formControlName="phoneNumber">
+                            <div *ngIf="submitted && userData.get('phoneNumber').invalid">
+                            </div>
+                            <div *ngIf="userData.get('phoneNumber').errors.required" class="text-danger"> phoneNumber is
+                                required.</div>
+                        </div>
+                    </div>
+
+                    <br>
+                    <div class="row">
+
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Email</label>
+                            <input type="text" class="form-control" placeholder="email" formControlName="email">
+                            <div *ngIf="submitted && userData.get('email').invalid">
+                            </div>
+                            <div *ngIf="userData.get('email').errors.required" class="text-danger"> Email is
+                                required.
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <br>
+                    <div class="row">
+
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">password</label>
+                            <input type="password" class="form-control" placeholder="password"
+                                formControlName="password">
+                        </div>
+
+                    </div>
+
+                    <button type="button" class="btn btn-success" (click)="submitForm(userData)">Submit</button>
+
+                </form>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+            <!-- <button type="button" class="btn btn-default" (click)="onCloseHandled()">Close</button> -->
+            <!-- <button type="button" class="btn btn-success" >Submit</button> -->
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display1}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit User</h4>
+                <span class="close" aria-label="Close" (click)="onCloseHandled1()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="updateUserForm">
+                    <div *ngIf="selectedItem">
+                        <div class="row">
+                            <div class="col">
+                                <label for="exampleInputPassword1" class="form-label">First Name</label>
+                                <input type="text" class="form-control" [(ngModel)]="selectedItem.firstName"
+                                    placeholder="{{selectedItem.firstName}}" formControlName="firstName">
+                                <div *ngIf="submitted && userData.get('firstName').invalid">
+                                </div>
+                                <div *ngIf="userData.get('firstName').hasError('required') && userData.get('firstName').touched"
+                                    class="text-danger">
+                                    first Name is required.
+                                </div>
+                            </div>
+                            <div class="col">
+                                <!-- <label for="exampleInputPassword1" class="form-label"> Id</label> -->
+                                <input hidden type="text" class="form-control" [(ngModel)]="selectedItem.id"
+                                    placeholder="{{selectedItem.id}}" formControlName="id">
+                            </div>
+
+                            <!-- <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Middle Name</label>
+                            <input type="text" class="form-control" placeholder="Middle Name">
+                        </div> -->
+                        </div>
+                        <br>
+                        <div class="row">
+
+                            <div class="col">
+                                <label for="exampleInputPassword1" class="form-label">Last Name</label>
+                                <input type="text" class="form-control" [(ngModel)]="selectedItem.lastName"
+                                    placeholder="{{selectedItem.lastName}}" formControlName="lastName">
+                                <div *ngIf="submitted && userData.get('lastName').invalid">
+                                </div>
+                                <div *ngIf="userData.get('lastName').hasError('required') && userData.get('lastName').touched"
+                                    class="text-danger">
+                                    Last Name is required.
+                                </div>
+                            </div>
+                            <div class="col">
+                                <label for="exampleInputPassword1" class="form-label">Phone Number</label>
+                                <input type="text" class="form-control" [(ngModel)]="selectedItem.phoneNumber"
+                                    placeholder="{{selectedItem.phoneNumber}}" formControlName="phoneNumber">
+                                <div *ngIf="submitted && userData.get('phoneNumber').invalid">
+                                </div>
+                                <div *ngIf="userData.get('phoneNumber').hasError('required') && userData.get('phoneNumber').touched"
+                                    class="text-danger">
+                                    phoneNumber is required.
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+
+                            <div class="col">
+                                <label for="exampleInputPassword1" class="form-label">Email</label>
+                                <input type="text" class="form-control" placeholder="Role"
+                                    [(ngModel)]="selectedItem.email" placeholder="{{selectedItem.email}}"
+                                    formControlName="email">
+                                <div *ngIf="submitted && userData.get('email').invalid">
+                                </div>
+                                <div *ngIf="userData.get('email').hasError('required') && userData.get('email').touched"
+                                    class="text-danger">
+                                    Email is required.
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <br>
+                        <div class="row">
+
+                            <div class="col">
+                                <!-- <label for="exampleInputPassword1" class="form-label">password</label> -->
+                                <input hidden type="password" class="form-control" placeholder="Last Zone"
+                                    formControlName="password" [(ngModel)]="selectedItem.password"
+                                    placeholder="{{selectedItem.password}}">
+                            </div>
+                            <!-- <div formArrayName="roles" class="col">
+                            <label for="exampleInputPassword1" class="form-label">roles</label>
+                            <input type="text" class="form-control"  formControlName="agent">
+                        </div> -->
+                        </div>
+
+                        <button type="button" class="btn btn-success" (click)="onSubmit(updateUserForm)">Submit</button>
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+                <!-- <button type="button" class="btn btn-default" (click)="onCloseHandled()">Close</button> -->
+                <!-- <button type="button" class="btn btn-success" (click)="onCloseHandled()">Submit</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display2}" id="dltModel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <span style="font-weight: bold;margin-left: 130px;"> Do you want to delete record?</span>
+                <span class="close" aria-label="Close" (click)="onClosed()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <hr>
+            <div class="modal-body">
+
+                <form>
+                    <div class="row" id="fields">
+                        <div class="col">
+
+
+                        </div>
+
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" (click)="onClosed()">OK</button>
+                <button type="button" class="btn btn-danger" (click)="onClosed()">X Cancel</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display4}" id="dltModel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <span style="font-weight: bold;margin-left: 130px;">Reset Password</span>
+                <span class="close" aria-label="Close" (click)="closePassword()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <hr>
+            <div class="modal-body">
+
+                <form>
+                    <div class="row">
+
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">New PassWord</label>
+                            <input type="Password" class="form-control" placeholder="Enter New PassWord">
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
+                            <input type="password" class="form-control">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" (click)="closePassword()">Save</button>
+                <button type="button" class="btn btn-danger" (click)="closePassword()">X Cancel</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display3}" id="dltModel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <span style="font-weight: bold;margin-left: 130px;">Do you want to make sure inactive</span>
+                <span class="close" aria-label="Close" (click)="closeActive()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <hr>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" (click)="closeActive()">Ok</button>
+                <button type="button" class="btn btn-danger" (click)="closeActive()">X Cancel</button>
+            </div>
+        </div>
+    </div>
+
+</div>

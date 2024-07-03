@@ -1,0 +1,313 @@
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h2>Agent Benefits</h2>
+
+            <div class="page-title-right" *ngIf="showAddButton">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item active">Administration</li>
+                    <li class="breadcrumb-item active">Agent Benefits</li>
+                </ol>
+                <br>
+
+            </div>
+
+
+        </div>
+    </div>
+    <div class="col-sm" *ngIf="showAddButton">
+        <div class="d-flex justify-content-sm-end gap-2">
+            <button type="button" class="btn btn-success add-btn" id="create-btn" (click)="openModal()"
+                data-toggle="tooltip" data-placement="top" title="click Add" style="color:black"><i
+                    class="ri-add-line align-bottom me-1"></i>
+                Add</button>
+
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+
+    </div>
+    <div class="container">
+        <div class="row  row-cols-lg-3 d-flex">
+
+            <!-- <div class="col-4" style="font-weight:normal; font-size: 25px;">
+                Agent Benefits</div> -->
+
+
+
+            <div class="col-lg-3 col-md-6 order-last justify-content-center me-auto"
+                style="position: relative;margin-left:-20px;">
+                <div class="search-box">
+                    <input type="text" class="form-control search" placeholder="Search for Vertical">
+                    <i class="ri-search-line search-icon"></i>
+                </div>
+            </div>
+ 
+            <div class=" order-last justify-content-end" style="margin-left: 30px;">
+
+                <!-- <button type="button" class="btn btn-success add-btn" id="create-btn" (click)="openModal()"
+                    data-toggle="tooltip" data-placement="top" title="click Add" style="color:black"><i
+                        class="ri-add-line align-bottom me-1"></i>
+                    Add</button> -->
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<br>
+<div class="container" style="background-color:white;
+box-shadow: 1px 1px 1px 1px #888888; height: 100%; width:100%; position: relative;">
+    <table class="table table-striped" id="sortable-table">
+
+        <thead class="text-muted table-light">
+            <tr>
+                <!-- <th scope="col" (click)="sortTable(0)">Name<i class="fa-solid fa-sort"></i></th>
+                <th scope="col" (click)="sortTable(0)">Description<i class="fa-solid fa-sort"></i></th>
+                <th scope="col" (click)="sortTable(0)">File<i class="fa-solid fa-sort"></i></th>
+                <th scope="col">Actions</th> -->
+                <th scope="col" (click)="sortTable('Name')" style="cursor:pointer">
+                    Name
+                    <span *ngIf="sortColumn === 'Name'">
+                        <!-- Show ascending or descending icon based on sortOrder -->
+                        <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                        <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                    </span>
+                    <span *ngIf="sortColumn !== 'Name'">
+                        <!-- Hide the default ascending icon when sorting by other columns -->
+                        <i [hidden]="true" class="fa fa-sort-up"></i>
+                    </span>
+                </th>
+
+                <th scope="col" (click)="sortTable('Description')" style="cursor:pointer">
+                    Description
+                    <span *ngIf="sortColumn === 'Description'">
+                        <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                        <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                    </span>
+                </th>
+                <th scope="col">File</th>
+                <th *ngIf="showActions" scope="col">
+                    Actions
+                </th>
+
+
+            </tr>
+        </thead>
+
+        <tbody>
+            @for (data of sortedAgentBenifitsList; track $index) {
+            <tr>
+                <td>{{data.Name}}</td>
+                <td>{{data.Description}}</td>
+                <td>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-download" viewBox="0 0 16 16">
+                        <path
+                            d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5" />
+                        <path
+                            d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z" />
+                    </svg>
+                    <img src="data:image/png;base64,{{ data.File }}" alt="benefits.pdf">
+                </td>
+                <!-- <td>
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-pencil" style="cursor: pointer;" viewBox="0 0 16 16" data-toggle="tooltip"
+                            data-placement="top" title="click Edit" (click)="onEditModelOpen()">
+                            <path
+                                d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325" />
+                        </svg>
+                    </span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-trash3" style="cursor: pointer;" viewBox="0 0 16 16" style="color:red"
+                            data-toggle="tooltip" data-placement="top" title="click Delete" (click)="openDeleteModel()">
+                            <path
+                                d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5" />
+                        </svg>
+                    </span>
+                </td> -->
+                <td  *ngIf="showActions">
+
+                    <div style="position: relative;left:50px;" class="dropdown">
+                        <button class="btn btn-subtle-secondary btn-sm dropdown-toggle" type="button"
+                            data-bs-toggle="dropdown">
+                            <i class="bi bi-three-dots-vertical"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" style="cursor: pointer;">
+
+                            <li style="cursor: pointer;">
+                                <a class="dropdown-item" href="javascript:void(0);" style="cursor: pointer;">
+
+                                    <p class="edit" (click)="onEditModelOpen()" style="cursor: pointer;">
+                                        Edit
+                                    </p>
+                                    <p class="edit" (click)="openDeleteModel()" style="cursor: pointer;">
+                                        Delete
+                                    </p>
+
+
+
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            }
+        </tbody>
+
+
+        <!-- <nav aria-label="Page navigation example" style="border-radius: 30px;">
+            <ul class="pagination">
+                <li class="page-item" style="border-radius: 300px;"><a class="page-link"
+                        style="border-radius: 30px; width:30px"><i class="fas fa-chevron-left"></i></a></li>
+                <li class="page-item"><a class="page-link" style="background-color: yellow;border-radius: 30px;">1</a>
+                </li>
+                <li class="page-item"><a class="page-link" style="border-radius: 30px;">2</a></li>
+                <li class="page-item" style="border-radius: 30px;"><a class="page-link"
+                        style="border-radius: 30px;">3</a></li>
+                <li class="page-item"><a class="page-link" style="border-radius: 30px;width:30px"><i
+                            class="fas fa-chevron-right"></i></a></li>
+            </ul>
+        </nav> -->
+
+    </table>
+    <!-- <i class="fa"
+    style="left:40px;color:navy;position:absolute;font-size:20px;font-weight: bold;margin-top:10px;">&#xf021;</i> -->
+</div>
+
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="row">
+                    <h2 class="col" style="position:absolute;top:30px">Add Agent Benefits</h2>
+                    <span class="close" aria-label="Close" (click)="onCloseHandled()" aria-hidden="true" class="col"
+                        style="font-size: 30px; color: #888888; cursor: pointer;margin-left: 460px;">&times;</span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <form>
+
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label"
+                            style="position: relative;top: 10px;">Name<span style="color: red;">*</span></label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                            placeholder="Enter Name" aria-placeholder="Enter Business Unit">
+                        <div id="emailHelp" class="form-text"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label"
+                            style="position: relative;top: 10px;">Description<span style="color: red;">*</span></label>
+                        <!-- <input type="text-area" class="form-control" id="exampleInputPassword1"
+                            placeholder="Enter Description"> -->
+                        <textarea id="w3review" name="w3review" rows="4" cols="50" class="form-control">
+                             </textarea>
+                    </div>
+                    <label for="exampleInputPassword1" class="form-label"
+                        style="position: relative;top: 10px;">File</label>
+                    <div class="drop-area">
+
+                        <p>Drag and drop a file here or click to select one</p>
+                        <input type="file" id="fileInput">
+                    </div>
+                    <p>Allowed Types : JPG, JPEG, PNG, GIF, PDF, XLS, XLSX, DOC, DOCX, TXT, ZIP</p>
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="onCloseHandled()">Cancel</button>
+                <button type="button" class="btn btn-success" (click)="onCloseHandled()">Submit</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':DeleteMOdel}" id="dltModel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <span style="font-weight: bold;margin-left: 130px;"> Do You Want To Delete this Agent Benefits?</span>
+                <span class="close" aria-label="Close" (click)="onClosed()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <hr>
+            <div class="modal-body">
+
+                <form>
+                    <div class="row" id="fields">
+                        <div class="col">
+
+
+                        </div>
+
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" (click)="onClosed()" style="width: 100px;">OK</button>
+                <button type="button" class="btn btn-danger" (click)="onClosed()">X Cancel</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':EditMOdel}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="row">
+                    <h2 class="col" style="position:absolute;top:30px">Update Agent Benefits</h2>
+                    <span class="close" aria-label="Close" (click)="onEditClose()" aria-hidden="true"
+                        style="font-size: 30px; color: #888888; cursor: pointer;margin-left: 460px;">&times;</span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <form>
+
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label"
+                            style="position: relative;top: 10px;">Name<span style="color: red;">*</span></label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                            placeholder="Enter Name" aria-placeholder="Enter Business Unit">
+                        <div id="emailHelp" class="form-text"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label"
+                            style="position: relative;top: 10px;">Description<span style="color: red;">*</span></label>
+                        <!-- <input type="text-area" class="form-control" id="exampleInputPassword1"
+                            placeholder="Enter Description"> -->
+                        <textarea id="w3review" name="w3review" rows="4" cols="50" class="form-control">
+                             </textarea>
+                    </div>
+                    <label for="exampleInputPassword1" class="form-label"
+                        style="position: relative;top: 10px;">File</label>
+                    <div class="drop-area">
+
+                        <p>Drag and drop a file here or click to select one</p>
+                        <input type="file" id="fileInput">
+                    </div>
+                    <p>Allowed Types : JPG, JPEG, PNG, GIF, PDF, XLS, XLSX, DOC, DOCX, TXT, ZIP</p>
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="onEditClose()">Cancel</button>
+                <button type="button" class="btn btn-success" (click)="onEditClose()">Submit</button>
+
+            </div>
+        </div>
+    </div>
+</div>

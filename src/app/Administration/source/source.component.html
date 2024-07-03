@@ -1,0 +1,331 @@
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h1>Pick List</h1>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item active">Administration</li>
+                    <li class="breadcrumb-item active">Pick List</li>
+                </ol>
+                <br>
+                <div class="col-sm">
+                    <div class="d-flex justify-content-sm-end">
+
+
+                        <button (click)="openModal()" type="button" class="btn btn-success add-btn me-2"
+                            id="create-btn"><i class="ri-add-line align-bottom me-1"></i>
+                            Add</button>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+
+<div class="container">
+    <div class="card">
+
+        <div class="card-body">
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Business</th>
+                        <th>Picklist code</th>
+                        <th>Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let element of data; let i = index">
+                        <tr [ngClass]="{'highlight': i === selectedIndex}"
+                            (click)="togglelookupCode(element.lookupCode, i)">
+                            <td>{{i + 1}}</td>
+                            <td>{{element.businessCode}}</td>
+                            <td>{{element.lookupCode}}</td>
+                            <td>{{element.description}}</td>
+                            <td (click)="stopPropagation($event)">
+                                <div class="dropdown">
+                                    <button class="btn btn-subtle-secondary btn-sm dropdown-toggle" type="button"
+                                        data-bs-toggle="dropdown" (click)="stopPropagation($event)">
+                                        <i class="bi bi-three-dots-vertical"></i>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end" style="cursor: pointer;">
+                                        <li style="cursor: pointer;">
+                                            <a class="dropdown-item" (click)="openEditPicklist()">Edit</a>
+                                        </li>
+                                        <li style="cursor: pointer;">
+                                            <a class="dropdown-item" (click)="deleteForm()">Delete</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <ng-container *ngIf="selectedlookupCode">
+        <div class="card">
+            <div class="card-header">
+                <h2>Pick List Values:{{selectedlookupCode}}</h2>
+            </div>
+            <div class="card-body">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Code</th>
+                            <th>Name</th>
+                            <th>Value</th>
+                            <th>Sequence</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let constant of getlookupConstants(selectedlookupCode);let i = index">
+                            <tr>
+                                <td>{{i + 1}}</td>
+                                <td>{{constant.lookupCode}}</td>
+                                <td>{{constant.description}}</td>
+                                <td>{{constant.value}}</td>
+                                <td>{{constant.sequence}}</td>
+                                <td (click)="stopPropagation($event)">
+                                    <div class="dropdown">
+                                        <button class="btn btn-subtle-secondary btn-sm dropdown-toggle" type="button"
+                                            data-bs-toggle="dropdown" (click)="stopPropagation($event)">
+                                            <i class="bi bi-three-dots-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end" style="cursor: pointer;">
+                                            <li style="cursor: pointer;">
+                                                <a class="dropdown-item" (click)="onUpadtePicklistValues()">Edit</a>
+                                            </li>
+                                            <li style="cursor: pointer;">
+                                                <a class="dropdown-item" (click)="deleteForm()">Delete</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+                <button (click)="onCreatePickListValues()" type="button" class="btn btn-success add-btn me-2 float-end"
+                    id="create-btn">
+                    <i class="ri-add-line align-bottom me-1"></i>
+                    Add
+                </button>
+            </div>
+        </div>
+    </ng-container>
+
+
+
+
+</div>
+
+<!-- create pick list -->
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title"> Create Pick List</h2>
+                <span class="close" aria-label="Close" (click)="onCloseHandled()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <label for="exampleInputPassword1" class="form-label">Business Verticals</label>
+                    <div class="input-group">
+                        <select class="form-select" aria-label="Default select example">
+                            <option value="" disabled selected>Select Business Verticals</option>
+                            <ng-container *ngFor="let vertical of lookupConstants; let i = index">
+                                <option>{{vertical.description}}</option>
+                            </ng-container>
+                        </select>
+                    </div>
+
+
+
+                    <br>
+                    <div class="col">
+                        <label for="exampleInputPassword1" class="form-label">Picklist Code<span
+                                class="text-danger">&nbsp;*</span></label>
+                        <input type="text" class="form-control" id="exampleInputPassword1"
+                            placeholder="Enter Picklist Code" formControlName="Picklist Code">
+                    </div>
+                    <br>
+                    <div class="col">
+                        <label for="exampleInputPassword1" class="form-label">Name<span
+                                class="text-danger">&nbsp;*</span></label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Name"
+                            formControlName="Name">
+                    </div>
+
+                    <div class="float-end d-flex">
+                        <button type="button" class="btn btn-danger" (click)="onCloseHandled()">Cancel</button>
+                        <button type="button" class="btn btn-success" (click)="onCloseHandled()">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- update pick list -->
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display1}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Update Pick List</h2>
+                <span class="close" aria-label="Close" (click)="onCloseHandled1()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <label for="exampleInputPassword1" class="form-label">Business Verticals</label>
+                    <div class="input-group">
+                        <select class="form-select" aria-label="Default select example">
+                            <option value="" disabled selected>Select Business Verticals</option>
+                            <ng-container *ngFor="let vertical of lookupConstants; let i = index">
+                                <option>{{vertical.description}}</option>
+                            </ng-container>
+                        </select>
+                    </div>
+
+                    <br>
+                    <div class="col">
+                        <label for="exampleInputPassword1" class="form-label">Picklist Code<span
+                                class="text-danger">&nbsp;*</span></label>
+                        <input type="text" class="form-control" id="exampleInputPassword1"
+                            placeholder="Enter Picklist Code" formControlName="Picklist Code">
+                    </div>
+                    <br>
+                    <div class="col">
+                        <label for="exampleInputPassword1" class="form-label">Name<span
+                                class="text-danger">&nbsp;*</span></label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Name"
+                            formControlName="Name">
+                    </div>
+
+                    <div class="float-end d-flex">
+                        <button type="button" class="btn btn-danger" (click)="onCloseHandled1()">Cancel</button>
+                        <button type="button" class="btn btn-success" (click)="onCloseHandled1()">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- create pick list values -->
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display3}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title"> Create Picklist Values</h2>
+                <span class="close" aria-label="Close" (click)="onPickListValues()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Name<span
+                                    class="text-danger">&nbsp;*</span></label>
+                            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Name"
+                                formControlName="Enter Name">
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Code<span
+                                    class="text-danger">&nbsp;*</span></label>
+                            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Code"
+                                formControlName="Code">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Value<span
+                                    class="text-danger">&nbsp;*</span></label>
+                            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Value"
+                                formControlName=" Value">
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Sequence<span
+                                    class="text-danger">&nbsp;*</span></label>
+                            <input type="text" class="form-control" id="exampleInputPassword1"
+                                placeholder="Enter Sequence" formControlName=" Sequence">
+                        </div>
+                    </div>
+                    <div class="float-end d-flex">
+                        <button type="button" class="btn btn-danger" (click)="onPickListValues()">Cancel</button>
+                        <button type="button" class="btn btn-success" (click)="onPickListValues()">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- update pick list values -->
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display4}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title"> Update Picklist Values</h2>
+                <span class="close" aria-label="Close" (click)="oncloseUpdatePickListValues()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Name<span
+                                    class="text-danger">&nbsp;*</span></label>
+                            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Name"
+                                formControlName="Enter Name">
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Code<span
+                                    class="text-danger">&nbsp;*</span></label>
+                            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Code"
+                                formControlName="Code">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Value<span
+                                    class="text-danger">&nbsp;*</span></label>
+                            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Value"
+                                formControlName="Enter Value">
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Sequence<span
+                                    class="text-danger">&nbsp;*</span></label>
+                            <input type="text" class="form-control" id="exampleInputPassword1"
+                                placeholder="Enter Sequence" formControlName="Sequence">
+                        </div>
+                    </div>
+                    <div class="float-end d-flex">
+                        <button type="button" class="btn btn-danger"
+                            (click)="oncloseUpdatePickListValues()">Cancel</button>
+                        <button type="button" class="btn btn-success"
+                            (click)="oncloseUpdatePickListValues()">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

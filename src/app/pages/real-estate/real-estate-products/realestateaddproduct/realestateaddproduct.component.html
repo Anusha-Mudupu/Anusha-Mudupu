@@ -1,0 +1,162 @@
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0">Add Product</h4>
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+
+
+                    <li class="breadcrumb-item active ">Real Estate</li>
+                    <li class="breadcrumb-item active">
+                        <a role="button" >Master</a>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        <a role="button"  (click)="close()">Product</a>
+                    </li>
+
+
+                </ol>
+            </div>
+            
+
+
+
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+
+            <form [formGroup]="productForm" class="tablelist-form">
+                <div class="card-body">
+                    <div class="row gy-2">
+
+                        <div class=" col-md-6">
+                            <label for="exampleInputEmail1" class="form-label">Business Verticals</label>
+                            <input disabled type="text" class="form-control" id="exampleInputEmail1"
+                                aria-describedby="emailHelp" placeholder=" Real-Estate" aria-placeholder="Real-Estate">
+                            <div id="emailHelp" class="form-text"></div>
+                        </div>
+                        <div class=" col-md-6">
+                            <div>
+                                <label for="customername-field" class="form-label">Name</label>
+                                <input type="text" id="customername-field" class="form-control" formControlName="name"
+                                    placeholder="Enter Name" required />
+                            </div>
+                        </div>
+                       
+                        <div class=" col-md-6">
+                            <label for="exampleInputPassword1" class="form-label">Category</label>
+                            <div class="input-group">
+
+                                <select formControlName="categoryId" class="form-select mb-3"
+                                    aria-label="Default select example">
+                                    @for(sub of categorydata; track $index){
+                                    <option [value]="sub.id">{{sub.name}}</option>
+                                    <option value="" disabled selected style="display:none;">Select category</option>
+
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class=" col-md-6">
+                            <label for="exampleInputPassword1" class="form-label">Sub Category</label>
+                            <div class="input-group">
+
+                                <select formControlName="subCategoryId" class="form-select mb-3"
+                                    aria-label="Default select example">
+                                    @for(sub of subcategorydata; track $index){
+                                    <option [value]="sub.id">{{sub.name}}</option>
+                                    <option value="" disabled selected style="display:none;">Select Sub category
+                                    </option>
+
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                      
+                        <div class=" col-md-6">
+                            <div>
+                                <label for="email-field" class="form-label">Rsd Amount</label>
+                                <input type="email" id="email-field" class="form-control" placeholder="Rsd Amount"
+                                    formControlName="rsdAmount" required />
+                            </div>
+                        </div>
+                        <div class=" col-md-6">
+                            <div class="mb-3">
+                                <label for="phone-field" class="form-label">Minimum Monthly Rent</label>
+                                <input type="text" id="phone-field" class="form-control"
+                                    placeholder="MinimumMonthlyRent" formControlName="minimumMonthlyRent" />
+                            </div>
+                        </div>
+                        <div class=" col-md-6">
+                            <div class="mb-3">
+                                <label for="phone-field" class="form-label">Area</label>
+                                <input type="text" id="phone-field" class="form-control" placeholder="Area"
+                                    formControlName="area" />
+                            </div>
+                        </div>
+                        <div class=" col-md-6">
+                            <div class="mb-3">
+                                <label for="phone-field" class="form-label">Value</label>
+                                <input type="text" id="phone-field" class="form-control" placeholder="Area"
+                                    formControlName="value" />
+                            </div>
+                        </div>
+                        <div class=" col-md-6">
+                            <div>
+                                <label for="email-field" class="form-label">Unit Size</label>
+                                <input type="email" id="email-field" class="form-control" placeholder="unit Size"
+                                    formControlName="unitSize" required />
+                            </div>
+                        </div>
+                       
+                        <div class=" col-md-6">
+                            <div class="mb-3">
+                                <label for="phone-field" class="form-label">Amount Payable</label>
+                                <input type="text" id="phone-field" class="form-control" placeholder="Amount Payable"
+                                    formControlName="amountPayable" />
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+
+
+                    <div class="modal-footer">
+                        <div class="hstack gap-2 justify-content-end">
+                            <button type="button" class="btn btn-light" (click)="close()">Cancel</button>
+                            <button type="submit" class="btn btn-success" id="add-btn" [disabled]="!productForm.valid"
+                                [ngClass]="{'text-body-tertiary': !productForm.valid}" (click)="onSubmit()">Add
+                                Product</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div style="z-index: 11">
+    <div id="borderedToast4" class="toast toast-border-danger overflow-hidden mt-3" role="alert" aria-live="assertive"
+        aria-atomic="true">
+        <div class="toast-body">
+            <div class="d-flex align-items-center">
+                <div class="flex-shrink-0 me-2">
+                    <i class="ri-alert-line align-middle"></i>
+                </div>
+                <div class="flex-grow-1">
+                    <h6 class="mb-0">Something is very wrong! <a href="javascript:void(0);"
+                            class="text-decoration-underline">See detailed report.</a></h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

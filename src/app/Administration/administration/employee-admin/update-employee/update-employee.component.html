@@ -1,0 +1,113 @@
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0">Edit Employee</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+
+
+                    <li class="breadcrumb-item active">Chits</li>
+                    <li class="breadcrumb-item active">Employee</li>
+
+                </ol>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<div class="">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="">
+                    <!-- <div class="col-xxl-4">
+                        <h2 class="card-title mb-3">Update Employee</h2>
+                       
+                    </div> -->
+                    <div>
+                        <form [formGroup]="updateUserForm">
+                            <div class="row">
+                                <div class="mb-3 col-4">
+                                    <label for="productTitle" class="form-label">First Name<span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" [(ngModel)]="userId.firstName"
+                                        placeholder="{{userId.firstName}}" formControlName="firstName">
+                                    <input hidden type="text" class="form-control" [(ngModel)]="userId.id"
+                                        placeholder="{{userId.id}}" formControlName="id">
+                                </div>
+                                <div class="mb-3 col-4">
+                                    <label for="productCategories" class="form-label">Last Name<span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" [(ngModel)]="userId.lastName"
+                                        placeholder="{{userId.lastName}}" formControlName="lastName">
+                                </div>
+                                <div class="mb-3 col-4">
+                                    <label for="productType" class="form-label">Phone Number <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" [(ngModel)]="userId.phoneNumber"
+                                        placeholder="{{userId.phoneNumber}}" formControlName="phoneNumber">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="mb-3 col-4">
+                                    <label for="shortDecs" class="form-label">Email Id<span
+                                            class="text-danger">*</span></label>
+                                    <input type="email" class="form-control" placeholder="Role"
+                                        [(ngModel)]="userId.email" placeholder="{{userId.email}}"
+                                        formControlName="email">
+                                </div>
+                                <div class="mb-3 col-4">
+                                    <label for="exampleInputPassword1" class="form-label">Reports To</label>
+                                    <select formControlName="reportingTo" class="form-select mb-3"
+                                        aria-label="Default select example">
+                                        @for(data of employeeList; track $index){
+                                        <option [value]="data.lastName">{{data .firstName}}&nbsp;{{data.lastName}}
+                                        </option>
+                                        <option value="" disabled selected style="display:none;">Select Designation
+                                        </option>
+
+                                        }
+                                    </select>
+                                </div>
+
+
+
+                                <div class="mb-3 col-4">
+                                    <label for="productBrand" class="form-label">Branch Id<span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" placeholder="branchId"
+                                        formControlName="branchId" [(ngModel)]="userId.branchId"
+                                        placeholder="{{userId.branchId}}">
+                                    <input hidden="password" class="form-control" formControlName="password"
+                                        [(ngModel)]="userId.password" placeholder="{{userId.password}}">
+                                </div>
+
+
+
+                                <!-- <div class="col-lg-6"> -->
+                                <!-- <div class="mb-3">
+                                        <label for="productUnit" class="form-label">Agent Id<span
+                                                class="text-danger">*</span></label>
+                                                <input type="test" class="form-control" formControlName="branchName" [(ngModel)]="userId.code"
+                                                placeholder="{{userId.code}}">
+                                    </div> -->
+                                <!-- </div> -->
+                            </div>
+                            <div class="hstack gap-2 justify-content-end mb-3">
+                                <button class="btn btn-danger" (click)="onCloseHandled()">
+                                 Cancel</button>
+                                <button class="btn btn-success" (click)="onSubmit()">Submit</button>
+                            </div>
+
+                        </form>
+                    </div><!--end col-->
+                </div><!--end row-->
+            </div>
+        </div>
+    </div><!--end col-->
+</div>

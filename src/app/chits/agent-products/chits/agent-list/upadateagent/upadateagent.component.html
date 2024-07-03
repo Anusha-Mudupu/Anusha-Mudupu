@@ -1,0 +1,105 @@
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0">Update Agent</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+
+
+                    <li class="breadcrumb-item active">Chits</li>
+                    <li class="breadcrumb-item active">Agent</li>
+
+                </ol>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <form [formGroup]="updateUserForm">
+                    <div class="row">
+                        <div class="col">
+                            <label for="productCategories" class="form-label">Business Code</label>
+                            <select class="form-select" aria-label="Default select example" formControlName="status">
+                                <option value="" disabled selected>Select Business Verticals</option>
+                                <ng-container *ngFor="let vertical of lookupConstants; let i = index">
+                                    <option  [value]="lookupConstants.value">{{vertical.description}}</option>
+                                </ng-container>
+                            </select>
+                            <input hidden type="text" class="form-control" [(ngModel)]="userId.id"
+                                placeholder="{{userId.id}}" formControlName="id">
+                        </div>
+
+                        
+                        <div class="col">
+                            <label for="productCategories" class="form-label">Name<span
+                                    class="text-danger">*</span></label>
+                            <input type="text" class="form-control" [(ngModel)]="userId.name"
+                                placeholder="{{userId.name}}" formControlName="name">
+                        </div>
+                        <div class="col">
+                            <label for="productType" class="form-label">Agent Code<span
+                                    class="text-danger">*</span></label>
+                            <input type="text" class="form-control" formControlName="agentCode">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="productType" class="form-label">Phone Number <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" class="form-control" [(ngModel)]="userId.phno"
+                                placeholder="{{userId.phno}}" formControlName="phno">
+                        </div>
+                        <div class="col">
+                            <label for="shortDecs" class="form-label">Email-Id<span class="text-danger">*</span></label>
+                            <input type="email" class="form-control" placeholder="Role" [(ngModel)]="userId.userId"
+                                placeholder="{{userId.userId}}" formControlName="userId">
+                        </div>
+                        <div class="col">
+                            <label for="productType" class="form-label">Password<span
+                                    class="text-danger">*</span></label>
+                            <input type="text" class="form-control" formControlName="pwd">
+                        </div>
+
+                    </div>
+
+
+
+                    <br>
+
+                    <div class="row">
+
+                        <div class="col">
+                            <label for="shortDecs" class="form-label">Subsource<span
+                                    class="text-danger">*</span></label>
+                            <input type="email" class="form-control"formControlName="subsourceid">
+                        </div>
+                        <div class="col">
+                            <label for="productType" class="form-label">Last Update By <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" class="form-control" >
+                        </div>
+                        <div class="col">
+                            <label for="shortDecs" class="form-label">Last Update On<span
+                                    class="text-danger">*</span></label>
+                            <input type="email" class="form-control">
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="hstack gap-2 justify-content-end mb-3">
+                        <button class="btn btn-danger" (click)="closeDialog()"><i class="ph-x align-middle"></i>
+                            Cancel</button>
+                        <button class="btn btn-success" (click)="onSubmit()">Submit</button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div><!--end col-->
+</div>

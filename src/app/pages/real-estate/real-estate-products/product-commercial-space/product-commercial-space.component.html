@@ -1,0 +1,181 @@
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h2>Commerical Towers
+              
+            </h2>
+           
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item active">Real Estate</li>
+                   
+                    <li class="breadcrumb-item active">Commerical Towers</li>
+                </ol>
+              
+            </div>
+
+        </div>
+    </div>
+    
+</div>
+
+
+
+<!-- <div class="row" >
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+
+                    <li class="breadcrumb-item active text-primary">Real Estate</li>
+                    <li class="breadcrumb-item active">
+                        <a role="button" class="text-primary">Commerical Towers</a>
+                    </li>
+
+
+                </ol>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<div class="row" >
+    <div class="card">
+        <div class="card-header">
+            <!-- <select [(ngModel)]="selectedOption">
+                <option value="dakshin">DAKSHIN-IT BLOCK</option>
+                <option value="itTowers">IT Towers</option>
+            </select> -->
+            <div class="row gy-2">
+                <div class=" col-md-6">
+                    <label for="exampleInputPassword1" class="form-label">Commercial Towers</label>
+                    <div class="input-group">
+                        <select [(ngModel)]="selectedOption" class="form-select mb-3"
+                            aria-label="Default select example">
+
+                            <option value="dakshin">DAKSHIN-IT BLOCK</option>
+                            <option value="itTowers">IT Towers</option>
+
+
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="card-body">
+
+            <div>
+                <!-- <tabset class="mb-3"> -->
+
+                <!-- <tab heading="DAKSHIN-IT BLOCK" class="nav-item"> -->
+                <div class="tab-pane " id="home" role="tabpanel">
+                    <div class="card-body">
+                        <div class="table-responsive" style="position: relative; top:-40px">
+                            <table *ngIf="selectedOption === 'dakshin'"
+                                class="table  table-centered align-middle table-nowrap mb-0" id="sortable-table">
+                                <thead class="text-muted table-light">
+                                    <tr>
+
+                                        <!-- <th scope="col" style="cursor:pointer">Product Type</th> -->
+                                        <!-- <th scope="col" style="cursor:pointer">SFT</th> -->
+                                        <!-- <th scope="col" style="cursor:pointer">Location</th>
+                                        <th scope="col" style="cursor:pointer">Project Name</th> -->
+                                        <th scope="col" style="cursor:pointer">Floor No.</th>
+                                        <th scope="col" style="cursor:pointer">Area (Sft)</th>
+                                        <!-- <th scope="col" style="cursor:pointer">Unit</th> -->
+
+                                        <th scope="col" style="cursor:pointer">No.of units</th>
+                                        <th scope="col" style="cursor:pointer">Unit Value (Rs)</th>
+                                        <th scope="col" style="cursor:pointer">Total Value (Rs)</th>
+
+
+                                    </tr>
+
+                                </thead>
+                                <tbody class="list form-check-all">
+
+                                    @for (data of CommercialData; track $index) {
+                                    <tr>
+                                        <!-- <td>Hyderabad</td> -->
+                                        <!-- <td>{{data.productType}}</td>
+                                        <td>{{data.Group}}</td> -->
+                                        <td>{{data.floorNumber}}</td>
+                                        <!-- <td>{{data.product}}</td> -->
+                                        <td>{{data.area}}</td>
+                                        <!-- <td>{{data.unit}}</td> -->
+
+
+                                        <td>{{data.floorUnits}}</td>
+                                        <td>{{data.unitValue}}</td>
+                                        <td>{{data.totalValue}}</td>
+
+
+                                    </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+                <!-- </tab> -->
+                <!-- <tab heading="IT Towers" class="nav-item">
+                        <div class="card-body">
+                            <div class="table-responsive"> -->
+                <table style="position: relative; top:-40px" *ngIf="selectedOption === 'itTowers'"
+                    class="table  table-centered align-middle table-nowrap mb-0" id="sortable-table">
+                    <thead class="text-muted table-light">
+                        <tr>
+
+                            <th scope="col" style="cursor:pointer">Floor No.</th>
+                            <th scope="col" style="cursor:pointer">Area</th>
+                            <th scope="col" style="cursor:pointer">Unit</th>
+
+                            <th scope="col" style="cursor:pointer">No.of units</th>
+                            <th scope="col" style="cursor:pointer">Unit Value</th>
+                            <th scope="col" style="cursor:pointer">Total Value<sub>(Rs.)</sub></th>
+
+
+                        </tr>
+
+                    </thead>
+                    <tbody class="list form-check-all">
+
+                        <!-- @for (data of incentivelist; track $index) {
+                                            <tr>
+                
+                                                <td>{{data.businessVertical}}</td>
+                                                <td>{{data.year}}</td>
+                                                <td>{{data.month}}</td>
+                                                <td>{{data.points}}</td>
+                
+                                            </tr>
+                                            } -->
+
+                    </tbody>
+                </table>
+
+
+
+                <!-- </div>
+
+
+                        </div>
+                    </tab> -->
+
+                <!-- </tabset> -->
+            </div>
+
+        </div>
+    </div>
+
+
+
+</div>

@@ -1,0 +1,152 @@
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h2>Update Notification Settings</h2>
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+
+                    <li class="breadcrumb-item active " (click)="goBack()">Notification Settings</li>
+                    <li class="breadcrumb-item active">
+                        <a role="button">Update Notification Settings</a>
+                    </li>
+
+
+                </ol>
+            </div>
+           
+
+
+
+        </div>
+    </div>
+</div>
+<div class="card">
+
+    <div class="card-body">
+
+        <form [formGroup]="editContentForm">
+            <div class="row">
+                <div class="col">
+                    <label for="exampleInputPassword1" class="form-label">Id</label>
+                    <input type="text" class="form-control" [(ngModel)]="GupshupsContent.id" formControlName="id">
+                </div>
+                <div class="col">
+                    <label for="exampleInputPassword1" class="form-label">Name</label>
+                    <input type="text" class="form-control" [(ngModel)]="GupshupsContent.name" formControlName="name">
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col">
+                    <label for="exampleInputPassword1" class="form-label">Description</label>
+                    <input type="text" class="form-control" [(ngModel)]="GupshupsContent.description"
+                        formControlName="description">
+                </div>
+                <div class="col">
+                    <label for="exampleInputPassword1" class="form-label">BaseUrl</label>
+                    <input type="text" class="form-control" [(ngModel)]="GupshupsContent.baseUrl"
+                        formControlName="baseUrl">
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col">
+                    <label for="exampleInputPassword1" class="form-label">From</label>
+                    <input type="text" class="form-control" [(ngModel)]="GupshupsContent.from" formControlName="from">
+                </div>
+                <div class="col">
+                    <label for="exampleInputPassword1" class="form-label">Api</label>
+                    <input type="text" class="form-control" [(ngModel)]="GupshupsContent.api" formControlName="api">
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col">
+                    <label for="exampleInputPassword1" class="form-label">NoticationSettingType</label>
+                    <input type="text" class="form-control" [(ngModel)]="GupshupsContent.noticationSettingType"
+                        formControlName="noticationSettingType">
+                </div>
+                <div class="col">
+                    <label for="exampleInputPassword1" class="form-label">AppName</label>
+                    <input type="text" class="form-control" [(ngModel)]="GupshupsContent.appName"
+                        formControlName="appName">
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col">
+                    <label for="exampleInputPassword1" class="form-label">ApiKey</label>
+                    <input type="text" class="form-control" [(ngModel)]="GupshupsContent.apiKey"
+                        formControlName="apiKey">
+                </div>
+                <div class="col">
+                    <label for="exampleInputPassword1" class="form-label">VerticalId</label>
+                    <input type="text" class="form-control" [(ngModel)]="GupshupsContent.verticalId"
+                        formControlName="verticalId">
+                </div>
+                <div class="col">
+                    <label for="exampleInputPassword1" class="form-label">LoginUserId</label>
+                    <input type="text" class="form-control" [(ngModel)]="GupshupsContent.loginUserId"
+                        formControlName="loginUserId">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="card-footer float-end gap-2">
+        <button type="button" class="btn btn-success" (click)="onSubmit()">Save</button>
+        <button type="button" class="btn btn-danger" (click)="goBack()"> Cancel</button>
+    </div>
+</div>
+
+
+
+<!-- <div class="card">
+   
+    <div class="card-body">
+
+        <form [formGroup]="editContentForm">
+            <div class="col">
+                <label for="exampleInputPassword1" class="form-label">Id</label>
+                <input type="text" class="form-control" [(ngModel)]="GupshupsContent.id" formControlName="id">
+            </div>
+            <div class="row">
+
+                <div class="col">
+                    <label for="exampleInputPassword1" class="form-label">Name</label>
+                    <input type="text" class="form-control" [(ngModel)]="GupshupsContent.name" formControlName="name">
+                </div>
+                <div class="col">
+                    <label for="exampleInputPassword1" class="form-label">Description</label>
+                    <input type="text" class="form-control" placeholder="Enter description" [(ngModel)]="GupshupsContent.id" formControlName="description">
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col">
+                    <label for="exampleInputPassword1" class="form-label">BaseUrl</label>
+                    <input type="text" class="form-control" placeholder="Enter baseUrl" [(ngModel)]="GupshupsContent.baseUrl" formControlName="baseUrl">
+                </div>
+                <div class="col">
+                    <label for="exampleInputPassword1" class="form-label">From</label>
+                    <input type="text" class="form-control" placeholder="Enter from" [(ngModel)]="GupshupsContent.from" formControlName="from">
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col">
+                    <label for="exampleInputPassword1" class="form-label">Api</label>
+                    <input type="text" class="form-control" placeholder="Enter api" [(ngModel)]="GupshupsContent.api" formControlName="api">
+                </div>
+                <div class="col">
+                    <label for="exampleInputPassword1" class="form-label">NoticationSetting Type</label>
+                    <input type="text" class="form-control" placeholder="Enter noticationSettingType" [(ngModel)]="GupshupsContent.noticationSettingType" formControlName="noticationSettingType">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="card-footer">
+        <button type="button" class="btn btn-success" >Save</button>
+        <button type="button" class="btn btn-danger" > Cancel</button>
+    </div>
+</div> -->

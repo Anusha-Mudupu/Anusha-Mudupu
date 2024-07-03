@@ -1,0 +1,132 @@
+<!-- <button type="button" [print]="['demo',config]" class="btn btn-secondary float-end" id="printbtn">Print</button> -->
+
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4>Manager Wise Channel Partner Commission (Month Wise)</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item active">Real Estate</li>
+                    <li class="breadcrumb-item active">Master</li>
+                    <li class="breadcrumb-item active">Month Wise</li>
+                </ol>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="container" id="demo">
+    <div class="card">
+        <!-- <div class="card-header">
+            <h2 class="card-title mb-0">Manager Wise Channel Partner Commission (Month Wise)</h2>
+        </div> -->
+
+        <div class="card-body">
+            <div class="search-box d-inline-block mb-2">
+
+                <div class="row align-items-center g-3">
+                    <div class="col-xxl-3 col-lg-6 me-auto">
+                        <table class="table table-bordered align-middle table-nowrap mb-0">
+                            <thead>
+                                <tr>
+                                    <th data-toggle="tooltip" data-placement="top" title="Copy" style="cursor: pointer;"><i style="color:rgb(69, 43, 134)" class="bi bi-copy" ></i><svg
+                                            xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-copy" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" 
+                                                d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z" />
+                                        </svg></th>
+                                    <th  data-toggle="tooltip" data-placement="top" title="Excel" style="cursor: pointer;"><i style="color:rgb(69, 43, 134)" class="bi bi-file-earmark-excel"></i></th>
+                                    <th data-toggle="tooltip" data-placement="top" title="PDF" style="cursor: pointer;"><i style="color:rgb(69, 43, 134)" class="bi bi-file-earmark-pdf" ></i></th>
+                                    <th data-toggle="tooltip" data-placement="top" title="Document" style="cursor: pointer;"><i style="color:rgb(69, 43, 134)" class="bi bi-file-earmark-text" ></i></th>
+                                    <th data-toggle="tooltip" data-placement="top" title="Printer" style="cursor: pointer;"><i style="color:rgb(69, 43, 134)" class="bi bi-printer" [print]="['demo',config]" ></i></th>
+                                    <th><span><a style="color:rgb(69, 43, 134); font-weight: normal;">Column
+                                                Visibility</a></span></th>
+                                </tr>
+                            </thead>
+
+                        </table>
+                    </div>
+                    <div class="col-xxl-3 col">
+                        <div class="search-box">
+
+                        </div>
+                    </div>
+                    <div class="col-xxl-auto col-auto" style="position: relative;left:365px">
+                        <input type="text" class="form-control search" placeholder="Search...">
+                        <i class="ri-search-line search-icon"></i>
+                    </div>
+                </div>
+
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-gridjs align-middle table-nowrap mb-0">
+                    <thead>
+                        <tr>
+                            <th scope="col" >Manager</th>
+                            <th scope="col" >Mar-2024</th>
+                            <th scope="col">Feb-2024</th>
+                            <th scope="col">Jan-2024</th>
+                            <th scope="col">Dec-2023</th>
+                            <th scope="col">Nov-2023</th>
+                            <th scope="col">Jan-2024</th>
+                            <th scope="col">Dec-2023</th>
+                            <th scope="col">Nov-2023</th>
+                            <th scope="col">Oct-2023</th>
+                            <th scope="col">Sep-2023</th>
+                            <th scope="col">Aug-2023</th>
+                            <th scope="col">July-2023</th>
+                            <th scope="col">Jun-2023</th>
+                            <th scope="col">May-2023</th>
+                            <th scope="col">Apr-2024</th>
+                            <th scope="col">Mar-2023</th>
+                            <th scope="col"> Upto Feb-2023</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (data of manager ;
+                        track $index) {
+                        <tr>
+                            <td ><a>{{data.Manager}}</a></td>
+                            <td><span class="fw-medium">{{data.Mar2024}}</span></td>
+                            <td><span class="fw-medium">{{data.Feb2024}}</span></td>
+                            <td><span class="fw-medium">{{data.Jan2024}}</span></td>
+                            <td><span class="fw-medium">{{data.Dec2023}}</span></td>
+                            <td ><span class="fw-medium">{{data.Nov2023}}</span> </td>
+                            <td><span class="fw-medium">{{data.Oct2023}}</span></td>
+                            <td ><span class="fw-medium">{{data.Sep2023}}</span></td>
+                            <td><span class="fw-medium">{{data.Aug2023}}</span></td>
+                            <td><span class="fw-medium">{{data.July2023}}</span></td>
+                            <td><span class="fw-medium">{{data.Jun2023}}</span></td>
+                            <td><span class="fw-medium">{{data.May2023}}</span> </td>
+                            <td><span class="fw-medium"> {{data.Apr2024}}</span></td>
+                            <td><span class="fw-medium"> {{data.Apr2024}}</span></td>
+                            <td><span class="fw-medium"> {{data.Apr2024}}</span></td>
+                            <td><span class="fw-medium"> {{data.Apr2024}}</span></td>
+                            <td><span class="fw-medium"> {{data.Apr2024}}</span></td>
+                            <td><span class="fw-medium"> {{data.UptoFeb2023}}</span> </td>
+
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <br>
+            <div class="row justify-content-md-between align-items-md-center">
+                <div class="col-sm-12 col-md-5">
+                    <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">
+                        Showing
+                        1 to
+                        4 of 4
+                        entries
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>

@@ -1,0 +1,110 @@
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+
+                    <li class="breadcrumb-item active text-primary" (click)="navigateTo()">Administration</li>
+                    <li class="breadcrumb-item active">
+                        <a role="button" class="text-primary"> Create Campaign </a>
+                    </li>
+
+
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="card border-success mb-3">
+    <div class="card-header bg-transparent border-success" style="font-weight: bold; font-size: 18px;">Campaign
+        Details
+    </div>
+    <div class="card-body">
+        <form [formGroup]="campaignsForm" (ngSubmit)="onSubmits()">
+            <div class=" row d-flex ">
+                <div class="mb-3 col-5">
+                    <label for="exampleInputPassword1" class="form-label">Campaign Name</label>
+                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder=""
+                        formControlName="name">
+                </div>
+                <div class="mb-3 col-5">
+                    <label for="exampleInputPassword1" class="form-label">Campaign Code</label>
+                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder=""
+                        formControlName="code">
+                </div>
+                <!-- <div class="mb-2 col-5">
+                    <label for="exampleInputPassword1" class="form-label">Approved By</label>
+                    <select formControlName="" class="form-select mb-3" aria-label="Default select example">
+                        @for(emp of employeeList;track $index){
+                        <option value="" disabled selected style="display:none;">Select Employee</option>
+
+                        <option [value]="emp.id">
+                            {{emp.firstName}}&nbsp;{{emp.lastName}}
+                        </option>
+                        }
+                    </select>
+                </div> -->
+
+
+                <div class="mb-3 col-5">
+                    <label for="fromDate" class="form-label">From Date</label>
+                    <input class="form-control" id="fromDate" name="fromDate" [(ngModel)]="fromDate"
+                        formControlName="startDate" readonly>
+                </div>
+                <div class="mb-3 col-5">
+                    <label for="toDate" class="form-label">To Date</label>
+                    <input class="form-control" name="toDate" [(ngModel)]="toDate" formControlName="endDate"
+                        (change)="onToDateChange()" readonly>
+                </div>
+                <!-- <div class="mb-2 col-5">
+                    <label for="exampleInputPassword1" class="form-label">Status</label>
+                    <select class="form-select" aria-label="Default select example">
+                        <option value="" disabled selected>Select Status</option>
+                        <ng-container *ngFor="let status of  campaignTypelookupConstants">
+                            <option [value]="status.constantName">{{status.constantName}}</option>
+                        </ng-container>
+                    </select>
+                </div> -->
+
+                <div class="mb-3 col-10">
+                    <label for="exampleInputPassword1" class="form-label">SMS Message</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea5" formControlName="smsMessage"
+                        rows="3"></textarea>
+                </div>
+
+                <div class="mb-3 col-10">
+                    <label for="exampleInputPassword1" class="form-label">WhatsApp Message</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea5" formControlName="whatsappMessage"
+                        rows="3"></textarea>
+                </div>
+
+                <div class="mb-3 col-10">
+                    <label for="exampleInputPassword1" class="form-label">Email Message</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea5" formControlName="emailMessage"
+                        rows="3"></textarea>
+                </div>
+
+            </div>
+            <div class="float-end custom-gap">
+                <button type="button" class="btn btn-danger" (click)="navigateTo()">Cancel</button>
+                <button type="submit" class="btn btn-success" (click)="onSubmits()">Save</button>
+
+            </div>
+        </form>
+        <!-- <form (ngSubmit)="onSubmits()">
+            <div>
+                <label for="fromDate">From Date:</label>
+                <input id="fromDate" name="fromDate" [(ngModel)]="fromDate">
+            </div>
+            <div>
+                <label for="toDate">To Date:</label>
+                <input id="toDate" name="toDate" [(ngModel)]="toDate" (change)="onToDateChange()">
+            </div>
+            <button type="submit">Submit</button>
+        </form> -->
+
+    </div>
+
+</div>

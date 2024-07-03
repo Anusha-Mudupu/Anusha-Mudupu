@@ -1,0 +1,466 @@
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4>Branch</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item active">Real Estate</li>
+                    <li class="breadcrumb-item active">Master</li>
+                    <li class="breadcrumb-item active">Branch</li>
+                </ol>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="col-sm">
+        <div class="d-flex justify-content-sm-end gap-2">
+
+            <button style="cursor: pointer;" type="button" (click)="openAddForm()" class="btn btn-warning add-btn me-2"
+                id="create-btn"><i class="ri-add-line align-bottom me-1"></i>
+                Add</button>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- <div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+
+                    <li class="breadcrumb-item active text-primary">Real-Estate</li>
+                    <li class="breadcrumb-item active">
+                        <a role="button" class="text-primary">Branch</a>
+                    </li>
+
+
+                </ol>
+            </div>
+            <div class="col-sm">
+                <div class="d-flex justify-content-sm-end">
+
+
+                    <button style="cursor: pointer;" type="button" (click)="openAddForm()"
+                        class="btn btn-warning add-btn me-2" id="create-btn"><i
+                            class="ri-add-line align-bottom me-1"></i>
+                        Add</button>
+
+
+
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <!-- <div class="">
+                <h2>Branch</h2>
+            </div> -->
+
+            <div class="card-body">
+                <div id="customerList">
+                    <div class="row g-4 mb-3">
+                        <div class="col-sm-auto">
+                        </div>
+                        <div class="table-responsive table-card mt-3 mb-1">
+
+                            <!-- <div class="row d-flex d-sm-flex mt-3 mb-2">
+                                    <div class="search-box  col-2">
+                                        <input type="text" class="form-control search" placeholder="Search With Name.."
+                                            [(ngModel)]="searchTermName" (input)="filterLeads()">
+                                        <i class="ri-search-line search-icon"></i>
+                                    </div>
+                                    <div class="search-box  col-3 justify-content-center">
+                                        <input type="text" class="form-control search" placeholder="Search With Description"
+                                            [(ngModel)]="searchTermPhone" (input)="filterLeads()">
+                                        <i class="ri-search-line search-icon"></i>
+                                    </div>
+    
+    
+    
+                                    
+                                </div> -->
+                            <table class="table align-middle table-nowrap" id="customerTable" id="sortable-table">
+                                <thead class="table-light">
+                                    <tr>
+
+
+                                        <th scope="col" (click)="sortTable('vchbranch')" style="cursor:pointer">
+                                            Branch
+                                            <span *ngIf="sortColumn === 'vchbranch'">
+
+                                                <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                                            </span>
+                                            <span *ngIf="sortColumn !== 'vchbranch'">
+
+                                                <i [hidden]="true" class="fa fa-sort-up"></i>
+                                            </span>
+                                        </th>
+                                        <th scope="col" (click)="sortTable('dateupdatedon')" style="cursor:pointer">
+                                            Date Updated On
+                                            <span *ngIf="sortColumn === 'dateupdatedon'">
+                                                <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                                            </span>
+                                        </th>
+                                        <th scope="col" (click)="sortTable('vchbranchname')" style="cursor:pointer">
+                                            Branch Name
+                                            <span *ngIf="sortColumn === 'vchbranchname'">
+                                                <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                                            </span>
+                                        </th>
+                                        <th scope="col" (click)="sortTable('vchcompany')" style="cursor:pointer">
+                                            Company
+                                            <span *ngIf="sortColumn === 'vchcompany'">
+                                                <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                                            </span>
+                                        </th>
+                                        <th scope="col" (click)="sortTable('brid')" style="cursor:pointer">
+                                            Brid
+                                            <span *ngIf="sortColumn === 'brid'">
+                                                <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                                            </span>
+                                        </th>
+                                        <th scope="col" (click)="sortTable('street')" style="cursor:pointer">
+                                            Street
+                                            <span *ngIf="sortColumn === 'street'">
+                                                <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                                            </span>
+                                        </th>
+                                        <th scope="col" (click)="sortTable('Area')" style="cursor:pointer">
+                                            Area
+                                            <span *ngIf="sortColumn === 'Area'">
+                                                <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                                            </span>
+                                        </th>
+                                        <th scope="col" (click)="sortTable('City')" style="cursor:pointer">
+                                            City
+                                            <span *ngIf="sortColumn === 'City'">
+                                                <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                                            </span>
+                                        </th>
+                                        <th scope="col" (click)="sortTable('State')" style="cursor:pointer">
+                                            State
+                                            <span *ngIf="sortColumn === 'State'">
+                                                <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                                            </span>
+                                        </th>
+                                        <th scope="col" (click)="sortTable('Country')" style="cursor:pointer">
+                                            Country
+                                            <span *ngIf="sortColumn === 'Country'">
+                                                <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                                            </span>
+                                        </th>
+                                        <th scope="col" (click)="sortTable('pincode')" style="cursor:pointer">
+                                            Pincode
+                                            <span *ngIf="sortColumn === 'pincode'">
+                                                <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                                            </span>
+                                        </th>
+                                        <th scope="col" (click)="sortTable('brcode')" style="cursor:pointer">
+                                            Code
+                                            <span *ngIf="sortColumn === 'brcode'">
+                                                <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                                            </span>
+                                        </th>
+                                        <th scope="col" (click)="sortTable('rgid')" style="cursor:pointer">
+                                            Rgid
+                                            <span *ngIf="sortColumn === 'rgid'">
+                                                <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                                            </span>
+                                        </th>
+                                        <th scope="col" (click)="sortTable('commondate')" style="cursor:pointer">
+                                            Common Date
+                                            <span *ngIf="sortColumn === 'commondate'">
+                                                <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                                            </span>
+                                        </th>
+                                        <th scope="col" (click)="sortTable('name')" style="cursor:pointer">
+                                            Name
+                                            <span *ngIf="sortColumn === 'name'">
+                                                <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                                            </span>
+                                        </th>
+                                        <th scope="col" (click)="sortTable('bm')" style="cursor:pointer">
+                                            Bm
+                                            <span *ngIf="sortColumn === 'bm'">
+                                                <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                                            </span>
+                                        </th>
+                                        <th scope="col" (click)="sortTable('phno')" style="cursor:pointer">
+                                            Phone no.
+                                            <span *ngIf="sortColumn === 'phno'">
+                                                <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                                            </span>
+                                        </th>
+                                        <th scope="col" (click)="sortTable('email')" style="cursor:pointer">
+                                            Email
+                                            <span *ngIf="sortColumn === 'email'">
+                                                <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                                            </span>
+                                        </th>
+
+
+                                        <th class="col">Action</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    @for (data of sortedFloorDetails; track $index) {
+                                    <tr>
+                                        <td>
+                                            {{data.vchbranch}}</td>
+                                        <td>{{data.dateupdatedon}}</td>
+                                        <td>{{data.vchbranchname}}</td>
+                                        <td>{{data.vchcompany}}</td>
+                                        <td>{{data.brid}}</td>
+                                        <td>{{data.street}}</td>
+                                        <td>{{data.Area}}</td>
+                                        <td>{{data.City}}</td>
+                                        <td>{{data.State}}</td>
+                                        <td>{{data.Country}}</td>
+                                        <td>{{data.pincode}}</td>
+                                        <td>{{data.brcode}}</td>
+                                        <td>{{data.rgid}}</td>
+                                        <td>{{data.commondate}}</td>
+                                        <td>{{data.name}}</td>
+                                        <td>{{data.bm}}</td>
+                                        <td>{{data.phno}}</td>
+                                        <td>{{data.email}}</td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <button class="btn btn-subtle-secondary btn-sm dropdown-toggle"
+                                                    data-bs-toggle="dropdown">
+                                                    <i class="bi bi-three-dots-vertical"></i>
+                                                </button>
+
+                                                <ul class="dropdown-menu dropdown-menu-end">
+
+                                                    <li><a class="dropdown-item edit-item-btn" (click)="editForm()"><i
+                                                                class="ph-pencil align-middle me-1"></i>
+                                                            Edit</a></li>
+                                                    <li><a class="dropdown-item remove-item-btn"
+                                                            href="javascript:void(0);" (click)="openDelete()"><i
+                                                                class="ph-trash align-middle me-1"></i> Remove</a></li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                        <div class="d-flex justify-content-end">
+                            <div class="pagination-wrap hstack gap-2">
+                                <pagination class="pagination-wrap hstack gap-2" [totalItems]="floorDetails.length"
+                                    [itemsPerPage]="20" (pageChanged)="tablePageChanged($event)"></pagination>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<!--Add Models -->
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display1}" id="dltModel">
+    <div class="modal-dialog" role="document" style="position: relative;">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <span style="font-weight:bolder;margin-left:150px;font-size:18px;">Add Branch Details</span>
+                <span class="close" aria-label="Close" (click)="closeAddForm()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <hr>
+            <div class="modal-body">
+
+                <form>
+                    <div class="row">
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Date Updated On</label>
+                            <input type="text" class="form-control" placeholder="Enter dateupdated on">
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Branch Name</label>
+                            <input type="text" class="form-control" placeholder="Enter branchname">
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Company</label>
+                            <input type="text" class="form-control" placeholder="Enter Company">
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">street</label>
+                            <input type="text" class="form-control" placeholder="Enter street">
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Country</label>
+                            <input type="text" class="form-control" placeholder="Enter Country">
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">pincode</label>
+                            <input type="text" class="form-control" placeholder="Enter pincode">
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Phone Number</label>
+                            <input type="text" class="form-control" placeholder="Enter Phone Number">
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Email</label>
+                            <input type="text" class="form-control" placeholder="Enter Email">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" (click)="closeAddForm()">Save</button>
+                <button type="button" class="btn btn-danger" (click)="closeAddForm()"> Cancel</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Edit Model -->
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display2}" id="dltModel">
+    <div class="modal-dialog" role="document" style="position: relative;">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <span style="font-weight:bolder;margin-left:150px;font-size:18px;">Edit Branch Details</span>
+                <span class="close" aria-label="Close" (click)="closeEditForm()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <hr>
+            <div class="modal-body">
+
+                <form>
+                    <div class="row">
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Date Updated on</label>
+                            <input type="text" class="form-control" placeholder="Enter Dateupdated on">
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Branch Name</label>
+                            <input type="text" class="form-control" placeholder="Enter Branch Name">
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Company</label>
+                            <input type="text" class="form-control" placeholder="Enter company">
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Street</label>
+                            <input type="text" class="form-control" placeholder="Enter street">
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Country</label>
+                            <input type="text" class="form-control" placeholder="Enter Country">
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">pincode</label>
+                            <input type="text" class="form-control" placeholder="Enter pincode">
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Phone Number</label>
+                            <input type="text" class="form-control" placeholder="Enter Phone Number">
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Email</label>
+                            <input type="text" class="form-control" placeholder="Enter Email">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" (click)="closeEditForm()">Save</button>
+                <button type="button" class="btn btn-danger" (click)="closeEditForm()"> Cancel</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- delete Model -->
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display3}" id="dltModel">
+    <div class="modal-dialog" role="document" style="position: relative;top:150px;">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <span style="font-weight: bold;margin-left: 130px;"> Do you want to delete record?</span>
+                <span class="close" aria-label="Close" (click)="onClosed()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <hr>
+            <div class="modal-body">
+
+                <form>
+                    <div class="row" id="fields">
+                        <div class="col">
+
+
+                        </div>
+
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-danger" (click)="onClosed()">X Cancel</button>
+                <button type="button" class="btn btn-success" (click)="onClosed()">OK</button>
+            </div>
+        </div>
+    </div>
+
+</div>

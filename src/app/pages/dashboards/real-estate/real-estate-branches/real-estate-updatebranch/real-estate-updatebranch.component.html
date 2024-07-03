@@ -1,0 +1,66 @@
+
+<div class="container">
+    <button mat-raised-button color="" mat-dialog-close id="crossbtn" (click)="closeDialog()">X</button>
+    <h2>Edit Branch</h2>
+    <form [formGroup]="updateBranchForm">
+        <input type="number" placeholder="{{branchDataById.id}}" [(ngModel)]="branchDataById.id" formControlName="id"
+            hidden>
+        <div class="col-lg">
+            <label for="exampleInputPassword1" class="form-label">Name<span style="color:red">*</span></label>
+            <input type="text" class="form-control" placeholder="{{branchDataById.name}}"
+                [(ngModel)]="branchDataById.name" formControlName="name">
+        </div>
+        <div>
+            <label for="exampleInputPassword1" class="form-label">Code</label>
+            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="{{branchDataById.code}}"
+                [(ngModel)]="branchDataById.code" formControlName="code">
+        </div>
+        <div>
+            <label for="exampleInputPassword1" class="form-label">Status</label>
+            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="{{branchDataById.status}}"
+                [(ngModel)]="branchDataById.status" formControlName="status">
+        </div>
+        <div>
+            <label for="exampleInputPassword1" class="form-label">Zone</label>
+            <!-- <input type="text" class="form-control" id="exampleInputPassword1" placeholder="{{branchDataById.zone}}"
+                [(ngModel)]="branchDataById.zone" formControlName="zone"> -->
+                <select class="form-select" aria-label="Default select example" formControlName="zone">
+                    @for(zone of zoneListData; track $index){
+                        <option [value]="zone.id">{{zone.vchzonename}}</option>  
+                    }
+
+                   </select>
+        </div>
+        <div>
+            <label for="exampleInputPassword1" class="form-label">Region</label>
+            <!-- <input type="text" class="form-control" id="exampleInputPassword1" placeholder="{{branchDataById.region}}"
+                [(ngModel)]="branchDataById.region" formControlName="region"> -->
+                <select class="form-select" aria-label="Default select example" formControlName="region">
+                    @for(region of regionListData; track $index){
+                        <option [value]="region.id">{{region.name}}</option>  
+                    }
+
+                   </select>
+        </div>
+        <button type="button" class="btn btn-danger" (click)="closeDialog()" id="cancelbtn">Cancel</button>
+
+        <button type="button" class="btn btn-success" (click)="saveUpdateBranchData()" id="submitbtn">Submit</button>
+            
+
+        <!-- <div style="z-index: 11" id="popup">
+            <div id="borderedToast2" class="toast toast-border-success overflow-hidden mt-3 " role="alert"
+                aria-live="assertive" aria-atomic="true">
+                <div class="toast-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0 me-2">
+                            <i class="ri-checkbox-circle-fill align-middle"></i>
+                        </div>
+                        <div class="flex-grow-1">
+                            <h6>Updated Success</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </form>
+</div>

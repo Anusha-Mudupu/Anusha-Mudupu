@@ -1,0 +1,213 @@
+<app-chits-dashboard></app-chits-dashboard>
+<router-outlet></router-outlet>
+<!-- <div class="row" id="print">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title mb-0 flex-grow-1" style="margin-top:-10px;">Manager Wise Leads Conversion</h2>
+            </div>
+
+            <div class="card-body">
+
+                <div class="row" style="position: relative;cursor: pointer;">
+                    <div class="col-3">
+                        <label for="valueInput" class="form-label">From Date</label>
+                        <input type="Date" class="form-control" id="valueInput" value="Select Date Range"
+                            placeholder="Select Date Range">
+                    </div>
+                    <div class="col-3">
+                        <label for="valueInput" class="form-label">To Date</label>
+                        <input type="Date" class="form-control" id="valueInput" value="Select Date Range"
+                            placeholder="Select Date Range">
+                    </div>
+                    <div class="col" style="position:relative;top:3cap">
+                        <button type="button" class="btn btn-success"> +Get</button>
+
+                    </div>
+                </div>
+
+
+
+                <span class="d-flex justify-content-sm-start" id="menu">
+
+                    <i style="color:rgb(69, 43, 134)" class="bi bi-copy"></i><svg xmlns="http://www.w3.org/2000/svg"
+                        width="16" height="16" fill="currentColor" class="bi bi-copy" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z" />
+                    </svg>
+
+                    <i style="color:rgb(69, 43, 134)" class="bi bi-file-earmark-excel"></i>
+                    <i style="color:rgb(69, 43, 134)" class="bi bi-file-earmark-pdf"></i>
+                    <i style="color:rgb(69, 43, 134)" class="bi bi-file-earmark-text"></i>
+                    <i style="color:rgb(69, 43, 134)" class="bi bi-printer icon-hover" title="Print"></i>
+                    <span><a style="color:rgb(69, 43, 134);font-weight:normal;margin-left: 20px;">Column
+                            Visibility</a></span>
+                    <label style="margin-left: 20px;">Show</label>
+                    <select class="form-select" aria-label="Default select example"
+                        style="cursor:pointer;width:120px;margin-left:10px;margin-top:-3px;height:34px;">
+
+                        <option value="" disabled selected style="display:none;">Select</option>
+
+                        <option value="">5 </option>
+                        <option value="Noor">10</option>
+                        <option value="Rajeshwari">20</option>
+                        <option value="Anusha">30</option>
+                        <option value="Noor">40</option>
+
+                    </select>
+                    <span style="margin-left:10px ;">entries</span>
+
+                    <input type="text" class="form-control search " placeholder="Search..."
+                        id=search>
+                   
+
+
+
+                </span>
+
+                <hr>
+
+                <div class="table-responsive">
+                    <table class="table table-gridjs table-striped">
+                        <thead id="table-headers">
+
+
+                            <tr>
+                                @for(key of keys;track $index){
+                                <th class="gridjs-th">{{key}}</th>
+                                }
+                               
+
+                            </tr>
+
+                        </thead>
+                        <tbody>
+
+
+                            <tr class="gridjs-tr">
+                                @for (key of keys ;track $index) {
+
+                                <td data-column-id="position" class="gridjs-td">{{ leadsConsolidate[0][key] }}</td>
+                                }
+                             
+
+
+
+
+
+
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+                <br>
+                <div class="row justify-content-md-between align-items-md-center"style="position: relative;left:10px;">
+                    <div class="col-sm-12 col-md-5">
+                        <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">
+                            Showing
+                            0 to
+                            0 of 0
+                            entries
+                        </div>
+                    </div>
+        
+                </div>
+            </div>
+        </div>
+    </div>
+   
+</div>
+
+
+
+
+<div class="col-xxl-6">
+    <div class="card">
+       
+        <div class="card-body">
+          
+            <accordion [closeOthers]="true"
+                class="accordion custom-accordionwithicon custom-accordion-border accordion-border-box accordion-success"
+                id="accordionBordered">
+                <accordion-group class="accordion-item" [isOpen]="isFirstOpen">
+                    <h2 accordion-heading class="accordion-header" id="accordionborderedExample1">
+                        <button class="accordion-button" type="button">
+                          Today's Follow Up
+                        </button>
+                    </h2>
+                    <div id="accor_borderedExamplecollapse1" class="accordion-collapse collapse show">
+                        <div class="accordion-body">
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
+                            squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck
+                            quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua nulla assumenda
+                            shoreditch et.
+                        </div>
+                    </div>
+                </accordion-group>
+                <accordion-group class="accordion-item">
+                    <h2 accordion-heading class="accordion-header" id="accordionborderedExample2">
+                        <button class="accordion-button" type="button">
+                           today's Leads
+                        </button>
+                    </h2>
+                    <div id="accor_borderedExamplecollapse2" class="accordion-collapse collapse show">
+                        <div class="accordion-body">
+                            Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed
+                            fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget
+                            bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce
+                            vulputate eleifend sapien.
+                        </div>
+                    </div>
+                </accordion-group>
+                <accordion-group class="accordion-item">
+                    <h2 accordion-heading class="accordion-header" id="accordionborderedExample3">
+                        <button class="accordion-button" type="button">
+                            Direct Leads
+                        </button>
+                    </h2>
+                    <div id="accor_borderedExamplecollapse3" class="accordion-collapse collapse show">
+                        <div class="accordion-body">
+                            Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in
+                            faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer
+                            lacinia. Nam pretium turpis et arcu arcu tortor, suscipit eget, imperdiet nec, imperdiet
+                            iaculis aliquam ultrices mauris.
+                        </div>
+                    </div>
+                </accordion-group>
+                <accordion-group class="accordion-item">
+                    <h2 accordion-heading class="accordion-header" id="accordionborderedExample4">
+                        <button class="accordion-button" type="button">
+                           Pending Follow-ups
+                        </button>
+                    </h2>
+                    <div id="accor_borderedExamplecollapse3" class="accordion-collapse collapse show">
+                        <div class="accordion-body">
+                            Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in
+                            faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer
+                            lacinia. Nam pretium turpis et arcu arcu tortor, suscipit eget, imperdiet nec, imperdiet
+                            iaculis aliquam ultrices mauris.
+                        </div>
+                    </div>
+                </accordion-group>
+                <accordion-group class="accordion-item">
+                    <h2 accordion-heading class="accordion-header" id="accordionborderedExample5">
+                        <button class="accordion-button" type="button">
+                          Upcoming Follow-ups
+                        </button>
+                    </h2>
+                    <div id="accor_borderedExamplecollapse3" class="accordion-collapse collapse show">
+                        <div class="accordion-body">
+                            Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in
+                            faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer
+                            lacinia. Nam pretium turpis et arcu arcu tortor, suscipit eget, imperdiet nec, imperdiet
+                            iaculis aliquam ultrices mauris.
+                        </div>
+                    </div>
+                </accordion-group>
+            </accordion>
+        </div>
+       
+    </div>
+</div> -->

@@ -1,0 +1,299 @@
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4>Regions</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item active">Real Estate</li>
+                    <li class="breadcrumb-item active">Master</li>
+                    <li class="breadcrumb-item active">Regions</li>
+                </ol>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="col-sm">
+        <div class="d-flex justify-content-sm-end gap-2">
+            <button type="button" class="btn btn-success add-btn" id="create-btn" (click)="openModal()"
+                data-toggle="tooltip" data-placement="top" title="click Add" style="color:black"><i
+                    class="ri-add-line align-bottom me-1"></i>
+                Add</button>
+
+                <button class="btn btn-success" (click)="clearAllSearchFields()" style="color:black">Clear All</button>
+
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container">
+
+    <div class="container">
+        <div class="row row-cols-2 row-cols-lg-3 d-flex">
+
+            <!-- <div class="col-4 col-lg-2" style="font-weight:normal; font-size: 25px;">
+                Regions</div> -->
+            <!-- <div class=" order-last justify-content-end">
+
+                <button type="button" class="btn btn-success add-btn" id="create-btn" (click)="openModal()"
+                    data-toggle="tooltip" data-placement="top" title="click Add" style="color:black"><i
+                        class="ri-add-line align-bottom me-1"></i>
+                    Add</button>
+            </div> -->
+
+
+        </div>
+    </div>
+</div>
+<div class="container" style="position: relative;top:-30px;">
+    <div class="row d-flex d-sm-flex mt-3 mb-2">
+        <div class="search-box  col-2">
+            <input type="text" class="form-control search" placeholder="Search for Zone.." [(ngModel)]="searchTermName"
+                (input)="filterLeads()">
+            <i class="ri-search-line search-icon"></i>
+        </div>
+        <div class="search-box  col-2">
+            <input type="text" class="form-control search" placeholder="Search for Region.."
+                [(ngModel)]="searchTermZone" (input)="filterLeads()">
+            <i class="ri-search-line search-icon"></i>
+        </div>
+    </div>
+    <table class="table table-striped" id="sortable-table">
+
+        <thead class="text-muted table-light">
+            <tr>
+                <!-- <th scope="col" (click)="sortTable(0)">Zone<i class="fa-solid fa-sort"></i></th>
+                <th scope="col" (click)="sortTable(1)">Region<i class="fa-solid fa-sort"></i></th> -->
+
+
+                <!-- <th scope="col" (click)="sortTable(2)">Code<i class="fa-solid fa-sort"></i></th> -->
+
+
+                <!-- <th scope="col">Actions</th> -->
+
+
+
+                <th scope="col" (click)="sortTable('zoneNavigation')" style="cursor:pointer">
+                    Zone
+                    <span *ngIf="sortColumn === 'zoneNavigation'">
+                        <!-- Show ascending or descending icon based on sortOrder -->
+                        <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                        <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                    </span>
+                    <span *ngIf="sortColumn !== 'zoneNavigation'">
+                        <!-- Hide the default ascending icon when sorting by other columns -->
+                        <i [hidden]="true" class="fa fa-sort-up"></i>
+                    </span>
+                </th>
+                <!-- <th scope="col">Region</th> -->
+                <th scope="col" (click)="sortTable('name')" style="cursor:pointer">
+                    Region
+                    <span *ngIf="sortColumn === 'name'">
+                        <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                        <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                    </span>
+                </th>
+                <!-- <th>bm</th>
+                <th>Commdate</th>
+                <th>name</th>
+                <th>mgrid</th> -->
+
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+
+
+        <tbody style="position: relative;left:10px;">
+            @for (list of sortedRegionList; track $index) {
+            <tr>
+                <td></td>
+                <td>{{list.name}}</td>
+                <!-- <td>100</td>
+                <td>2024-01-30</td>
+                <td>EDP</td>
+                <td>2</td> -->
+                <!-- <td>{{list.code}}</td> -->
+                <!-- <td class="d-flex gap-2">
+                    
+                    <button class="btn btn-sm btn-success edit-item-btn" title="Edit" (click)="EditModal(list.id)"><i
+                            style="margin-left:-2px;" class="bi bi-pen"></i></button>
+                    <button class="btn btn-sm btn-danger remove-item-btn" title="Delete" (click)="userClick(list.id)"><i
+                            style="margin-left:-2px;" class="ri-delete-bin-2-line"></i></button>
+                </td> -->
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-subtle-secondary btn-sm dropdown-toggle" type="button"
+                            data-bs-toggle="dropdown">
+                            <i class="bi bi-three-dots-vertical"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" style="cursor: pointer;">
+                            <li style="cursor: pointer;">
+                                <a class="dropdown-item" href="javascript:void(0);" style="cursor: pointer;"
+                                    (click)="EditModal(list.id)">Edit</a>
+                            </li>
+                            <li style="cursor: pointer;">
+                                <a class="dropdown-item" href="javascript:void(0);" style="cursor: pointer;"
+                                    (click)="userClick(list.id)">Delete</a>
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            }
+        </tbody>
+
+    </table>
+    <i style="font-size:16px;color:navy;position: relative;left:10px" class="fa">&#xf021;</i>
+    <!-- <nav aria-label="Page navigation example" style="margin-left: 350px;position: relative;top:-20px;border-radius: 30px;">
+        <ul class="pagination">
+            <li class="page-item" style="border-radius: 300px;"><a class="page-link"
+                    style="border-radius: 30px; width:30px"><i style="position: relative; left:-15px;"class="fas fa-chevron-left"></i></a></li>
+            <li class="page-item"><a class="page-link" style="background-color: yellow;border-radius: 30px;">1</a></li>
+            <li class="page-item"><a class="page-link" style="border-radius: 30px;">2</a></li>
+            <li class="page-item" style="border-radius: 30px;"><a class="page-link" style="border-radius: 30px;">3</a></li>
+            <li class="page-item"><a class="page-link" style="border-radius: 30px;width:30px"><i
+                        class="fas fa-chevron-right" style="position: relative; left:-15px;"></i></a></li>
+        </ul>
+    </nav> -->
+    <div class="d-flex justify-content-end">
+        <div class="pagination-wrap hstack gap-2">
+            <pagination class="pagination-wrap hstack gap-2" [totalItems]="regionListData.length" [itemsPerPage]="15"
+                (pageChanged)="tablepageChanged($event)"></pagination>
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Create Region</h2>
+                <span class="close" aria-label="Close" (click)="onCloseHandled()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="addRegionForm">
+                    <!-- <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Zone</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                            placeholder="Enter Zone" aria-placeholder="Enter Business Unit" formControlName="zone">
+                        <div id="emailHelp" class="form-text"></div>
+                    </div> -->
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Zone</label>
+                        <select class="form-select" aria-label="Default select example" formControlName="zone">
+                            @for(zone of zoneListData; track $index){
+                            <option [value]="zone.id">{{zone.name}}</option>
+                            }
+
+                        </select>
+                        <div *ngIf="submitted && addRegionForm.get('zone').invalid">
+                            <div *ngIf="addRegionForm.get('zone').errors.required" style="color: red;"> Zone is
+                                required.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Region</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder=""
+                            formControlName="name">
+                        <div *ngIf="submitted && addRegionForm.get('name').invalid">
+                            <div *ngIf="addRegionForm.get('name').errors.required" style="color: red;"> Region is
+                                required.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Code</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder=""
+                            formControlName="code">
+                        <div *ngIf="submitted && addRegionForm.get('code').invalid">
+                            <div *ngIf="addRegionForm.get('code').errors.required" style="color: red;"> Code is
+                                required.
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="modal-footer">
+                        <!-- <button type="submit" class="btn btn-primary">Save</button> -->
+                        <button type="button" class="btn btn-danger" (click)="onCloseHandled()">Cancel</button>
+                        <button type="button" class="btn btn-success" (click)="saveRegion()">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display1}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit Region</h4>
+                <span class="close" aria-label="Close" (click)="onCloseHandled1()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Zone</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                            placeholder="Enter Zone" aria-placeholder="Enter Business Unit">
+                        <div id="emailHelp" class="form-text"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Code</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Code">
+                    </div>
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="submit" class="btn btn-primary">Save</button> -->
+                <button type="button" class="btn btn-danger" (click)="onCloseHandled()">Cancel</button>
+                <button type="button" class="btn btn-success" (click)="onCloseHandled()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display2}" id="dltModel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <span style="font-weight: bold;margin-left: 130px;"> Do you want to delete record ?</span>
+                <span class="close" aria-label="Close" (click)="onClosed()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <hr>
+            <div class="modal-body">
+
+                <form>
+                    <div class="row" id="fields">
+                        <div class="col">
+
+
+                        </div>
+
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" (click)="deleteRegion()">OK</button>
+                <button type="button" class="btn btn-danger" (click)="onClosed()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+</div>

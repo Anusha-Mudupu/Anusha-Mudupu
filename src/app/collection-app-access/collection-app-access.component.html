@@ -1,0 +1,218 @@
+<!-- <p>collection-app-access works!</p>
+<div class="row pl-3 pt-4">
+    <div class="pt-3 d-flex flex-wrap align-items-center">
+        <h1>Assign</h1>
+    </div>
+</div>
+<div class="row">
+    <ul class="nav nav-tabs funnel-tabs" id="myTab" role="tablist">
+
+        <li class="nav-item"><a aria-controls="fresh" aria-selected="true" data-toggle="tab" role="tab" class="nav-link active show" href="#NewDuesList">Un-Assigned</a></li>
+        <li class="nav-item"><a aria-controls="fresh" aria-selected="true" data-toggle="tab" role="tab" class="nav-link" href="#AlreadyAssignedDues"> Assigned</a></li>
+        <li class="nav-item"><a aria-controls="fresh" aria-selected="true" data-toggle="tab" role="tab" class="nav-link" href="#ReAssigned">Re-Assigned</a></li>
+    </ul>
+</div> -->
+
+
+<!-- <div class="row"> -->
+    <!-- <div class="col">
+        <input type="checkbox">
+        <span class="text-primary" style="border-right: 1px solid black;">Loan A/c Number</span>
+    </div> -->
+    <!-- <span class="col text-primary" style="border-right: 1px solid black;">Loan A/c Number</span>
+    <div class="col text-primary" style="border-right: 1px solid black;">Customer Name</div>
+    <div class="col text-primary" style="border-right: 1px solid black;">Mobile Number</div>
+    <div class="col text-primary" style="border-right: 1px solid black;">Instalment Date</div>
+    <div class="col text-primary" style="border-right: 1px solid black;">Due Amount</div>
+    <div class="col text-primary" style="border-right: 1px solid black;">Over Due</div>
+    <div class="col text-primary" style="border-right: 1px solid black;">Due Penalty</div>
+    <div class="col text-primary" style="border-right: 1px solid black;">Charges Due</div>
+    <div class="col text-primary" style="border-right: 1px solid black;">Total OverDue</div>
+    <div class="col text-primary" style="border-right: 1px solid black;">Days Past Due</div>
+    <div class="col text-primary" style="border-right: 1px solid black;">Charges Due</div>
+    <div class="col text-primary">Total OverDue</div>
+    
+    <hr> -->
+   
+<!-- </div>
+<span>No records available</span>
+<hr>
+<button style="width: 130px; height: 50px; margin-left: 10px;" class="btn btn-primary">Lead Assign</button> -->
+
+
+
+<!-- <div class="row">
+    
+    <div class="tab-content table-responsive">
+
+        <div id="NewDuesList" class="tab-pane fade active show ">
+
+            <div class="mt-0 pt-3 main-dd pl-3 for-custom-kendo-popup3" *ngIf="showSelectuser" style="margin-left: 96px;">
+                <button (click)="onToggle()" class="k-button-cst btn btn-secondary drop-custom dropdown-toggle ">{{ selectedKeys }}</button>
+                <kendo-popup *ngIf="show" style="position: absolute;top: 205px !important;left: 397px !important;">
+
+                    <kendo-treeview [nodes]="Employeetree" textField="employeename" idField="employeeid" parentIdField="reportingto" kendoTreeViewFlatDataBinding [selectBy]="'employeename'" kendoTreeViewExpandable kendoTreeViewSelectable kendoTreeViewHierarchyBinding [(selectedKeys)]="selectedKeys"
+                        (selectionChange)="handleSelection($event)">
+                        <ng-template kendoTreeViewNodeTemplate let-dataItem>
+                            <span class="treecss">{{dataItem.employeename}}</span>
+                        </ng-template>
+                    </kendo-treeview>
+                </kendo-popup>
+                &nbsp;&nbsp; <button type="submit" class="btn btn-blue mr-2 mb-3" (click)="LeadAssign()" style="color: #ffff !important;">Lead Transfer </button>
+            </div>
+
+            <kendo-grid [kendoGridBinding]="OverDuesdate" class="mt-2" [scrollable]="true">
+
+                <kendo-grid-column title="Select All" field="" class="pl-2" width="40">
+                    <ng-template kendoGridHeaderTemplate let-dataItem let-rowIndex="rowIndex">
+                        <input type="checkbox" name="selectAll" (change)="selectAll($event,dataItem,rowIndex)" [checked]="allSelected" />
+                    </ng-template>
+                    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                        <div *ngIf="dataItem.alreadyexist==false">
+                            <input type="checkbox" id="status{{rowIndex}}" [checked]="dataItem.selectOverDues" (change)="checktoAssign($event,dataItem,rowIndex)" />
+                        </div>
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="pApplicationid" title="Loan A/c Number" width="130"></kendo-grid-column>
+                <kendo-grid-column field="pApplicantName" title="Customer Name" width="120"></kendo-grid-column>
+                <kendo-grid-column field="pContactNumber" title="Mobile Number" width="100"></kendo-grid-column>
+                <kendo-grid-column field="pRepaymentType" title="Instalment Date" width="100"></kendo-grid-column>
+                <kendo-grid-column field="pCurrentBalance" title="Due Amount" width="100">
+                    <ng-template kendoGridCellTemplate let-dataItem>
+                        {{dataItem.pCurrentBalance | mycurrency}}
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="pOverDue" title="Over Due" width="100">
+                    <ng-template kendoGridCellTemplate let-dataItem>
+                        {{dataItem.pOverDue | mycurrency}}
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="pPenaltyAmount" title="Due Penalty" width="100">
+                    <ng-template kendoGridCellTemplate let-dataItem>
+                        {{dataItem.pPenaltyAmount | mycurrency}}
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="pCharges" title="Charges Due" width="100">
+                    <ng-template kendoGridCellTemplate let-dataItem>
+                        {{dataItem.pCharges | mycurrency}}
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="pTotalOverDue" title="Total OverDue" width="100">
+                    <ng-template kendoGridCellTemplate let-dataItem>
+                        {{dataItem.pTotalOverDue | mycurrency}}
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="pDuedays" title="Days Past Due" width="100"></kendo-grid-column>
+            </kendo-grid> -->
+
+            <!-- <div class="col pr-0 mt-5 float-right">
+
+                <button type="submit" class="btn btn-blue mr-2 mb-3" (click)="LeadAssign()">Lead Assign </button>
+
+            </div>
+        </div>
+        <div id="AlreadyAssignedDues" class="tab-pane fade mt-2">
+            <kendo-grid [kendoGridBinding]="postsaleleadsdate">
+
+                <kendo-grid-column field="referenceno" title="Loan A/c Number" width="150"></kendo-grid-column>
+                <kendo-grid-column field="fullname" title="Customer Name" width="120"></kendo-grid-column>
+                <kendo-grid-column field="mobileno" title="Mobile Number" width="100"></kendo-grid-column>
+                <kendo-grid-column field="dealvalue" title="Total OverDue" width="100">
+                    <ng-template kendoGridCellTemplate let-dataItem>
+                        {{dataItem.dealvalue | mycurrency}}
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="query" title="Query" width="150"></kendo-grid-column>
+                <kendo-grid-column field="employeename" title="Employee" width="100"></kendo-grid-column>
+                <kendo-grid-column field="reportingmanager" title="Manager" width="100"></kendo-grid-column>
+
+            </kendo-grid>
+        </div> -->
+        <!-- <div id="ReAssigned" class="tab-pane fade mt-2">
+            <div class="col-12">
+                <h3>Re-Assigned</h3>
+            </div> -->
+
+            <!-- <form [formGroup]="ReAssignedform">
+                <div class="d-flex" *ngIf="showSelectuser">
+                    <div class="col-2">
+                        <label class="mr-2">From</label>
+                        <select class="form-control" (change)="Fromemployeetree($event)" formControlName="Fromemployeeid">
+                            <option value="" ng-selected="selected">Select Employee</option>
+                            <option *ngFor="let Employe  of Employeetree;" [value]="Employe.employeeid">{{Employe.employeename}}</option>
+                          </select>
+                    </div> -->
+                    <!-- <div class="col-2">
+                        <label class="mr-2">To</label>
+                        <select class="form-control" *ngIf="toEmployeetree!=''" formControlName="Toemployeeid">
+                            <option value="" ng-selected="selected">Select Employee</option>
+                            <option *ngFor="let toEmploye  of toEmployeetree;" [value]="toEmploye.employeeid">{{toEmploye.employeename}}</option>
+                    </select>
+                    </div> -->
+                    <!-- <div class="col pr-0 float-right" *ngIf="ReAssigned!=''" style="margin-top: 39px;">
+
+                        <button type="submit" class="btn btn-blue mr-2 mb-3" (click)="ReAssigneddata()">Re-Assigned</button>
+
+                    </div>
+                </div>
+            </form> -->
+
+            <!-- <div class="col-12">
+                <kendo-grid [kendoGridBinding]="ReAssigned">
+                    <kendo-grid-column title="Select All" field="" class="pl-2" width="40">
+                        <ng-template kendoGridHeaderTemplate let-dataItem let-rowIndex="rowIndex">
+                            <input type="checkbox" name="selectAll" (change)="selectAllReAssigned($event,dataItem,rowIndex)" [checked]="allSelectedReAssigned" />
+                        </ng-template>
+                        <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+
+                            <input type="checkbox" id="status{{rowIndex}}" [checked]="dataItem.selectReAssigned" (change)="checktReAssigned($event,dataItem,rowIndex)" />
+
+                        </ng-template>
+                    </kendo-grid-column>
+                    <kendo-grid-column field="referenceno" title="Loan A/c Number" width="150"></kendo-grid-column>
+                    <kendo-grid-column field="fullname" title="Customer Name" width="120"></kendo-grid-column>
+                    <kendo-grid-column field="mobileno" title="Mobile Number" width="100"></kendo-grid-column>
+                    <kendo-grid-column field="dealvalue" title="Total OverDue" width="100">
+                        <ng-template kendoGridCellTemplate let-dataItem>
+                            {{dataItem.dealvalue | mycurrency}}
+                        </ng-template>
+                    </kendo-grid-column>
+                    <kendo-grid-column field="query" title="Query" width="100"></kendo-grid-column>
+                    <kendo-grid-column field="employeename" title="Employee" width="100"></kendo-grid-column>
+                    <kendo-grid-column field="reportingmanager" title="Manager" width="100"></kendo-grid-column>
+
+                </kendo-grid>
+
+            </div> -->
+        <!-- </div>
+    </div>
+</div> -->
+
+
+
+<!-- <style>
+    .for-custom-kendo-popup2>kendo-popup {
+        top: 212px !important;
+        left: 271px !important;
+    }
+    
+    .for-custom-kendo-popup3>kendo-popup {
+        top: 212px !important;
+        left: 366px !important;
+    }
+    
+    .for-custom-kendo-popup4>kendo-popup {
+        top: 51px !important;
+        left: 236px !important;
+    }
+    
+    .for-custom-kendo-popup4>.kendo-popup4 {
+        top: 51px !important;
+        left: 60px !important;
+    }
+    
+    #ReAssigned .k-grid th,
+    #ReAssigned .k-grid td {
+        white-space: normal !important;
+    }
+</style> -->

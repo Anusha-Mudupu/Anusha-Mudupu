@@ -1,0 +1,25 @@
+/*
+ *   Copyright (c) 2024 Dmantz Technologies private limited
+ *   All rights reserved.
+ */
+
+.dropdown-toggle::after{
+    display: none;
+  }
+  
+  table tr  td{
+    position: relative;
+    padding: 10px;
+  }
+  table tr th{
+    position: relative;
+    padding: 10px; 
+  }
+  button{
+    position: relative;
+    margin-left: 10px;
+    top:10px
+  }
+  .highlight {
+    background-color: #f0f8ff; /* Light blue background for the highlighted row */
+}

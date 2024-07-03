@@ -1,0 +1,365 @@
+
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+
+                    <li class="breadcrumb-item active text-primary">Real-Estate</li>
+                    <li class="breadcrumb-item active">
+                        <a role="button" class="text-primary">Floor Details</a>
+                    </li>
+
+
+                </ol>
+            </div>
+            <div class="col-sm">
+                <div class="d-flex justify-content-sm-end">
+
+
+                    <button style="cursor: pointer;"  type="button" (click)="openAddForm()"
+                        class="btn btn-warning add-btn me-2" id="create-btn"><i
+                            class="ri-add-line align-bottom me-1"></i>
+                        Add</button>
+                   
+
+
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="">
+                <h2>Floor Details</h2>
+            </div>
+
+            <div class="card-body">
+                <div id="customerList">
+                    <div class="row g-4 mb-3">
+                        <div class="col-sm-auto">
+                        </div>
+                        <div class="table-responsive table-card mt-3 mb-1">
+
+                            <div class="d-flex flex-wrap justify-content-between mt-3 mb-2">
+                                <div class="search-box  col-2">
+                                    <input type="text" class="form-control search" placeholder="Search floorno.."
+                                        [(ngModel)]="searchfloorno" (input)="filterLeads()">
+                                    <i class="ri-search-line search-icon"></i>
+                                </div>
+                                <div class="search-box  col-2 justify-content-center">
+                                    <input type="text" class="form-control search" placeholder="Search blackname"
+                                        [(ngModel)]="searchblackname" (input)="filterLeads()">
+                                    <i class="ri-search-line search-icon"></i>
+                                </div>
+                                <div class="search-box  col-2">
+                                    <input type="text" class="form-control search" placeholder="Search floorname.."
+                                        [(ngModel)]="searchfloorname" (input)="filterLeads()">
+                                    <i class="ri-search-line search-icon"></i>
+                                </div>
+                                <div class="search-box  col-2 ">
+                                    <input type="text" class="form-control search" placeholder="Search floorunits"
+                                        [(ngModel)]="searchfloorunits" (input)="filterLeads()">
+                                    <i class="ri-search-line search-icon"></i>
+                                </div>
+
+
+
+                                <div class="search-box col-2">
+                                    <input type="text" class="form-control search" placeholder="Search amtperunit"
+                                        [(ngModel)]="searchamtperunit" (input)="filterLeads()">
+                                    <i class="ri-search-line search-icon"></i>
+                                </div>
+                                <div class="search-box col-2">
+                                    <input type="text" class="form-control search" placeholder="Search amtperfloor"
+                                        [(ngModel)]="searchamtperfloor" (input)="filterLeads()">
+                                    <i class="ri-search-line search-icon"></i>
+                                </div>
+                                <!-- <div class="search-box  col-2 justify-content-center">
+                                    <input type="text" class="form-control search" placeholder="Search With floorsft"
+                                        [(ngModel)]="searchfloorsft" (input)="filterLeads()">
+                                    <i class="ri-search-line search-icon"></i>
+                                </div> -->
+
+
+
+                                <!-- Add more search boxes for additional criteria (e.g., status) -->
+                            </div>
+                            <table class="table align-middle table-nowrap" id="customerTable" id="sortable-table">
+                                <thead class="table-light">
+                                    <tr>
+
+
+                                        <th scope="col" (click)="sortTable('floorno')" style="cursor:pointer">
+                                            Floor No
+                                            <span *ngIf="sortColumn === 'floorno'">
+
+                                                <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                                            </span>
+                                            <span *ngIf="sortColumn !== 'floorno'">
+
+                                                <i [hidden]="true" class="fa fa-sort-up"></i>
+                                            </span>
+                                        </th>
+                                        <th scope="col" (click)="sortTable('blackname')" style="cursor:pointer">
+                                            Black Name
+                                            <span *ngIf="sortColumn === 'blackname'">
+                                                <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                                            </span>
+                                        </th>
+                                        <th scope="col" (click)="sortTable('floorname')" style="cursor:pointer">
+                                            Floor Name
+                                            <span *ngIf="sortColumn === 'floorname'">
+                                                <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                                            </span>
+                                        </th>
+                                        <th scope="col" (click)="sortTable('floorunits')" style="cursor:pointer">
+                                            Floor Units
+                                            <span *ngIf="sortColumn === 'floorunits'">
+                                                <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                                            </span>
+                                        </th>
+                                        <th scope="col" (click)="sortTable('amtperunit')" style="cursor:pointer">
+                                            Amtperunit
+                                            <span *ngIf="sortColumn === 'amtperunit'">
+                                                <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                                            </span>
+                                        </th>
+                                        <th scope="col" (click)="sortTable('amtperfloor')" style="cursor:pointer">
+                                            Amtperfloor
+                                            <span *ngIf="sortColumn === 'amtperfloor'">
+                                                <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                                            </span>
+                                        </th>
+                                        <th scope="col" (click)="sortTable('floorsft')" style="cursor:pointer">
+                                            Floorsft
+                                            <span *ngIf="sortColumn === 'floorsft'">
+                                                <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                                            </span>
+                                        </th>
+                                        <th class="col">Action</th>
+                                    </tr>
+                                </thead>
+     
+                                <tbody>
+                                    @for (data of sortedFloorDetails; track $index) {
+                                    <tr>
+
+                                        <td>
+                                            {{data.floorno}}</td>
+                                        <td>{{data.blackname}}</td>
+                                        <td>{{data.floorname}}</td>
+                                        <td>{{data.floorunits}}</td>
+                                        <td>{{data.amtperunit}}</td>
+                                        <td>{{data.amtperfloor}}</td>
+                                        <td>{{data.floorsft}}</td>
+                                        <td>
+                                            <div  class="dropdown">
+                                                <button class="btn btn-subtle-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown">
+                                                    <i class="bi bi-three-dots-vertical"></i>
+                                                </button>
+    
+                                                <ul  class="dropdown-menu dropdown-menu-end">
+                                       
+                                                    <li><a class="dropdown-item edit-item-btn" (click)="editForm()"><i class="ph-pencil align-middle me-1"></i>
+                                                            Edit</a></li>
+                                                    <li><a class="dropdown-item remove-item-btn"  href="javascript:void(0);"  (click)="openDelete()"><i class="ph-trash align-middle me-1"></i> Remove</a></li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                        <div class="d-flex justify-content-end">
+                            <div class="pagination-wrap hstack gap-2">
+                                <pagination class="pagination-wrap hstack gap-2" [totalItems]="floorDetails.length"
+                                    [itemsPerPage]="20" (pageChanged)="tablePageChanged($event)"></pagination>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<!--Add Models -->
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display1}" id="dltModel">
+    <div class="modal-dialog" role="document" style="position: relative;">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <span style="font-weight:bolder;margin-left:150px;font-size:18px;">Add Floor Details</span>
+                <span class="close" aria-label="Close" (click)="closeAddForm()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <hr>
+            <div class="modal-body">
+
+                <form>
+                    <div class="col">
+                        <label for="exampleInputPassword1" class="form-label">Floor No</label>
+                        <input type="text" class="form-control" placeholder="Enter Floor No">
+                    </div>
+                    <div class="row">
+                       
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Black Name</label>
+                            <input type="text" class="form-control" placeholder="Enter Blackname">
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Floor Name</label>
+                            <input type="text" class="form-control" placeholder="Enter Floor Name">
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Floor Units</label>
+                            <input type="text" class="form-control" placeholder="Enter Floor Units">
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Amtperunit</label>
+                            <input type="text" class="form-control" placeholder="Enter Amtperunit">
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Amtperfloor</label>
+                            <input type="text" class="form-control" placeholder="Enter Amtperfloor">
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Floorsft</label>
+                            <input type="text" class="form-control" placeholder="Enter Floorsft">
+                        </div>
+                    </div>
+                </form>
+             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" (click)="closeAddForm()">Save</button>
+                <button type="button" class="btn btn-danger" (click)="closeAddForm()"> Cancel</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Edit Model -->
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display2}" id="dltModel">
+    <div class="modal-dialog" role="document" style="position: relative;">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <span style="font-weight:bolder;margin-left:150px;font-size:18px;">Edit Floor Details</span>
+                <span class="close" aria-label="Close" (click)="closeEditForm()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <hr>
+            <div class="modal-body">
+
+                <form>
+                    <div class="col">
+                        <label for="exampleInputPassword1" class="form-label">Floor No</label>
+                        <input type="text" class="form-control" placeholder="Enter floorno">
+                    </div>
+                    <div class="row">
+                        
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Black Name</label>
+                            <input type="text" class="form-control" placeholder="Enter blackname">
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Floor Name</label>
+                            <input type="text" class="form-control" placeholder="Enter Floor Name">
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Floor Units</label>
+                            <input type="text" class="form-control" placeholder="Enter Floor Units">
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Amtperunit</label>
+                            <input type="text" class="form-control" placeholder="Enter Amtperunit">
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Amtperfloor</label>
+                            <input type="text" class="form-control" placeholder="Enter Amtperfloor">
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Floorsft</label>
+                            <input type="text" class="form-control" placeholder="Enter floorsft">
+                        </div>
+                    </div>
+                </form>
+             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" (click)="closeEditForm()">Save</button>
+                <button type="button" class="btn btn-danger" (click)="closeEditForm()"> Cancel</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- delete Model -->
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display3}" id="dltModel">
+    <div class="modal-dialog" role="document" style="position: relative;top:150px;">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <span style="font-weight: bold;margin-left: 130px;"> Do you want to delete record?</span>
+                <span class="close" aria-label="Close" (click)="onClosed()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <hr>
+            <div class="modal-body">
+
+                <form>
+                    <div class="row" id="fields">
+                        <div class="col">
+
+
+                        </div>
+
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-danger" (click)="onClosed()">X Cancel</button>
+                <button type="button" class="btn btn-success" (click)="onClosed()">OK</button>
+            </div>
+        </div>
+    </div>
+
+</div>

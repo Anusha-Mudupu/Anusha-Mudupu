@@ -1,0 +1,43 @@
+
+<div class="container">
+    <button mat-raised-button color="" mat-dialog-close id="crossbtn" (click)="closeDialog()">X</button>
+    <h2>Edit Region</h2>
+    <form [formGroup]="updateRegionForm">
+        <input type="number" placeholder="{{regionDataById.id}}" [(ngModel)]="regionDataById.id" formControlName="id"
+            hidden>
+
+
+        <div>
+            <label for="exampleInputPassword1" class="form-label">Zone</label>
+
+            <select formControlName="zone" class="form-select mb-3" aria-label="Default select example">
+                @for(zone of zoneListData; track $index){
+                <option [value]="zone.id">{{zone.name}}</option>
+                <option value="" disabled selected style="display:none;">Select Region</option>
+
+                }
+            </select>
+            <div *ngIf="updateRegionForm.get('zone')?.hasError('required')" style="color: red;"> Zone is required</div>
+        </div>
+        <div>
+            <label for="exampleInputPassword1" class="form-label">Region</label>
+            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="{{regionDataById.name}}"
+                [(ngModel)]="regionDataById.name" formControlName="name">
+                <div *ngIf="updateRegionForm.get('name')?.hasError('required')" style="color: red;"> Region is required</div>
+        </div>
+
+        <div>
+            <label for="exampleInputPassword1" class="form-label">Code</label>
+            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="{{regionDataById.code}}"
+                [(ngModel)]="regionDataById.code" formControlName="code">
+                <div *ngIf="updateRegionForm.get('code')?.hasError('required')" style="color: red;"> Code is required</div>
+        </div>
+
+        <button type="button" class="btn btn-danger" (click)="closeDialog()" id="cancelbtn">Cancel</button>
+
+        <button type="button" class="btn btn-success" (click)="saveUpdateRegionData()" id="submitbtn">Save</button>
+
+
+
+    </form>
+</div>

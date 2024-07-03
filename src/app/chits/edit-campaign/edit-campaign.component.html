@@ -1,0 +1,416 @@
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+
+                    <li class="breadcrumb-item active text-primary" (click)="navigateTo()">Administration</li>
+                    <li class="breadcrumb-item active">
+                        <a role="button" class="text-primary"> Edit Campaign </a>
+                    </li>
+
+
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="">
+
+        <div class="card">
+            <div class="card-body">
+
+                <!-- Nav tabs -->
+                <tabset class="nav nav-pills nav-success mb-3" role="tablist">
+                    <tab heading="Campaign Details" class="nav-item ">
+                        <div class="card border-success mb-3">
+                            <div class="card-header bg-transparent border-success"
+                                style="font-weight: bold; font-size: 18px;">Campaign
+                                Details
+                            </div>
+
+                            <div class="card-body">
+                                <form [formGroup]="updateCampaignDataForm">
+                                    <div class=" row d-flex ">
+                                        <div class="mb-3 col-5">
+                                            <label for="exampleInputPassword1" class="form-label">Campaign Name</label>
+                                            <input type="text" class="form-control" id="exampleInputPassword1"
+                                                placeholder="Enter Name" formControlName="name">
+                                        </div>
+                                        <div class="mb-2 col-5">
+                                            <label for="exampleInputPassword1" class="form-label">Status</label>
+                                            <select class="form-select" formControlName="status"
+                                                aria-label="Default select example">
+                                                <option value="" disabled selected>Select Status
+                                                </option>
+                                                <ng-container *ngFor="let status of  campaignTypelookupConstants">
+                                                    <option [value]="status.value">
+                                                        {{status.constantName}}</option>
+                                                </ng-container>
+                                            </select>
+                                        </div>
+                                        <!-- <div class="mb-2 col-5">
+                        
+                                            <label for="businessVertical" class="form-label">Business Vertical</label>
+                                            <select [(ngModel)]="verticalid" class="form-select mb-3" aria-label="Default select example">
+                                                @for(vertical of verticalData; track $index){
+                                                <option [value]="vertical.id">{{vertical.name}}</option>
+                                                <option value="" disabled selected style="display:none;">Select Vertical
+                                                </option>
+                        
+                                                }
+                                            </select>
+                        
+                                        </div> -->
+                                        <!-- 
+                                        <div class="mb-3 col-5">
+                                            <label for="exampleInputPassword1" class="form-label">From Date</label>
+                                            <input type="date" class="form-control" id="exampleInputPassword1" placeholder=""
+                                                formControlName="startDate">
+                                        </div> -->
+                                        <div class="mb-3 col-5">
+                                            <label class="form-label">From Date</label>
+                                            <input type="text" formControlName="startDate"
+                                                class="form-control flatpickr-input" mwlFlatpickr [altInput]="true"
+                                                [convertModelValue]="true" altFormat="F j, Y" dateFormat="Y-m-d"
+                                                placeholder="" (change)="onStartDateChange($event)">
+                                        </div>
+
+                                        <!-- <div class="mb-3 col-5">
+                                            <label for="exampleInputPassword1" class="form-label">To Date</label>
+                                            <input type="date" class="form-control" id="exampleInputPassword1" placeholder="30-06-2024"
+                                                formControlName="endDate" [(ngModel)]="campaignsData.startDate">
+                                        </div> -->
+                                        <div class="mb-3 col-5">
+                                            <label class="form-label">TO Date</label>
+                                            <input type="text" formControlName="endDate"
+                                                class="form-control flatpickr-input" mwlFlatpickr [altInput]="true"
+                                                [convertModelValue]="true" altFormat="F j, Y" dateFormat="Y-m-d"
+                                                placeholder="" (change)="onEndDateChange($event)">
+                                        </div>
+
+
+                                    </div>
+                                    <div class="float-end">
+                                        <button type="submit" class="btn btn-success" (click)="onSubmit()">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </tab>
+                    <tab heading="Notification" class="nav-item ">
+                        <div class="tab-pane mt-3" id="profile-1" role="tabpanel">
+                            <div class="d-flex mt-2">
+                                <!-- <div class="flex-shrink-0">
+                                    <i class="ri-checkbox-circle-fill text-success"></i>
+                                </div> -->
+                                <div class="flex-grow-1 ms-2">
+                                    <tabset class="mb-3">
+                                        <!-- <tab heading="Notification" class="nav-item"> -->
+                                        <tabset class="">
+
+                                            <tab heading="WhatsApp" class="nav-item">
+                                                <form [formGroup]="updateCampaignDataForm">
+                                                    <div class="tab-pane mt-2" id="home" role="tabpanel">
+                                                        <div class="row align-items-start">
+                                                            <div class="card">
+                                                                <div class="">
+                                                                    <ckeditor [editor]="Editor" data=""
+                                                                        formControlName="whatsappMessage">
+                                                                    </ckeditor>
+                                                                    <button type="submit"
+                                                                        class="btn btn-success float-end mt-2"
+                                                                        (click)="onSubmit()">SAVE</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </tab>
+
+                                            <tab heading="Sms" class="nav-item">
+                                                <form [formGroup]="updateCampaignDataForm">
+                                                    <div class="tab-pane mt-2" id="product1" role="tabpanel">
+                                                        <div class="row align-items-start">
+                                                            <div class="card">
+                                                                <div class="">
+                                                                    <ckeditor [editor]="Editor" data=""
+                                                                        formControlName="smsMessage"></ckeditor>
+                                                                    <button type="submit"
+                                                                        class="btn btn-success float-end mt-2"
+                                                                        (click)="onSubmit()">SAVE</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </tab>
+
+                                            <tab heading="E-mail" class="nav-item">
+                                                <form [formGroup]="updateCampaignDataForm">
+                                                    <div class="tab-pane mt-2" id="product11" role="tabpanel">
+                                                        <div class="row align-items-start">
+                                                            <div class="card">
+                                                                <div class="">
+                                                                    <ckeditor [editor]="Editor" data=""
+                                                                        formControlName="emailMessage">
+                                                                    </ckeditor>
+                                                                    <button type="submit"
+                                                                        class="btn btn-success float-end mt-2"
+                                                                        (click)="onSubmit()">SAVE</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </tab>
+                                        </tabset>
+                                        <!-- </tab> -->
+                                    </tabset>
+                                </div>
+                            </div>
+
+                        </div>
+                    </tab>
+
+                </tabset>
+                <!-- Tab panes -->
+            </div><!-- end card-body -->
+        </div><!-- end card -->
+    </div>
+
+</div>
+<div class="card">
+    <div class="card-header bg-transparent border-success" style="font-weight: bold; font-size: 18px;">Media
+        Details
+    </div>
+
+    <div class="card-body">
+        <div id="customerList">
+            <div class="row g-4 mb-3">
+                <div class="col-sm-auto">
+                </div>
+                <div class="table-responsive table-card mt-3 mb-1">
+
+
+
+
+                    <table class="table align-middle table-nowrap" id="customerTable" id="sortable-table">
+                        <thead class="table-light">
+                            <tr>
+
+
+                                <!-- <th scope="col" (click)="sortTable('name')"
+                                    style="cursor:pointer">
+                                    Bussiness
+
+
+                                </th> -->
+                                <th scope="col" style="cursor:pointer">
+                                    Media Type
+
+                                </th>
+                                <th scope="col" style="cursor:pointer">
+                                    Name
+
+                                </th>
+                                <th scope="col" style="cursor:pointer">
+                                    File Path
+
+                                </th>
+                                <th scope="col" style="cursor:pointer">
+                                    Status
+
+                                </th>
+                                <th class="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="list form-check-all">
+                            @for (data of campaignMediaData; track $index) {
+                            <tr>
+
+                                <td>{{data.mediaType}}</td>
+                                <td>{{data.name}}</td>
+                                <td>{{data.filePath}}</td>
+                                <td>Active</td>
+                                <td>
+                                    <div class="d-flex gap-2">
+                                        <div class="dropdown">
+                                            <button class="btn btn-subtle-secondary btn-sm dropdown-toggle"
+                                                type="button" data-bs-toggle="dropdown">
+                                                <i class="bi bi-three-dots-vertical"></i>
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-end" style="cursor: pointer;">
+                                                <li style="cursor: pointer;">
+                                                    <a class="dropdown-item" href="javascript:void(0);"
+                                                        style="cursor: pointer;">
+                                                        <p style="cursor: pointer;" (click)="smallModal(data.id)">
+                                                            Edit Media
+                                                        </p>
+
+
+                                                        <p style="cursor: pointer;">
+                                                            Delete
+                                                        </p>
+
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+
+
+
+
+                                    </div>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+        </div><!-- end card -->
+    </div>
+    <!-- end col -->
+    <div class="card">
+
+        <div class="card-body">
+
+            <accordion [closeOthers]="true"
+                class="accordion custom-accordionwithicon custom-accordion-border accordion-border-box accordion-success"
+                id="accordionBordered">
+                <accordion-group class="accordion-item" [isOpen]="isFirstOpen">
+                    <h2 accordion-heading class="accordion-header" id="accordionborderedExample1">
+                        <button class="accordion-button" type="button">
+                            Add Media
+                        </button>
+                    </h2>
+                    <div id="accor_borderedExamplecollapse1" class="accordion-collapse collapse show">
+                        <form action="upload.php" method="post" enctype="multipart/form-data"
+                            [formGroup]="addMediaForm">
+                            <div class=" row d-flex ">
+
+                                <div class="mb-2 col-5">
+                                    <label for="mediaType" class="form-label">Media Type</label>
+                                    <select formControlName="mediaType" id="mediaType" class="form-select mb-3"
+                                        aria-label="Select Media Type">
+                                        <option value="" disabled selected style="display:none;">Select Media Type
+                                        </option>
+                                        <option *ngFor="let type of mediaTypelookupConstants" [value]="type.value">{{
+                                            type.constantName }}</option>
+                                    </select>
+                                </div>
+                                <div class="mb-2 col-5">
+                                    <label for="mediaType" class="form-label">Media Name</label>
+                                    <input type="text" class="form-control" formControlName="name">
+                                </div>
+
+                                <!-- <div class="mb-2 col-5">
+                                    <label for="exampleInputPassword1"
+                                        class="form-label">Status</label>
+                                    <select class="form-select" formControlName="status"
+                                        aria-label="Default select example">
+                                        <option value="" disabled selected>Select Status
+                                        </option>
+                                        <ng-container
+                                            *ngFor="let status of  campaignTypelookupConstants">
+                                            <option [value]="status.constantName">
+                                                {{status.constantName}}</option>
+                                        </ng-container>
+                                    </select>
+                                </div> -->
+
+
+                                <div class="mb-2 col-5">
+                                    <label for="mediaType" class="form-label">Select Media
+                                        File</label>
+                                    <input type="file" class="form-control" formControlName="filePath">
+                                </div>
+                                <div class="mb-2  float-end" id="button">
+                                    <button type="submit" class="btn btn-success float-end"
+                                        (click)="uploadFiles()">Upload Files</button>
+                                </div>
+                            </div>
+
+
+
+
+
+                        </form>
+                    </div>
+                </accordion-group>
+
+            </accordion>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Edit Media</h2>
+                <span class="close" aria-label="Close" (click)="onCloseHandled()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="editMediaForm">
+                    <div class=" row d-flex ">
+
+                        <div class="mb-2">
+                            <label for="mediaType" class="form-label">Media Type</label>
+                            <select formControlName="mediaType" id="mediaType" class="form-select mb-3"
+                                aria-label="Select Media Type">
+                                <option value="" disabled selected style="display:none;">Select Media Type
+                                </option>
+                                <option *ngFor="let type of mediaTypelookupConstants" [value]="type.value">{{
+                                    type.constantName }}</option>
+                            </select>
+                        </div>
+                         <div class="mb-2">
+                            <label for="exampleInputPassword1"
+                                class="form-label"> Media Status</label>
+                            <select class="form-select" formControlName="status"
+                                aria-label="Default select example">
+                                <option value="" disabled selected>Select Status
+                                </option>
+                                <ng-container
+                                    *ngFor="let status of  campaignMediaTypelookupConstants">
+                                    <option [value]="status.value">
+                                        {{status.constantName}}</option>
+                                </ng-container>
+                            </select>
+                        </div>
+                        <div class="mb-2">
+                            <label for="mediaType" class="form-label">Media Name</label>
+                            <input type="text" class="form-control" formControlName="name">
+                        </div>
+
+                       
+
+
+                        <div class="mb-2">
+                            <label for="mediaType" class="form-label">Select Media
+                                File</label>
+                            <input type="file" class="form-control" formControlName="filePath">
+                        </div>
+                        <div class="mb-2  float-end" id="button">
+                            <button type="submit" class="btn btn-success float-end">UPDATE</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

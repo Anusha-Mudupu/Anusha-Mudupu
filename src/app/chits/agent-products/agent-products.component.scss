@@ -1,0 +1,91 @@
+/*
+ *   Copyright (c) 2024 Dmantz Technologies private limited
+ *   All rights reserved.
+ */
+// .container1{background-color:white;
+// box-shadow: 1px 1px 1px 1px #888888; height: 100%; width:100%; position: relative;}
+ select {
+    
+    background-color: transparent;
+    border: 0px solid #ccc;
+    // padding: 5px; 
+    content: &#9660;
+    position: relative;
+   
+    // margin-right: -20px;
+ 
+  }
+  option {
+    max-width: 100%;
+    overflow: hidden;
+    word-wrap: normal !important;
+    white-space: normal;
+}
+
+
+  select::-ms-expand {
+    display: none;
+  }
+  select::-webkit-select-arrow {
+    display: none;
+  }
+i{
+    margin-right: 20px;
+}
+.bi-search{
+    font-weight: bold;
+}
+.col-md-auto{
+    
+    color: aliceblue;
+}
+.dropdown-toggle::after{
+  display: none;
+}
+// @media only screen and (min-width: 601px) and (max-width: 1024px) {
+//  .container{
+// width:100%;
+//  }
+//  .container1{
+//   background-color:white;
+//   box-shadow: 1px 1px 1px 1px #888888; height: 100%; width:100%;top:40px; position: relative
+//  }
+//  .table{
+//   width: 100%;
+//  }
+// }
+
+/* CSS for large screens (desktops) */
+// @media only screen and (min-width: 1025px) {
+//   .container{
+//    position: relative;left:-150px
+//      }
+//      .container1{
+//       // background-color:white;
+//       // box-shadow: 1px 1px 1px 1px #888888; 
+//       height: 80%; width:80%;top:40px; position: relative
+//      }
+//      .table{
+//       width: 80%;
+//      }
+// }
+/* Custom tooltip style */
+
+.fa-sort {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 5px;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+}
+.asc { border-bottom: 6px solid black; }
+.desc { border-top: 6px solid black; }
+// table td{
+//   border-color: black;
+// }
+table th{
+  position: relative;
+  left:10px;
+}
+

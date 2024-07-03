@@ -1,0 +1,12 @@
+// /*
+//  *   Copyright (c) 2024 Dmantz Technologies private limited
+//  *   All rights reserved.
+//  */
+.text-body-tertiary {
+  background-color: rgb(236 237 240);
+  cursor: not-allowed;
+}
+
+.dropdown-toggle::after {
+  display: none;
+}

@@ -1,0 +1,372 @@
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4>Leads</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0" >
+                    <li class="breadcrumb-item active">Chits</li>
+                    <li class="breadcrumb-item active">Leads</li>
+                </ol>
+                <br>
+               
+            </div>
+
+
+        </div>
+    </div>
+    <div class="col-sm">
+        <div class="d-flex justify-content-sm-end gap-2">
+            <button type="button" class="btn btn-success add-btn me-2 text-dark" id="create-btn"
+            (click)="openModal()"><i class="ri-add-line align-bottom me-1"></i>
+            Add</button>
+        <button *ngIf="assignLead" type="button" class="btn btn-success add-btn me-2 text-dark" id="create-btn"
+            (click)="assignlead()"><i class="ri-add-line align-bottom me-1"></i>
+            Assign Lead</button>
+        <button *ngIf="assignTransfer" type="button" class="btn btn-success add-btn me-2 text-dark"
+            id="create-btn" (click)="leadTransfer()"><i class="ri-add-line align-bottom me-1"></i>
+            Lead Transfer</button>
+
+            <button class="btn btn-success text-dark" (click)="clearAllSearchFields()">Clear All</button> 
+
+
+
+        </div>
+    </div>
+</div>
+
+<div class="row" >
+    <div class="container" tyle="position: relative;top:-45px;">
+        <div class="row row-cols-2 row-cols-lg-3 d-flex">
+
+            <!-- <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+
+                    <li class="breadcrumb-item active text-dark">Chits</li>
+                    <li class="breadcrumb-item active">
+                        <a role="button" class="text-primary">Leads</a>
+                    </li>
+
+
+                </ol>
+            </div> -->
+
+
+
+            <!-- <div class="d-flex float-end">
+                <button type="button" class="btn btn-success add-btn me-2 text-dark" id="create-btn"
+                    (click)="openModal()"><i class="ri-add-line align-bottom me-1"></i>
+                    Add</button>
+                <button *ngIf="assignLead" type="button" class="btn btn-success add-btn me-2 text-dark" id="create-btn"
+                    (click)="assignlead()"><i class="ri-add-line align-bottom me-1"></i>
+                    Assign Lead</button>
+                <button *ngIf="assignTransfer" type="button" class="btn btn-success add-btn me-2 text-dark"
+                    id="create-btn" (click)="leadTransfer()"><i class="ri-add-line align-bottom me-1"></i>
+                    Lead Transfer</button>
+            </div> -->
+
+            <div>
+                <table class="table table-bordered align-middle table-nowrap mb-0">
+                    <thead>
+                        <tr class="gap-2 d-flex">
+                            <th data-toggle="tooltip" data-placement="top" title="Copy" style="cursor: pointer;"><i
+                                    style="color:rgb(69, 43, 134)" class="bi bi-copy"></i><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-copy" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z" />
+                                </svg></th>
+                            <th data-toggle="tooltip" data-placement="top" title="Excel" style="cursor: pointer;"><i
+                                    style="color:rgb(69, 43, 134)" class="bi bi-file-earmark-excel"></i></th>
+                            <th data-toggle="tooltip" data-placement="top" title="PDF" style="cursor: pointer;">
+                                <i style="color:rgb(69, 43, 134)" class="bi bi-file-earmark-pdf"></i>
+                            </th>
+                            <th data-toggle="tooltip" data-placement="top" title="Document" style="cursor: pointer;"><i
+                                    style="color:rgb(69, 43, 134)" class="bi bi-file-earmark-text"></i></th>
+                            <th data-toggle="tooltip" data-placement="top" title="Printer" style="cursor: pointer;"><i
+                                    style="color:rgb(69, 43, 134)" class="bi bi-printer"></i></th>
+                            <!-- <th><span><a style="color:rgb(69, 43, 134); font-weight: normal;">Column
+                                        Visibility</a></span></th>
+
+                            <th><select formControlName="Show entries" aria-label="Default select example"
+                                    style="cursor: pointer;">
+
+                                    <option value="" disabled selected style="display:none;">Show
+                                        entries
+                                    </option>
+
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+
+                                </select>
+                            </th> -->
+                        </tr>
+                    </thead>
+
+                </table>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+<div class="row gy-2" *ngIf="verticaldropdown">
+    <div class="col-md-6">
+        <label for="verticalDropdown" class="form-label">Business Verticals</label>
+        <div class="input-group">
+            <select [(ngModel)]="verticalid" (change)="onVerticalChange($event)" class="form-select mb-3"
+                aria-label="Default select example" id="verticalDropdown">
+                <option value="" disabled selected style="display:none;">Select Product</option>
+                <option *ngFor="let vertical of verticalData; trackBy: trackByFn" [value]="vertical.id">{{ vertical.name
+                    }}</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+
+<div class="">
+    <div class="card" >
+
+
+        <div class="card-body">
+            <div id="customerList">
+                <div class="table-responsive table-card mt-3 mb-1">
+                    <div class="row d-flex mb-2">
+
+                        <div class="search-box col-2">
+                            <input type="text" class="form-control search" placeholder="Search Name.."
+                                [(ngModel)]="searchTermName" (input)="filterLeads()">
+                            <i class="ri-search-line search-icon"></i>
+                        </div>
+                        <!-- <div class="search-box col-2">
+                                <input type="text" class="form-control search" placeholder="Search EmailId.."
+                                    [(ngModel)]="searchTermEmail" (input)="filterLeads()">
+                                <i class="ri-search-line search-icon"></i>
+                            </div> -->
+                        <div class="search-box col-2">
+                            <input type="text" class="form-control search" placeholder="Search Phone"
+                                [(ngModel)]="searchTermPhone" (input)="filterLeads()">
+                            <i class="ri-search-line search-icon"></i>
+                        </div>
+                        <div class="search-box col-2" >
+                            <input type="text" class="form-control search" placeholder="Search Chit Value"
+                                [(ngModel)]="searchTermProducts" (input)="filterLeads()">
+                            <i class="ri-search-line search-icon"></i>
+                        </div>
+                        <div class="search-box col-2" >
+                            <input type="text" class="form-control search" placeholder="Search Duration"
+                                [(ngModel)]="searchTermDuration" (input)="filterLeads()">
+                            <i class="ri-search-line search-icon"></i>
+                        </div>
+                      
+                        <div class="search-box col-2">
+                            <input type="text" class="form-control search" placeholder="Search With Branch.."
+                                [(ngModel)]="searchTermBranch" (input)="filterLeads()">
+                            <i class="ri-search-line search-icon"></i>
+                        </div>
+                        <div class="search-box col-2">
+                            <input type="text" class="form-control search" placeholder="Search With Status"
+                                [(ngModel)]="searchTermStatus" (input)="filterLeads()">
+                            <i class="ri-search-line search-icon"></i>
+                        </div>
+                    </div>
+
+                    <table class="table align-middle table-nowrap" id="customerTable">
+                        <thead class="table-light">
+                            <tr>
+
+                                <th class="col-2" (click)="sortTable('id')" style="cursor:pointer">S.No</th>
+                                <th class="col-2" (click)="sortTable('leadName')" style="cursor:pointer">Name
+                                </th>
+                                <th class="col-2" (click)="sortTable('emailId')" style="cursor:pointer">Email Id
+                                </th>
+                                <th class="col-2" (click)="sortTable('contactNo')" style="cursor:pointer">Phone</th>
+                                <th class="col-2" (click)="sortTable('productName')" style="cursor:pointer"
+                                   >Chit Value</th>
+                                <th class="col-2" (click)="sortTable('productName')" style="cursor:pointer"
+                                    >Tenure <br>
+                                    (Months)</th>
+                              
+                                <th class="col-2" (click)="sortTable('Branch')" style="cursor:pointer">Branch</th>
+                                <th class="col-2" (click)="sortTable('employeeName')" style="cursor:pointer"
+                                    *ngIf="hideEmployeeName">Employee</th>
+                                <th class="col-2" (click)="sortTable('status')">Status
+                                </th>
+                                <th class="col-2">FollowUp</th>
+                                <th class="col-2">Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody class="list form-check-all">
+                            <ng-container>
+                                <tr *ngFor="let data of getSelectedData(); let index = index; trackBy: trackByFn"
+                                    [attr.id]="'a_' + data.id">
+                                    <td class="col-2">{{data.id}}</td>
+                                    <td class="col-2">{{data.leadName}}</td>
+                                    <td class="col-2">{{data.emailId}}</td>
+                                    <td class="col-2">{{data.contactNo}}</td>
+                                    <td class="col-2">{{data.productName}}</td>
+                                    <td class="col-2">9</td>
+                                  
+                                    <td class="col-2">{{data.branchName}}</td>
+                                    <td class="col-2" *ngIf="hideEmployeeName">{{data.employeeName}}</td>
+                                    <td class="col-2">{{data.statusName}}</td>
+                                    <td>
+
+                                        <div class="edit" (click)="followuptable(data.id)">
+                                            <button class="btn btn-sm btn-success edit-item-btn">FollowUp</button>
+
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <button class="btn btn-subtle-secondary btn-sm dropdown-toggle"
+                                                type="button" data-bs-toggle="dropdown">
+                                                <i class="bi bi-three-dots-vertical"></i>
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-end" style="cursor: pointer;">
+                                                <li style="cursor: pointer;">
+                                                    <a class="dropdown-item" href="javascript:void(0);"
+                                                        style="cursor: pointer;">
+                                                        <p class="edit" *ngIf="userWrite" (click)="openDialog(data.id)"
+                                                            style="cursor: pointer;">
+                                                            Edit</p>
+                                                        <p class="edit" *ngIf="userWrite" style="cursor: pointer;"
+                                                            (click)="opennotificationModel()">
+                                                            Send SMS </p>
+                                                        <p class="edit" *ngIf="userWrite" style="cursor: pointer;"
+                                                            (click)="openEmailModel()">
+                                                            Send E-Mail</p>
+                                                        <p class="edit" *ngIf="userWrite" style="cursor: pointer;"
+                                                            (click)="opennotificationModel()">
+                                                            Send WhatsApp</p>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </ng-container>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="d-flex justify-content-end mt-3">
+                    <div class="pagination">
+                        <!-- Pagination buttons code goes here -->
+                    </div>
+                </div>
+            </div><!-- end card -->
+        </div>
+        <!-- end col -->
+    </div>
+    <!-- end col -->
+</div>
+
+<div class="d-flex justify-content-center spinner-container" *ngIf="spinner">
+    <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+
+
+
+
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}" id="msgpopup">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Send Message</h2>
+                <span class="close" aria-label="Close" aria-hidden="true" (click)="onClosed()"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Message<span
+                                class="text-danger">&nbsp;*</span>
+                        </label>
+
+                        <textarea class="form-control" id="exampleFormControlTextarea5" formControlName=""
+                            rows="3"></textarea>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" (click)="onClosed()">Cancel</button>
+                        <button type="button" class="btn btn-success">Send</button>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':EmailPopup}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Send Message</h2>
+                <span class="close" aria-label="Close" aria-hidden="true" (click)="onEmailPopupClosed()"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class=" mt-3 card">
+                        <div class="mt-2">
+                            <!-- <div class="mb-3 position-relative">
+                                <input type="text" class="form-control email-compose-input" data-choices
+                                    data-choices-limit="15" value="" data-choices-removeItem placeholder="To">
+                                <div class="position-absolute top-0 end-0">
+                                    <div class="d-flex">
+                                        <button class="btn btn-link text-reset fw-semibold px-2" type="button"
+                                            (click)="collapse('CcRecipientsCollapse')">
+                                            Cc
+                                        </button>
+                                        <button class="btn btn-link text-reset fw-semibold px-2" type="button"
+                                            (click)="collapse('BccRecipientsCollapse')">
+                                            Bcc
+                                        </button>
+                                    </div>
+                                </div>
+                            </div> -->
+                            <!-- <div class="collapse show" id="CcRecipientsCollapse">
+                                <div class="mb-3">
+                                    <label>Cc:</label>
+                                    <input type="text" class="form-control" data-choices data-choices-limit="15"
+                                        data-choices-removeItem placeholder="Cc recipients">
+                                </div>
+                            </div> -->
+                            <!-- <div class="collapse" id="BccRecipientsCollapse">
+                                <div class="mb-3">
+                                    <label>Bcc:</label>
+                                    <input type="text" class="form-control" data-choices data-choices-limit="15"
+                                        data-choices-removeItem placeholder="Bcc recipients">
+                                </div>
+                            </div> -->
+
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Subject">
+                            </div>
+                            <ckeditor [editor]="Editor" data="" formControlName="content">
+                            </ckeditor>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" (click)="onEmailPopupClosed()">Cancel</button>
+                        <button type="button" class="btn btn-success">Send</button>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

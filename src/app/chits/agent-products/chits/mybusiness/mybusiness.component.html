@@ -1,0 +1,131 @@
+<div class="container">
+    <div (click)="openModal()">
+        <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="click Filter"><i
+                class="fa fa-filter" aria-hidden="true"></i>Filter</button>
+    </div>
+
+    <div class="container" style="position:relative;top:-20px">
+        <p style="font-size: 20px;">My Business</p>
+
+        @for (list of mybusiness; track $index) {
+        <div class="container" style="background-color:white;
+box-shadow: 1px 1px 1px 1px #888888; height: 100%; width:100%;top:40px; position: relative;">
+
+            <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-3">
+
+                <div class="col">
+                    <div style="color: gray;">Chit Fund</div>
+                    <p style="font-weight: 150px;">{{list.ChitFund }}</p>
+                </div>
+                <div class="col" style="position: relative; ">
+                    <div style="color: gray;">Branch</div>
+                    <p>{{list.Branch}}</p>
+                </div>
+                <div class="col" style="position: relative; ">
+                    <div style="color: gray;">Group</div>
+                    <p>{{list.Group}}</p>
+                </div>
+                <div class="col" style="position: relative; ">
+                    <div style="color: gray;">TNO</div>
+                    <p>{{list.TNO}}</p>
+                </div>
+                <div class="col" style="position: relative; margin-top: 10px;">
+                    <div style="color: gray;">Due Amount</div>
+                    <p>{{list.AdAmount}}</p>
+                </div>
+                <div class="col" style="position: relative; margin-top: 10px;">
+                    <div style="color: gray;">Advance Amount</div>
+                    <p>{{list.DueAmount}}</p>
+                </div>
+                
+                <div class="col">
+                    <div style="color: gray;">Name</div>
+                    <p>{{list.Name}}</p>
+                </div>
+
+                <div class="col">
+                    <div style="color: gray;">Phone</div>
+                    <p>{{list.Phone}}</p>
+                </div>
+              
+                
+                
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col" style="position: relative; margin-top: -10px;">
+                    <div style="color: gray;">Enroll Date</div>
+                    <p>{{list.EnrollDate}}</p>
+
+                </div>
+                <div class="col" style="position: relative; margin-top: -10px;">
+                    <div style="color: gray;">status</div>
+                    <p class="text-success">Converted</p>
+                </div>
+            </div>
+
+
+        </div>
+        <br>
+
+        }
+
+
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Filter</h2>
+                <span class="close" aria-label="Close" (click)="onCloseHandled()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Contact</label>
+                        <div class="input-group">
+                            <select formControlName="TeamMember" class="form-select mb-3"
+                                aria-label="Default select example" style="cursor: pointer">
+
+                                <option value="" disabled selected style="display:none;">Select Contact</option>
+
+                                <!-- <option value="">Select </option>
+                                <option value="Noor">8</option>
+                                <option value="Rajeshwari">6</option>
+                                <option value="Anusha">4</option> -->
+
+
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3 ">
+                        <label for="exampleInputPassword1" class="form-label">Date</label>
+                        <input type="date" class="form-control" id="exampleInputPassword1">
+                    </div>
+                  
+                    <div class="mb-3 ">
+                        <label for="exampleInputPassword1" class="form-label">Group</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Text">
+                    </div>
+                   
+                    <div class="mb-3 ">
+                        <label for="exampleInputPassword1" class="form-label">TNO</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter TNO">
+                    </div>
+
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="submit" class="btn btn-primary">Save</button> -->
+                <!-- <button type="button" class="btn btn-default" (click)="onCloseHandled()">Close</button> -->
+                <button type="button" class="btn btn-success" (click)="onCloseHandled()">Apply</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,185 @@
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h2>Contacts
+
+            </h2>
+
+
+
+
+        </div>
+    </div>
+
+</div>
+
+
+
+<div class="row">
+    <div class="container">
+        <div class="row row-cols-2 row-cols-lg-3 d-flex">
+
+           
+
+
+            <div class="col-lg-3 col-md-6 order-last justify-content-center" style="position:relative;">
+                <div class="search-box">
+                    <input type="text" class="form-control search" placeholder="Search for Lead"
+                        [(ngModel)]="searchText">
+                    <i class="ri-search-line search-icon"></i>
+                </div>
+            </div>
+
+            <div class=" order-last" style="margin-left:40px;">
+
+                <!-- <button *ngIf="userCreate" type="button" class="btn btn-success add-btn me-2 text-dark" id="create-btn"
+                    (click)="openModal()"><i class="ri-add-line align-bottom me-1"></i>
+                    Add</button> -->
+            </div>
+            <div class="order-last" Style="position:absolute; right:-27px;">
+
+                <!-- <button type="button" class="btn btn-success add-btn me-2 text-dark" id="create-btn"
+                    (click)="assignlead()"><i class="ri-add-line align-bottom me-1"></i>
+                    Assign Lead</button> -->
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card" style="margin-top: 30px;">
+            <div class="">
+
+            </div><!-- end card header -->
+
+            <div class="card-body">
+                <div id="customerList">
+                    <div class="row g-4 mb-3">
+                        <div class="col-sm-auto">
+
+                        </div>
+                        <!-- <div class="col-sm">
+                            <div class="d-flex justify-content-sm-end">
+                                <button type="button" class="btn btn-success add-btn me-2" id="create-btn" (click)="assignlead()" ><i class="ri-add-line align-bottom me-1"></i>
+                                    Assign Lead</button>
+                                  
+                                <button type="button" class="btn btn-success add-btn me-2" id="create-btn" (click)="openaddscreen()" ><i class="ri-add-line align-bottom me-1"></i>
+                                    Add</button>
+                                    <div class="search-box ms-2">
+                                        <input type="text" class="form-control search" placeholder="Search..." [(ngModel)]="searchTerm" (input)="filterLeads()">
+                                        <i class="ri-search-line search-icon"></i>
+                                      </div>
+                                      
+                                      
+                        </div>
+                    </div> -->
+
+                        <div class="table-responsive table-card mt-3 mb-1">
+                            <table class="table align-middle table-nowrap" id="customerTable" id="sortable-table">
+                                <thead class="table-light">
+                                    <tr>
+
+                                    
+
+
+
+
+
+                                        <th scope="col" (click)="sortTable('leadName')" style="cursor:pointer">
+                                            Lead Name
+                                            <span *ngIf="sortColumn === 'leadName'">
+                                                <!-- Show ascending or descending icon based on sortOrder -->
+                                                <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                                            </span>
+                                            <span *ngIf="sortColumn !== 'firstName'">
+                                                <!-- Hide the default ascending icon when sorting by other columns -->
+                                                <i [hidden]="true" class="fa fa-sort-up"></i>
+                                            </span>
+                                        </th>
+                                        <th scope="col" (click)="sortTable('contactNo')" style="cursor:pointer">
+                                            Phone Number
+                                            <span *ngIf="sortColumn === 'contactNo'">
+                                                <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                                            </span>
+                                        </th>
+
+                                        <th scope="col" (click)="sortTable('emailId')" style="cursor:pointer">
+                                            Email-Id
+                                            <span *ngIf="sortColumn === 'emailId'">
+                                                <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                                            </span>
+                                        </th>
+                                        <th>Action</th>
+
+
+                                    </tr>
+                                </thead>
+
+                                <tbody class="list form-check-all">
+                                    @for (data of sortedLeadList; track $index) {
+                                    <tr id="a_{{data.id}}">
+
+                                        <td class="id" style="display:none;"><a href="javascript:void(0);"
+                                                class="fw-medium link-primary">#VZ2101</a></td>
+                                        <td class="leadName">{{data.leadName}}</td>
+                                        <td class="contactNo">{{data.contactNo}}</td>
+                                        <td class="productName">{{data.emailId}}</td>
+                                        <!-- <td class="Branch">{{data.branchName}}</td>
+                                        <td class="employeeName">{{data.employeeName}}</td> -->
+
+                                        <!-- <td>
+                                            <div class="d-flex gap-2">
+                                               
+                                                <div class="edit" (click)="followuptable(data.id)">
+                                                    <button class="btn btn-sm btn-success edit-item-btn">Follow
+                                                        Up</button>
+                                                </div>
+
+                                            </div>
+                                        </td> -->
+                                        <td>
+                                            <div class="d-flex gap-2">
+
+                                                <div class="edit">
+                                                    <button class="btn btn-sm btn-success edit-item-btn cursor"
+                                                        title="Phone"><i class="bi bi-telephone"></i>
+                                                    </button>
+                                                </div>
+                                                <div class="edit">
+                                                    <button class="btn btn-sm btn-success edit-item-btn"
+                                                        title="whatsapp"><i class="bi bi-whatsapp"></i></button>
+                                                </div>
+                                                <div class="remove">
+                                                    <button class="btn btn-sm btn-success remove-item-btn"
+                                                        title="Message"><i class="bi bi-chat-left-text"></i>
+                                                    </button>
+                                                </div>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                        <div class="d-flex justify-content-end">
+                            <div class="pagination-wrap hstack gap-2">
+                                <pagination class="pagination-wrap hstack gap-2" [totalItems]="contactsData.length"
+                                    [itemsPerPage]="15" (pageChanged)="tablepageChanged($event)"></pagination>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- end card -->
+            </div>
+            <!-- end col -->
+        </div>
+        <!-- end col -->
+    </div>

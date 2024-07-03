@@ -1,0 +1,196 @@
+<div id="productList">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title mb-0">Team
+                        Wise Lead Details</h2>
+                </div><!-- end card header -->
+                <div class="card-body">
+                    <div class="row gy-4">
+                        <div class="col-xxl-3 col-md-6">
+                            <label for="exampleInputPassword1" class="form-label" >Team Member</label>
+                            <div class="input-group">
+                                <select formControlName="TeamMember" class="form-select mb-3"
+                                    aria-label="Default select example" style="cursor: pointer">
+
+                                    <option value="" disabled selected style="display:none;">Select Team Member</option>
+
+                                    <option value="">Select Team Member</option>
+                                    <option value="Noor">All</option>
+                                    <option value="Rajeshwari">Rajeshwari</option>
+                                    <option value="Anusha">Anusha</option>
+                                    <option value="Noor">Noor</option>
+
+                                </select>
+                            </div>
+
+                        </div>
+                        <!--end col-->
+                        <div class="col-xxl-3 col-md-6">
+                            <div>
+                                <label for="labelInput" class="form-label">Status</label>
+                                <input type="text" class="form-control" id="labelInput">
+                            </div>
+                        </div>
+                        <!--end col-->
+
+                        <div class="col-xxl-3 col-sm-6" style="position: relative;top:-20px;cursor: pointer">
+                            <label for="exampleInputPassword1" class="form-label">Source</label>
+                            <div class="input-group">
+                                <select formControlName="Source" class="form-select mb-3"
+                                    aria-label="Default select example" style="cursor: pointer">
+
+                                    <option value="" disabled selected style="display:none;">Select Source</option>
+
+                                    <option value="">Select Source</option>
+                                    <option value="CALLING">CALLING</option>
+                                    <option value="DATA CALLING">DATA CALLING</option>
+
+                                </select>
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-xxl-2 col-sm-6" style="position: relative;top:-20px;cursor: pointer">
+                            <label for="exampleInputPassword1" class="form-label">Source Sub Category</label>
+                            <div class="input-group">
+                                <select formControlName="SourceSubCategory" class="form-select mb-3"
+                                    aria-label="Default select example" style="cursor: pointer">
+
+                                    <option value="" disabled selected style="display:none;">Select Source Sub Category
+                                    </option>
+
+                                    <option value="">Select Source</option>
+                                    <option value="CALLING">CALLING</option>
+                                    <option value="DATA CALLING">DATA CALLING</option>
+
+                                </select>
+                            </div>
+                        </div><!--end col-->
+
+                        <!--end col-->
+
+                        <!--end col-->
+
+                        <div class="col-xxl-3 col-md-6" style="position: relative;top:-50px;cursor: pointer;">
+                            <div>
+                                <label for="valueInput" class="form-label">Date</label>
+                                <input type="Date"  class="form-control" id="valueInput" value="Select Date Range"
+                                    placeholder="Select Date Range" >
+                            </div>
+                        </div>
+
+                        <!--end col-->
+                        <div class="col-xxl-3 col-md-6" style="position: relative;top:-20px">
+                            <div>
+                                <a class="btn btn-info btn-lg " role="button" aria-disabled="true">Show</a>
+                                <a class="btn btn-danger btn-lg " role="button" aria-disabled="true">Clear</a>
+                            </div>
+                        </div>
+                        <!--end col-->
+
+
+                    </div>
+                </div>
+                <!--end col-->
+            </div>
+
+
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title mb-0 flex-grow-1">Report</h4>
+                        </div><!-- end card header -->
+
+                        <div class="card-body">
+                            <div class="search-box d-inline-block mb-2">
+                                <input type="text" class="form-control search" placeholder="Search...">
+                                <i class="ri-search-line search-icon"></i>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table table-gridjs">
+                                    <thead>
+                                        <tr>
+                                            <th class="gridjs-th sort" sortable="id">S.No.</th>
+                                            <th class="gridjs-th sort" sortable="name">Lead Date</th>
+                                            <th class="gridjs-th sort" sortable="email">Lead Name</th>
+                                            <th class="gridjs-th sort" sortable="position">Contact No.</th>
+                                            <th class="gridjs-th sort" sortable="company">Email Id</th>
+                                            <th class="gridjs-th sort" sortable="country">Source</th>
+                                            <th class="gridjs-th sort" sortable="position">Sub Source</th>
+                                            <th class="gridjs-th sort" sortable="company">Query</th>
+                                            <th class="gridjs-th sort" sortable="country">Next Followup Date</th>
+                                            <th class="gridjs-th sort" sortable="position">Next Followup Through</th>
+                                            <th class="gridjs-th sort" sortable="company">Status</th>
+                                            <th class="gridjs-th sort" sortable="country">Assign To</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @for (lead of leadDetils ;
+                                        track $index) {
+                                        <tr class="gridjs-tr">
+                                            <td data-column-id="id" class="gridjs-td"><span
+                                                    class="fw-semibold">{{lead.slno}}</span></td>
+                                            <td data-column-id="name" class="gridjs-td">{{lead.LeadDate}}</td>
+                                            <td data-column-id="email" class="gridjs-td"><span>
+                                                    {{lead.LeadName}}</span>
+                                            </td>
+                                            <td data-column-id="position" class="gridjs-td">{{lead.ContactNo}}
+                                            </td>
+                                            <td data-column-id="company" class="gridjs-td"> {{lead.EmailId}}</td>
+                                            <td data-column-id="country" class="gridjs-td">{{lead.Source}}</td>
+                                            <td data-column-id="actions" class="gridjs-td"><span>
+                                                    {{lead.SubSource}}</span>
+                                            </td>
+                                            <td data-column-id="position" class="gridjs-td">{{lead.Query}}
+                                            </td>
+                                            <td data-column-id="company" class="gridjs-td">{{lead.NextFollowupDate}}
+                                            </td>
+                                            <td data-column-id="country" class="gridjs-td">{{lead.NextFollowupThrough}}
+                                            </td>
+                                            <td data-column-id="position" class="gridjs-td">{{lead.Status}}
+                                            </td>
+                                            <td data-column-id="company" class="gridjs-td">{{lead.AssignTo}} </td>
+
+                                        </tr>
+
+
+                                        }
+
+
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="row justify-content-md-between align-items-md-center">
+                                <div class="col-sm-12 col-md-5">
+                                    <div class="dataTables_info mb-2" id="tickets-table_info" role="status"
+                                        aria-live="polite">
+                                        Showing
+                                        1 to
+                                        2 of 2
+                                        entries
+                                    </div>
+                                </div>
+                                <!-- Pagination -->
+                                <!-- @if (gridjsList$ | async) {
+                        <div class="col-sm-12 col-md-5">
+                            <div class="text-md-right float-md-end gridjs-pagination">
+                                <pagination [totalItems]="(total$ | async)!" [(ngModel)]="service.page"
+                                    [itemsPerPage]="service.pageSize"></pagination>
+                            </div>
+                        </div>
+                        } -->
+                                <!-- End Pagination -->
+                            </div>
+                        </div><!-- end card-body -->
+                    </div><!-- end card -->
+                </div>
+                <!-- end col -->
+            </div>
+
+        </div>

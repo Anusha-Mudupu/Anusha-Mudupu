@@ -1,0 +1,223 @@
+<!-- <div class="container"> -->
+<div class="row row-cols-2 row-cols-lg-3">
+
+    <div class="col-4 col-lg-3" style="font-weight:normal; font-size: 25px;">
+        Agent Products</div>
+
+        <div class="col-4 col-lg-1" style="left:350px;position:relative">
+            <!-- <input type="search" [(ngModel)]="searchText"
+                style="position: relative; top:10px;width:225px; left: -130px;" placeholder="Search name/code"> -->
+
+
+            <input type="text" class="form-control search"
+                style="position: relative; top:10px;width:225px; left: -130px;"
+                placeholder="Search Product Type or something..." >
+
+        </div>
+        <div class="col-4 col-lg-1" style="left:480px;position:relative"><button type="button"
+                class="btn btn-success" data-toggle="tooltip" data-placement="top" title="click Search"
+                style="left:-110px;width:85px; position: relative; top:12px;border-radius: 5px;; height: 35px; padding-top:5px; color: white; font-weight: bold; padding-left:25px;">
+                Search<i class="bi bi-search"
+                    style="position: relative; top:-17px ; left:-20px;font-weight: bold;font-size: 13px;"></i>
+            </button>
+            <button (click)="openModal()" class="btn btn-success" data-toggle="tooltip" data-placement="top"
+                title="click Add"
+                style="left:-20px;width: 70px; position: relative; top:-23px;border-radius: 5px;; height: 35px; padding-top:5px; color: white; font-weight: bold;">+ADD</button>
+        </div>
+
+</div>
+<!-- </div> -->
+
+<div class="container" style="background-color:white;
+box-shadow: 1px 1px 1px 1px #888888; height: 100%; width:100%;top:40px; position: relative;">
+    <table class="table table-striped">
+
+        <thead class="text-muted table-light">
+            <tr>
+
+                <th scope="col">Product Type</th>
+                <th scope="col">Units Size</th>
+                <th scope="col">Amount payble</th>
+                <th scope="col">RSD Amount</th>
+                <th scope="col">Minumum Montly Rent</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @for (Product of realAgentProducts; track $index) {
+            <tr>
+                <td>{{Product.Name}}</td>
+
+                <td>{{Product.UnitsSize}}</td>
+                <td>{{Product.Amountpayble}}</td>
+                <td>Rs.{{Product.RSDAmount}}/- PM</td>
+                <td>Rs.{{Product.MinumumMontlyRent}}/- PM</td>
+
+                <!-- <td>
+                    <i class="bi bi-pen" style="color:gray;cursor: pointer;" (click)="openModal1()"></i>
+                    <i class="bi bi-trash3" style="color:red;cursor: pointer;" (click)="openDelete()"></i>
+                </td> -->
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-subtle-secondary btn-sm dropdown-toggle" type="button"
+                            data-bs-toggle="dropdown">
+                            <i class="bi bi-three-dots-vertical"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" style="cursor: pointer;">
+                            <li style="cursor: pointer;">
+                                <a class="dropdown-item" href="javascript:void(0);"
+                                (click)="openModal1()" style="cursor: pointer;">Edit</a>
+                            </li>
+                            <li style="cursor: pointer;">
+                                <a class="dropdown-item" href="javascript:void(0);"
+                               (click)="openDelete()" style="cursor: pointer;">Delete</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
+<!-- <nav aria-label="Page navigation example" style="margin-left: 380px;position: relative; top:40px;border-radius: 30px;">
+    <ul class="pagination">
+        <li class="page-item" style="border-radius: 300px;"><a class="page-link"
+                style="border-radius: 30px; width:30px"><i class="fas fa-chevron-left"></i></a></li>
+        <li class="page-item"><a class="page-link" style="background-color: yellow;border-radius: 30px;">1</a></li>
+        <li class="page-item"><a class="page-link" style="border-radius: 30px;">2</a></li>
+        <li class="page-item" style="border-radius: 30px;"><a class="page-link" style="border-radius: 30px;">3</a></li>
+        <li class="page-item"><a class="page-link" style="border-radius: 30px;width:30px"><i
+                    class="fas fa-chevron-right"></i></a></li>
+    </ul>
+</nav> -->
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"> Create Agent Product</h4>
+                <span class="close" aria-label="Close" (click)="onCloseHandled()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Product Type</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                            placeholder="Enter Product Type" aria-placeholder="Product Type">
+                        <div id="emailHelp" class="form-text"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Units Size</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1"
+                            placeholder="Enter Units Size">
+                    </div>
+                    <div class="mb-3 ">
+                        <label for="exampleInputPassword1" class="form-label">Amount payble</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1"
+                            placeholder="Enter Amount payble">
+                    </div>
+                    <div class="row">
+                        <label for="exampleInputPassword1" class="form-label">RSD Amount</label>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="RSD Amount">
+                        </div>
+                        <label for="exampleInputPassword1" class="form-label">Minumum Montly Rent</label>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Minumum Montly Rent">
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+                <button type="button" class="btn btn-danger" (click)="onCloseHandled()">Cancel</button>
+                <button type="button" class="btn btn-success" (click)="onCloseHandled()">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display1}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"> Edit Agent Product</h4>
+                <span class="close" aria-label="Close" (click)="onCloseHandled1()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Product Type</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                            placeholder="Enter Product Type" aria-placeholder="Product Type">
+                        <div id="emailHelp" class="form-text"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Units Size</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1"
+                            placeholder="Enter Units Size">
+                    </div>
+                    <div class="mb-3 ">
+                        <label for="exampleInputPassword1" class="form-label">Amount payble</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1"
+                            placeholder="Enter Amount payble">
+                    </div>
+                    <div class="row">
+                        <label for="exampleInputPassword1" class="form-label">RSD Amount</label>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="RSD Amount">
+                        </div>
+                        <label for="exampleInputPassword1" class="form-label">Minumum Montly Rent</label>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Minumum Montly Rent">
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+                <button type="button" class="btn btn-danger" (click)="onCloseHandled1()">Cancel</button>
+                <button type="button" class="btn btn-success" (click)="onCloseHandled1()">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display2}" id="dltModel">
+    <div class="modal-dialog" role="document" style="position: relative;top:150px;">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <span style="font-weight: bold;margin-left: 130px;"> Do you want to delete record?</span>
+                <span class="close" aria-label="Close" (click)="onClosed()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <hr>
+            <div class="modal-body">
+
+                <form>
+                    <div class="row" id="fields">
+                        <div class="col">
+
+
+                        </div>
+
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-danger" (click)="onClosed()">X Cancel</button>
+                <button type="button" class="btn btn-success" (click)="onClosed()">OK</button>
+            </div>
+        </div>
+    </div>
+
+</div>

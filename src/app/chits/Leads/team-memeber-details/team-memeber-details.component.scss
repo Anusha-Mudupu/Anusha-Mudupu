@@ -1,0 +1,12 @@
+/*
+ *   Copyright (c) 2024 Dmantz Technologies private limited
+ *   All rights reserved.
+ */
+a{
+    margin-left: 20px;
+    line-height: -0em;  /*  <-- this was it ! */
+    vertical-align: middle;
+    height: 30px;
+    width: 200px;
+    padding-top: -10px;
+}

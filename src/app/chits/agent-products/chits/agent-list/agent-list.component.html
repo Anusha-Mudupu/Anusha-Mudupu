@@ -1,0 +1,390 @@
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4>Agents</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item active">Administration</li>
+                    <li class="breadcrumb-item active">Users</li>
+                </ol>
+            </div>
+           </div>
+    </div>
+    <div class="col-sm">
+        <div class="d-flex justify-content-sm-end gap-2">
+            <button type="button" class="btn btn-success add-btn" id="create-btn" (click)="openModal()"
+                data-toggle="tooltip" data-placement="top" title="click Add" style="color:black"><i
+                    class="ri-add-line align-bottom me-1"></i>
+                Add</button>
+            <button class="btn btn-success" (click)="clearAllSearchFields()" style="color:black">Clear All</button>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display2}" id="dltModel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                 <span style="font-weight: bold;margin-left: 130px;"> Do you want to delete record?</span>
+                <span class="close" aria-label="Close" (click)="onClosed()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="onClosed()">X Cancel</button>
+                <button type="button" class="btn btn-success" (click)="DeleteList()">OK</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display4}" id="dltModel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                 <span style="font-weight: bold;margin-left: 130px;">Reset Password</span>
+                <span class="close" aria-label="Close" (click)="closePassword()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <hr>
+            <div class="modal-body">
+                 <form [formGroup]="passwordResetForm">
+                    <div class="row">
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">New PassWord</label>
+                            <input type="Password" class="form-control" formControlName="newPassword"
+                                placeholder="Enter New PassWord">
+                            <div *ngIf="passwordResetForm.get('newPassword').errors?.required && passwordResetForm.get('newPassword').touched"
+                                style="color:red">
+                                Password is required.
+                            </div>
+                            <div *ngIf="passwordResetForm.get('newPassword').errors?.minlength && passwordResetForm.get('newPassword').touched"
+                                style="color:red">
+                                Password must be at least 8 characters long.
+                            </div>
+                            <div *ngIf="passwordResetForm.get('newPassword').errors?.invalidPassword && passwordResetForm.get('newPassword').touched"
+                                style="color:red">
+                                Password must contain all the characters.
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
+                            <input type="password" class="form-control" formControlName="confirmPassword">
+                            <div *ngIf="passwordResetForm.hasError('mismatch') && passwordResetForm.get('confirmPassword').touched"
+                                style="color:red">
+                                Passwords do not match.
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" (click)="savePassword()">Save</button>
+                <button type="button" class="btn btn-danger" (click)="closePassword()">X Cancel</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display3}" id="dltModel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                 <span style="font-weight: bold;margin-left: 130px;">Are you sure to make Inactive ?</span>
+                <span class="close" aria-label="Close" (click)="closeActive()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <hr>
+             <div class="modal-footer">
+                 <button type="button" class="btn btn-danger" (click)="closeActive()">X Cancel</button>
+                <button type="button" class="btn btn-success" (click)="closeActive()">Ok</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="card-body">
+    <div class="table-responsive">
+        <div class="row d-flex mb-2">
+
+            <div class="search-box col-2">
+                <input type="text" class="form-control search" placeholder="Search Branch.."
+                    [(ngModel)]="searchTermBranch" (input)="filterLeads()">
+                <i class="ri-search-line search-icon"></i>
+            </div>
+             <div class="search-box col-2">
+                <input type="text" class="form-control search" placeholder="Search Name.." [(ngModel)]="searchTermName"
+                    (input)="filterLeads()">
+                <i class="ri-search-line search-icon"></i>
+            </div>
+
+            <div class="search-box col-2">
+                <input type="text" class="form-control search" placeholder="Search UserName "
+                    [(ngModel)]="searchTermuserName" (input)="filterLeads()">
+                <i class="ri-search-line search-icon"></i>
+            </div>
+            <div class="search-box col-2">
+                <input type="text" class="form-control search" placeholder="Search Phone" [(ngModel)]="searchTermPhone"
+                    (input)="filterLeads()">
+                <i class="ri-search-line search-icon"></i>
+            </div>
+            <div class="search-box col-2">
+                <input type="text" class="form-control search" placeholder="Search PAN" [(ngModel)]="searchTermPanNo"
+                    (input)="filterLeads()">
+                <i class="ri-search-line search-icon"></i>
+            </div>
+
+        </div>
+        <table class="table table-striped table-centered align-middle table-nowrap mb-0" id="sortable-table">
+            <thead class="text-muted table-light">
+                <tr>
+
+
+
+                    <th scope="col" (click)="sortTable('firstName')" style="cursor:pointer">
+                        Agent Name
+                        <span *ngIf="sortColumn === 'firstName'">
+
+                            <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                            <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                        </span>
+                        <span *ngIf="sortColumn !== 'firstName'">
+
+                            <i [hidden]="true" class="fa fa-sort-up"></i>
+                        </span>
+                    </th>
+
+                    <th scope="col" (click)="sortTable('code')" style="cursor:pointer">
+                        Agent ID
+                        <span *ngIf="sortColumn === 'code'">
+                            <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                            <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                        </span>
+                    </th>
+                    <!-- <th scope="col" (click)="sortTable('userName')" style="cursor:pointer">
+                        User Name
+                        <span *ngIf="sortColumn === 'userName'">
+                            <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                            <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                        </span>
+                    </th> -->
+                    <th scope="col" (click)="sortTable('phoneNumber')" style="cursor:pointer">
+                        Mobile No.
+                        <span *ngIf="sortColumn === 'phoneNumber'">
+                            <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                            <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                        </span>
+                    </th>
+
+                    <th scope="col" (click)="sortTable('email')" style="cursor:pointer">
+                        User Id
+                        <span *ngIf="sortColumn === 'email'">
+                            <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                            <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                        </span>
+                    </th>
+                    <th>PAN No.</th>
+
+                    <th scope="col">SourceId</th>
+                    <th scope="col">Actions</th>
+                </tr>
+
+            </thead>
+            <tbody class="list form-check-all">
+                <!-- @for (list of sortedAgentList ; track $index)
+                { -->
+                <tr
+                    *ngFor="let list of sortedAgentList.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage); let i = index">
+
+                    <td scope="row">
+                        {{list.name}} </td>
+
+                    <td scope="row">
+                        {{list.code}}</td>
+
+
+                    <!-- <td style="width: 10%;">{{list.userName}}</td> -->
+                    <td>{{list.phno}}</td>
+                    <td>{{list.userId}}</td>
+
+                    <td>{{list.panNo}}</td>
+                    <!-- <td [ngClass]="{'text-danger': !list.isActive, 'text-primary': list.isActive}">
+                        <span *ngIf="list.isActive; then activeContent else inactiveContent"></span>
+                        <ng-template #inactiveContent>Inactive</ng-template>
+                        <ng-template #activeContent>Active</ng-template>
+                    </td> -->
+                    <td>{{list.subsourceid}}</td>
+
+                    <td>
+
+                        <div class="dropdown">
+                            <button class="btn btn-subtle-secondary btn-sm dropdown-toggle" type="button"
+                                data-bs-toggle="dropdown">
+                                <i class="bi bi-three-dots-vertical"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end" style="cursor: pointer;">
+
+                                <li *ngFor="let action of UserListActions" style="cursor: pointer;">
+
+                                    <span class="dropdown-item" *ngIf="action === 'Edit'" (click)="openDialog1(list.id)"
+                                        style="cursor: pointer;">
+                                        {{action}}
+                                    </span>
+                                    <span class="dropdown-item" *ngIf="action == 'Reset Password'" class="edit"
+                                        (click)="userClick(list.id)"
+                                        style="cursor: pointer;position: relative;left:15px">
+                                        Reset Password
+                                    </span>
+                                    <span class="dropdown-item"
+                                        *ngIf="action === (list.isActive ? 'Inactive' : 'Active')"
+                                        (click)="changeStatus(list.id, list.isActive)" style="cursor: pointer;">
+                                        {{action}}
+                                    </span>
+                                    <span class="dropdown-item" *ngIf="action === 'Delete'"
+                                        (click)="openDelete(list.id)" style="cursor: pointer;">
+                                        {{action}}
+                                    </span>
+
+
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                <!-- } -->
+            </tbody>
+        </table>
+
+
+
+    </div>
+
+    <div>
+        <div class="pagination-wrap hstack gap-2">
+            <div class="pagination">
+                <button class="btn btn-sm btn-outline-primary" *ngFor="let page of getPages()" (click)="setPage(page)">
+                    {{ page }}
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}" id="addModel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Create Agent</h4>
+                <span class="close" aria-label="Close" (click)="onCloseHandled()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="agentform">
+                    <div class="row">
+                        <div class="col" style="display:none">
+                            <label for="exampleInputPassword1" class="form-label">id</label>
+                            <input type="text" class="form-control" style="position: relative; width:450px"
+                                placeholder="enter Id" formControlName="id">
+                            <div *ngIf="submitted && agentform.get('id').invalid">
+                                <div *ngIf="agentform.get('id').errors.required" class="text-danger"> id is
+                                    required.</div>
+                            </div>
+
+
+                        </div>
+                        <div class="col">
+                            <label for="productCategories" class="form-label">Business Code</label>
+                            <select class="form-select" aria-label="Default select example" formControlName="value">
+                                <option value="" disabled selected>Select Business Verticals</option>
+                                <ng-container *ngFor="let vertical of lookupConstants; let i = index">
+                                    <option >{{vertical.description}}</option>
+                                </ng-container>
+                            </select>
+
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Name</label>
+                            <input type="text" class="form-control" placeholder="Name" formControlName="name">
+                            <div *ngIf="submitted && agentform.get('name').invalid">
+                                <div *ngIf="agentform.get('name').errors.required" class="text-danger"> Name is
+                                    required.</div>
+                            </div>
+
+
+                        </div>
+                        <div class="col">
+                            <label for="productType" class="form-label">Agent Code<span
+                                    class="text-danger">*</span></label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Phone Number</label>
+                            <input type="text" class="form-control" placeholder="phno" formControlName="phno">
+                            <div *ngIf="submitted && agentform.get('phno').invalid">
+                                <div *ngIf="agentform.get('phno').errors.required" class="text-danger">Phone Number is
+                                    required.</div>
+                            </div>
+
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Email-Id</label>
+                            <input type="text" class="form-control" placeholder="Email-ID"
+                                formControlName="userId">
+                            <div *ngIf="submitted && agentform.get('userId').invalid">
+                                <div *ngIf="agentform.get('userId').errors.required" class="text-danger"> Email is
+                                    required.
+                                </div>
+                            </div>
+
+
+                        </div>
+                        
+
+                    </div>
+                    <div class="row">
+
+                        <div class="col">
+                            <label for="shortDecs" class="form-label">Subsource<span
+                                    class="text-danger">*</span></label>
+                            <input type="email" class="form-control">
+                        </div>
+                        <div class="col">
+                            <label for="productType" class="form-label">Password<span
+                                    class="text-danger">*</span></label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="hstack gap-2 justify-content-end mb-3">
+                        <button class="btn btn-danger" (click)="onCloseHandled()">Cancel</button>
+                        <button class="btn btn-success" (click)="onSubmit()">Save</button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- <div class="col">
+    <label for="productType" class="form-label">Last Update By <span
+            class="text-danger">*</span></label>
+    <input type="text" class="form-control">
+</div>
+<div class="col">
+    <label for="shortDecs" class="form-label">Last Update On<span
+            class="text-danger">*</span></label>
+    <input type="email" class="form-control">
+</div> -->

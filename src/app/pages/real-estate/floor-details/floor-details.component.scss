@@ -1,0 +1,11 @@
+/*
+ *   Copyright (c) 2024 Dmantz Technologies private limited
+ *   All rights reserved.
+ */
+ .dropdown-toggle::after{
+    display: none;
+  }
+  .search-box{
+    position: relative;
+    margin-left:-2px;
+  }

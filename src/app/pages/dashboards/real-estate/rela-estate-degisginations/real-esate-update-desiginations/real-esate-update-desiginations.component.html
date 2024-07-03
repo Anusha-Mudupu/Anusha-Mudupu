@@ -1,0 +1,41 @@
+
+<div class="container">
+    <!-- <button  style="cursor: pointer;"mat-raised-button color="" mat-dialog-close id="crossbtn" (click)="closeDialog()">X</button> -->
+    <h2 style="position: relative;top:-3px;">Edit DesignationForm</h2>
+
+    <form [formGroup]="updateDesignationForm">
+        <input type="number" placeholder="{{DesignationDataById.id}}" [(ngModel)]="DesignationDataById.id" formControlName="id" hidden>
+
+
+
+        <div>
+            <label for="exampleInputPassword1" class="form-label">name</label>
+            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="{{DesignationDataById.name}}"
+                [(ngModel)]="DesignationDataById.name" formControlName="name">
+        </div>
+        <div>
+            <label for="exampleInputPassword1" class="form-label">Code</label>
+            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="{{DesignationDataById.code}}"
+                [(ngModel)]="DesignationDataById.code" formControlName="code">
+        </div>
+        <div>
+            <label for="exampleInputPassword1" class="form-label">Reports To</label>
+            <select formControlName="reportsTo" class="form-select mb-3"
+            aria-label="Default select example">
+            @for(data of designationData; track $index){
+            <option [value]="data.id">{{data.name}}</option>
+            <option value="" disabled selected style="display:none;">Select Designation
+            </option>
+
+            }
+        </select>
+        </div>
+
+        <button type="button" class="btn btn-danger" (click)="closeDialog()" id="cancelbtn">Cancel</button>
+
+        <button type="button" class="btn btn-success" (click)="saveUpdateDesignationData()" id="submitbtn">Save</button>
+
+
+
+    </form>
+</div>

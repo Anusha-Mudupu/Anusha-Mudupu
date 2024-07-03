@@ -1,0 +1,323 @@
+<div class="row">
+    <div class="container" style="margin-top:-30px;">
+        <div class="row row-cols-2 row-cols-lg-3 d-flex">
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+
+                    <li class="breadcrumb-item active text-dark">Chits</li>
+                    <li class="breadcrumb-item active">
+                        <a role="button" class="text-primary">Leads</a>
+                    </li>
+
+
+                </ol>
+            </div>
+
+
+
+            <div class="col-lg-3 col-md-6 order-last justify-content-center" style="position:relative;">
+                <div class="search-box">
+                    <input type="text" class="form-control search" placeholder="Search for Lead"
+                        [(ngModel)]="searchText">
+                    <i class="ri-search-line search-icon"></i>
+                </div>
+            </div>
+
+            <div class=" order-last" style="margin-left:40px;">
+
+                <button *ngIf="userCreate" type="button" class="btn btn-success add-btn me-2 text-dark" id="create-btn"
+                    (click)="openModal()"><i class="ri-add-line align-bottom me-1"></i>
+                    Add</button>
+            </div>
+            <div class="order-last" Style="position:absolute; right:-27px;">
+
+
+            </div>
+            <button type="button" class="btn btn-success add-btn me-2 text-dark" id="create-btn"
+                (click)="assignlead()"><i class="ri-add-line align-bottom me-1"></i>
+                Assign Lead</button>
+
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card" style="margin-top: 30px;">
+            <div class="">
+
+            </div><!-- end card header -->
+
+            <div class="card-body">
+                <div id="customerList">
+                    <div class="row g-4 mb-3">
+                        <div class="col-sm-auto">
+
+                        </div>
+
+
+                        <div class="table-responsive table-card mt-3 mb-1">
+
+                            <div class="row d-flex d-sm-flex mt-3 mb-2">
+                                <div class="search-box  col-2">
+                                    <input type="text" class="form-control search" placeholder="Search With Name.."
+                                        [(ngModel)]="searchTermName" (input)="filterLeads()">
+                                    <i class="ri-search-line search-icon"></i>
+                                </div>
+                                <div class="search-box  col-2">
+                                    <input type="text" class="form-control search" placeholder="Search With Phone nbr.."
+                                        [(ngModel)]="searchTermPhone" (input)="filterLeads()">
+                                    <i class="ri-search-line search-icon"></i>
+                                </div>
+                                <div class="search-box  col-2">
+                                    <input type="text" class="form-control search" placeholder="Search With Product.."
+                                        [(ngModel)]="searchTermProducts" (input)="filterLeads()">
+                                    <i class="ri-search-line search-icon"></i>
+                                </div>
+                                <div class="search-box  col-2">
+                                    <input type="text" class="form-control search" placeholder="Search With Branch.."
+                                        [(ngModel)]="searchTermBranch" (input)="filterLeads()">
+                                    <i class="ri-search-line search-icon"></i>
+                                </div>
+                                <div class="search-box  col-2">
+                                    <input type="text" class="form-control search" placeholder="Search With Employee.."
+                                        [(ngModel)]="searchTermEmployee" (input)="filterLeads()">
+                                    <i class="ri-search-line search-icon"></i>
+                                </div>
+                                <div class="search-box  col-2">
+                                    <input type="text" class="form-control search" placeholder="Search With Status.."
+                                        [(ngModel)]="searchTermStatus" (input)="filterLeads()">
+                                    <i class="ri-search-line search-icon"></i>
+                                </div>
+
+                            </div>
+
+                            <table class="table align-middle table-nowrap" id="customerTable">
+                                <thead class="table-light">
+                                    <tr>
+
+                                        <!-- <th class="sort" listsortable="leadName" (click)="onSort('leadName')">Lead Name
+                                        </th>
+
+                                        <th class="sort" listsortable="contactNo" (listsort)="onSort($event)">Phone
+                                            Number</th>
+                                        <th class="sort" listsortable="productName" (listsort)="onSort($event)">Products
+                                        </th>
+                                        <th class="sort" listsortable="Branch" (listsort)="onSort($event)">Branch</th>
+                                        <th class="sort " listsortable="employeeName" (listsort)="onSort($event)">
+                                            Employee
+                                        </th>
+                                        <th class="sort " listsortable="employeeName" (listsort)="onSort($event)">
+                                            Status
+                                        </th>
+                                        <th class="sort ">Follow Up
+                                        </th>
+                                        <th class="sort">Action</th> -->
+                                        <th scope="col" (click)="sortTable('leadName')" style="cursor:pointer">
+                                            Lead Name
+                                            <span *ngIf="sortColumn === 'leadName'">
+                                                <!-- Show ascending or descending icon based on sortOrder -->
+                                                <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                                            </span>
+                                            <span *ngIf="sortColumn !== 'leadName'">
+                                                <!-- Hide the default ascending icon when sorting by other columns -->
+                                                <i [hidden]="true" class="fa fa-sort-up"></i>
+                                            </span>
+                                        </th>
+                                        <th scope="col" (click)="sortTable('contactNo')" style="cursor:pointer">
+                                            Phone
+                                            <span *ngIf="sortColumn === 'contactNo'">
+                                                <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                                            </span>
+                                        </th>
+                                        <th scope="col" (click)="sortTable('productName')" style="cursor:pointer">
+                                            Products
+                                            <span *ngIf="sortColumn === 'productName'">
+                                                <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                                            </span>
+                                        </th>
+                                        <th scope="col" (click)="sortTable('Branch')" style="cursor:pointer">
+                                            Branch
+                                            <span *ngIf="sortColumn === 'Branch'">
+                                                <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                                            </span>
+                                        </th>
+                                        <th scope="col" (click)="sortTable('employeeName')" style="cursor:pointer">
+                                            Employee
+                                            <span *ngIf="sortColumn === 'employeeName'">
+                                                <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                                            </span>
+                                        </th>
+                                        <th scope="col" (click)="sortTable('statusName')" style="cursor:pointer">
+                                            Status
+                                            <span *ngIf="sortColumn === 'statusName'">
+                                                <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                                            </span>
+                                        </th>
+                                        <th>Follow Up
+                                        </th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody class="list form-check-all">
+                                    @for (data of sortedLeadList; track $index) {
+                                    <tr id="a_{{data.id}}">
+
+                                        <td class="id" style="display:none;"><a href="javascript:void(0);"
+                                                class="fw-medium link-primary">#VZ2101</a></td>
+                                        <td class="leadName">{{data.leadName}}</td>
+                                        <td class="contactNo">{{data.contactNo}}</td>
+                                        <td class="productName">{{data.productName}}</td>
+                                        <td class="Branch">{{data.branchName}}</td>
+                                        <td class="employeeName">{{data.employeeName}}</td>
+                                        <td class="employeeName">{{data.statusName}}</td>
+
+                                        <td>
+                                            <div class="d-flex gap-2">
+                                                <!-- <div class="edit" (click)="followup(data.id)"> -->
+                                                <div class="edit" (click)="followuptable(data.id)">
+                                                    <button class="btn btn-sm btn-success edit-item-btn">Follow
+                                                        Up</button>
+                                                </div>
+
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex gap-2">
+                                                <!-- <div class="edit" (click)="editlead(data.id)">
+                                                <button class="btn btn-sm btn-success edit-item-btn" ><i class="ri-pencil-line"></i></button>
+                                            </div> -->
+                                                <!-- <div class="edit" (click)="showModal.show()">
+                                                    <button class="btn btn-sm btn-success edit-item-btn cursor"
+                                                        title="Lead Transfer"><i
+                                                            class="ri-arrow-left-right-fill"></i></button>
+                                                </div> -->
+                                                <div class="edit" (click)="openDialog(data.id)">
+                                                    <button *ngIf="userWrite"
+                                                        class="btn btn-sm btn-success edit-item-btn"
+                                                        title="Edit Lead"><i class="ri-pencil-line"></i></button>
+                                                </div>
+                                                <div class="remove" *ngIf="userDelete" (click)="openDelete(data.id)">
+                                                    <button class="btn btn-sm btn-danger remove-item-btn"
+                                                        title="Delete Lead"><i
+                                                            class="ri-delete-bin-2-line"></i></button>
+                                                </div>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                        <!-- <div class="d-flex justify-content-end">
+                            <div class="pagination-wrap hstack gap-2">
+                                <pagination class="pagination-wrap hstack gap-2" [totalItems]="leadsData2.length"
+                                    [itemsPerPage]="15" (pageChanged)="tablepageChanged($event)"></pagination>
+                            </div>
+                        </div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        <div class="d-flex justify-content-end mt-3">
+                            <div class="pagination">
+                                <!-- Previous page button -->
+                                <button class="btn btn-sm btn-outline-secondary" (click)="prevPage()"
+                                    [disabled]="isFirstPage()">
+                                    Previous
+                                </button>
+
+                                <!-- Displayed page links -->
+                                <ng-container *ngFor="let pageNum of displayedPages">
+                                    <button class="btn btn-sm btn-outline-primary" (click)="goToPage(pageNum)"
+                                        [disabled]="pageNum === currentPage">
+                                        {{ pageNum }}
+                                    </button>
+                                </ng-container>
+
+                                <!-- Next page button -->
+                                <button class="btn btn-sm btn-outline-secondary" (click)="nextPage()"
+                                    [disabled]="isLastPage()">
+                                    Next
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- end card -->
+            </div>
+            <!-- end col -->
+        </div>
+        <!-- end col -->
+    </div>
+
+    <div class="d-flex justify-content-center spinner-container" *ngIf="spinner">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+    <div bsModal #showModal="bs-modal" class="modal fade" id="showModal" tabindex="-1"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-light p-3">
+                    <h5 class="modal-title" id="exampleModalLabel">Lead Transfer</h5>
+                    <button type="button" class="btn-close" (click)="showModal.hide()" id="close-modal"></button>
+                </div>
+                <form class="tablelist-form">
+                    <div class="modal-body">
+                        <input type="hidden" name="id" value="" formControlName="ids" />
+
+                        <div class="mb-3" id="modal-id" style="display: none;">
+                            <label for="id-field" class="form-label">ID</label>
+                            <input type="text" id="id-field" class="form-control" placeholder="ID" readonly />
+                        </div>
+
+
+                        <div>
+                            <label for="status-field" class="form-label">From</label>
+                            <select class="form-control" data-trigger name="status-field" id="status-field">
+                                <option value="">Please Select</option>
+                                <option value="Active">Active</option>
+                                <option value="Block">Block</option>
+                            </select>
+                        </div>
+                        <div class="mt-1">
+                            <label for="status-field" class="form-label">To</label>
+                            <select class="form-control" data-trigger name="status-field" id="status-field">
+                                <option value="">Please Select</option>
+                                <option value="Active">Active</option>
+                                <option value="Block">Block</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="hstack gap-2 justify-content-end">
+                            <button type="button" class="btn btn-light" (click)="showModal.hide()">Close</button>
+                            <button type="submit" class="btn btn-success" id="add-btn">Transfer</button>
+                            <!-- <button type="button" class="btn btn-success" id="edit-btn">Update</button> -->
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>

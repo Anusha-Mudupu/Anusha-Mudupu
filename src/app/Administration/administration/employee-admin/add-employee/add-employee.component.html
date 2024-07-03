@@ -1,0 +1,199 @@
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0">Create Employee</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    
+                    
+                    <li class="breadcrumb-item active" >Chits</li>
+                    <li class="breadcrumb-item active" >Employee</li>
+                    
+                </ol>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+       
+        <div class="modal-body">
+            <form [formGroup]="userData">
+                <div class="row">
+            
+                    <div class="col">
+                        <label for="exampleInputPassword1" class="form-label"> First Name<span
+                            style="color:red">*</span></label>
+                        <input type="text" class="form-control" placeholder="First Name"
+                            formControlName="firstName">
+                        <div *ngIf="submitted && userData.get('firstName').invalid">
+                            <div *ngIf="userData.get('firstName').errors.required" class="text-danger"> first Name is
+                                required.</div>
+                        </div>
+                        
+            
+                    </div>
+                    <div class="col">
+                        <label for="exampleInputPassword1" class="form-label">Last Name<span
+                            style="color:red">*</span></label>
+                        <input type="text" class="form-control" placeholder="Last Name" formControlName="lastName">
+                        <div *ngIf="submitted && userData.get('lastName').invalid">
+                            <div *ngIf="userData.get('lastName').errors.required" class="text-danger"> lastName is
+                                required.</div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+            
+                   
+                    <div class="col">
+                        <label for="exampleInputPassword1" class="form-label">Phone Number<span
+                            style="color:red">*</span></label>
+                        <input type="text" class="form-control" placeholder="phoneNumber"
+                            formControlName="phoneNumber" >
+                        <div *ngIf="submitted && userData.get('phoneNumber').invalid">
+                            <div *ngIf="userData.get('phoneNumber').errors.required" class="text-danger"> phoneNumber is
+                                required.</div>
+                        </div>
+                       
+                    </div>
+                    <div class="col">
+                        <label for="exampleInputPassword1" class="form-label">Company Name<span
+                            style="color:red">*</span></label>
+                        <input type="text" class="form-control" placeholder="Company Name"
+                            formControlName="companyName" >
+                            <div *ngIf="submitted && userData.get('companyName').invalid">
+                                <div *ngIf="userData.get('companyName').errors.required" class="text-danger"> Company Name is
+                                    required.</div>
+                            </div>
+                    </div>
+                </div>
+            
+                <br>
+                <div class="row">
+                    <div class="col">
+                        <!-- <label  class="form-label">Reporting To.<span
+                            style="color:red">*</span></label>
+                        <input type="" class="form-control" placeholder="Reporting To" formControlName="reportingTo">
+                        <div *ngIf="submitted && userData.get('reportingTo').invalid">
+                            <div *ngIf="userData.get('reportingTo').errors.required" class="text-danger"> Reporting To is
+                                required.</div>
+                        </div> -->
+                        <label for="exampleInputPassword1" class="form-label">Reports To.</label>
+                        <select class="form-select" aria-label="Default select example" formControlName="reportingTo">
+                            @for(list of employeeList; track $index){
+                            <option [value]="list.firstName">{{list.firstName}}&nbsp;{{list.lastName}}</option>
+                            }
+
+                        </select>
+                        
+                    </div>
+                    <div class="col">
+                        <label for="exampleInputPassword1" class="form-label">Email<span
+                            style="color:red">*</span></label>
+                        <input type="text" class="form-control" placeholder="email" formControlName="email">
+                        <div *ngIf="submitted && userData.get('email').invalid">
+                            <div *ngIf="userData.get('email').errors.required" class="text-danger"> Email is
+                                required.
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                   
+                </div>
+            
+            
+                <br>
+                <div class="row">
+            
+                    <div class="col">
+                        <label for="exampleInputPassword1" class="form-label">password<span
+                            style="color:red">*</span></label>
+                        <input type="password"  class="form-control" placeholder="password"
+                            formControlName="password">
+                            <div *ngIf="submitted && userData.get('password').invalid">
+                                <div *ngIf="userData.get('password').errors.required" class="text-danger"> Password is
+                                    required.
+                                </div>
+                            </div>
+                    </div>
+                    <div class="col">
+                        <label for="exampleInputPassword1" class="form-label">Branch Id<span
+                            style="color:red">*</span></label>
+                        <input type="number"  class="form-control" placeholder="branchId"
+                            formControlName="branchId">
+                            <div *ngIf="submitted && userData.get('branchId').invalid">
+                                <div *ngIf="userData.get('branchId').errors.required" class="text-danger"> Branch Id is
+                                    required.
+                                </div>
+                            </div>
+                    </div>
+                    <!-- <div class="col">
+                        <label for="exampleInputPassword1" class="form-label">Agent Id</label>
+                        <input type="text"  class="form-control" placeholder="Agent Id"
+                            formControlName="code">
+                    </div> -->
+                   
+                </div>
+                <br>
+                <div class="row">
+            
+                    <div class="col">
+                            <label for="exampleInputPassword1"
+                            class="form-label">Designation<span
+                            style="color:red">*</span></label>
+                            <div class="input-group">
+    
+                                <!-- <label class="input-group-text" for="inputGroupSelect01">Options</label> -->
+                                <select formControlName="designationId" class="form-select mb-3" aria-label="Default select example" style="cursor: pointer">
+                                    @for(des of designation;track $index){
+                                        <option value="" disabled selected
+                                            style="display:none;">Select Designation</option>
+    
+                                        <option [value]="des.id">
+                                            {{des.name}}
+                                        </option>
+                                        }
+                                </select>
+                               
+                            </div>
+                            <div *ngIf="submitted && userData.get('designationId').invalid">
+                                <div *ngIf="userData.get('designationId').errors.required" class="text-danger"> DesignationId is
+                                    required.
+                                </div>
+                            </div>
+                    </div>
+                    <div class="col">
+                        <label for="exampleInputPassword1" class="form-label">Date Of  Birth</label>
+                        <input type="date"  class="form-control" placeholder="Date Of  Birth"
+                            formControlName="dob">
+                            
+                    </div>
+                    <div class="col">
+                        <label for="exampleInputPassword1" class="form-label">Date Of Joining</label>
+                        <input type="date"  class="form-control" placeholder="Date Of Joining"
+                            formControlName="doj">
+                    </div>
+                   
+                </div>
+                <br>
+                <div class="hstack gap-2 justify-content-end mb-3">
+                    <button class="btn btn-danger" (click)="closeDialog()">Cancel</button>
+                    <button class="btn btn-success" (click)="onSubmit()">Submit</button>
+                </div>
+            
+            </form>
+        </div>
+
+    </div>
+
+</div>

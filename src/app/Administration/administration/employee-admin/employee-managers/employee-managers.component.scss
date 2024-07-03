@@ -1,0 +1,83 @@
+/*
+ *   Copyright (c) 2024 Dmantz Technologies private limited
+ *   All rights reserved.
+ */
+ select {
+    
+    background-color: transparent;
+    border: 0px solid #ccc;
+    // padding: 5px; 
+    content: &#9660;
+    position: relative;
+   
+    // margin-right: -20px;
+ 
+  }
+  option {
+    max-width: 100%;
+    overflow: hidden;
+    word-wrap: normal !important;
+    white-space: normal;
+}
+  select::-ms-expand {
+    display: none;
+  }
+  select::-webkit-select-arrow {
+    display: none;
+  }
+i{
+    margin-right: 20px;
+    cursor: pointer;
+}
+.bi-search{
+    font-weight: bold;
+}
+.col-md-auto{
+    
+    color: aliceblue;
+}
+// #add{
+//   width: 70px; 
+//     position: relative; top:10px;border-radius: 5px;
+//  height: 30px; padding-top:1px;
+//  color: white; font-weight: bold;cursor:pointer;
+//  left:120px;
+// }
+
+
+.fa-sort {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 5px;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  position: relative;
+ 
+}
+.asc { border-bottom: 6px solid black; }
+.desc { border-top: 6px solid black; }
+// table td{
+//   border-color: black;
+// }
+// tr .action:hover{
+//   background-color: black;
+// }
+table{
+  cursor: pointer;
+}
+.action{
+  position: relative;
+  left:80px;
+}
+.btn{
+  position: relative;
+  
+}
+.dropdown-toggle::after{
+  display: none;
+}
+#inactive{
+  background-color: red; /* Example background color */
+  padding: 5px; /* Add padding for better readability */
+}

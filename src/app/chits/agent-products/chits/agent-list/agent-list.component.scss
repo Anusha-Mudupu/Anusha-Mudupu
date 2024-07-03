@@ -1,0 +1,133 @@
+/*
+ *   Copyright (c) 2024 Dmantz Technologies private limited
+ *   All rights reserved.
+ */
+ .text-body-tertiary {
+    background-color: rgb(236 237 240); /* Set your desired background color for the disabled button */
+    cursor: not-allowed;
+    // color: black;
+    // border: aliceblue;
+
+    /* Add any other styles you want for the disabled button */
+  }
+ option {
+    max-width: 100%;
+    overflow: hidden;
+    word-wrap: normal !important;
+    white-space: normal;
+}
+
+  select::-ms-expand {
+    display: none;
+  }
+  select::-webkit-select-arrow {
+    display: none;
+  }
+i{
+    margin-right: 20px;
+    cursor: pointer;
+}
+.bi-search{
+    font-weight: bold;
+}
+.col-md-auto{
+    
+    color: aliceblue;
+}
+#add{
+  width: 90px; 
+                    position: relative; top:10px;border-radius: 5px;
+                    height: 30px; padding-top:5px;
+                     color: white; font-weight: bold;cursor:pointer;
+                     left:190px;
+}
+.pagination{
+    // margin-left: 200px;
+    margin-top: 10px;
+   position: relative;
+   left:450px;
+}
+// #addModel{
+//     width: 1000px;
+//     margin-left: 300px;
+//     margin-top: 50px;
+// }
+// #editModel{
+//     width: 1000px;
+//     margin-left: 300px;
+//     margin-top: 50px;
+// }
+
+// .modal-footer{
+//     margin-right: 130px;
+//     position: relative;
+//     overflow: hidden;
+// }
+#dltModel{
+    margin-top: 120px;
+}
+#aegntinactivemodel{
+    margin-top: 120px;  
+}
+.bi-key{
+    margin-left:10px;
+    height:16px;
+    width:16px;
+}
+
+
+
+
+
+.password-container {
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.password-input {
+    width: calc(100% - 30px);
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+#resetPassword{
+    position: absolute;
+    top:150px;
+    left: 50px;
+}
+
+
+.fa-sort {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 5px;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+}
+.asc { border-bottom: 6px solid black; }
+.desc { border-top: 6px solid black; }
+.action{
+    position: relative;
+    left:40px;
+  }
+  .dropdown-toggle::after{
+    display: none;
+  }
+  #inactive{
+    background-color: red; /* Example background color */
+    padding: 5px; /* Add padding for better readability */
+  }
+  .pagination button{
+    position: relative;
+    margin-left: 5px;
+  }

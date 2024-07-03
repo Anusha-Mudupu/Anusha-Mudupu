@@ -1,0 +1,372 @@
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4>Floor Wise Chart
+              
+            </h4>
+           
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item active">Real Estate</li>
+                    <li class="breadcrumb-item active">Master</li>
+                    <li class="breadcrumb-item active">Floor Wise Chart</li>
+                </ol>
+              
+            </div>
+
+        </div>
+    </div>
+    
+</div>
+
+<div class="row">
+    <div>
+
+        <div class="card">
+            <div class="card-header">
+                <!-- <h3>Floor Wise Chart</h3> -->
+            </div>
+            <div class="card-body">
+
+                <div class="tab-content  text-muted">
+                    <tabset class="mb-3">
+                        <div class="col-4">
+                            <label for="exampleInputPassword1" class="form-label">Select Floor(select
+                                one)</label>
+                            <div class="input-group">
+                                <select formControlName="TeamMember" class="form-select mb-3"
+                                    aria-label="Default select example" style="cursor: pointer">
+
+                                    <option value="" disabled selected style="display:none;">Select </option>
+
+                                    <option value="">Select </option>
+                                    <option value="Noor">8</option>
+                                    <option value="Rajeshwari">6</option>
+                                    <option value="Anusha">4</option>
+
+
+                                </select>
+                            </div>
+                        </div>
+                        <tab heading="DAKSHIN" class="nav-item">
+                            <div class="tab-pane " id="home" role="tabpanel">
+                                <!-- <h6>DAKSHIN</h6> -->
+                                <div class="col">
+
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="col-2 p-3 mb-2 bg-info text-white">1</div>
+                                            <div class="col-2 p-3 mb-2 bg-info text-white">2</div>
+                                            <div class="col-2 p-3 mb-2 bg-info text-white">3</div>
+                                            <div class="col-2 p-3 mb-2 bg-info text-white">4</div>
+                                            <div class="col-2 p-3 mb-2 bg-info text-white">5</div>
+                                            <div class="col-2 p-3 mb-2 bg-info text-white">6</div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </tab>
+                        <tab heading="BVM" class="nav-item">
+                            <div class="tab-pane active mt-3" id="product1" role="tabpanel">
+                                <apx-chart [series]="rangeWithoutShadesChart.series" [chart]="rangeWithoutShadesChart.chart"
+                                [dataLabels]="rangeWithoutShadesChart.dataLabels" [colors]="rangeWithoutShadesChart.colors"
+                                [stroke]="rangeWithoutShadesChart.stroke" [plotOptions]="rangeWithoutShadesChart.plotOptions"
+                                [xaxis]="rangeWithoutShadesChart.xaxis" [title]="rangeWithoutShadesChart.title" dir="ltr"></apx-chart>
+                            </div>
+                        </tab>
+
+                    </tabset>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<br>
+
+
+
+
+
+
+
+<!-- 
+<div class="container" style="position: relative;top:-30px;">
+    <div class="card">
+        <p style="position: relative;top:10px;left:5px">Details of <span style="color:Red">BHAVANI UPADHAYA AND VIVEK UPADHAYA</span><span class="text-info">(No of unit/ Super Builtup Area - 3/360sft)[Unit No.(s) / Floor -4,5 and 6 / Eighth Floor]</span></p>
+        <hr>
+        <div class="card-header">
+           
+            <button type="button" class="btn btn-light">Costing Sheet</button>
+            <button type="button" class="btn btn-light">Incentives</button>
+        </div>
+
+        <div class="card-body">
+            <div class="search-box d-inline-block mb-2">
+
+                <div class="row align-items-center g-3">
+                    <div class="col-xxl-3 col-lg-6 me-auto">
+                        <table class="table table-bordered align-middle table-nowrap mb-0">
+                            <thead>
+                                <tr>
+                                    <th data-toggle="tooltip" data-placement="top" title="Copy"
+                                        style="cursor: pointer;"><i style="color:rgb(69, 43, 134)"
+                                            class="bi bi-copy"></i><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                            height="16" fill="currentColor" class="bi bi-copy" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd"
+                                                d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z" />
+                                        </svg></th>
+                                    <th data-toggle="tooltip" data-placement="top" title="Excel"
+                                        style="cursor: pointer;"><i style="color:rgb(69, 43, 134)"
+                                            class="bi bi-file-earmark-excel"></i></th>
+                                    <th data-toggle="tooltip" data-placement="top" title="PDF" style="cursor: pointer;">
+                                        <i style="color:rgb(69, 43, 134)" class="bi bi-file-earmark-pdf"></i>
+                                    </th>
+                                    <th data-toggle="tooltip" data-placement="top" title="Document"
+                                        style="cursor: pointer;"><i style="color:rgb(69, 43, 134)"
+                                            class="bi bi-file-earmark-text"></i></th>
+                                    <th data-toggle="tooltip" data-placement="top" title="Printer"
+                                        style="cursor: pointer;"><i style="color:rgb(69, 43, 134)"
+                                            class="bi bi-printer"></i></th>
+                                    <th><span><a style="color:rgb(69, 43, 134); font-weight: normal;">Column
+                                                Visibility</a></span></th>
+                                    <th><select formControlName="Show entries" aria-label="Default select example"
+                                            style="cursor: pointer;">
+
+                                            <option value="" disabled selected style="display:none;">Show entries
+                                            </option>
+
+                                            <option value="5">5</option>
+                                            <option value="10">10</option>
+                                            <option value="15">15</option>
+
+                                        </select></th>
+                                </tr>
+                            </thead>
+
+                        </table>
+                    </div>
+                    <div class="col-xxl-3 col">
+
+
+
+                    </div>
+
+                    <div class="col-xxl-auto col-auto" style="position: relative;left:210px">
+
+                        <input type="text" class="form-control search" placeholder="Search...">
+                        <i class="ri-search-line search-icon"></i>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-gridjs align-middle table-nowrap mb-0">
+                    <thead>
+                        <tr>
+                            <th scope="col">S.No</th>
+                            <th scope="col">Details</th>
+                            <th scope="col"><span class="fw-medium">Payables</span></th>
+                            <th scope="col"><span class="fw-medium">Paid</span></th>
+                            <th scope="col"><span class="fw-medium">Difference</span></th>
+                            <th scope="col"><span class="fw-medium">Last paid Date</span></th>
+
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+
+
+                        @for (data of manager ;
+                        track $index) {
+                        <tr>
+                            <td><a>{{data.SNo}}</a></td>
+                            <td><span> {{data.Details}}</span></td>
+                            <td><span class="fw-medium"> {{data.Payables}}</span></td>
+                            <td><span class="fw-medium"> {{data.Paid}}</span></td>
+                            <td> <span class="fw-medium">{{data.Difference}}</span></td>
+                            <td><span class="fw-medium">{{data.LastpaidDate}}</span></td>
+
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <br>
+            <div class="row justify-content-md-between align-items-md-center">
+                <div class="col-sm-12 col-md-5">
+                    <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">
+                        Showing
+                        1 to
+                        3 of 3
+                        entries
+                    </div>
+                </div>
+
+            </div>
+            <div class="d-flex justify-content-end">
+                <div class="pagination-wrap hstack gap-2">
+                    <pagination class="pagination-wrap hstack gap-2" [totalItems]="manager.length" [itemsPerPage]="15"
+                        (pageChanged)="tablepageChanged($event)"></pagination>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div> -->
+
+
+
+
+
+<tabset class="mb-3">
+    <tab heading="Costing Sheet" class="nav-item" id="print">
+        <div class="tab-pane mt-3" id="home" role="tabpanel">
+
+            <div class="search-box d-inline-block mb-2">
+
+                <div class="row align-items-center g-3">
+                    <div class="col-xxl-3 col-lg-6 me-auto">
+                        <table class="table table-bordered align-middle table-nowrap mb-0">
+                            <thead>
+                                <tr>
+                                    <th data-toggle="tooltip" data-placement="top" title="Copy"
+                                        style="cursor: pointer;"><i style="color:rgb(69, 43, 134)"
+                                            class="bi bi-copy"></i><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                            height="16" fill="currentColor" class="bi bi-copy" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd"
+                                                d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z" />
+                                        </svg></th>
+                                    <th data-toggle="tooltip" data-placement="top" title="Excel"
+                                        style="cursor: pointer;"><i style="color:rgb(69, 43, 134)"
+                                            class="bi bi-file-earmark-excel"></i></th>
+                                    <th data-toggle="tooltip" data-placement="top" title="PDF" style="cursor: pointer;">
+                                        <i style="color:rgb(69, 43, 134)" class="bi bi-file-earmark-pdf"></i>
+                                    </th>
+                                    <th data-toggle="tooltip" data-placement="top" title="Document"
+                                        style="cursor: pointer;"><i style="color:rgb(69, 43, 134)"
+                                            class="bi bi-file-earmark-text"></i></th>
+                                    <th data-toggle="tooltip" data-placement="top" title="Printer"
+                                        style="cursor: pointer;"><i style="color:rgb(69, 43, 134)"
+                                            class="bi bi-printer" [print]="['print',config]"></i></th>
+                                    <th><span><a style="color:rgb(69, 43, 134); font-weight: normal;">Column
+                                                Visibility</a></span></th>
+                                    <th><select formControlName="Show entries" aria-label="Default select example"
+                                            style="cursor: pointer;">
+
+                                            <option value="" disabled selected style="display:none;">Show entries
+                                            </option>
+
+                                            <option value="5">5</option>
+                                            <option value="10">10</option>
+                                            <option value="15">15</option>
+
+                                        </select></th>
+                                </tr>
+                            </thead>
+
+                        </table>
+                    </div>
+                    <div class="col-xxl-3 col">
+
+
+
+                    </div>
+
+                    <div class="col-xxl-auto col-auto" style="position: relative;left:210px">
+
+                        <input type="text" class="form-control search" placeholder="Search...">
+                        <i class="ri-search-line search-icon"></i>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-gridjs align-middle table-nowrap mb-0">
+                    <thead>
+                        <tr>
+                            <th scope="col">S.No</th>
+                            <th scope="col">Details</th>
+                            <th scope="col"><span class="fw-medium">Payables</span></th>
+                            <th scope="col"><span class="fw-medium">Paid</span></th>
+                            <th scope="col"><span class="fw-medium">Difference</span></th>
+                            <th scope="col"><span class="fw-medium">Last paid Date</span></th>
+
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+
+
+                        @for (data of manager ;
+                        track $index) {
+                        <tr>
+                            <td><a>{{data.SNo}}</a></td>
+                            <td><span> {{data.Details}}</span></td>
+                            <td><span class="fw-medium"> {{data.Payables}}</span></td>
+                            <td><span class="fw-medium"> {{data.Paid}}</span></td>
+                            <td> <span class="fw-medium">{{data.Difference}}</span></td>
+                            <td><span class="fw-medium">{{data.LastpaidDate}}</span></td>
+
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <br>
+            <div class="row justify-content-md-between align-items-md-center">
+                <div class="col-sm-12 col-md-5">
+                    <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">
+                        Showing
+                        1 to
+                        3 of 3
+                        entries
+                    </div>
+                </div>
+
+            </div>
+            <div class="d-flex justify-content-end">
+                <div class="pagination-wrap hstack gap-2">
+                    <pagination class="pagination-wrap hstack gap-2" [totalItems]="manager.length" [itemsPerPage]="15"
+                        (pageChanged)="tablepageChanged($event)"></pagination>
+                </div>
+            </div>
+        </div>
+    </tab>
+    <tab heading="Incentives" class="nav-item">
+        <div class="tab-pane active mt-3" id="product1" role="tabpanel">
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-gridjs align-middle table-nowrap mb-0">
+                    <thead>
+                        <tr>
+                            <th scope="col">S.No</th>
+                            <th scope="col">Name</th>
+                            <th scope="col"><span class="fw-medium">Role/Desigination</span></th>
+                            <th scope="col"><span class="fw-medium">Date Of Payment</span></th>
+                            <th scope="col"><span class="fw-medium">Incentive Payble</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </tab>
+
+</tabset>

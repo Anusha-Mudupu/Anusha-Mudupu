@@ -1,0 +1,36 @@
+/*
+ *   Copyright (c) 2024 Dmantz Technologies private limited
+ *   All rights reserved.
+ */
+// button{
+//     position: relative;
+//     margin-left: 10px;;
+// }
+// .card{
+//     position: relative;
+//     left:200px;
+//     top:-30px;
+// }
+
+#crossbtn{
+    position: absolute;
+    top:10px;
+     right: 20px;
+}
+#submitbtn{
+    margin-left: 55px;
+    margin-top: 20px;
+    // margin-bottom: 10px;
+}
+#cancelbtn{
+    margin-left: 180px; 
+    margin-top: 20px;
+    left:40px;
+}
+#popup{
+    margin-left: -300px;
+}
+form{
+   position: relative;
+   top:30px;
+}

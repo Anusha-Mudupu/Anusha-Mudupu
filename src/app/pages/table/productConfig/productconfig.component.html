@@ -1,0 +1,180 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs title="Product Config" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+
+            <div class="card-body">
+                <div id="customerList">
+                    <div class="row g-4 mb-3">
+                        
+                        <div class="col-sm">
+                            <div class="d-flex justify-content-sm-end">
+                                <div class="search-box ms-2">
+                                    <input type="text" class="form-control search" placeholder="Search..." [(ngModel)]="service.searchTerm">
+                                    <i class="ri-search-line search-icon"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-auto">
+                            <div>
+                                <button type="button" class="btn btn-success add-btn me-2" id="create-btn" (click)="showModal.show()"><i class="ri-add-line align-bottom me-1"></i>
+                                    Add</button>
+                                <button class="btn btn-subtle-danger" (click)="deleteRecord()"><i class="ri-delete-bin-2-line"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive table-card mt-3 mb-1">
+                        <table class="table align-middle table-nowrap" id="customerTable">
+                            <thead class="table-light">
+                                <tr>
+                                    <th scope="col" style="width: 50px;">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="checkAll" value="option" [(ngModel)]="masterSelected" (change)="checkUncheckAll($event)">
+                                        </div>
+                                    </th>
+                                    <th class="sort" productsortable="category" >Category
+                                    </th>
+                                    <th class="sort" productsortable="type" >type</th>
+                                    <th class="sort" productsortable="product" >Product</th>
+                                    <th class="sort" productsortable="pValue" >Product Value</th>
+                                    <th class="sort" productsortable="tenure" >Tenure/ Area</th>
+                                    <th class="sort">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="list form-check-all">
+                                @for (data of ProductConfigDatas; track $index) {
+                                <tr id="a_{{data.id}}">
+                                    <th scope="row">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="chk_child" value="{{data.id}}" [(ngModel)]="data.state">
+                                        </div>
+                                    </th>
+                                    <td class="id" style="display:none;"><a href="javascript:void(0);" class="fw-medium link-primary">#VZ2101</a></td>
+                                    <td class="name">{{data.category}}</td>
+                                    <td class="type">{{data.type}}</td>
+                                    <td class="product">{{data.product}}</td>
+                                    <td class="pValue">{{data.pValue}}</td>
+                                    <td class="tenure">{{data.tenure}}</td>
+                                    <td>
+                                        <div class="d-flex gap-2">
+                                            <div class="edit">
+                                                <button class="btn btn-sm btn-success edit-item-btn" (click)="editModal($index)"><i class="ri-edit-2-line"></i></button>
+                                            </div>
+                                            <div class="remove">
+                                                <button class="btn btn-sm btn-danger remove-item-btn" (click)="confirm(data.id)"><i class="ri-delete-bin-2-line"></i></button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <div class="noresult" [ngClass]="(ProductConfigDatas?.length != 0)?'d-none':''">
+                            <div class="text-center">
+                                <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop" colors="primary:#121331,secondary:#08a88a" style="width:75px;height:75px"></lord-icon>
+                                <h5 class="mt-2">Sorry! No Result Found</h5>
+                                <p class="text-muted mb-0">We've searched more than 150+ Orders We did not find any
+                                    orders for you search.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-end">
+                        <div class="pagination-wrap hstack gap-2">
+                            <pagination class="pagination-wrap hstack gap-2" [totalItems]="10" [itemsPerPage]="8" (pageChanged)="tablepageChanged($event)"></pagination>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end card -->
+        </div>
+        <!-- end col -->
+    </div>
+    <!-- end col -->
+</div>
+<!-- end row -->
+
+
+<div bsModal #showModal="bs-modal" class="modal fade" id="showModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-light p-3">
+                <h5 class="modal-title" id="exampleModalLabel">Add Customer</h5>
+                <button type="button" class="btn-close" (click)="showModal.hide()" id="close-modal"></button>
+            </div>
+            <form (ngSubmit)="saveProductConfig()" [formGroup]="productConfigForm" class="tablelist-form">
+                <div class="modal-body">
+                    <input type="hidden" name="id" value="" formControlName="ids" />
+
+                    <div class="mb-3" id="modal-id" style="display: none;">
+                        <label for="id-field" class="form-label">ID</label>
+                        <input type="text" id="id-field" class="form-control" placeholder="ID" readonly />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="name-field" class="form-label">Category</label>
+                        <input type="text" id="name-field" class="form-control" formControlName="ame" [ngClass]="{ 'is-invalid': submitted && form['category'].errors }" placeholder="Enter Category" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="type-field" class="form-label">Type</label>
+                        <input type="text" id="type-field" class="form-control" placeholder="Enter type." formControlName="type" [ngClass]="{ 'is-invalid': submitted && form['type'].errors }" required />
+                    </div>
+
+                    <div>
+                        <label for="product-field" class="form-label">Product</label>
+                        <select class="form-control" data-trigger name="product-field" id="product-field" formControlName="product" [ngClass]="{ 'is-invalid': submitted && form['product'].errors }">
+                            <option value="Adminstrator">Adminstrator</option>
+                            <option value="Branch Manager">Branch Manager</option>
+                            <option value="Regional Manager">Regional Manager</option>
+                            <option value="Zonal Manager">Zonal Manager</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="pValue-field" class="form-label">Value</label>
+                        <input type="text" id="pValue-field" class="form-control" formControlName="ame" [ngClass]="{ 'is-invalid': submitted && form['pValue'].errors }" placeholder="Enter pValue" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="tenure-field" class="form-label">Tenure</label>
+                        <input type="text" id="tenure-field" class="form-control" formControlName="ame" [ngClass]="{ 'is-invalid': submitted && form['tenure'].errors }" placeholder="Enter Tenure" required />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="hstack gap-2 justify-content-end">
+                        <button type="button" class="btn btn-light" (click)="showModal.hide()">Close</button>
+                        <button type="submit" class="btn btn-success" id="add-btn">Add Role</button>
+                        <!-- <button type="button" class="btn btn-success" id="edit-btn">Update</button> -->
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div bsModal #deleteModal="bs-modal" class="modal fade zoomIn" id="deleteRecordModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" (click)="deleteModal.hide()" id="btn-close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mt-2 text-center">
+                    <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop" colors="primary:#f7b84b,secondary:#f06548" style="width:100px;height:100px"></lord-icon>
+                    <div class="mt-4 pt-2 fs-base mx-4 mx-sm-5">
+                        <h4>Are you Sure ?</h4>
+                        <p class="text-muted mx-4 mb-0">Are you Sure You want to Remove this Record ?</p>
+                    </div>
+                </div>
+                <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
+                    <button type="button" class="btn w-sm btn-light" (click)="deleteModal.hide()">Close</button>
+                    <button type="button" class="btn w-sm btn-danger " (click)="deleteData(deleteId)" id="delete-record">Yes, Delete It!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end modal -->

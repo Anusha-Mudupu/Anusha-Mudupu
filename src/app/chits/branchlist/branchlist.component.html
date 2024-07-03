@@ -1,0 +1,252 @@
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4>Branches</h4>
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item active">Chits</li>
+                    <li class="breadcrumb-item active">Master</li>
+                    <li class="breadcrumb-item active">Branches</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm">
+        <div class="d-flex justify-content-sm-end gap-2">
+            <button class="btn btn-success add-btn" (click)="branchTransfer()">
+                &nbsp;Branch Transfer</button>
+            <button type="button" class="btn btn-success add-btn" id="create-btn" (click)="openModal()"
+                data-toggle="tooltip" data-placement="top" title="click Add"><i
+                    class="ri-add-line align-bottom me-1"></i>
+                Add</button>
+            <button class="btn btn-success" (click)="clearAllSearchFields()">Clear All</button>
+        </div>
+    </div>
+</div>
+<div class="container" style="position: relative;top: -30px;">
+    <div class="row d-flex d-sm-flex mt-3 mb-2">
+        <div class="search-box  col-2">
+            <input type="text" class="form-control search" placeholder="Search for Branch.."
+                [(ngModel)]="searchTermBranch" (input)="filterData()">
+            <i class="ri-search-line search-icon"></i>
+        </div>
+        <div class="search-box  col-2">
+            <input type="text" class="form-control search" placeholder="Search for Region.."
+                [(ngModel)]="searchTermRegion" (input)="filterData()">
+            <i class="ri-search-line search-icon"></i>
+        </div>
+        <div class="search-box  col-2">
+            <input type="text" class="form-control search" placeholder="Search for Zone.." [(ngModel)]="searchTermZone"
+                (input)="filterData()">
+            <i class="ri-search-line search-icon"></i>
+        </div>
+    </div>
+    <table class="table table-striped" id="sortable-table">
+
+        <thead class="text-muted table-light">
+            <tr>
+                <th scope="col" (click)="sortTable('name')" style="cursor:pointer">
+                    Branch
+                    <span *ngIf="sortColumn === 'name'">
+                        <!-- Show ascending or descending icon based on sortOrder -->
+                        <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                        <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                    </span>
+                    <span *ngIf="sortColumn !== 'name'">
+                        <!-- Hide the default ascending icon when sorting by other columns -->
+                        <i [hidden]="true" class="fa fa-sort-up"></i>
+                    </span>
+                </th>
+                <!-- <th scope="col">Region</th> -->
+                <th scope="col" (click)="sortTable('regionName')" style="cursor:pointer">
+                    Region
+                    <span *ngIf="sortColumn === 'regionName'">
+                        <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                        <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                    </span>
+                </th>
+                <th scope="col" (click)="sortTable('zoneName')" style="cursor:pointer">
+                    Zone
+                    <span *ngIf="sortColumn === 'zoneName'">
+                        <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                        <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                    </span>
+                </th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody style="position: relative;left:10px;">
+            @for (list of sortedBranchList; track $index) {
+            <tr>
+                <td>{{list.name}}</td>
+                <td>{{list.regionName}}</td>
+                <td>{{list.zoneName}}</td>
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-subtle-secondary btn-sm dropdown-toggle" type="button"
+                            data-bs-toggle="dropdown">
+                            <i class="bi bi-three-dots-vertical"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" style="cursor: pointer;">
+                            <li style="cursor: pointer;">
+                                <a class="dropdown-item" href="javascript:void(0);" style="cursor: pointer;"
+                                    (click)="openDialog(list.id)">Edit</a>
+                            </li>
+                            <li style="cursor: pointer;">
+                                <a class="dropdown-item" href="javascript:void(0);" style="cursor: pointer;"
+                                    (click)="openDelete()">Delete</a>
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+
+            </tr>
+            }
+        </tbody>
+
+    </table>
+    <i style="font-size:16px;color:navy;position: relative;left:10px" class="fa">&#xf021;</i>
+    <div class="d-flex justify-content-end">
+        <div class="pagination-wrap hstack gap-2">
+            <pagination class="pagination-wrap hstack gap-2" [totalItems]="branchListData.length" [itemsPerPage]="15"
+                (pageChanged)="tablepageChanged($event)"></pagination>
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title"> Create Branch</h2>
+                <span class="close" aria-label="Close" (click)="onCloseHandled()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="BranchForm">
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                            placeholder="Enter Name" aria-placeholder="Enter Name" formControlName="name">
+                        <div *ngIf="submitted && BranchForm.get('name').invalid">
+                            <div *ngIf="BranchForm.get('name').errors.required" style="color: red;"> Name is required.
+                            </div>
+                        </div>
+                        <div id="emailHelp" class="form-text"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Code</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Code"
+                            formControlName="code">
+                        <div *ngIf="submitted && BranchForm.get('code').invalid">
+                            <div *ngIf="BranchForm.get('code').errors.required" style="color: red;"> Code is required.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3 ">
+                        <label for="exampleInputPassword1" class="form-label">Status</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Status"
+                            formControlName="status">
+                        <div *ngIf="submitted && BranchForm.get('status').invalid">
+                            <div *ngIf="BranchForm.get('status').errors.required" style="color: red;"> Status is
+                                required.</div>
+                        </div>
+                    </div>
+                    <div class="mb-3 ">
+                        <label for="exampleInputPassword1" class="form-label">Zone</label>
+                        <select class="form-select" aria-label="Default select example" formControlName="zone">
+                            @for(zone of zoneListData; track $index){
+                            <option [value]="zone.id">{{zone.name}}</option>
+                            }
+
+                        </select>
+                        <div *ngIf="submitted && BranchForm.get('zone').invalid">
+                            <div *ngIf="BranchForm.get('zone').errors.required" style="color: red;"> Zone is required.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3 ">
+                        <label for="exampleInputPassword1" class="form-label">Region</label>
+                        <select class="form-select" aria-label="Default select example" formControlName="region">
+                            @for(region of regionListData; track $index){
+                            <option [value]="region.id">{{region.name}}</option>
+                            }
+
+                        </select>
+                        <div *ngIf="submitted && BranchForm.get('region').invalid">
+                            <div *ngIf="BranchForm.get('region').errors.required" style="color: red;"> Region is
+                                required.</div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-danger" (click)="onCloseHandled()"
+                        id="createcancelbtn">Cancel</button>
+                    <button type="button" class="btn btn-success" (click)="onSubmit()" id="createsubbtn">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display1}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit Branch</h4>
+                <span class="close" aria-label="Close" (click)="onCloseHandled1()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Zone</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                            placeholder="Enter Zone" aria-placeholder="Enter Zone">
+                        <div id="emailHelp" class="form-text"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Region</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Region">
+                    </div>
+                    <div class="mb-3 ">
+                        <label for="exampleInputPassword1" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Name">
+                    </div>
+                    <div class="mb-3 ">
+                        <label for="exampleInputPassword1" class="form-label">Code</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Code">
+                    </div>
+                    <div class="mb-3 ">
+                        <label for="exampleInputPassword1" class="form-label">Status</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Status">
+                    </div>
+                    <button type="button" class="btn btn-danger" (click)="onCloseHandled()"
+                        class="createcancelbtn">Cancel</button>
+                    <button type="button" class="btn btn-success" (click)="onCloseHandled()"
+                        class="createsubbtn">Save</button>
+                </form>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display2}" id="dltModel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <span style="font-weight: bold;margin-left: 130px;"> Do you want to delete record ?</span>
+                <span class="close" aria-label="Close" (click)="onClosed()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <hr>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="onClosed()">Cancel</button>
+                <button type="button" class="btn btn-success" (click)="onClosed()" (click)="deleteBranch()"
+                    style="width:80px">OK</button>
+
+            </div>
+        </div>
+    </div>
+
+</div>

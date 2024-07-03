@@ -1,0 +1,518 @@
+<!-- <div class="dashboard-container">
+    <h2>Welcome to the Dashboard</h2>
+
+    <div *ngFor="let card of getVisibleCards()">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ card.title }}</h5>
+                <p class="card-text">Card content here...</p>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+
+
+
+
+
+
+<div class="row row-cols-xxl-5 row-cols-lg-5 row-cols-md-2 row-cols-1">
+
+    <div class="col" *ngIf="totalContactsData" (click)="showContacts()">
+        <div class="card border-bottom border-3 card-animate" style="width:180px">
+            <div class="card-body">
+                <i class="bi bi-person-lines-fill" style="color:mediumpurple;font-size:25px"></i>
+                <p class="text-muted fw-medium text-uppercase mb-0">Total Contacts</p>
+                <h3 class="fw-medium text-uppercase mb-0">{{contactslength}}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col" *ngIf="showAdministartionLeadsData || showrealestateLeadData || ShowChitsLeadsData">
+        <div class="card border-bottom border-3 card-animate" style="width:180px">
+            <div class="card-body">
+                <i class="bi bi-copy"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="40" fill="currentColor" class="bi bi-copy"
+                    viewBox="0 0 16 16" style="color:lightslategray;">
+                    <path fill-rule="evenodd"
+                        d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z" />
+                </svg>
+                <p class="text-muted fw-medium text-uppercase mb-0">Total Leads</p>
+                <h3 class="fw-medium text-uppercase mb-0">
+                    <ng-container *ngIf="showAdministartionLeadsData">
+                        {{ totalAdministrationLeadsLength }}
+                    </ng-container>
+                    <ng-container *ngIf="showrealestateLeadData">
+                        {{ realestateLeadDataLength }}
+                    </ng-container>
+                    <ng-container *ngIf="ShowChitsLeadsData">
+                        {{ chitsLeadDataLength }}
+                    </ng-container>
+                </h3>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col" *ngIf="totalConvertedLeads">
+        <div class="card border-bottom border-3 card-animate" style="width:180px">
+            <div class="card-body">
+                <i class="bi bi-copy"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="40" fill="currentColor" class="bi bi-copy"
+                    viewBox="0 0 16 16" style="color:lightseagreen;">
+                    <path fill-rule="evenodd"
+                        d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z" />
+                </svg>
+                <p class="text-muted fw-medium text-uppercase mb-0">Converted Leads</p>
+                <h3 class="fw-medium text-uppercase mb-0">50</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col" *ngIf="totalBusinessValue">
+        <div class="card border-bottom border-3 card-animate" style="width:180px">
+            <div class="card-body">
+                <i class="bi bi-cash-stack" style="font-size: 25px;color:mediumpurple"></i>
+
+                <p class="text-muted fw-medium text-uppercase mb-0">Business Value(₴)</p>
+                <h3 class="fw-medium text-uppercase mb-0">25,50,000</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col" *ngIf="totalPipeLine">
+        <div class="card border-bottom border-3 card-animate" style="width:180px">
+            <div class="card-body">
+                <i class="bi bi-pip" style="font-size: 25px;color:lightslategray"></i>
+                <p class="text-muted fw-medium text-uppercase mb-0">Pipeline(₴)</p>
+                <h3 class="fw-medium text-uppercase mb-0">70,90,000</h3>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+<div class="card" id="propertyList" *ngIf="showAdministartionLeadsData">
+    <div class="card-header">
+        <div class="row align-items-center gy-3">
+            <div class="col-lg-3 col-md-6 order-last order-md-first me-auto">
+                <div class="search-box">
+                    <input type="text" class="form-control search"
+                        placeholder="Search for property, price or something..." (keyup)="filterdata()">
+                    <i class="ri-search-line search-icon"></i>
+                </div>
+            </div>
+            <div class="col-md-auto col-6 text-end">
+                <div class="d-flex flex-wrap align-items-start gap-2">
+                    <button class="btn btn-subtle-danger d-none" id="remove-actions"><i
+                            class="ri-delete-bin-2-line"></i></button>
+                    <button class="btn btn-secondary add-btn"><i class="bi bi-house align-baseline me-1"></i> Add
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-borderless table-centered align-middle table-nowrap mb-0">
+                <thead class="text-muted table-light">
+                    <tr>
+                        <th>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="option" id="checkAll"
+                                    (change)="checkUncheckAll($event)">
+                                <label class="form-check-label" for="checkAll"></label>
+                            </div>
+                        </th>
+                        <th scope="col" class=" cursor-pointer desc" (click)="onSort('id')">#
+                        </th>
+                        <th scope="col" class=" cursor-pointer" (click)="onSort('title')">
+
+                            Lead Name
+                        </th>
+                        <th scope="col" class=" cursor-pointer" (click)="onSort('location')">
+
+                            phone
+                        </th>
+
+                        <th scope="col" class=" cursor-pointer" (click)="onSort('type')">
+
+                            Product
+                        </th>
+
+                        <th scope="col" class=" cursor-pointer" (click)="onSort('employeeName')">
+
+                            Employee
+                        </th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="list form-check-all">
+                    @for (data of leadsData; track $index) {
+                    <tr id="l_{{data.id}}">
+                        <td>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="checkAll" value="{{data.id}}"
+                                    (change)="onCheckboxChange($event)">
+                                <label class="form-check-label"></label>
+                            </div>
+                        </td>
+                        <td class="id"><a routerLink="/real-estate/property-overview"
+                                class="fw-medium link-primary">#TBS0{{data.id}}</a></td>
+                        <td class="propert_Name text-capitalize"><a routerLink="/real-estate/property-overview"
+                                class="text-reset">{{data.leadName}}</a></td>
+                        <td class="address">{{data.contactNo}}</td>
+                        <td class="bedroom">{{data.productName}}</td>
+
+                        <td class="propert_type">{{data.employeeName}}</td>
+
+                        <td>
+                            <ul class="d-flex gap-2 list-unstyled mb-0">
+                                <li>
+                                    <a routerLink="/real-estate/property-overview"
+                                        class="btn btn-subtle-primary btn-icon btn-sm "><i class="ph-eye"></i></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);"
+                                        class="btn btn-subtle-secondary btn-icon btn-sm edit-item-btn"><i
+                                            class="ph-pencil"></i></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);" (click)="removeItem(data.id)"
+                                        class="btn btn-subtle-danger btn-icon btn-sm remove-item-btn"><i
+                                            class="ph-trash"></i></a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+
+            </table>
+            <div id="elmLoader">
+                <div class="spinner-border text-primary avatar-sm" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+
+            <div class="noresult" style="display: none;">
+                <div class="text-center py-4">
+                    <i class="ph-magnifying-glass fs-1 text-primary"></i>
+                    <h5 class="mt-2">Sorry! No Result Found</h5>
+                    <p class="text-muted mb-0">We've searched more than 150+ property We did not find any property for
+                        you search.</p>
+                </div>
+            </div>
+            <div class="d-flex justify-content-end">
+                <div class="pagination-wrap hstack gap-2">
+                    <pagination class="pagination-wrap hstack gap-2" [totalItems]="totalLeads.length"
+                        [itemsPerPage]="15" (pageChanged)="tablepageChanged($event)"></pagination>
+                </div>
+            </div>
+        </div>
+
+        <div class="row align-items-center mt-3">
+
+        </div>
+
+    </div>
+</div>
+
+
+
+<div class="card" id="propertyList" *ngIf="showrealestateLeadData">
+    <div class="card-header">
+        <div class="row align-items-center gy-3">
+            <div class="col-lg-3 col-md-6 order-last order-md-first me-auto">
+                <div class="search-box">
+                    <input type="text" class="form-control search"
+                        placeholder="Search for property, price or something..." (keyup)="filterdata()">
+                    <i class="ri-search-line search-icon"></i>
+                </div>
+            </div>
+            <div class="col-md-auto col-6 text-end">
+                <div class="d-flex flex-wrap align-items-start gap-2">
+                    <button class="btn btn-subtle-danger d-none" id="remove-actions"><i
+                            class="ri-delete-bin-2-line"></i></button>
+                    <button class="btn btn-secondary add-btn"><i class="bi bi-house align-baseline me-1"></i> Add
+                        Property</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-borderless table-centered align-middle table-nowrap mb-0">
+                <thead class="text-muted table-light">
+                    <tr>
+                        <th>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="option" id="checkAll"
+                                    (change)="checkUncheckAll($event)">
+                                <label class="form-check-label" for="checkAll"></label>
+                            </div>
+                        </th>
+                        <th scope="col" class=" cursor-pointer desc" (click)="onSort('id')">#
+                        </th>
+                        <th scope="col" class=" cursor-pointer" (click)="onSort('title')">
+                            <!-- Property Name -->
+                            Lead Name
+                        </th>
+                        <th scope="col" class=" cursor-pointer" (click)="onSort('location')">
+                            <!-- Address -->
+                            phone
+                        </th>
+
+                        <th scope="col" class="cursor-pointer" (click)="onSort('type')">
+                            <!-- Property Type -->
+                            Product
+                        </th>
+                        <!-- <th scope="col" class="sort cursor-pointer" (click)="onSort('area')">
+                         
+                            Branch
+                        </th> -->
+                        <th scope="col" class="sort cursor-pointer" (click)="onSort('employeeName')">
+                            <!-- Agents -->
+                            Employee
+                        </th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="list form-check-all">
+                    @for (data of realestateLeadData; track $index) {
+                    <tr id="l_{{data.id}}">
+                        <td>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="checkAll" value="{{data.id}}"
+                                    (change)="onCheckboxChange($event)">
+                                <label class="form-check-label"></label>
+                            </div>
+                        </td>
+                        <td class="id"><a routerLink="/real-estate/property-overview"
+                                class="fw-medium link-primary">#TBS0{{data.id}}</a></td>
+                        <td class="propert_Name text-capitalize"><a routerLink="/real-estate/property-overview"
+                                class="text-reset">{{data.leadName}}</a></td>
+                        <td class="address">{{data.contactNo}}</td>
+                        <td class="bedroom">{{data.productName}}</td>
+                        <!-- <td class="bathroom d-none">{{data.branchName}}</td> -->
+                        <td class="propert_type">{{data.employeeName}}</td>
+                        <!-- <td class="sqft">{{data.area}}</td>
+                            
+                        <td class="agents">{{data.agent}}</td>
+                        <td class="amount"><span class="fw-medium">${{data.price}}</span></td> -->
+
+                        <td>
+                            <ul class="d-flex gap-2 list-unstyled mb-0">
+                                <li>
+                                    <a routerLink="/real-estate/property-overview"
+                                        class="btn btn-subtle-primary btn-icon btn-sm "><i class="ph-eye"></i></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);"
+                                        class="btn btn-subtle-secondary btn-icon btn-sm edit-item-btn"><i
+                                            class="ph-pencil"></i></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);" (click)="removeItem(data.id)"
+                                        class="btn btn-subtle-danger btn-icon btn-sm remove-item-btn"><i
+                                            class="ph-trash"></i></a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    }
+                </tbody><!-- end tbody -->
+            </table><!-- end table -->
+
+            <div id="elmLoader">
+                <div class="spinner-border text-primary avatar-sm" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+
+            <div class="noresult" style="display: none;">
+                <div class="text-center py-4">
+                    <i class="ph-magnifying-glass fs-1 text-primary"></i>
+                    <h5 class="mt-2">Sorry! No Result Found</h5>
+                    <p class="text-muted mb-0">We've searched more than 150+ property We did not find any property for
+                        you search.</p>
+                </div>
+            </div>
+            <!-- <div class="d-flex justify-content-end">
+                <div class="pagination-wrap hstack gap-2">
+                    <pagination class="pagination-wrap hstack gap-2" [totalItems]="realestateLeadData.length"
+                        [itemsPerPage]="15" (pageChanged)="tablepageChanged1($event)"></pagination>
+                </div>
+            </div> -->
+        </div>
+
+        <div class="row align-items-center mt-3">
+            <!-- <div class="col-sm">
+                <div class="text-muted text-center text-sm-start">
+                    Showing <span class="fw-semibold">{{products?.length}}</span> of <span
+                        class="fw-semibold">{{productsdata?.length}}</span> Results
+                </div>
+            </div> -->
+
+            <!--end col-->
+            <!-- <div class="col-sm-auto mt-3 mt-sm-0">
+                    <pagination class="pagination-wrap justify-content-center hstack gap-2" [totalItems]="productsdata?.length" [itemsPerPage]="8" (pageChanged)="pageChanged($event)"></pagination>
+                </div> -->
+            <!--end col-->
+        </div><!--end row-->
+
+    </div>
+</div>
+
+
+
+<div class="card" id="propertyList" *ngIf="ShowChitsLeadsData">
+    <div class="card-header">
+        <div class="row align-items-center gy-3">
+            <div class="col-lg-3 col-md-6 order-last order-md-first me-auto">
+                <div class="search-box">
+                    <input type="text" class="form-control search"
+                        placeholder="Search for property, price or something..." (keyup)="filterdata()">
+                    <i class="ri-search-line search-icon"></i>
+                </div>
+            </div>
+            <div class="col-md-auto col-6 text-end">
+                <div class="d-flex flex-wrap align-items-start gap-2">
+                    <button class="btn btn-subtle-danger d-none" id="remove-actions"><i
+                            class="ri-delete-bin-2-line"></i></button>
+                    <button class="btn btn-secondary add-btn"><i class="bi bi-house align-baseline me-1"></i> Add
+                        Property</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-borderless table-centered align-middle table-nowrap mb-0">
+                <thead class="text-muted table-light">
+                    <tr>
+                        <th>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="option" id="checkAll"
+                                    (change)="checkUncheckAll($event)">
+                                <label class="form-check-label" for="checkAll"></label>
+                            </div>
+                        </th>
+                        <th scope="col" class=" cursor-pointer desc" (click)="onSort('id')">#
+                        </th>
+                        <th scope="col" class=" cursor-pointer" (click)="onSort('title')">
+                            <!-- Property Name -->
+                            Lead Name
+                        </th>
+                        <th scope="col" class="" (click)="onSort('location')">
+                            <!-- Address -->
+                            phone
+                        </th>
+
+                        <th scope="col" class=" cursor-pointer" (click)="onSort('type')">
+                            <!-- Property Type -->
+                            Product
+                        </th>
+                        <!-- <th scope="col" class="sort cursor-pointer" (click)="onSort('area')">
+                         
+                            Branch
+                        </th> -->
+                        <th scope="col" class="cursor-pointer" (click)="onSort('employeeName')">
+                            <!-- Agents -->
+                            Employee
+                        </th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody class="list form-check-all">
+                    @for (data of chitsLeadData; track $index) {
+                    <tr id="l_{{data.id}}">
+                        <td>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="checkAll" value="{{data.id}}"
+                                    (change)="onCheckboxChange($event)">
+                                <label class="form-check-label"></label>
+                            </div>
+                        </td>
+                        <td class="id"><a routerLink="/real-estate/property-overview"
+                                class="fw-medium link-primary">#TBS0{{data.id}}</a></td>
+                        <td class="propert_Name text-capitalize"><a routerLink="/real-estate/property-overview"
+                                class="text-reset">{{data.leadName}}</a></td>
+                        <td class="address">{{data.contactNo}}</td>
+                        <td class="bedroom">{{data.productName}}</td>
+                        <!-- <td class="bathroom d-none">{{data.branchName}}</td> -->
+                        <td class="propert_type">{{data.employeeName}}</td>
+                        <!-- <td class="sqft">{{data.area}}</td>
+                            
+                        <td class="agents">{{data.agent}}</td>
+                        <td class="amount"><span class="fw-medium">${{data.price}}</span></td> -->
+
+                        <td>
+                            <ul class="d-flex gap-2 list-unstyled mb-0">
+                                <li>
+                                    <a routerLink="/real-estate/property-overview"
+                                        class="btn btn-subtle-primary btn-icon btn-sm "><i class="ph-eye"></i></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);"
+                                        class="btn btn-subtle-secondary btn-icon btn-sm edit-item-btn"><i
+                                            class="ph-pencil"></i></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);" (click)="removeItem(data.id)"
+                                        class="btn btn-subtle-danger btn-icon btn-sm remove-item-btn"><i
+                                            class="ph-trash"></i></a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    }
+                </tbody><!-- end tbody -->
+            </table><!-- end table -->
+
+            <div id="elmLoader">
+                <div class="spinner-border text-primary avatar-sm" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+
+            <div class="noresult" style="display: none;">
+                <div class="text-center py-4">
+                    <i class="ph-magnifying-glass fs-1 text-primary"></i>
+                    <h5 class="mt-2">Sorry! No Result Found</h5>
+                    <p class="text-muted mb-0">We've searched more than 150+ property We did not find any property for
+                        you search.</p>
+                </div>
+            </div>
+            <div class="d-flex justify-content-end">
+                <div class="pagination-wrap hstack gap-2">
+                    <pagination class="pagination-wrap hstack gap-2" [totalItems]="chitsLeadData.length"
+                        [itemsPerPage]="15" (pageChanged)="tablepageChanged2($event)"></pagination>
+                </div>
+            </div>
+        </div>
+
+        <div class="row align-items-center mt-3">
+            <!-- <div class="col-sm">
+                <div class="text-muted text-center text-sm-start">
+                    Showing <span class="fw-semibold">{{products?.length}}</span> of <span
+                        class="fw-semibold">{{productsdata?.length}}</span> Results
+                </div>
+            </div> -->
+
+            <!--end col-->
+            <!-- <div class="col-sm-auto mt-3 mt-sm-0">
+                    <pagination class="pagination-wrap justify-content-center hstack gap-2" [totalItems]="productsdata?.length" [itemsPerPage]="8" (pageChanged)="pageChanged($event)"></pagination>
+                </div> -->
+            <!--end col-->
+        </div><!--end row-->
+
+    </div>
+</div>
+<div *ngIf="showContactsComponent">
+    <app-contacts></app-contacts>
+</div>
+<div *ngIf="showadminComponent">
+    <app-leads-list></app-leads-list>
+</div>

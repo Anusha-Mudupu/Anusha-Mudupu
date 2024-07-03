@@ -1,0 +1,338 @@
+<!-- ========== App Menu ========== -->
+
+
+
+<div class="app-menu navbar-menu">
+    <!-- LOGO -->
+    <div class="navbar-brand-box">
+        <a routerLink="/" class="logo logo-dark">
+            <span class="logo-sm">
+                <img src="assets/images/logo-sm.png" alt="" height="22">
+            </span>
+            <span class="logo-lg">
+                <img src="assets/images/logo-dark.png" alt="" height="22">
+            </span>
+        </a>
+        <a routerLink="/" class="logo logo-light">
+            <span class="logo-sm">
+                <img src="assets/images/logo-sm.png" alt="" height="60">
+            </span>
+            <span class="logo-lg">
+                <img src="assets/images/logo-light.png" alt="" height="60">
+            </span>
+        </a>
+        <button type="button" class="btn btn-sm p-0 fs-3xl header-item float-end btn-vertical-sm-hover"
+            id="vertical-hover" (click)="toggleMobileMenu($event)">
+            <i class="ri-record-circle-line"></i>
+        </button>
+    </div>
+
+    <ngx-simplebar id="scrollbar" style="height: 100%;" data-simplebar-track="light"
+        class="h-100 simplebar-scrollable-y">
+        <div class="container-fluid">
+
+            <div id="two-column-menu">
+            </div>
+            <ul class="navbar-nav" id="navbar-nav">
+
+                @for(item of menuItems; track $index){
+                @if(item.isTitle){
+                <li class="menu-title"><span>{{ item.label | translate }}</span></li>
+                }@else {
+                <li class="nav-item">
+                    @if(hasItems(item)){
+                    <a href="javascript:void(0);" class="nav-link menu-link" data-bs-toggle="collapse"
+                        [ngClass]="{'has-arrow': !item.badge, 'has-dropdown': item.badge}" aria-expanded="false"
+                        (click)="toggleItem($event)" (click)="selectMenu2(item.label)">
+                        <i class="{{ item.icon }}"></i>
+                        <span> {{ item.label | translate }}</span>
+                        @if(item.badge){<span class="badge badge-pill bg-danger">{{item.badge | translate}}</span>}
+                    </a>
+                    <div class="collapse menu-dropdown mega-dropdown-menu">
+                        <ul class="nav nav-sm flex-column" aria-expanded="false">
+                            @for(subitem of item.subItems; track $index){
+                            <li class="nav-item">
+                                @if(hasItems(subitem)){
+                                <a class="nav-link" href="javascript:void(0);" [attr.data-parent]="subitem.parentId"
+                                    data-bs-toggle="collapse" aria-expanded="false" (click)="toggleSubItem($event)"
+                                    (click)="selectMenu3(item.label)">
+                                    {{ subitem.label | translate}}
+                                </a>
+                                <div class="collapse menu-dropdown sub-menu">
+                                    <ul class="nav nav-sm flex-column" aria-expanded="false">
+                                        @for(subSubitem of subitem.subItems; track $index){
+                                        <li class="nav-item">
+                                            @if(hasItems(subSubitem)){
+                                            <a class="nav-link" href="javascript:void(0);"
+                                                [attr.data-parent]="subSubitem.parentId" data-bs-toggle="collapse"
+                                                aria-expanded="false" (click)="toggleExtraSubItem($event)"
+                                                (click)="selectMenu4(item.label)">
+                                                {{ subSubitem.label | translate}}
+                                            </a>
+                                            <div class="collapse menu-dropdown extra-sub-menu">
+                                                <ul class="nav nav-sm flex-column" aria-expanded="false">
+                                                    @for(subSubitem1 of subSubitem.subItems; track $index){
+                                                    <li class="nav-item">
+                                                        <a [attr.data-parent]="subSubitem1.parentId"
+                                                            [routerLink]="subSubitem1.link" class="nav-link"
+                                                            (click)="updateActive($event)"
+                                                            (click)="selectMenu5(item.label)">
+                                                            {{ subSubitem1.label | translate }}
+                                                        </a>
+                                                    </li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                            }@else {
+                                            <a [routerLink]="subSubitem.link" class="nav-link"
+                                                [attr.data-parent]="subSubitem.parentId" (click)="updateActive($event)"
+                                                (click)="selectMenu6(item.label)" aria-expanded="false">
+                                                {{ subSubitem.label | translate}}
+                                            </a>
+                                            }
+                                        </li>
+                                        }
+                                    </ul>
+                                </div>
+                                }@else {
+                                <a [routerLink]="subitem.link" class="nav-link" [attr.data-parent]="subitem.parentId"
+                                    (click)="updateActive($event)" (click)="selectMenu(item.label)">
+                                    {{ subitem.label | translate}}
+                                </a>
+                                }
+                            </li>
+                            }
+                        </ul>
+                    </div>
+                    }@else {
+                    <a [routerLink]="item.link" class="side-nav-link-ref nav-link menu-link"
+                        (click)="toggleParentItem($event)" (click)="selectMenu7(item.label)">
+                        @if(item.icon){<i class="bx {{ item.icon }} icon nav-icon" class=""></i>}
+                        <span class=""> {{ item.label | translate }} </span>
+                        <span class="badge badge-pill bg-secondary">{{item.badge | translate}}</span>
+                    </a>
+                    }
+                </li>
+                }
+                }
+
+            </ul>
+        </div>
+        <!-- Sidebar -->
+    </ngx-simplebar>
+
+    <div class="sidebar-background"></div>
+</div>
+<!-- Left Sidebar End -->
+<!-- Vertical Overlay-->
+<div class="vertical-overlay" (click)="SidebarHide()"></div>
+<!-- <div>
+    <app-topbar></app-topbar>
+</div> -->
+<div>
+    <!-- center modal -->
+    <!-- <button type="button" class="btn btn-primary">Center Modal</button> -->
+    <div bsModal #center="bs-modal" class="modal fade bs-example-modal-center" tabindex="-1" role="dialog"
+        aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center p-5">
+                    <div class="mt-4">
+                        <h4 class="mb-3">You have multiple Roles</h4>
+                        <div class=" ">
+                            <label for="exampleInputPassword1" class="form-label">Select Role Name</label>
+                            <div class="input-group">
+                                <!-- <label class="input-group-text" for="inputGroupSelect01">Options</label> -->
+                                <select [(ngModel)]="roles" class="form-select mb-3"
+                                    aria-label="Default select example">
+                                    @for(role of roledata; track $index){
+                                    <option [value]="role.roleName">{{role.roleName}}</option>
+                                    <option value="" disabled selected style="display:none;">Select RoleName</option>
+
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="hstack gap-2 justify-content-center">
+                            <button type="button" class="btn btn-warning add-btn me-2" (click)="submitrole(roles)"
+                                [disabled]="!roles" [ngClass]="{'text-body-tertiary': !roles}">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+</div>
+
+
+
+
+
+
+
+<!-- side menu for Agent Role -->
+
+
+
+<!-- ========== App Menu ========== -->
+<div class="app-menu navbar-menu"
+    *ngIf="role || selectedrole === 'Agent' || role === 'Employee' || role === 'Manager' || role === 'Branch Manager'">
+    <!-- LOGO -->
+
+    <div class="navbar-brand-box">
+        <a routerLink="/" class="logo logo-dark">
+            <span class="logo-sm">
+                <img src="assets/images/logo-sm.png" alt="" height="22">
+            </span>
+            <span class="logo-lg">
+                <img src="assets/images/logo-dark.png" alt="" height="22">
+            </span>
+        </a>
+        <a routerLink="/" class="logo logo-light">
+            <span class="logo-sm">
+                <img src="assets/images/logo-sm.png" alt="" height="60">
+            </span>
+            <span class="logo-lg">
+                <img src="assets/images/logo-light.png" alt="" height="60">
+            </span>
+        </a>
+        <button type="button" class="btn btn-sm p-0 fs-3xl header-item float-end btn-vertical-sm-hover"
+            id="vertical-hover" (click)="toggleMobileMenu($event)">
+            <i class="ri-record-circle-line"></i>
+        </button>
+    </div>
+
+    <ngx-simplebar id="scrollbar" style="height: 100%;" data-simplebar-track="light"
+        class="h-100 simplebar-scrollable-y">
+        <div class="container-fluid">
+
+            <div id="two-column-menu">
+            </div>
+            <ul class="navbar-nav" id="navbar-nav">
+
+                @for(item of menuItems; track $index){
+                @if(item.isTitle){
+                <li class="menu-title"><span>{{ item.label | translate }}</span></li>
+                }@else {
+                <li class="nav-item">
+                    @if(hasItems(item)){
+                    <a href="javascript:void(0);" class="nav-link menu-link" data-bs-toggle="collapse"
+                        [ngClass]="{'has-arrow': !item.badge, 'has-dropdown': item.badge}" aria-expanded="false"
+                        (click)="toggleItem($event)">
+                        <i class="{{ item.icon }}"></i>
+                        <span> {{ item.label | translate }}</span>
+                        @if(item.badge){<span class="badge badge-pill bg-danger">{{item.badge | translate}}</span>}
+                    </a>
+                    <div class="collapse menu-dropdown mega-dropdown-menu">
+                        <ul class="nav nav-sm flex-column" aria-expanded="false">
+                            @for(subitem of item.subItems; track $index){
+                            <li class="nav-item">
+                                @if(hasItems(subitem)){
+                                <a class="nav-link" href="javascript:void(0);" [attr.data-parent]="subitem.parentId"
+                                    data-bs-toggle="collapse" aria-expanded="false" (click)="toggleSubItem($event)">
+                                    {{ subitem.label | translate}}
+                                </a>
+                                <div class="collapse menu-dropdown sub-menu">
+                                    <ul class="nav nav-sm flex-column" aria-expanded="false">
+                                        @for(subSubitem of subitem.subItems; track $index){
+                                        <li class="nav-item">
+                                            @if(hasItems(subSubitem)){
+                                            <a class="nav-link" href="javascript:void(0);"
+                                                [attr.data-parent]="subSubitem.parentId" data-bs-toggle="collapse"
+                                                aria-expanded="false" (click)="toggleExtraSubItem($event)">
+                                                {{ subSubitem.label | translate}}
+                                            </a>
+                                            <div class="collapse menu-dropdown extra-sub-menu">
+                                                <ul class="nav nav-sm flex-column" aria-expanded="false">
+                                                    @for(subSubitem1 of subSubitem.subItems; track $index){
+                                                    <li class="nav-item">
+                                                        <a [attr.data-parent]="subSubitem1.parentId"
+                                                            [routerLink]="subSubitem1.link" class="nav-link"
+                                                            (click)="updateActive($event)"
+                                                            (click)="selectMenu(subSubitem1.label1)">
+                                                            {{ subSubitem1.label | translate }}
+                                                        </a>
+                                                    </li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                            }@else {
+                                            <a [routerLink]="subSubitem.link" class="nav-link"
+                                                [attr.data-parent]="subSubitem.parentId" (click)="updateActive($event)"
+                                                (click)="selectMenu(subSubitem.label1)" aria-expanded="false">
+                                                {{ subSubitem.label | translate}}
+                                            </a>
+                                            }
+                                        </li>
+                                        }
+                                    </ul>
+                                </div>
+                                }@else {
+                                <a [routerLink]="subitem.link" class="nav-link" [attr.data-parent]="subitem.parentId"
+                                    (click)="updateActive($event)" (click)="selectMenu(subitem.label1)">
+                                    {{ subitem.label | translate}}
+                                </a>
+                                }
+                            </li>
+                            }
+                        </ul>
+                    </div>
+                    }@else {
+                    <a [routerLink]="item.link" class="side-nav-link-ref nav-link menu-link"
+                        (click)="toggleParentItem($event)" (click)="selectMenu(item.label)">
+                        @if(item.icon){<i class="bx {{ item.icon }} icon nav-icon" class=""></i>}
+                        <span class=""> {{ item.label | translate }} </span>
+                        <span class="badge badge-pill bg-secondary">{{item.badge | translate}}</span>
+                    </a>
+                    }
+                </li>
+                }
+                }
+
+            </ul>
+        </div>
+        <!-- Sidebar -->
+    </ngx-simplebar>
+
+    <div class="sidebar-background"></div>
+</div>
+<!-- Left Sidebar End -->
+<!-- Vertical Overlay-->
+<div class="vertical-overlay" (click)="SidebarHide()"></div>
+<!-- <div>
+    <app-topbar></app-topbar>
+</div> -->
+<div>
+    <!-- center modal -->
+    <!-- <button type="button" class="btn btn-primary">Center Modal</button> -->
+    <div bsModal #center="bs-modal" class="modal fade bs-example-modal-center" tabindex="-1" role="dialog"
+        aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center p-5">
+                    <div class="mt-4">
+                        <h4 class="mb-3">You have multiple Roles</h4>
+                        <div class=" ">
+                            <label for="exampleInputPassword1" class="form-label">Select Role Name</label>
+                            <div class="input-group">
+                                <!-- <label class="input-group-text" for="inputGroupSelect01">Options</label> -->
+                                <select [(ngModel)]="roles" class="form-select mb-3"
+                                    aria-label="Default select example">
+                                    @for(role of roledata; track $index){
+                                    <option [value]="role.roleName">{{role.roleName}}</option>
+                                    <option value="" disabled selected style="display:none;">Select RoleName</option>
+
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="hstack gap-2 justify-content-center">
+                            <button type="button" class="btn btn-warning add-btn me-2" (click)="submitrole(roles)"
+                                [disabled]="!roles" [ngClass]="{'text-body-tertiary': !roles}">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+</div>

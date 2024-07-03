@@ -1,0 +1,113 @@
+<div class="" tabindex="-1">
+    <div class="">
+        <div class="">
+            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+
+                <h4 class="mb-sm-0">Add Product</h4>
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item active">Chits</li>
+                        <li class="breadcrumb-item active" (click)="onCloseHandled()">
+                            <a role="button">Product</a>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+            <form [formGroup]="createProductForm">
+                <div class="row gy-2">
+                    <div class="col-md-6">
+                        <label for="exampleInputEmail1" class="form-label">Business Verticals</label>
+                        <input disabled type="text" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp" placeholder=" chit Fund" aria-placeholder="Chit Fund">
+                        <div id="emailHelp" class="form-text"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Name</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                            aria-placeholder="Chit Fund" formControlName="name">
+                        <div id="emailHelp" class="form-text"></div>
+                        <div *ngIf="submitted && createProductForm.get('name').invalid">
+                            <div *ngIf="createProductForm.get('name').errors.required" style="color: red;"> Name is
+                                required.
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" col-md-6">
+                        <label for="exampleInputPassword1" class="form-label">Chit value</label>
+                        <input type="number" class="form-control" id="exampleInputPassword1" placeholder=""
+                            formControlName="chitValue">
+                        <div *ngIf="submitted && createProductForm.get('chitValue').invalid">
+                            <div *ngIf="createProductForm.get('chitValue').errors.required" style="color: red;">
+                                ChitValue is
+                                required.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="exampleInputPassword1" class="form-label">Months</label>
+                        <input type="number" class="form-control" id="exampleInputPassword1" placeholder=""
+                            formControlName="durationMonths">
+                        <div *ngIf="submitted && createProductForm.get('tenureInMonths').invalid">
+                            <div *ngIf="createProductForm.get('tenureInMonths').errors.required" style="color: red;">
+                                TenureInMonths is
+                                required.
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-6">
+                        <label for="exampleInputPassword1" class="form-label">Min.Installment</label>
+                        <input type="number" class="form-control" placeholder="" formControlName="minInstallment">
+                        <div *ngIf="submitted && createProductForm.get('minInstallment').invalid">
+                            <div *ngIf="createProductForm.get('minInstallment').errors.required" style="color: red;">
+                                MinInstallment is
+                                required.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="exampleInputPassword1" class="form-label">Max.Installment</label>
+                        <input type="number" class="form-control" placeholder="" formControlName="maxInstallment">
+                        <div *ngIf="submitted && createProductForm.get('maxInstallment').invalid">
+                            <div *ngIf="createProductForm.get('maxInstallment').errors.required" style="color: red;">
+                                MaxInstallment is
+                                required.
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-6">
+                        <label for="exampleInputPassword1" class="form-label">Min.Bid payable</label>
+                        <input type="number" class="form-control" placeholder="" formControlName="minBidPayable">
+                        <div *ngIf="submitted && createProductForm.get('minBidPayable').invalid">
+                            <div *ngIf="createProductForm.get('minBidPayable').errors.required" style="color: red;">
+                                MinBidPayable is
+                                required.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="exampleInputPassword1" class="form-label">Max.Bid payable</label>
+                        <input type="number" class="form-control" placeholder="" formControlName="maxBidPayable">
+                        <div *ngIf="submitted && createProductForm.get('maxBidPayable').invalid">
+                            <div *ngIf="createProductForm.get('maxBidPayable').errors.required" style="color: red;">
+                                MaxBidPayable is
+                                required.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-2  justify-content-end">
+                        <button type="button" class="btn btn-danger" (click)="onCloseHandled()">Cancel</button>
+                        <button type="button" class="btn btn-success" (click)="saveProduct()">Save</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

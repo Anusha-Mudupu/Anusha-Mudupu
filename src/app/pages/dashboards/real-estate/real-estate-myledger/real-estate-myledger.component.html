@@ -1,0 +1,141 @@
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h2>Ledger
+              
+            </h2>
+           
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item active">Real Estate</li>
+                   
+                    <li class="breadcrumb-item active">Ledger</li>
+                </ol>
+              
+            </div>
+
+        </div>
+    </div>
+    
+</div>
+
+
+
+<!-- <div class="row" >
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+
+                    <li class="breadcrumb-item active text-primary">Real Estate</li>
+                    <li class="breadcrumb-item active">
+                        <a role="button" class="text-primary">Ledger</a>
+                    </li>
+
+
+                </ol>
+            </div>
+        </div>
+    </div>
+</div> -->
+<div >
+    <div class="row">
+        <div class="col-xl-6">
+            <h2>Group</h2>
+        </div>
+        <div class="col-xl-6">
+            <h2>TNO</h2>
+        </div>
+    </div>
+</div>
+<div class="card" >
+   
+    <div class="card-body" >
+       
+        <div class="table-responsive">
+
+            <table class="table  table-centered align-middle table-nowrap mb-0" id="sortable-table">
+                <thead class="text-muted table-light">
+                    <tr>
+
+                        <!-- <th scope="col" style="cursor:pointer">Group </th> -->
+                        <th scope="col" style="cursor:pointer">Transaction Date</th>
+                        <th scope="col" style="cursor:pointer">Transaction No.</th>
+                        <!-- <th scope="col" style="cursor:pointer">TNO</th> -->
+                        
+                        <th>Debit</th>
+                        <th>Credit</th>
+
+                    </tr>
+
+                </thead>
+                <tbody class="list form-check-all">
+
+                    @for (data of Subscribers; track $index) {
+                    <tr>
+
+                        <td>{{data.Group}}</td>
+                        <td>{{data.BusinessValue}}</td>
+                        <td>{{data.ChitFund}}</td>
+                        <td>{{data.TNO}}</td>
+                       
+
+
+                    </tr>
+                    }
+
+                </tbody>
+            </table>
+
+
+
+        </div>
+
+
+    </div>
+</div>
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Filter</h2>
+                <span class="close" aria-label="Close" (click)="onCloseHandled()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form>
+
+                    <div class="mb-3 ">
+                        <label for="exampleInputPassword1" class="form-label">Transaction No.</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1"
+                            placeholder="Enter Transaction No.">
+                    </div>
+                    <div class="mb-3 ">
+                        <label for="exampleInputPassword1" class="form-label">Transaction Date</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1"
+                            placeholder="Enter Transaction Date">
+                    </div>
+                    <div class="mb-3 ">
+                        <label for="exampleInputPassword1" class="form-label">Group</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Group">
+                    </div>
+                    <div class="mb-3 ">
+                        <label for="exampleInputPassword1" class="form-label">Date</label>
+                        <input type="date" class="form-control" id="exampleInputPassword1">
+                    </div>
+
+
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="submit" class="btn btn-primary">Save</button> -->
+                <!-- <button type="button" class="btn btn-default" (click)="onCloseHandled()">Close</button> -->
+                <button type="button" class="btn btn-success" (click)="onCloseHandled()">Apply</button>
+            </div>
+        </div>
+    </div>
+</div>
+

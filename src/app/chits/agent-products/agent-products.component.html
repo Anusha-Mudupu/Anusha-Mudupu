@@ -1,0 +1,257 @@
+<div class="row" *ngIf="showadminBredcrumbs">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4>Products</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item active">Chits</li>
+                    <li class="breadcrumb-item active">Master</li>
+                    <li class="breadcrumb-item active">Products</li>
+                </ol>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="col-sm" *ngIf="showAddButton">
+        <div class="d-flex justify-content-sm-end gap-2">
+
+            <button type="button" class="btn btn-success" id="create-btn" (click)="openModal()" data-toggle="tooltip"
+                data-placement="top" title="click Add"><i class="ri-add-line align-bottom me-1"></i>
+                Add</button>
+            <button class="btn btn-success" (click)="clearAllSearchFields()">Clear All</button>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12" *ngIf="showbreadcrumbs">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4>Products</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item active">Chits</li>
+
+                    <li class="breadcrumb-item active">Products</li>
+                </ol>
+
+            </div>
+           
+
+        </div>
+        <div class="col-sm">
+            <div class="d-flex justify-content-sm-end gap-2">
+                <button class="btn btn-success" (click)="clearAllSearchFields()">Clear All</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+<div class="container">
+
+    <div class="container">
+        <div class="row d-flex">
+
+            <!-- <div class="col" style="font-weight:normal; font-size: 25px;">
+                Products</div> -->
+            <!-- <div class=" col float-end">
+
+                <button type="button" class="btn btn-success add-btn" id="create-btn" (click)="openModal()"
+                    data-toggle="tooltip" data-placement="top" title="Add" style="color:black"><i
+                        class="ri-add-line align-bottom me-1"></i>
+                    Add</button>
+            </div> -->
+
+
+        </div>
+    </div>
+</div>
+<div class="container1">
+    <div class="row d-flex d-sm-flex mt-3 mb-2">
+        <div class="search-box  col-2">
+            <input type="text" class="form-control search" placeholder="Search With ChitValue"
+                [(ngModel)]="searchTermChitValue" (input)="filterLeads()">
+            <i class="ri-search-line search-icon"></i>
+        </div>
+        <div class="search-box  col-2">
+            <input type="text" class="form-control search" placeholder="Search With Duration"
+                [(ngModel)]="searchTermtenureInMonths" (input)="filterLeads()">
+            <i class="ri-search-line search-icon"></i>
+        </div>
+        <div class="search-box  col-2">
+            <input type="text" class="form-control search" placeholder="Search With With minInstallment"
+                [(ngModel)]="searchTermMinInstals" (input)="filterLeads()">
+            <i class="ri-search-line search-icon"></i>
+        </div>
+        <div class="search-box  col-2">
+            <input type="text" class="form-control search" placeholder="Search With maxInstallment"
+                [(ngModel)]="searchTermMaxInstall" (input)="filterLeads()">
+            <i class="ri-search-line search-icon"></i>
+        </div>
+        <div class="search-box  col-2">
+            <input type="text" class="form-control search" placeholder="Search With Min.Bid payable.."
+                [(ngModel)]="searchTermMinMBid" (input)="filterLeads()">
+            <i class="ri-search-line search-icon"></i>
+        </div>
+        <div class="search-box  col-2">
+            <input type="text" class="form-control search" placeholder="Search With Max.Bid payable.."
+                [(ngModel)]="searchTermMaxBid" (input)="filterLeads()">
+            <i class="ri-search-line search-icon"></i>
+        </div>
+
+    </div>
+
+
+    <table class="table table-striped" id="sortable-table">
+
+        <thead class="text-muted table-light">
+
+            <tr>
+
+                <th scope="col" (click)="sortTable('chitValue')" style="cursor:pointer">
+                    Chit Value (Rs)
+
+
+                    <span *ngIf="sortColumn === 'chitValue'">
+                        <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                        <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                    </span>
+                </th>
+                <th scope="col" (click)="sortTable('tenureInMonths')" style="cursor:pointer">
+                    Duration (Months)
+                    <span *ngIf="sortColumn === 'tenureInMonths'">
+                        <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                        <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                    </span>
+                </th>
+                <th scope="col" (click)="sortTable('minInstallment')" style="cursor:pointer">
+                    Min.Installment (Rs)
+                    <span *ngIf="sortColumn === 'minInstallment'">
+                        <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                        <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                    </span>
+                </th>
+
+                <th scope="col" (click)="sortTable('maxInstallment')" style="cursor:pointer">Max.Installment (Rs)</th>
+                <th scope="col" (click)="sortTable(5)">Min.Bid payable (Rs)</th>
+                <th scope="col" (click)="sortTable(6)">Max.Bid payable (Rs)</th>
+                <th *ngIf="showActions" scope="col">Actions</th>
+            </tr>
+        </thead>
+
+        <tbody style="position: relative;left:10px;">
+            @for (Products of sortedProductList; track $index) {
+            <tr>
+                <!-- <td>{{Products.name}}</td> -->
+                <td>{{Products.chitValue}}</td>
+                <td>{{Products.durationMonths}}</td>
+                <td>{{Products.minInstallment}}</td>
+                <td>{{Products.maxInstallment}}</td>
+                <td>{{Products.minBidPayable}}</td>
+                <td>{{Products.maxBidPayable}}</td>
+                <!-- <td class="d-flex gap-2">
+
+                    <button class="btn btn-sm btn-success edit-item-btn" title="Edit"
+                        (click)="EditProduct(Products.id)"><i class="bi bi-pen"></i></button>
+                    <button class="btn btn-sm btn-danger remove-item-btn" (click)="openDelete(Products.id) "
+                        title="Delete"><i style="margin-left:2px;" class="ri-delete-bin-2-line"></i></button>
+                </td> -->
+                <td *ngIf="showActions">
+
+                    <div class="dropdown">
+                        <button class="btn btn-subtle-secondary btn-sm dropdown-toggle" type="button"
+                            data-bs-toggle="dropdown">
+                            <i class="bi bi-three-dots-vertical"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" style="cursor: pointer;">
+
+                            <li style="cursor: pointer;">
+                                <a class="dropdown-item" href="javascript:void(0);" style="cursor: pointer;">
+
+                                    <p class="Add" (click)="EditProduct(Products.id)" style="cursor: pointer;">
+                                        Edit
+                                    </p>
+                                    <p class="edit" (click)="openDelete(Products.id) " style="cursor: pointer;">
+                                        Delete
+                                    </p>
+
+
+
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            }
+        </tbody>
+
+    </table>
+
+</div>
+
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"> Create Product</h4>
+                <span class="close" aria-label="Close" (click)="onCloseHandled()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Business Verticals</label>
+                        <input disabled type="text" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp" placeholder=" chit Fund" aria-placeholder="Chit Fund">
+                        <div id="emailHelp" class="form-text"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Chit value</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1"
+                            placeholder="Enter Chit value">
+                    </div>
+                    <div class="mb-3 ">
+                        <label for="exampleInputPassword1" class="form-label">Months</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Months">
+                    </div>
+                    <div class="row">
+                        <label for="exampleInputPassword1" class="form-label">Min.Installment</label>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Min.Installment">
+                        </div>
+                        <label for="exampleInputPassword1" class="form-label">Max.Installment</label>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Max.Installment">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label for="exampleInputPassword1" class="form-label">Min.Bid payable</label>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Min.Bid payable">
+                        </div>
+                        <label for="exampleInputPassword1" class="form-label">Max.Bid payable</label>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Max.Bid payable">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="submit" class="btn btn-primary">Save</button> -->
+                <button type="button" class="btn btn-danger" (click)="onCloseHandled()">Cancel</button>
+                <button type="button" class="btn btn-success" (click)="onCloseHandled()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

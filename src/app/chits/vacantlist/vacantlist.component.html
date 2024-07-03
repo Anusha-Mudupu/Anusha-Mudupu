@@ -1,0 +1,260 @@
+<!-- <div>
+    
+        <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="click Filter"
+            (click)="openModal()"><i class="fa fa-filter" aria-hidden="true"></i>Filter</button>
+   
+    <div class=" col float-end d-flex gap-2">
+        <i style="color:rgb(69, 43, 134)" class="bi bi-copy"></i><svg xmlns="http://www.w3.org/2000/svg" width="18"
+            height="18" fill="currentColor" class="bi bi-copy" viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z" />
+        </svg>
+
+        <i style="color:rgb(69, 43, 134)" class="bi bi-file-earmark-excel" width="18"
+        height="18"></i>
+        <i style="color:rgb(69, 43, 134)" class="bi bi-file-earmark-pdf" width="18"
+        height="18"></i>
+        <i style="color:rgb(69, 43, 134)" class="bi bi-file-earmark-text" width="18"
+        height="18"></i>
+        <i style="color:rgb(69, 43, 134)" class="bi bi-printer icon-hover" [print]="['print',config]" width="18"
+        height="18"></i>
+    </div>
+</div> -->
+
+<!-- 
+<div class="container" style="position:relative;top:-20px" id="print">
+    <p style="font-size: 20px;">Vacant Chits</p>
+   
+    @for (list of VaccantList; track $index) {
+    <div class="" style="background-color:white;
+      box-shadow: 1px 1px 1px 1px #888888; height: 100%; width:100%;top:40px; position: relative;">
+
+        <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-3">
+
+            <div class="col">
+                <div style="color: gray;">Branch Name</div>
+                <p style="font-weight: 150px;">{{list.BranchName }}</p>
+            </div>
+
+            <div class="col">
+                <div style="color: gray;">Chit Value</div>
+                <p>{{list.ChitValue }}</p>
+            </div>
+            <div class="col">
+                <div style="color: gray;">Chit Period</div>
+                <p>{{list.ChitPeriod}}</p>
+            </div>
+
+            <div class="col">
+                <div style="color: gray;">Subscription Amount</div>
+                <p>{{list.SubscriptionAmount}}</p>
+            </div>
+            <div class="col" style="position: relative; margin-top: -10px;">
+                <div style="color: gray;">Action Number</div>
+                <p>{{list.ActionNumber}}</p>
+            </div>
+            <div class="col" style="position: relative; margin-top: -10px;">
+                <div style="color: gray;">Vaccant Value</div>
+                <p>{{list.VaccantValue}}</p>
+            </div>
+            <div class="col" style="position: relative; margin-top: -10px;">
+                <div style="color: gray;">No.of Vaccant Tickets</div>
+                <p>{{list.NoofVaccantTickets}}</p>
+            </div>
+
+        </div>
+
+    </div>
+    <br>
+    }
+
+
+</div> -->
+
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4>Vacant Chits</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item active">Chits</li>
+                    <li class="breadcrumb-item active">Vacant Chits</li>
+                </ol>
+              
+            </div>
+
+        </div>
+    </div>
+    <div class="col-sm">
+        <div class="d-flex justify-content-sm-end gap-2">
+            <button class="btn btn-success" (click)="openModal()">Filter</button>
+            <i style="color:rgb(69, 43, 134)" class="bi bi-copy"></i><svg xmlns="http://www.w3.org/2000/svg"
+            width="18" height="18" fill="currentColor" class="bi bi-copy" viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z" />
+        </svg>
+
+        <i style="color:rgb(69, 43, 134)" class="bi bi-file-earmark-excel" width="18" height="18"></i>
+        <i style="color:rgb(69, 43, 134)" class="bi bi-file-earmark-pdf" width="18" height="18"></i>
+        <i style="color:rgb(69, 43, 134)" class="bi bi-file-earmark-text" width="18" height="18"></i>
+        <i style="color:rgb(69, 43, 134)" class="bi bi-printer icon-hover" [print]="['print',config]"
+            width="18" height="18"></i>
+
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+
+    </div>
+    <div class="container">
+        <div class="row row-cols-2 row-cols-lg-3">
+
+            <!-- <h1 style="font-size: 25px;">
+                Vacant Chits
+            </h1> -->
+            <div>
+<!-- 
+                <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
+                    title="click Filter" (click)="openModal()"><i class="fa fa-filter"
+                        aria-hidden="true"></i>Filter</button>
+
+                <div class=" col float-end d-flex gap-2">
+                    <i style="color:rgb(69, 43, 134)" class="bi bi-copy"></i><svg xmlns="http://www.w3.org/2000/svg"
+                        width="18" height="18" fill="currentColor" class="bi bi-copy" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z" />
+                    </svg>
+
+                    <i style="color:rgb(69, 43, 134)" class="bi bi-file-earmark-excel" width="18" height="18"></i>
+                    <i style="color:rgb(69, 43, 134)" class="bi bi-file-earmark-pdf" width="18" height="18"></i>
+                    <i style="color:rgb(69, 43, 134)" class="bi bi-file-earmark-text" width="18" height="18"></i>
+                    <i style="color:rgb(69, 43, 134)" class="bi bi-printer icon-hover" [print]="['print',config]"
+                        width="18" height="18"></i>
+                </div> -->
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+<div class="container" style="position: relative;top: -25px;">
+    <div class="row d-flex d-sm-flex mt-3 mb-2">
+
+
+    </div>
+    <table class="table table-striped" id="sortable-table">
+        <thead class="text-muted table-light">
+            <tr>
+
+                <th scope="col">Branch Name</th>
+                <th scope="col">Chit Value</th>
+                <th scope="col">Chit Period</th>
+                <th scope="col">Subscription Amount</th>
+                <th scope="col">Action Number</th>
+                <th scope="col">Vaccant Value</th>
+                <th scope="col">No.of Vaccant Tickets</th>
+            </tr>
+        </thead>
+
+
+        <tbody style="position: relative;left:10px;">
+            @for (list of VaccantList; track $index) {
+            <tr>
+                <td>{{list.BranchName }}</td>
+                <td>{{list.ChitValue}}</td>
+                <td>{{list.ChitPeriod}}</td>
+                <td>{{list.SubscriptionAmount}}</td>
+                <td>{{list.ActionNumber}}</td>
+                <td>{{list.VaccantValue}}</td>
+                <td>{{list.NoofVaccantTickets}}</td>
+
+
+
+
+
+
+
+            </tr>
+            }
+        </tbody>
+
+    </table>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Filter</h4>
+                <span class="close" aria-label="Close" (click)="onCloseHandled()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Chit Value</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                            placeholder="Enter Chit Value" aria-placeholder="Enter Chit value">
+                        <div id="emailHelp" class="form-text"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Chit Period</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1"
+                            placeholder="Enter Chit Period">
+                    </div>
+                    <div class="mb-3 ">
+                        <label for="exampleInputPassword1" class="form-label">Monthly Subscription Amount</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1"
+                            placeholder="Enter Subscription Amount">
+                    </div>
+                    <div class="row">
+                        <label for="exampleInputPassword1" class="form-label">Action Number</label>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Min">
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Max">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label for="exampleInputPassword1" class="form-label">Vacant Value</label>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Min">
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Max">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-success" (click)="onCloseHandled()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

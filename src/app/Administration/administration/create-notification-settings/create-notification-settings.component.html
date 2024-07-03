@@ -1,0 +1,132 @@
+  <div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h2>Create Notification Settings</h2>
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+
+                    <li class="breadcrumb-item active" (click)="goBack()">Notification Settings</li>
+                    <li class="breadcrumb-item active">
+                        <a role="button" >Create Notification Settings</a>
+                    </li>
+
+
+                </ol>
+            </div>
+           
+
+
+
+        </div>
+    </div>
+</div>
+<div class="card">
+
+    <div class="card-body">
+
+        <form [formGroup]="createNotificationForm">
+            <div class="row">
+                <div class="col">
+                    <label for="exampleInputPassword1" class="form-label">Id</label>
+                    <input type="text" class="form-control" formControlName="id">
+                </div>
+                <div class="col">
+                    <label for="exampleInputPassword1" class="form-label">Name</label>
+                    <input type="text" class="form-control"  formControlName="name">
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col">
+                    <label for="exampleInputPassword1" class="form-label">Description</label>
+                    <input type="text" class="form-control" 
+                        formControlName="description">
+                </div>
+                <div class="col">
+                    <label for="exampleInputPassword1" class="form-label">BaseUrl</label>
+                    <input type="text" class="form-control" 
+                        formControlName="baseUrl">
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col">
+                    <label for="exampleInputPassword1" class="form-label">From</label>
+                    <input type="text" class="form-control"  formControlName="from">
+                </div>
+                <div class="col">
+                    <label for="exampleInputPassword1" class="form-label">Api</label>
+                    <input type="text" class="form-control"  formControlName="api">
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col">
+                    <label for="exampleInputPassword1" class="form-label">NoticationSettingType</label>
+                    <input type="text" class="form-control" 
+                        formControlName="noticationSettingType">
+                </div>
+                <div class="col">
+                    <label for="exampleInputPassword1" class="form-label">AppName</label>
+                    <input type="text" class="form-control" 
+                        formControlName="appName">
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col">
+                    <label for="exampleInputPassword1" class="form-label">ApiKey</label>
+                    <input type="text" class="form-control" 
+                        formControlName="apiKey">
+                </div>
+                <div class="col">
+                    <label for="exampleInputPassword1" class="form-label">VerticalId</label>
+                    <input type="text" class="form-control" 
+                        formControlName="verticalId">
+                </div>
+                <!-- <div class="col">
+                    <label for="exampleInputPassword1" class="form-label">loginUserId</label>
+                    <input type="text" class="form-control" 
+                        formControlName="loginUserId">
+                </div> -->
+            </div> 
+            <div class="row">
+
+                <div class="col">
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input type="text" class="form-control" 
+                        formControlName="password">
+                </div>
+                <!-- <div class="col">
+                    <label for="exampleInputPassword1" class="form-label">active</label>
+                    <input type="text" class="form-control" 
+                        formControlName="active">
+                </div> -->
+                <div class="col">
+                    <label for="exampleInputPassword1" class="form-label">UserName</label>
+                    <input type="text" class="form-control" 
+                        formControlName="userName">
+                </div>
+            </div>
+            <div class="row">
+
+                <!-- <div class="col">
+                    <label for="exampleInputPassword1" class="form-label">method</label>
+                    <input type="text" class="form-control" 
+                        formControlName="method">
+                </div> -->
+                <!-- <div class="col">
+                    <label for="exampleInputPassword1" class="form-label">userName</label>
+                    <input type="text" class="form-control" 
+                        formControlName="userName">
+                </div> -->
+               
+            </div>
+        </form>
+    </div>
+    <div class="card-footer float-end gap-2">
+        <button type="button" class="btn btn-success" (click)="onSubmit()">Save</button>
+        <button type="button" class="btn btn-danger" (click)="goBack()"> Cancel</button>
+    </div>
+</div>

@@ -1,0 +1,423 @@
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+
+                    <li class="breadcrumb-item active text-primary" (click)="navigateTo()">Administration</li>
+                    <li class="breadcrumb-item active">
+                        <a role="button" class="text-primary"> Edit My Campaign </a>
+                    </li>
+
+
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="">
+        <div class="card">
+            <div class="card-body">
+                <form [formGroup]="updateMycampaignsForm">
+                    <tabset class="nav nav-pills nav-success mb-3" role="tablist">
+                        <tab heading="Campaign Details" class="nav-item ">
+                            <br>
+                            <div class="card">
+                                <div class="row d-flex">
+                                    <div class="col" hidden>
+                                        <label for="name" class="form-label">id</label>
+                                        <input hidden type="text" class="form-control" id="name"
+                                            placeholder="{{getByIdCampaign.name}}" formControlName="id"
+                                            [(ngModel)]="getByIdCampaign.id" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="name" class="form-label">Campaign Name</label>
+                                        <input type="text" class="form-control" id="name"
+                                            placeholder="{{getByIdCampaign.name}}" formControlName="name"
+                                            [(ngModel)]="getByIdCampaign.name" />
+                                    </div>
+                                    <div class="col">
+                                        <label for="startDate" class="form-label">From Date</label>
+                                        <input type="text" formControlName="startDate"
+                                            [(ngModel)]="getByIdCampaign.startDate" class="form-control">
+                                        </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="endDate" class="form-label">To Date</label>
+                                        <input type="text" formControlName="endDate"
+                                            [(ngModel)]="getByIdCampaign.endDate" class="form-control">
+                                    </div>
+                                    <div class="col">
+                                        <label for="exampleInputPassword1" class="form-label">Status</label>
+                                        <select class="form-select" formControlName="status"
+                                            aria-label="Default select example">
+                                            <option value="" disabled selected>Select Status
+                                            </option>
+                                            <ng-container *ngFor="let status of  campaignTypelookupConstants">
+                                                <option [value]="status.value">
+                                                    {{status.constantName}}</option>
+                                            </ng-container>
+                                        </select>
+                                    </div>
+                                </div>
+                             </div>
+                        </tab>
+                        <tab heading="Camapaign Content" class="nav-item ">
+                            <div class="tab-pane mt-3" id="profile-1" role="tabpanel">
+                                <div class="d-flex mt-2">
+
+                                    <div class="flex-grow-1 ms-2">
+                                        <tabset class="mb-3">
+                                            <!-- <tab heading="Notification" class="nav-item"> -->
+                                            <tabset class="mb-3">
+
+                                                <tab heading="WhatsApp" class="nav-item">
+
+                                                    <div class="tab-pane mt-3" id="home" role="tabpanel">
+                                                        <div class="row align-items-start">
+                                                            <div class="card">
+                                                                <div class="mt-2">
+                                                                    <ckeditor [editor]="Editor" data=""
+                                                                        formControlName="whatsappMessage"  [(ngModel)]="getByIdCampaign.whatsappMessage">
+                                                                    </ckeditor>
+                                                                    <!-- <button type="submit"
+                                                                            class="btn btn-success float-end mt-2">Save</button> -->
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </tab>
+
+                                                <tab heading="Sms" class="nav-item">
+
+                                                    <div class="tab-pane mt-3" id="product1" role="tabpanel">
+                                                        <div class="row align-items-start">
+                                                            <div class="card">
+                                                                <div class="mt-2">
+                                                                    <ckeditor [editor]="Editor" data="" formControlName="smsMessage" [(ngModel)]="getByIdCampaign.smsMessage"></ckeditor>
+                                                                    <!-- <button type="submit"
+                                                                            class="btn btn-success float-end mt-2">Save</button>
+                                                                    </div> -->
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </tab>
+
+                                                <tab heading="E-mail" class="nav-item">
+
+                                                    <div class="tab-pane mt-3" id="product11" role="tabpanel">
+                                                        <div class="row align-items-start">
+                                                            <div class="card">
+                                                                <div class="mt-2">
+                                                                    <ckeditor [editor]="Editor" data=""
+                                                                        formControlName="emailMessage" [(ngModel)]="getByIdCampaign.emailMessage">
+                                                                    </ckeditor>
+                                                                    <!-- <button type="submit"
+                                                                            class="btn btn-success float-end mt-2">Save</button>
+                                                                    </div> -->
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </tab>
+                                            </tabset>
+                                            <!-- </tab> -->
+                                        </tabset>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </tab>
+                    </tabset>
+                    <div class="float-end">
+                        <button type="submit" class="btn btn-success" (click)="Submit()">Save</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="">
+         <div class="card">
+            <div class="card-body">
+                <tabset class="nav nav-pills nav-success mb-3" role="tablist">
+                    <tab heading="Media Details" class="nav-item ">
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-header bg-transparent border-success"
+                                        style="font-weight: bold; font-size: 18px;">Media
+                                        Details
+                                    </div>
+                                    <form class="tablelist-form">
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table class="table align-middle table-nowrap" id="customerTable"
+                                                    id="sortable-table">
+                                                    <thead class="table-light">
+                                                        <tr>
+                                                            <th scope="col" (click)="sortTable('fromDt')"
+                                                                style="cursor:pointer">
+                                                                Media Type
+                                                            </th>
+                                                            <th scope="col" (click)="sortTable('todt')"
+                                                                style="cursor:pointer">
+                                                                Name
+                                                            </th>
+                                                            <th scope="col" (click)="sortTable('todt')"
+                                                                style="cursor:pointer">
+                                                                File Path
+                                                            </th>
+                                                            <th scope="col" (click)="sortTable('todt')"
+                                                                style="cursor:pointer">
+                                                                File Size</th>
+                                                            <th scope="col" (click)="sortTable('todt')"
+                                                                style="cursor:pointer">
+                                                                Status</th>
+                                                            <th class="col">Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="list form-check-all">
+                                                        @for (data of matchedMedia; track $index) {
+                                                        <tr>
+                                                            <!-- <td></td> -->
+                                                            <td>{{data.mediaType}}</td>
+                                                            <td>{{data.name}}</td>
+                                                            <td>{{data.filePath}}</td>
+                                                            <td>{{getStatusDescription(data.status)}}</td>
+                                                            <td></td>
+                                                            <td>
+                                                                <div class="dropdown">
+                                                                    <button
+                                                                        class="btn btn-subtle-secondary btn-sm dropdown-toggle"
+                                                                        data-bs-toggle="dropdown">
+                                                                        <i class="bi bi-three-dots-vertical"></i>
+                                                                    </button>
+                                                                     <ul class="dropdown-menu dropdown-menu-end">
+                                                                        <li><a class="dropdown-item edit-item-btn"><i
+                                                                                    class="bi bi-download"></i>
+                                                                                Download</a></li>
+                                                                        <li><a (click)="editForm(data.campaignId,data.id)"class="dropdown-item edit-item-btn"><i
+                                                                                    class="ph-pencil align-middle me-1"></i>
+                                                                                Edit</a></li>
+                                                                        <li><a (click)="deleteMyCampaign(data.campaignId,data.id)"class="dropdown-item remove-item-btn"
+                                                                                href="javascript:void(0);"><i
+                                                                                    class="ph-trash align-middle me-1"></i>
+                                                                                Remove</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        }
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <accordion [closeOthers]="true"
+                                    class="accordion custom-accordionwithicon custom-accordion-border accordion-border-box accordion-success"
+                                    id="accordionBordered">
+                                    <accordion-group class="accordion-item" [isOpen]="isFirstOpen">
+                                        <h2 accordion-heading class="accordion-header" id="accordionborderedExample1">
+                                            <button class="accordion-button" type="button">
+                                                Add Media
+                                            </button>
+                                        </h2>
+                                        <div id="accor_borderedExamplecollapse1"
+                                            class="accordion-collapse collapse show">
+                                            <form action="upload.php" method="post" enctype="multipart/form-data"
+                                                [formGroup]="addMediaForm">
+                                                <div class=" row d-flex ">
+                                                    <div class="mb-2 col-5">
+                                                        <label for="mediaType" class="form-label">Media Type</label>
+                                                        <select formControlName="mediaType" id="mediaType"
+                                                            class="form-select mb-3" aria-label="Select Media Type">
+                                                            <option value="" disabled selected style="display:none;">
+                                                                Select Media Type
+                                                            </option>
+                                                            <option *ngFor="let type of MediaTypeenumConstants" [value]="type.description">
+                                                                {{type.description }}</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="mb-2 col-5">
+                                                        <label for="mediaType" class="form-label">Media Name</label>
+                                                        <input type="text" class="form-control" formControlName="name">
+                                                    </div>
+
+                                                    <div class="mb-2 col-5">
+                                                        <label for="exampleInputPassword1" class="form-label">Status</label>
+                                                        <select class="form-select" formControlName="status"
+                                                            aria-label="Default select example">
+                                                            <option value="" disabled selected>Select Status
+                                                            </option>
+                                                            <ng-container *ngFor="let status of  campaignTypelookupConstants">
+                                                                <option [value]="status.value">
+                                                                    {{status.constantName}}</option>
+                                                            </ng-container>
+                                                        </select>
+                                                    </div>
+                                                     <div class="mb-2 col-5">
+                                                        <label for="mediaType" class="form-label">Select Media
+                                                            File</label>
+                                                        <input type="file" class="form-control"
+                                                            formControlName="filePath">
+                                                    </div>
+                                                    <div class="mb-2 col-5">
+                                                        <label for="mediaType" class="form-label">Select File Size</label>
+                                                        <input type="number" class="form-control"
+                                                            formControlName="size">
+                                                    </div>
+                                                    <div class="float-end" id="button">
+                                                        <button type="submit" class="btn btn-success float-end"
+                                                            (click)="uploadFiles()">Upload Files</button>
+                                                    </div>
+                                                </div>
+                                             </form>
+                                        </div>
+                                    </accordion-group>
+                                </accordion>
+                            </div>
+                        </div>
+                    </tab>
+                    <tab heading="Recipients" class="nav-item ">
+                        <div class="tab-pane mt-3" id="profile-1" role="tabpanel">
+                            <form [formGroup]="editContentForm" (ngSubmit)="onSubmit()">
+                                <div class="tab-pane active mt-3" id="product11" role="tabpanel">
+                                    <div class="row align-items-start ">
+
+                                        <table class="table align-middle table-nowrap" id="customerTable"
+                                            id="sortable-table">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                value="option" [(ngModel)]="masterSelected"
+                                                                (change)="checkUncheckAll($event)" id="checkAll">
+                                                            <label class="form-check-label" for="checkAll"></label>
+                                                        </div>
+                                                    </th>
+
+                                                    <th scope="col" (click)="sortTable('name')" style="cursor:pointer">
+                                                        Name</th>
+                                                    <th scope="col" (click)="sortTable('fromDt')"
+                                                        style="cursor:pointer">
+                                                        Phone Number </th>
+                                                    <th scope="col" (click)="sortTable('todt')" style="cursor:pointer">
+                                                        E-Mail
+
+                                                    </th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody class="list form-check-all">
+
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                    </tab>
+
+                </tabset>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="float-end">
+    <button type="button" class="btn btn-primary"> Run Camapaign</button>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display2}" id="dltModel">
+    <div class="modal-dialog" role="document" style="position: relative;top:150px;">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <span style="font-weight:bolder;margin-left:150px;font-size:18px;">Edit Media Details</span>
+                <span class="close" aria-label="Close" (click)="closeEditForm()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <hr>
+            <div class="modal-body">
+
+                <form [formGroup]="updateMediaForm">
+                    <div class=" row d-flex ">
+
+                        <div class="mb-2 col-5">
+                            <label for="mediaType" class="form-label">Media Type</label>
+                            <select formControlName="mediaType" id="mediaType"
+                                class="form-select mb-3" aria-label="Select Media Type">
+                                <option value="" disabled selected style="display:none;">
+                                    Select Media Type
+                                </option>
+                                <option *ngFor="let type of MediaTypeenumConstants " [value]="type.constantName">
+                                    {{
+                                    type.constantName }}</option>
+                            </select>
+                        </div>
+                        <div class="mb-2 col-5">
+                            <label for="mediaType" class="form-label">Media Name</label>
+                            <input type="text" class="form-control"  formControlName="name">
+                        </div>
+
+                        <div class="mb-2 col-5">
+                            <label for="exampleInputPassword1"
+                                class="form-label">Status</label>
+                            <select class="form-select" aria-label="Default select example" formControlName="status">
+                                <option value="" disabled selected>Select Status
+                                </option>
+                                <ng-container
+                                    *ngFor="let status of  campaignTypelookupConstants">
+                                    <option [value]="status.value">
+                                        {{status.constantName}}</option>
+                                </ng-container>
+                            </select>
+                        </div>
+
+
+                        <div class="mb-2 col-5">
+                            <label for="mediaType" class="form-label">Select Media
+                                File</label>
+                            <input type="file" class="form-control"
+                                formControlName="filePath" >
+                        </div>
+                        
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" (click)="SubmitMediaForm()">Save</button>
+                <button type="button" class="btn btn-danger" (click)="closeEditForm()"> Cancel</button>
+            </div>
+        </div>
+    </div>
+
+</div>

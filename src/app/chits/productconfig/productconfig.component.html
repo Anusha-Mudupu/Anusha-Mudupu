@@ -1,0 +1,193 @@
+<div class="container">
+    <div class="row">
+
+    </div>
+    <div class="container">
+        <div class="row row-cols-2 row-cols-lg-3">
+
+            <div style="font-weight:normal; font-size: 25px;">
+                Product Config</div>
+
+            <div class="col-4 col-lg-1" style="left:350px;position:relative">
+                <input type="search" [(ngModel)]="searchText"
+                    style="position: relative; top:10px;width:225px; left: -130px;" placeholder="Search Product">
+            </div>
+            <div class="col-4 col-lg-1" style="left:480px;position:relative">
+                <button type="button" data-toggle="tooltip" data-placement="top" title="click Search"
+                    class="btn btn-success"
+                    style="left:-110px;width:85px; position: relative;padding-top: 4px; top:10px;border-radius: 5px;; height: 30px;  color: white; font-weight: bold; padding-left:25px;">
+                    Search<i class="bi bi-search"
+                        style="position: relative; top:-19px ; left:-25px;font-weight: bold;font-size: 13px;"></i>
+                </button>
+                <button (click)="openModal()" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="click Add"
+                    style="left:-20px;width: 70px; position: relative; top:-19px;border-radius: 5px;; height: 30px; padding-top: 4px; color: white; font-weight: bold;">+ADD</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="container" style="background-color:white;
+box-shadow: 1px 1px 1px 1px #888888; height: 100%; width:100%; position: relative;">
+    <table class="table" id="sortable-table">
+
+        <thead style="background-color: whitesmoke;">
+            <tr>
+                <!-- "category" is replaced to "business unit" -->
+                <!-- <th scope="col">Business Vertical</th> -->
+                <!-- <th scope="col">Type</th> -->
+                <th scope="col" style="position: relative;left:10px"(click)="sortTable(0)">Product<i class="fa-solid fa-sort"></i></th>
+                <th scope="col" style="position: relative;left:10px"(click)="sortTable(1)">Value<i class="fa-solid fa-sort"></i></th>
+                <th scope="col"(click)="sortTable(2)">Tenure<i class="fa-solid fa-sort"></i></th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        @for (Product of Products | paginate: { itemsPerPage: tableSize, currentPage:
+            page,
+            totalItems: count };
+            track $index)  {
+        <tbody style="position: relative;left:10px;">
+            <tr>
+                <!-- <td>{{Product.BusinessVertical}}</td> -->
+                <!-- <td>{{Product.Type}}</td> -->
+                <td>{{Product.Product}}</td>
+                <td>{{Product.Value}}</td>
+                <td>{{Product.Tenure}}</td>
+                <td>
+                    <i class="bi bi-pen" style="color:gray" (click)="EditModal()" data-toggle="tooltip" data-placement="top" title="click Edit"></i>
+                    <i class="bi bi-trash3" style="color:red;cursor: pointer;" (click)="openDelete()" data-toggle="tooltip" data-placement="top" title="click Delete"></i>
+                </td>
+
+            </tr>
+        </tbody>
+        }
+
+    </table>
+    <div class="col-sm-auto mt-3 mt-sm-0">
+        <i style="font-size:16px;color:navy;position: relative;left:10px;top:20px" class="fa">&#xf021;</i>
+
+        <pagination-controls previousLabel="prev" nextLabel="next" (pageChange)="onTableDataChange($event)">
+
+        </pagination-controls>
+    </div>
+
+</div>
+
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"> Create Product Config</h4>
+                <span class="close" aria-label="Close" (click)="onCloseHandled()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Business Vertical</label>
+                        <input disabled type="text" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp" placeholder="Enter chit Fund"
+                            aria-placeholder="Enter Business Vertical">
+                        <div id="emailHelp" class="form-text"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Type</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Type">
+                    </div>
+                    <div class="mb-3 ">
+                        <label for="exampleInputPassword1" class="form-label">Product</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Product">
+                    </div>
+                    <div class="mb-3 ">
+                        <label for="exampleInputPassword1" class="form-label">Value</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Value">
+                    </div>
+                    <div class="mb-3 ">
+                        <label for="exampleInputPassword1" class="form-label">Tenure</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Tenure">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+                <button type="button" class="btn btn-danger" (click)="onCloseHandled()">Cancel</button>
+                <button type="button" class="btn btn-success" (click)="onCloseHandled()">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display1}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"> Edit Product Config</h4>
+                <span class="close" aria-label="Close" (click)="onCloseHandled1()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Business Vertical</label>
+                        <input disabled type="text" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp" placeholder="Enter chit Fund"
+                            aria-placeholder="Enter Business Vertical">
+                        <div id="emailHelp" class="form-text"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Type</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Type">
+                    </div>
+                    <div class="mb-3 ">
+                        <label for="exampleInputPassword1" class="form-label">Product</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Product">
+                    </div>
+                    <div class="mb-3 ">
+                        <label for="exampleInputPassword1" class="form-label">Value</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Value">
+                    </div>
+                    <div class="mb-3 ">
+                        <label for="exampleInputPassword1" class="form-label">Tenure</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Tenure">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+                <button type="button" class="btn btn-danger" (click)="onCloseHandled()">Cancel</button>
+                <button type="button" class="btn btn-success" (click)="onCloseHandled()">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display2}" id="dltModel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <span style="font-weight: bold;margin-left: 130px;"> Do you want to delete record?</span>
+                <span class="close" aria-label="Close" (click)="onClosed()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <hr>
+            <div class="modal-body">
+
+                <form>
+                    <div class="row" id="fields">
+                        <div class="col">
+
+
+                        </div>
+
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="onClosed()">Cancel</button>
+                <button type="button" class="btn btn-success" (click)="onClosed()">OK</button>
+               
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,214 @@
+<!-- <div class="card" id="propertyList">
+
+    <div class="card-body">
+        <div class="table-responsive">
+            <div class="card-body">
+
+                <div>
+                    <h2 for="productTitle" class="form-label">Permission For
+                        &nbsp;{{userId.lastName}}.{{userId.firstName}}
+
+                    </h2>
+
+                </div>
+
+                <div>
+                    <div class="font-weight-bold"><strong>Permissions</strong></div>
+                    <div class="row mt-1">
+                        <div class="col-sm-12">
+                            <form [formGroup]="rolesform">
+                                <table class="table table-bordered table-responsive">
+                                    <thead>
+
+
+                                    </thead>
+                                    <tbody id="rows">
+
+                                        @for (item of usersdata; track $index) {
+                                        <tr>
+                                            <td>
+                                                {{item.name}}
+                                            </td>
+
+                                            <div *ngIf="item.id==1;then content else other_content">
+                                            </div>
+                                            <ng-template #content> @for(ChitsRoles of ChitsRole; track $index){
+                                                <td> {{ChitsRoles.roleName}}
+
+                                                    <div class="form-check form-switch mb-3" dir="ltr">
+                                                        <div class="form-check form-switch mb-3" dir="ltr">
+                                                            <input type="checkbox" class="form-check-input"
+                                                                id="customSwitchsizesm">
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                }
+                                            </ng-template>
+                                            <ng-template #other_content>
+                                                @for(realEstateRoles of realEstateRole; track $index){
+                                                <td> {{realEstateRoles.roleName}}
+                                                    <div class="form-check form-switch mb-3" dir="ltr">
+                                                        <input (change)="updatecreate(realEstateRoles.roleName, $event)"
+                                                            type="checkbox" class="form-check-input"
+                                                            id="customSwitchsizesm">
+                                                    </div>
+                                                </td>
+                                                }
+                                            </ng-template>
+
+
+
+                                        </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+
+    <div class="hstack gap-2 justify-content-end">
+        <button type="button" class="btn btn-danger" (click)="cancel()" id="cancel">Cancel</button>
+        <button type="Save" class="btn btn-success" id="add-btn" (click)="addrole()">
+            Save</button>
+
+    </div>
+
+</div> -->
+
+
+
+
+<!-- 
+<label for="exampleInputPassword1" class="form-label">Business Vertical</label>
+<div class="input-group">
+    <select formControlName="TeamMember" class="form-select mb-3" aria-label="Default select example"
+        style="cursor: pointer" (change)="onChange($event)">
+        
+        <option value="Chits">Chits</option>
+        <option value="Real-Estate">Real-Estate</option>
+    </select>
+</div> -->
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div>
+                <h2 for="productTitle" class="form-label"> Roles Permissions for :
+                    &nbsp;{{userId.lastName}}.{{userId.firstName}}
+
+                </h2>
+
+            </div>
+            <h2 for="exampleInputPassword1" class="form-label">Business Verticals</h2>
+            <div class="input-group" style="width: 150px;">
+                <select formControlName="Business Vertical" class="form-select mb-3" aria-label="Default select example"
+                    style="cursor: pointer; position: relative;top:-10px;" (change)="onChange($event)"
+                    [value]="selectedVertical">
+
+                    <option value="Chits">Chits</option>
+                    <option value="Real-Estate">Real-Estate</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div *ngIf="selectedVertical === 'Chits'">
+
+    <div class="container">
+        <div>
+
+            <div>
+
+
+
+                <div class="image-item" class="row" id="dfcv">
+
+                    <div class="col-lg-3 col-md-12 mb-4 mb-lg-0" *ngFor="let ChitsRoles of ChitsRole" id="dfcv">
+
+
+                        <div style="position: relative; "> {{ChitsRoles.roleName}}
+
+
+                            <div class="form-check form-switch mb-3" dir="ltr">
+                                <input type="checkbox" class="form-check-input" id="customSwitchsizesm" (change)="updatecreate(ChitsRoles.roleName, $event)">
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+
+
+
+
+
+                </div>
+                <div>
+                    <div class="hstack gap-2 justify-content-end" style="position: relative; top:30px">
+                        <button type="button" class="btn btn-danger" (click)="cancel()" id="cancel">Cancel</button>
+                        <button type="Save" class="btn btn-success" id="add-btn" (click)="addrole()">
+                            Save</button>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div *ngIf="selectedVertical === 'Real-Estate'">
+
+    <div class="card-container">
+        <div>
+            <div>
+
+
+
+
+                <div class="image-item" class="row" id="dfcv">
+
+
+                    <div class="col-lg-4 col-md-12 mb-4 mb-lg-0" *ngFor="let realEstateRoles of realEstateRole"
+                        id="dfcv">
+                        <div> {{realEstateRoles.roleName}}
+                            <div class="form-check form-switch mb-3" dir="ltr">
+                                <input (change)="updatecreate(realEstateRoles.roleName, $event)" type="checkbox"
+                                    class="form-check-input" id="customSwitchsizesm">
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+                <div>
+                    <div class="hstack gap-2 justify-content-end" style="position: relative; top:30px">
+                        <button type="button" class="btn btn-danger" (click)="cancel()" id="cancel">Cancel</button>
+                        <button type="Save" class="btn btn-success" id="add-btn" (click)="addrole()">
+                            Save</button>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

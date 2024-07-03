@@ -1,0 +1,387 @@
+<!-- <form [formGroup]="updateUserForm">
+    <div>
+        <div class="row">
+            <div class="col">
+                <label for="exampleInputPassword1" class="form-label">First Name</label>
+                <input type="text" class="form-control" [(ngModel)]="userId.firstName"
+                    placeholder="{{userId.firstName}}" formControlName="firstName">
+
+                <div class="col">
+
+                    <input hidden type="text" class="form-control" [(ngModel)]="userId.id" placeholder="{{userId.id}}"
+                        formControlName="id">
+                </div>
+
+
+            </div>
+            <br>
+            <div class="row">
+
+                <div class="col">
+                    <label for="exampleInputPassword1" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" [(ngModel)]="userId.lastName"
+                        placeholder="{{userId.lastName}}" formControlName="lastName">
+
+                </div>
+
+            </div>
+            <div class="col">
+                <label for="exampleInputPassword1" class="form-label">Phone Number</label>
+                <input type="text" class="form-control" [(ngModel)]="userId.phoneNumber"
+                    placeholder="{{userId.phoneNumber}}" formControlName="phoneNumber">
+
+            </div>
+
+        </div>
+    </div>
+    <br>
+    <div class="row">
+
+        <div class="col">
+            <label for="exampleInputPassword1" class="form-label">Email</label>
+            <input type="email" class="form-control" placeholder="Role" [(ngModel)]="userId.email"
+                placeholder="{{userId.email}}" formControlName="email">
+
+        </div>
+
+
+    </div>
+
+
+    <br>
+    <label for="exampleInputPassword1" class="form-label">Branch Id</label>
+    <div class="col">
+        <input type="text" class="form-control" placeholder="branchId" formControlName="branchId"
+            [(ngModel)]="userId.branchId" placeholder="{{userId.branchId}}">
+    </div>
+    <div class="row">
+
+        <div class="col">
+            <label for="exampleInputPassword1" class="form-label">Password</label> -->
+<!-- <input hidden="password" class="form-control" formControlName="password" [(ngModel)]="userId.password"
+                placeholder="{{userId.password}}">
+        </div>
+
+
+    </div>
+    <br>
+    <div class="row">
+
+        <div class="col">
+
+            <label for="exampleInputPassword1" class="form-label">Code</label>
+            <input type="test" class="form-control" formControlName="branchName" [(ngModel)]="userId.code"
+                placeholder="{{userId.code}}">
+        </div>
+
+
+    </div>
+    <br>
+    <button type="button" class="btn btn-success" (click)="onSubmit()">Submit</button>
+
+
+</form> -->
+
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0">Update User</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+
+
+                    <li class="breadcrumb-item active" >Chits</li>
+                    <li class="breadcrumb-item active"  (click)="user()">User</li>
+
+                </ol>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h2>Update User</h2>
+            </div>
+            <div class="card-body">
+                <div class="row">
+
+                    <div class="col-xxl-8">
+                        <form style="position: relative; top:-40px" [formGroup]="updateUserForm">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="productTitle" class="form-label">First Name <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" [(ngModel)]="userId.firstName"
+                                        placeholder="{{userId.firstName}}" formControlName="firstName">
+                                    <input hidden type="text" class="form-control" [(ngModel)]="userId.id"
+                                        placeholder="{{userId.id}}" formControlName="id">
+                                </div>
+                                <div class="col">
+                                    <label for="productCategories" class="form-label">Last Name <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" [(ngModel)]="userId.lastName"
+                                        placeholder="{{userId.lastName}}" formControlName="lastName">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col">
+                                    <label for="productType" class="form-label">Phone Number <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" [(ngModel)]="userId.phoneNumber"
+                                        placeholder="{{userId.phoneNumber}}" formControlName="phoneNumber">
+                                </div>
+                                <div class="col">
+                                    <label for="shortDecs" class="form-label">Email <span
+                                            class="text-danger">*</span></label>
+                                    <input type="email" class="form-control" placeholder="Role"
+                                        [(ngModel)]="userId.email" placeholder="{{userId.email}}"
+                                        formControlName="email">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col">
+                                    <label class="form-label">User Name
+                                        <span style="color:red">*</span></label>
+                                    <input type="text" class="form-control" formControlName="userName"
+                                        [(ngModel)]="userId.userName">
+
+
+                                </div>
+                                <div class="col">
+                                    <label class="form-label">PAN Number <span style="color:red">*</span>
+                                    </label>
+                                    <input type="text" class="form-control" formControlName="panNo"
+                                        [(ngModel)]="userId.panNo">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label for="productBrand" class="form-label">Branch <span
+                                                class="text-danger">*</span></label>
+                                        <!-- <input type="text" class="form-control" placeholder="branchName"
+                                            formControlName="branchName" [(ngModel)]="userId.branchName"
+                                            placeholder="{{userId.branchName}}"> -->
+                                        <select formControlName="branchId" class="form-select" aria-label="Default select example">
+                                                @for(branch of baranchList; track $index){
+                                                    <option [value]="branch.id">{{branch.name}}</option>
+                                                    <option value="" disabled selected style="display:none;">Select Branch
+                                                    </option>
+                        
+                                                    }
+                                            </select>
+                                        <!-- <select formControlName="branchName" class="form-select mb-3"
+                                            aria-label="Default select example">
+                                            @for(branch of baranchList; track $index){
+                                            <option [value]="branch.id">{{branch.name}}</option>
+                                            <option value="" disabled selected style="display:none;">Select Branch
+                                            </option>
+
+                                            }
+                                        </select> -->
+                                        <input hidden="password" class="form-control" formControlName="password"
+                                            [(ngModel)]="userId.password" placeholder="{{userId.password}}">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label for="productUnit" class="form-label">Agent Code
+                                        </label>
+                                        <input type="test" class="form-control" formControlName="agentCode"
+                                            [(ngModel)]="userId.agentCode" placeholder="{{userId.agentCode}}">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <br>
+                            <div class="row">
+                                <div class="col">
+                                    <h2 class="form-label" for="exampleInputPassword1">Business Verticals</h2>
+                                    <div class="input-group" style="width: 150px;">
+                                        <!-- <select formControlName="Business Vertical" class="form-select mb-3"
+                                            aria-label="Default select example"
+                                            style="cursor: pointer; position: relative;top:-10px;"
+                                            (change)="onChange($event)" [value]="selectedVertical">
+                                            <option *ngFor="let master of masterData" [value]="master.name">
+                                                {{master.name}}</option>
+                                                <option name="All">All</option>
+                                        </select> -->
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="productUnit">Employee Id</label>
+                                        <input type="test" class="form-control" formControlName="code"
+                                            [(ngModel)]="userId.code" placeholder="{{userId.code}}">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row align-items-start ">
+                                <div class="col-12  border ">
+                                <h3 class="form-label" for="exampleInputPassword1">All:-</h3>
+                
+                                <div  *ngFor="let all of allrolesmaster; let i = index">
+                                  
+                                 
+                
+                                    <div class="dropdown-item d-flex  align-items-center">
+                                        <span class="form-check form-switch" dir="ltr">
+                                            <input [checked]="isSelectedRole(all)"
+                                                    (click)="updateSelectedRole(all)"
+                                                    (change)="toggleRole(all)"
+                                                      type="checkbox"
+                                                        class="form-check-input" id="customSwitchsizesm">
+                                        </span>
+                                        <span class="align-middle">{{ all.roleName }}</span>
+                                        
+                                    </div>
+                                    
+                
+                                       
+                                </div>
+                            </div>
+                         
+                              
+                            </div>
+                
+                            <div class="row align-items-start ">
+                                <div class="col-sm-6  border ">
+                                <h3 class="form-label" for="exampleInputPassword1">Chits:-</h3>
+                
+                                <div  *ngFor="let ChitsRoles of chitsRole; let i = index">
+                                  
+                                 
+                
+                                    <div class="dropdown-item d-flex  align-items-center">
+                                        <span class="form-check form-switch" dir="ltr">
+                                            <input type="checkbox" class="form-check-input"
+                                            [checked]="isSelectedRole(ChitsRoles)"
+                                            (click)="updateSelectedRole(ChitsRoles)"
+                                            (change)="toggleRole(ChitsRoles)">
+                                        </span>
+                                        <span class="align-middle">{{ ChitsRoles.roleName }}</span>
+                                        
+                                    </div>
+                                    
+                
+                                       
+                                </div>
+                            </div>
+                            <div class="col-sm-6  border">
+                                <h3 class="form-label" for="exampleInputPassword1">Real-Estate:-</h3>
+                
+                                <div *ngFor="let realEstateRoles of realEstateRole; let i = index">
+                                  
+                                 
+                
+                                    <div class="dropdown-item d-flex  align-items-center">
+                                        <span class="form-check form-switch" dir="ltr">
+                                            <input [checked]="isSelectedRole(realEstateRoles)"
+                                            (click)="updateSelectedRole(realEstateRoles)"
+                                            (change)="toggleRole(realEstateRoles)" type="checkbox"
+                                            id="customSwitchsizesm" class="form-check-input">
+                                        </span>
+                                        <span class="align-middle"> {{realEstateRoles.roleName}}</span>
+                                       
+                                    </div>
+                                    
+                
+                                       
+                                </div>
+                            </div>
+                              
+                            </div>
+
+
+                            <!-- <div *ngIf="selectedVertical === 'Chits'">
+
+                                <div class="container">
+                                     <div class="row" style="position: relative; widows: 300px;">
+
+                                        <ng-container *ngFor="let role of ChitsRole; let i = index">
+                                            <div class="col-lg-{{ calculateColumnSize(ChitsRole.length) }} col-md-12 mb-4 mb-lg-0"
+                                                id="dfcv">
+                                                <div style="position: relative; margin-left: 50px; padding-top: 20px;">
+                                                    {{role.roleName}}
+                                                    <div class="form-check form-switch mb-3" dir="ltr"
+                                                        style="position: relative; margin-left: 10px; ">
+
+                                                        <input type="checkbox" class="form-check-input"
+                                                            [checked]="isSelectedRole(role)"
+                                                            (click)="updateSelectedRole(role)"
+                                                            (change)="toggleRole(role)">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="selectedVertical === 'Real Estate'">
+
+                                <div class="card-container">
+                                    
+                                    <div class="row" style="position: relative; widows: 300px;">
+
+                                        <ng-container *ngFor="let role of realEstateRole; let i = index">
+                                            <div class="col-lg-{{ calculateColumnSize(ChitsRole.length) }} col-md-12 mb-4 mb-lg-0"
+                                                id="dfcv">
+                                                <div style="position: relative; margin-left: 50px; padding-top: 20px;">
+                                                    {{role.roleName}}
+                                                    <div class="form-check form-switch mb-3" dir="ltr"
+                                                        style="position: relative; margin-left: 20px; ">
+                                                        <input [checked]="isSelectedRole(role)"
+                                                            (click)="updateSelectedRole(role)"
+                                                            (change)="toggleRole(role)" type="checkbox"
+                                                            id="customSwitchsizesm" class="form-check-input">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="position: relative;left:20px;" *ngIf="selectedVertical === 'All'">
+                                <div class="row" style="position: relative; widows: 300px;">
+                                    <ng-container *ngFor="let role of allrolesmaster; let i = index">
+                                        <div class="col-lg-{{ calculateColumnSize(ChitsRole.length) }} col-md-12 mb-4 mb-lg-0"
+                                            id="dfcv">
+                                            <div style="position: relative; margin-left: 50px; padding-top: 20px;">
+                                              {{role.roleName}}
+                                                <div class="form-check form-switch mb-3" dir="ltr"
+                                                    style="position: relative; margin-left: 20px; ">
+                                                    <input [checked]="isSelectedRole(role)"
+                                                    (click)="updateSelectedRole(role)"
+                                                    (change)="toggleRole(role)"
+                                                      type="checkbox"
+                                                        class="form-check-input" id="customSwitchsizesm">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div> -->
+                            <br>
+                            <div class="hstack gap-2 justify-content-end mb-3">
+                                <button class="btn btn-danger" (click)="onCloseHandled()"><i
+                                        class="ph-x align-middle"></i> Cancel</button>
+                                <button class="btn btn-success" (click)="onSubmit()">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

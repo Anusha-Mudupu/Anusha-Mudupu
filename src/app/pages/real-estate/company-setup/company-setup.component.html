@@ -1,0 +1,276 @@
+<!-- <div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+
+                    <li class="breadcrumb-item active text-primary">Real-Estate</li>
+                    <li class="breadcrumb-item active">
+                        <a role="button" class="text-primary">Companysetup</a>
+                    </li>
+
+
+                </ol>
+            </div>
+            <div class="col-sm">
+                <div class="d-flex justify-content-sm-end">
+                    <button style="cursor: pointer;" type="button" (click)="openAddForm()"
+                        class="btn btn-warning add-btn me-2" id="create-btn"><i
+                            class="ri-add-line align-bottom me-1"></i>
+                        Add</button>
+
+
+
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4>Company set Up</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item active">Administration</li>
+                    <li class="breadcrumb-item active">Companysetup</li>
+                </ol>
+                <br>
+
+            </div>
+
+
+        </div>
+    </div>
+    <div class="col-sm">
+        <div class="d-flex justify-content-sm-end gap-2">
+            <button style="cursor: pointer;" type="button" (click)="openAddForm()"
+                        class="btn btn-warning add-btn me-2" id="create-btn"><i
+                            class="ri-add-line align-bottom me-1"></i>
+                        Add</button>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <!-- <div class="">
+                <h2>Company Setup</h2>
+            </div> -->
+
+            <div class="card-body">
+                <div id="customerList">
+                    <div class="row g-4 mb-3">
+                        <div class="col-sm-auto">
+                        </div>
+                        <div class="table-responsive table-card mt-3 mb-1">
+
+
+                            <table class="table align-middle table-nowrap">
+                                <thead class="table-light">
+                                    <tr>
+
+
+                                        <th scope="col" (click)="sortTable('vchaccid')" style="cursor:pointer">
+                                           Id
+                                            <span *ngIf="sortColumn === 'vchaccid'">
+
+                                                <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                                            </span>
+                                            <span *ngIf="sortColumn !== 'vchaccid'">
+
+                                                <i [hidden]="true" class="fa fa-sort-up"></i>
+                                            </span>
+                                        </th>
+                                        <th scope="col" (click)="sortTable('vchcompanycode')" style="cursor:pointer">
+                                            Company Code
+                                            <span *ngIf="sortColumn === 'vchcompanycode'">
+                                                <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                                            </span>
+                                        </th>
+                                        <th scope="col" (click)="sortTable('vchcompanyName')" style="cursor:pointer">
+                                            Company Name
+                                            <span *ngIf="sortColumn === 'vchcompanyName'">
+                                                <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                                            </span>
+                                        </th>
+                                        <th scope="col" (click)="sortTable('vcregioncode')" style="cursor:pointer">
+                                            Region Code
+                                            <span *ngIf="sortColumn === 'vcregioncode'">
+                                                <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                                            </span>
+                                        </th>
+                                        <th scope="col" (click)="sortTable('vchregionaddress')" style="cursor:pointer">
+                                            Region Address
+                                            <span *ngIf="sortColumn === 'vchregionaddress'">
+                                                <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                                            </span>
+                                        </th>
+                                        <th class="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for (data of sortedCompanyList; track $index) {
+                                    <tr>
+
+                                        <td>
+                                            {{data.vchaccid}}</td>
+                                        <td>{{data.vchcompanycode}}</td>
+                                        <td>{{data.vchcompanyName}}</td>
+                                        <td>{{data.vcregioncode}}</td>
+                                        <td>{{data.vchregionaddress}}</td>
+                                        <td>
+                                            <div  class="dropdown">
+                                                <button class="btn btn-subtle-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown">
+                                                    <i class="bi bi-three-dots-vertical"></i>
+                                                </button>
+    
+                                                <ul  class="dropdown-menu dropdown-menu-end">
+                                       
+                                                    <li><a class="dropdown-item edit-item-btn" (click)="editForm()"><i class="ph-pencil align-middle me-1"></i>
+                                                            Edit</a></li>
+                                                    <li><a class="dropdown-item remove-item-btn"  href="javascript:void(0);"  (click)="openDelete()"><i class="ph-trash align-middle me-1"></i> Remove</a></li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <div class="pagination-wrap hstack gap-2">
+                                <pagination class="pagination-wrap hstack gap-2" [totalItems]="companySetUp.length"
+                                    [itemsPerPage]="20" (pageChanged)="tablePageChanged($event)"></pagination>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<!--Add Models -->
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display1}" id="dltModel">
+    <div class="modal-dialog" role="document" style="position: relative;top:150px;">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <span style="font-weight:bolder;margin-left:150px;font-size:18px;">Add Companysetup</span>
+                <span class="close" aria-label="Close" (click)="closeAddForm()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <hr>
+            <div class="modal-body">
+
+                <form>
+                    <div class="row">
+
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Company Code</label>
+                            <input type="text" class="form-control" placeholder="Enter Company Code">
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Company Name</label>
+                            <input type="text" class="form-control" placeholder="Enter Company Name">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" (click)="closeAddForm()">Save</button>
+                <button type="button" class="btn btn-danger" (click)="closeAddForm()"> Cancel</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Edit Model -->
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display2}" id="dltModel">
+    <div class="modal-dialog" role="document" style="position: relative;top:150px;">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <span style="font-weight:bolder;margin-left:150px;font-size:18px;">Edit Companysetup</span>
+                <span class="close" aria-label="Close" (click)="closeEditForm()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <hr>
+            <div class="modal-body">
+
+                <form>
+                    <div class="row">
+
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Company Code</label>
+                            <input type="text" class="form-control" placeholder="Enter Company Code">
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Company Name</label>
+                            <input type="text" class="form-control" placeholder="Enter Company Name">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" (click)="closeEditForm()">Save</button>
+                <button type="button" class="btn btn-danger" (click)="closeEditForm()"> Cancel</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- delete Model -->
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display3}" id="dltModel">
+    <div class="modal-dialog" role="document" style="position: relative;top:150px;">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <span style="font-weight: bold;margin-left: 130px;"> Do you want to delete record?</span>
+                <span class="close" aria-label="Close" (click)="onClosed()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <hr>
+            <div class="modal-body">
+
+                <form>
+                    <div class="row" id="fields">
+                        <div class="col">
+
+
+                        </div>
+
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-danger" (click)="onClosed()">X Cancel</button>
+                <button type="button" class="btn btn-success" (click)="onClosed()">OK</button>
+            </div>
+        </div>
+    </div>
+
+</div>

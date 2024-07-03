@@ -1,0 +1,179 @@
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+
+            <h4 class="mb-sm-0" style="position: relative;left:20px">Create User</h4>
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item active">Chits</li>
+                    <li class="breadcrumb-item active" style="cursor:pointer" (click)="user()">User</li>
+
+                </ol>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="card" role="document">
+    <div class="card-header">
+        <h2 style="position: relative;left:20px">Create User</h2>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="userData">
+            <div class="row">
+                <div class="col">
+                    <label for="exampleInputPassword1" class="form-label"> First Name<span
+                            style="color:red">*</span></label>
+                    <input type="text" class="form-control" formControlName="firstName" style="width:300px">
+                    <div *ngIf="submitted && userData.get('firstName').invalid">
+                        <div *ngIf="userData.get('firstName').errors.required" class="text-danger"> first Name is
+                            required.</div>
+                    </div>
+                </div>
+                <div class="col">
+                    <label for="exampleInputPassword1" class="form-label">Last Name <span
+                            style="color:red">*</span></label>
+                    <input type="text" class="form-control" formControlName="lastName" style="width:300px">
+                    <div *ngIf="submitted && userData.get('lastName').invalid">
+                        <div *ngIf="userData.get('lastName').errors.required" class="text-danger"> Last Name is
+                            required.</div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col">
+                    <label>Phone Number <span style="color:red">*</span></label>
+                    <input type="text" class="form-control" formControlName="phoneNumber" style="width:300px">
+                    <div *ngIf="submitted && userData.get('phoneNumber').invalid">
+                        <div *ngIf="userData.get('phoneNumber').errors.required" class="text-danger"> Phone Number
+                            is
+                            required.</div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col">
+                    <label for="exampleInputEmail1" class="form-label">Email <span style="color:red">*</span> </label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" formControlName="email"
+                        aria-describedby="emailHelp" autocomplete="off">
+                    <div *ngIf="submitted && userData.get('email').invalid">
+                        <div *ngIf="userData.get('email').errors.required" class="text-danger">Email
+                            is
+                            required.</div>
+                    </div>
+                </div>
+                <div class="col">
+                    <label class="form-label">Password <span style="color:red">*</span></label>
+                    <input type="password" class="form-control" formControlName="password" autocomplete="off">
+                    <div *ngIf="submitted && userData.get('password').invalid">
+                        <div *ngIf="userData.get('password').errors.required" class="text-danger">Password
+                            is
+                            required.</div>
+                    </div>
+                </div>
+
+
+            </div>
+            <br>
+            <div class="row">
+                <div class="col">
+                    <label for="exampleInputPassword1" class="form-label">Branch <span
+                            style="color:red">*</span></label>
+                    <select formControlName="" class="form-select" aria-label="Default select example">
+                        @for(branch of baranchList; track $index){
+                        <option [value]="branch.brid">{{branch.name}}</option>
+                        }
+                    </select>
+                    <div *ngIf="submitted && userData.get('branchId').invalid">
+                        <div *ngIf="userData.get('branchId').errors.required" class="text-danger">Branch Name
+                            is
+                            required.</div>
+                    </div>
+                </div>
+                <div class="col">
+                    <label for="exampleInputPassword1" class="form-label">PAN Number. <span
+                            style="color:red">*</span></label>
+                    <input type="text" class="form-control" formControlName="panNo">
+                    <div *ngIf="submitted && userData.get('panNo').invalid">
+                        <div *ngIf="userData.get('panNo').errors.required" class="text-danger">PAN Number
+                            is
+                            required.</div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <h2 class="form-label" for="exampleInputPassword1">Business Verticals</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-start ">
+                <div class="col-12  border ">
+                    <h3 class="form-label" for="exampleInputPassword1">All:-</h3>
+                    <div *ngFor="let all of allrolesmaster; let i = index">
+                        <div class="dropdown-item d-flex  align-items-center">
+                            <span class="form-check form-switch" dir="ltr">
+                                <input (change)="updatecreate(realEstateRoles.roleName, $event)" type="checkbox"
+                                    class="form-check-input" id="customSwitchsizesm">
+                            </span>
+                            <span class="align-middle">{{ all.roleName }}</span>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row align-items-start ">
+                <div class="col-sm-6  border ">
+                    <h3 class="form-label" for="exampleInputPassword1">Chits:-</h3>
+                    <div *ngFor="let ChitsRoles of chitsRole; let i = index">
+                        <div class="dropdown-item d-flex  align-items-center">
+                            <span class="form-check form-switch" dir="ltr">
+                                <input type="checkbox" class="form-check-input" id="customSwitchsizesm"
+                                    (change)="updatecreate(ChitsRoles.roleName, $event)">
+                            </span>
+                            <span class="align-middle">{{ ChitsRoles.roleName }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6  border">
+                    <h3 class="form-label" for="exampleInputPassword1">Real-Estate:-</h3>
+                    <div *ngFor="let realEstateRoles of realEstateRole; let i = index">
+                        <div class="dropdown-item d-flex  align-items-center">
+                            <span class="form-check form-switch" dir="ltr">
+                                <input (change)="updatecreate(realEstateRoles.roleName, $event)" type="checkbox"
+                                    class="form-check-input" id="customSwitchsizesm">
+                            </span>
+                            <span class="align-middle"> {{realEstateRoles.roleName}}</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <br>
+            <div>
+                <h3 style="color:blue">(Note: The below Codes are only for Employee and Agent Roles)</h3>
+                <div class="row">
+                    <div class="col">
+                        <label for="employeeInput" class="form-label">Employee Id:</label>
+                        <input type="text" class="form-control" formControlName="code">
+                    </div>
+                    <div class="col">
+                        <label for="agentInput" class="form-label">Agent Code:</label>
+                        <input type="text" class="form-control" formControlName="agentCode">
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="hstack gap-2 justify-content-end mb-3">
+                <button class="btn btn-danger" (click)="cancel()"><i class="ph-x align-middle"></i>
+                    Cancel</button>
+                <button class="btn btn-success" (click)="onSubmit()">Save</button>
+            </div>
+        </form>
+    </div>
+</div>

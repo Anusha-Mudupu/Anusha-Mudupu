@@ -1,0 +1,118 @@
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item active text-dark">Administration</li>
+                    <li class="breadcrumb-item active">
+                        <a role="button" class="text-primary">Status</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="card">
+    <div class="card-header">
+        <div class="col-md-5">
+            <label for="exampleInputPassword1" class="form-label">Bussiness Vertical</label>
+            <div class="input-group">
+
+
+                <select formControlName="assignTo" class="form-select mb-3" aria-label="Default select example">
+                    @for(vertical of verticalData;track $index){
+                    <option value="" disabled selected style="display:none;">Select Vertical</option>
+
+                    <option [value]="vertical.id">
+                        {{vertical.name}}
+                    </option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <table class="table table-striped center-aligned-table">
+            <thead class="text-muted table-light">
+                <tr>
+                    <!-- <th scope="col" style="cursor:pointer">Id</th> -->
+                    <th>Order</th>
+                    <th><span style="position: relative;left:200px">Title</span></th>
+                    <th>Actions</th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+                @for (list of filteredStatusData; track $index) {
+                <tr>
+                    <td>{{ $index + 1 }}</td>
+                    <!-- <td>{{list.id}}</td> -->
+                    <td><p style="position: relative;left:200px">{{list.title}}</p></td>
+                    <!-- <td>{{list.title}}</td> -->
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-subtle-secondary btn-sm dropdown-toggle" type="button"
+                                data-bs-toggle="dropdown">
+                                <i class="bi bi-three-dots-vertical"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end" style="cursor: pointer;">
+                                <li style="cursor: pointer;">
+                                    <a class="dropdown-item" href="javascript:void(0);"
+                                     (click)="openModal()"   style="cursor: pointer;">Edit</a>
+                                </li>
+                               
+
+                            </ul>
+                        </div>
+                    </td>
+
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Edit Status</h2>
+                <span class="close" aria-label="Close" (click)="onCloseHandled()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form>
+                   
+                   
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Order By</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder=""
+                            >
+                       
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Title</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder=""
+                            formControlName="code">
+                       
+                    </div>
+
+
+
+                   
+                </form>
+            </div>
+            <div class="modal-footer">
+               
+                <button type="button" class="btn btn-danger" (click)="onCloseHandled()">Cancel</button>
+                <button type="button" class="btn btn-success" (click)="onCloseHandled()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

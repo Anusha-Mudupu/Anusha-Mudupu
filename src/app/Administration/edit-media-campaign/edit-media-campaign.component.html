@@ -1,0 +1,493 @@
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+
+                    <li class="breadcrumb-item active text-primary" (click)="navigateTo()">Administration</li>
+                    <li class="breadcrumb-item active">
+                        <a role="button" class="text-primary"> Edit Media Details </a>
+                    </li>
+
+
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="card border-success mb-3">
+    <div class="card-header bg-transparent border-success" style="font-weight: bold; font-size: 18px;">Campaign
+        Details
+    </div>
+
+    <div class="card-body">
+        <form>
+            <div class=" row d-flex ">
+                <div class="mb-3 col-5">
+                    <label for="exampleInputPassword1" class="form-label">Campaign Name</label>
+                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Campaign" readonly>
+                </div>
+                <!-- <div class="mb-2 col-5"> -->
+
+                    <!-- <label for="businessVertical" class="form-label">Business Vertical</label> -->
+                    <!-- <select [(ngModel)]="verticalid" class="form-select mb-3" aria-label="Default select example"> -->
+                        <!-- @for(vertical of verticalData; track $index){ -->
+                        <!-- <option [value]="vertical.id">{{vertical.name}}</option>
+                        <option value="" disabled selected style="display:none;">Select Vertical
+                        </option>
+
+                        } -->
+                        
+                    <!-- </select> -->
+
+                <!-- </div> -->
+                <!-- <div class="mb-3 col-5">
+                    <label for="exampleInputPassword1" class="form-label">Business Vertical</label>
+                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Chits" readonly>
+                </div> -->
+                <div class="mb-3 col-5">
+                    <label for="exampleInputPassword1" class="form-label">From Date</label>
+                    <input class="form-control" id="exampleInputPassword1" placeholder="01-01-2024" readonly>
+                </div>
+                <div class="mb-3 col-5">
+                    <label for="exampleInputPassword1" class="form-label">To Date</label>
+                    <input class="form-control" id="exampleInputPassword1" placeholder="30-06-2024" readonly>
+                </div>
+                <!-- <div class="mb-2 col-5">
+                    <label for="exampleInputPassword1" class="form-label">Status</label> -->
+                    <!-- <select formControlName="toId" class="form-select mb-3" aria-label="Default select example"> -->
+                        <!-- @for(status of StatusData;track $index){ -->
+                        <!-- <option value="" >Select Status</option> -->
+
+                        <!-- <option [value]="status.id">
+                            {{status.title}}
+                        </option> -->
+                        <!-- <option>Create</option>
+                        <option>Approved</option>
+                        <option>Open</option>
+                        <option>Closed</option> -->
+                        <!-- } -->
+                       
+                    <!-- </select> -->
+                <!-- </div> -->
+                <div class="mb-3 col-5">
+                    <label for="exampleInputPassword1" class="form-label">Status</label>
+                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="create" readonly>
+                </div>
+                <div class="mb-3 col-5">
+                    <label for="exampleInputPassword1" class="form-label">Effective Date</label>
+                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="30-06-2024" readonly>
+                </div>
+            </div>
+            <!-- <div class="float-end">
+                <button type="submit" class="btn btn-success">Save</button>
+            </div> -->
+        </form>
+    </div>
+
+</div>
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header bg-transparent border-success" style="font-weight: bold; font-size: 18px;">Media
+                Details
+            </div>
+
+            <div class="card-body">
+                <div id="customerList">
+                    <div class="row g-4 mb-3">
+                        <div class="col-sm-auto">
+                        </div>
+                        <div class="table-responsive table-card mt-3 mb-1">
+
+
+
+
+                            <table class="table align-middle table-nowrap" id="customerTable" id="sortable-table">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="option"
+                                                    [(ngModel)]="masterSelected" (change)="checkUncheckAll($event)"
+                                                    id="checkAll">
+                                                <label class="form-check-label" for="checkAll"></label>
+                                            </div>
+                                        </th>
+
+                                        <th scope="col" (click)="sortTable('name')" style="cursor:pointer">
+                                            Bussiness
+
+
+                                        </th>
+                                        <th scope="col" (click)="sortTable('fromDt')" style="cursor:pointer">
+                                            Media Type
+
+                                        </th>
+                                        <th scope="col" (click)="sortTable('todt')" style="cursor:pointer">
+                                            Name
+
+                                        </th>
+                                        <th scope="col" (click)="sortTable('todt')" style="cursor:pointer">
+                                            File Path
+
+                                        </th>
+                                        <!-- <th class="col">Action</th> -->
+                                    </tr>
+                                </thead>
+                                <tbody class="list form-check-all">
+                                    @for (data of sortedRoleList; track $index) {
+                                    <tr id="a_{{campaignsData.id}}">
+                                        <td>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="checkAll"
+                                                    formControlName="leadIds" value="{{data.id}}"
+                                                    [(ngModel)]="data.states" (change)="onCheckboxChange($event)">
+                                                <label class="form-check-label"></label>
+                                            </div>
+                                        </td>
+                                        <td class="id" style="display:none;"><a href="javascript:void(0);"
+                                                class="fw-medium link-primary">#VZ2101</a></td>
+                                        <td class="leadName">Chits</td>
+                                        <td class="contactNo">Pdf</td>
+                                        <td class="contactNo">chits.pdf</td>
+                                        <td class="contactNo">https://example.com/path/to/file.pdf</td>
+<!--                                        
+                                        <td>
+                                            <div class="dropdown">
+                                                <button class="btn btn-subtle-secondary btn-sm dropdown-toggle"
+                                                    type="button" data-bs-toggle="dropdown">
+                                                    <i class="bi bi-three-dots-vertical"></i>
+                                                </button>
+                                                <ul class="dropdown-menu dropdown-menu-end" style="cursor: pointer;">
+                                                    <li style="cursor: pointer;">
+                                                        <a class="dropdown-item" href="javascript:void(0);"
+                                                            style="cursor: pointer;">
+                                                            <span style="cursor: pointer;">
+                                                               
+                                                                Delete
+                                                            </span>
+
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </td> -->
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+                </div><!-- end card -->
+            </div>
+            <!-- end col -->
+        </div>
+        <!-- end col -->
+    </div>
+
+    <!-- <div class="d-flex justify-content-center spinner-container" *ngIf="spinner">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div> -->
+</div>
+
+
+<!-- <div class="card border-success mb-3">
+    <div class="card-header bg-transparent border-success" style="font-weight: bold; font-size: 18px;">Add Media</div>
+    <div class="card-body ">
+        <form action="upload.php" method="post" enctype="multipart/form-data">
+            <div class=" row d-flex">
+                <div class="mb-2 col-5">
+                    <label for="businessVertical" class="form-label">Business Vertical</label>
+                    <select [(ngModel)]="verticalid" class="form-select mb-3" aria-label="Default select example">
+                        @for(vertical of verticalData; track $index){
+                        <option [value]="vertical.id">{{vertical.name}}</option>
+                        <option value="" disabled selected style="display:none;">Select Vertical</option>
+
+                        }
+                    </select>
+                </div>
+                <div class="mb-2 col-5">
+                    <label for="mediaType" class="form-label">Media Type</label>
+                    <select formControlName="mediaType" id="mediaType" class="form-select mb-3"
+                        aria-label="Select Media Type" (change)="getMediaType($event)">
+                        <option value="" disabled selected style="display:none;">Select Media Type</option>
+                        <option *ngFor="let type of mediaTypes" [value]="type.name">{{
+                            type.name }}</option>
+                    </select>
+                </div>
+                <div class="mb-2 col-5">
+                    <label for="mediaType" class="form-label"> Media Name</label>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="mb-2 col-5">
+                    <label for="mediaType" class="form-label">Select Media File</label>
+                    <input type="file" class="form-control">
+                </div>
+            </div>
+
+           
+            <div>
+                <button type="submit" class="btn btn-success float-end">Upload Files</button>
+            </div>
+
+
+        </form>
+
+    </div>
+
+</div> -->
+
+
+<!-- 
+<div class="col-xxl-6"> -->
+    <div class="card">
+
+        <div class="card-body">
+
+            <accordion [closeOthers]="true"
+                class="accordion custom-accordionwithicon custom-accordion-border accordion-border-box accordion-success"
+                id="accordionBordered">
+                <accordion-group class="accordion-item" [isOpen]="isFirstOpen">
+                    <h2 accordion-heading class="accordion-header" id="accordionborderedExample1">
+                        <button class="accordion-button" type="button">
+                            Add Media
+                        </button>
+                    </h2>
+                    <div id="accor_borderedExamplecollapse1" class="accordion-collapse collapse show">
+                        <form action="upload.php" method="post" enctype="multipart/form-data">
+                            <div class=" row d-flex ">
+
+                                <div class="mb-2 col-5">
+                                    <label for="mediaType" class="form-label">Media Type</label>
+                                    <select formControlName="mediaType" id="mediaType" class="form-select mb-3"
+                                        aria-label="Select Media Type" (change)="getMediaType($event)">
+                                        <option value="" disabled selected style="display:none;">Select Media Type
+                                        </option>
+                                        <option *ngFor="let type of mediaTypes" [value]="type.name">{{
+                                            type.name }}</option>
+                                    </select>
+                                </div>
+                                <div class="mb-2 col-5">
+                                    <label for="mediaType" class="form-label">Media Name</label>
+                                    <input type="text" class="form-control">
+                                </div>
+                                <div class="mb-2 col-5">
+                                    <label for="mediaType" class="form-label">Select Media File</label>
+                                    <input type="file" class="form-control">
+                                </div>
+                                <div class="mb-2 col-5" id="button">
+                                    <button type="submit" class="btn btn-success float-end">Upload Files</button>
+                                </div>
+                            </div>
+
+
+                           
+
+
+                        </form>
+                    </div>
+                </accordion-group>
+
+            </accordion>
+        </div>
+
+    </div>
+<!-- </div> -->
+
+
+
+<div class="row">
+    <!-- <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+
+
+                    <li class="breadcrumb-item active text-primary">Administration</li>
+                    <li class="breadcrumb-item active">
+                        <a role="button" class="text-primary">Notification</a>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        <a role="button" class="text-primary">Template</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div> -->
+    <h2>Campaign Notification Content</h2>
+</div>
+<div class="tab-content  text-muted">
+    <tabset class="mb-3">
+
+        <tab heading="WhatsApp" class="nav-item">
+            <form [formGroup]="editContentForm" (ngSubmit)="onSubmit()">
+                <div class="tab-pane mt-3" id="home" role="tabpanel">
+                    <div class="row align-items-start">
+
+                        <!-- <div class="col-sm-3  ">
+                            <ul class="list-unstyled chat-list chat-user-list card " id="userList">
+                                <li *ngFor="let data of whatsappdata; let i = index"
+                                    [ngClass]="{'active': selectedIndexWhatsApp === i}">
+                                    <a href="javascript: void(0);">
+                                        <div class="d-flex align-items-center">
+                                            <div class="text-truncate mb-0" (click)="selectUserWhatsApp(i)"
+                                                formControlName="name">{{data.name}}</div>
+                                            <div class="ms-auto"><span
+                                                    class="badge bg-dark-subtle text-dark rounded p-1"
+                                                    (click)="removeWhatsappData(data.id)"> &#10006; </span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div> -->
+
+                        <div class="card">
+                            <div class="mt-2">
+                                <!-- <div class="mb-3 position-relative">
+                                    <input type="text" class="form-control email-compose-input" data-choices
+                                        data-choices-limit="15" value="" data-choices-removeItem placeholder="To">
+                                    <div class="position-absolute top-0 end-0">
+
+                                    </div>
+                                </div> -->
+
+
+                                <!-- <div class="mb-3">
+                                    <input type="text" class="form-control" placeholder="Subject">
+                                </div> -->
+                                <ckeditor [editor]="Editor" data="{{whatsappConent}}" formControlName="content">
+
+                                </ckeditor>
+                                <button type="submit" class="btn btn-success float-end mt-2">Save</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </tab>
+        <tab heading="Sms" class="nav-item">
+            <form [formGroup]="editContentForm" (ngSubmit)="onSubmit()">
+                <div class="tab-pane active mt-3" id="product1" role="tabpanel">
+                    <div class="row align-items-start">
+
+                        <!-- <div class="col-sm-3  ">
+                            <ul class="list-unstyled chat-list chat-user-list card " id="userList">
+                                <li *ngFor="let data of smsData; let i = index"
+                                    [ngClass]="{'active': selectedIndexSms === i}">
+                                    <a href="javascript: void(0);">
+                                        <div class="d-flex align-items-center">
+                                            <div class="text-truncate mb-0" (click)="selectUserSms(i)"
+                                                formControlName="name">{{data.name}}</div>
+                                            <div class="ms-auto"><span
+                                                    class="badge bg-dark-subtle text-dark rounded p-1"
+                                                    (click)="removeSmsData(data.id)"> &#10006; </span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div> -->
+                        <div class=" card">
+                            <div class="mt-2">
+                                <!-- <div class="mb-3 position-relative">
+                                    <input type="text" class="form-control email-compose-input" data-choices
+                                        data-choices-limit="15" value="" data-choices-removeItem placeholder="To">
+                                    <div class="position-absolute top-0 end-0">
+
+                                    </div>
+                                </div> -->
+
+
+                                <!-- <div class="mb-3">
+                                    <input type="text" class="form-control" placeholder="Subject">
+                                </div> -->
+                                <ckeditor [editor]="Editor" data="{{smsConent}}"></ckeditor>
+                                <button type="submit" class="btn btn-success float-end mt-2">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </tab>
+        <tab heading="E-mail" class="nav-item">
+            <form [formGroup]="editContentForm" (ngSubmit)="onSubmit()">
+                <div class="tab-pane active mt-3" id="product11" role="tabpanel">
+                    <div class="row align-items-start ">
+
+                        <!-- <div class="col-sm-3  ">
+                            <ul class="list-unstyled chat-list chat-user-list card " id="userList">
+                                <li *ngFor="let data of emailData; let i = index"
+                                    [ngClass]="{'active': selectedIndexEmail === i}">
+                                    <a href="javascript: void(0);">
+                                        <div class="d-flex align-items-center">
+                                            <div class="text-truncate mb-0" (click)="selectUserEmail(i)"
+                                                formControlName="name">{{data.name}}</div>
+                                            <div class="ms-auto"><span
+                                                    class="badge bg-dark-subtle text-dark rounded p-1"
+                                                    (click)="removeEmailData(data.id)"> &#10006; </span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div> -->
+                        <div class="card">
+                            <div class="mt-2">
+                                <!-- <div class="mb-3 position-relative">
+                                    <input type="text" class="form-control email-compose-input" data-choices
+                                        data-choices-limit="15" value="" data-choices-removeItem placeholder="To">
+                                    <div class="position-absolute top-0 end-0">
+                                        <div class="d-flex">
+                                            <button class="btn btn-link text-reset fw-semibold px-2" type="button"
+                                                (click)="collapse('CcRecipientsCollapse')">
+                                                Cc
+                                            </button>
+                                            <button class="btn btn-link text-reset fw-semibold px-2" type="button"
+                                                (click)="collapse('BccRecipientsCollapse')">
+                                                Bcc
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <!-- <div class="collapse show" id="CcRecipientsCollapse">
+                                    <div class="mb-3">
+                                        <label>Cc:</label>
+                                        <input type="text" class="form-control" data-choices data-choices-limit="15"
+                                            data-choices-removeItem placeholder="Cc recipients">
+                                    </div>
+                                </div>
+                                <div class="collapse" id="BccRecipientsCollapse">
+                                    <div class="mb-3">
+                                        <label>Bcc:</label>
+                                        <input type="text" class="form-control" data-choices data-choices-limit="15"
+                                            data-choices-removeItem placeholder="Bcc recipients">
+                                    </div>
+                                </div> -->
+
+                                <!-- <div class="mb-3">
+                                    <input type="text" class="form-control" placeholder="Subject">
+                                </div> -->
+                                <ckeditor [editor]="Editor" data="{{emailContent}}" formControlName="content">
+                                </ckeditor>
+                                <button type="submit" class="btn btn-success float-end mt-2">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </tab>
+
+
+    </tabset>
+</div>

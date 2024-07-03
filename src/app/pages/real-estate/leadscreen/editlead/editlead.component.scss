@@ -1,0 +1,23 @@
+/*
+ *   Copyright (c) 2024 Dmantz Technologies private limited
+ *   All rights reserved.
+ */
+
+
+
+.fa-sort {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 5px;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+  }
+  .asc { border-bottom: 6px solid black; }
+  .desc { border-top: 6px solid black; }
+
+  .next{
+    font-size: medium;
+    font-weight: 400;
+    color: midnightblue
+  }

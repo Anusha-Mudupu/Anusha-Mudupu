@@ -1,0 +1,213 @@
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4>Business Verticals</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item active">Administration</li>
+                    <li class="breadcrumb-item active">Business Verticals</li>
+
+
+                </ol>
+                <br>
+                <div class="col-sm">
+                    <div class="d-flex justify-content-sm-end">
+
+
+                        <button type="button" class="btn btn-success add-btn" id="create-btn" (click)="openModal()"
+                            data-toggle="tooltip" data-placement="top" title="click Add" style="color:black"><i
+                                class="ri-add-line align-bottom me-1"></i>
+                            Add</button>
+
+
+                        <button class="btn btn-success" (click)="clearAllSearchFields()" style="color:black">Clear All</button>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<div class="container" style="margin-top:-30px;position: relative;box-shadow: 1px 1px 1px 0.4px #888888;">
+    <div class="row d-flex d-sm-flex mt-4">
+        <div class="search-box ms-2 col-2">
+            <input type="text" class="form-control search" placeholder="Search With id" [(ngModel)]="searchTermid"
+                (input)="filterLeads()">
+            <i class="ri-search-line search-icon"></i>
+        </div>
+        <div class="search-box ms-2 col-2">
+            <input type="text" class="form-control search" placeholder="Search With name" [(ngModel)]="searchTermName"
+                (input)="filterLeads()">
+            <i class="ri-search-line search-icon"></i>
+        </div>
+        <!-- Add more search boxes for additional criteria (e.g., status) -->
+    </div>
+    <table class="table table-striped" id="sortable-table">
+
+        <thead class="text-muted table-light">
+            <tr>
+                <th (click)="sortTable('id')" style="cursor:pointer">
+                    ID
+                    <span *ngIf="sortColumn === 'id'">
+                        <!-- Show ascending or descending icon based on sortOrder -->
+                        <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                        <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                    </span>
+                    <span *ngIf="sortColumn !== 'id'">
+                        <!-- Hide the default ascending icon when sorting by other columns -->
+                        <i [hidden]="true" class="fa fa-sort-up"></i>
+                    </span>
+                </th>
+
+                <th (click)="sortTable('name')" style="cursor:pointer">
+                    Name
+                    <span *ngIf="sortColumn === 'name'">
+                        <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                        <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                    </span>
+                </th>
+
+                <th>
+                    <span>Actions</span>
+                </th>
+
+
+            </tr>
+        </thead>
+
+        <tbody style="position: relative;left:10px;">
+            <tr *ngFor="let verticle of lookupConstants; let i = index">
+                <td>{{ i+ 1 }}</td>
+                <td>
+                    <span>{{ verticle.constantName }}</span>
+                </td>
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-subtle-secondary btn-sm dropdown-toggle" type="button"
+                            data-bs-toggle="dropdown">
+                            <i class="bi bi-three-dots-vertical"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" style="cursor: pointer;">
+                            <li style="cursor: pointer;">
+                                <a class="dropdown-item" href="javascript:void(0);" (click)="EditModal()"
+                                    style="cursor: pointer;">Edit</a>
+                            </li>
+                            <li style="cursor: pointer;">
+                                <a class="dropdown-item" href="javascript:void(0);" (click)="openDelete()"
+                                    style="cursor: pointer;">Delete</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+
+
+    </table>
+    <i style="font-size:16px;color:navy;position: relative;left:10px" class="fa">&#xf021;</i>
+
+    <div class="d-flex justify-content-end">
+        <div class="pagination-wrap hstack gap-2">
+            <pagination class="pagination-wrap hstack gap-2" [totalItems]="BusinessVerticleData.length"
+                [itemsPerPage]="15" (pageChanged)="tablepageChanged($event)"></pagination>
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Create Business Vertical</h4>
+                <span class="close" aria-label="Close" (click)="onCloseHandled()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Order</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Order">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Code</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Code">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Status</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter status">
+                    </div>
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="onCloseHandled()">Cancel</button>
+                <button type="button" class="btn btn-success" (click)="onCloseHandled()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display1}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"> Edit Business Vertical</h4>
+                <span class="close" aria-label="Close" (click)="onCloseHandled1()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Order</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Order">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Code</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Code">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Status</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter status">
+                    </div>
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="onCloseHandled1()">Cancel</button>
+                <button type="button" class="btn btn-success" (click)="onCloseHandled1()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display2}" id="dltModel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <span style="font-weight: bold;margin-left: 130px;"> Do you want to delete record ?</span>
+                <span class="close" aria-label="Close" (click)="onClosed()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <hr>
+          
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" (click)="onClosed()">OK</button>
+                <button type="button" class="btn btn-danger" (click)="onClosed()">X Cancel</button>
+            </div>
+        </div>
+    </div>
+
+</div>

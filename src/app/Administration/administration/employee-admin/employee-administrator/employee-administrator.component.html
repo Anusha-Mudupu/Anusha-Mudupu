@@ -1,0 +1,288 @@
+
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4>Administrator</h4>
+<!-- 
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item active">Chits</li>
+                    <li class="breadcrumb-item active">Master</li>
+                    <li class="breadcrumb-item active">Administrator</li>
+                </ol>
+              
+            </div> -->
+
+        </div>
+    </div>
+    <div class="col-sm">
+        <div class="d-flex justify-content-sm-end gap-2">
+            <button class="btn btn-success add-btn"> + &nbsp;Add</button>
+            <button class="btn btn-success"><i class="bi bi-house align-baseline me-1"></i>
+                DOWNLOAD PDF</button>
+            <button class="btn btn-success"><i class="bi bi-house align-baseline me-1"></i>DOWNLOAD
+                EXCEL</button>
+
+                <button class="btn btn-success" >Clear All</button>
+
+
+        </div>
+    </div>
+</div>
+
+<div id="propertyList">
+
+    <div class="card-header">
+        <div class="row align-items-center gy-3">
+            <div class="col-md-auto col-6 text-end">
+                <div class="d-flex flex-wrap  gap-2">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body" style="margin-top:30px;">
+
+        <div class="table-responsive">
+            <div class="row d-flex mb-2">
+
+                <div class="search-box col-2">
+                    <input type="text" class="form-control search" placeholder="Search Name.."
+                        [(ngModel)]="searchTermName" (input)="filterLeads()">
+                    <i class="ri-search-line search-icon"></i>
+                </div>
+                <div class="search-box col-2">
+                    <input type="text" class="form-control search" placeholder="Search UserName"
+                        [(ngModel)]="searchTermuserName" (input)="filterLeads()">
+                    <i class="ri-search-line search-icon"></i>
+                </div>
+                <div class="search-box col-2">
+                    <input type="text" class="form-control search" placeholder="Search Phone "
+                        [(ngModel)]="searchTermPhone" (input)="filterLeads()">
+                    <i class="ri-search-line search-icon"></i>
+                </div>
+                <div class="search-box col-2">
+                    <input type="text" class="form-control search" placeholder="Search Branch"
+                        [(ngModel)]="searchTermBranch" (input)="filterLeads()">
+                    <i class="ri-search-line search-icon"></i>
+                </div>
+
+
+            </div>
+            <table class="table  table-centered align-middle table-nowrap mb-0" id="sortable-table">
+                <thead class="text-muted table-light">
+                    <tr>
+                       
+
+                        <th scope="col" (click)="sortTable('userName')" style="cursor:pointer">
+                            UserName
+                            <span *ngIf="sortColumn === 'userName'">
+                                <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                                <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                            </span>
+                        </th>
+                        <th scope="col" (click)="sortTable('email')" style="cursor:pointer">
+                            Email
+                            <span *ngIf="sortColumn === 'email'">
+                                <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                                <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                            </span>
+                        </th>
+                        <th scope="col" (click)="sortTable('phoneNumber')" style="cursor:pointer">
+                            Phone Number
+                            <span *ngIf="sortColumn === 'phoneNumber'">
+                                <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                                <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                            </span>
+                        </th>
+                        <th scope="col">Reports To</th>
+                        <th scope="col" (click)="sortTable('branchName')" style="cursor:pointer">
+                            Branch
+                            <span *ngIf="sortColumn === 'branchName'">
+                                <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                                <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                            </span>
+                        </th>
+                        
+                        <th scope="col">Actions</th>
+
+
+                    </tr>
+
+                </thead>
+                <tbody class="list form-check-all">
+                    @for (list of sortedUserList;
+                    track $index) {
+
+                    <tr>
+                        <td>{{list.userName}}</td>
+                        <td>{{list.email}}</td>
+                        <td>{{list.phoneNumber}}</td>
+                        <td>{{list.branchName}}</td>
+                        <td>
+
+                            <div class="dropdown">
+                                <button class="btn btn-subtle-secondary btn-sm dropdown-toggle" type="button"
+                                    data-bs-toggle="dropdown">
+                                    <i class="bi bi-three-dots-vertical"></i>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end" style="cursor: pointer;">
+                                   
+                                    <li *ngFor="let action of UserListActions" style="cursor: pointer;">
+                                        <a class="dropdown-item" href="javascript:void(0);" style="cursor: pointer;">
+
+                                            <span class="edit" *ngIf="action === 'Edit'"
+                                                 style="cursor: pointer;">
+                                                Edit
+                                            </span>
+                                            
+                                            <span class="edit" *ngIf="action == 'Reset Password'" class="edit"
+                                                 style="cursor: pointer;">
+                                                {{action}}
+                                            </span>
+
+                                            <span *ngIf="action === (list.isActive ? 'Inactive' : 'Active')"
+                                                 style="cursor: pointer;">
+                                                {{action}}
+                                            </span>
+                                            <span *ngIf="action === 'Delete'" 
+                                                style="cursor: pointer;">
+                                                {{action}}
+                                            </span>
+
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    }
+                </tbody><!-- end tbody -->
+            </table><!-- end table -->
+
+
+
+        </div>
+
+
+
+
+        <div class="d-flex justify-content-end">
+            <!-- <i style="font-size:16px;color:navy;position: relative;left:10px;top:20px" class="fa">&#xf021;</i> -->
+            <div class="pagination-wrap hstack gap-2">
+                <pagination class="pagination-wrap hstack gap-2" (pageChange)="onTableDataChange($event)"
+                    [itemsPerPage]="15">
+
+                </pagination>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display2}" id="dltModel">
+    <div class="modal-dialog" role="document" style="position: relative;top:150px;">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <span style="font-weight: bold;margin-left: 130px;"> Do you want to delete record?</span>
+                <span class="close" aria-label="Close" (click)="onClosed()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <hr>
+            <div class="modal-body">
+
+                <form>
+                    <div class="row" id="fields">
+                        <div class="col">
+
+
+                        </div>
+
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-danger" (click)="onClosed()">X Cancel</button>
+                <button type="button" class="btn btn-success" (click)="DeleteList()">OK</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display4}" id="dltModel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <span style="font-weight: bold;margin-left: 130px;">Reset Password</span>
+                <span class="close" aria-label="Close" (click)="closePassword()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <hr>
+            <div class="modal-body">
+
+                <form [formGroup]="passwordResetForm">
+                    <div class="row">
+
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">New PassWord</label>
+                            <input type="Password" class="form-control" formControlName="newPassword"
+                                placeholder="Enter New PassWord">
+                            <div *ngIf="passwordResetForm.get('newPassword').errors?.required && passwordResetForm.get('newPassword').touched"
+                                style="color:red">
+                                Password is required.
+                            </div>
+                            <div *ngIf="passwordResetForm.get('newPassword').errors?.minlength && passwordResetForm.get('newPassword').touched"
+                                style="color:red">
+                                Password must be at least 8 characters long.
+                            </div>
+                            <div *ngIf="passwordResetForm.get('newPassword').errors?.invalidPassword && passwordResetForm.get('newPassword').touched"
+                                style="color:red">
+                                Password must contain all the characters.
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
+                            <input type="password" class="form-control" formControlName="confirmPassword">
+                            <div *ngIf="passwordResetForm.hasError('mismatch') && passwordResetForm.get('confirmPassword').touched"
+                                style="color:red">
+                                Passwords do not match.
+                            </div>
+                            <!-- <div *ngIf="error12">
+                                <p style="color:red"> Passwords do not match.</p>
+
+                            </div> -->
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" (click)="savePassword()">Save</button>
+                <button type="button" class="btn btn-danger" (click)="closePassword()">X Cancel</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display3}" id="dltModel">
+    <div class="modal-dialog" role="document" style="position: relative;top:150px;">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <span style="font-weight: bold;margin-left: 130px;">Are you sure to make Inactive ?</span>
+                <span class="close" aria-label="Close" (click)="closeActive()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <hr>
+
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-danger" (click)="closeActive()">X Cancel</button>
+                <button type="button" class="btn btn-success" (click)="closeActive()">Ok</button>
+            </div>
+        </div>
+    </div>
+
+</div>

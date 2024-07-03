@@ -1,0 +1,153 @@
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4>Region Performance Report</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item active">Chits</li>
+                    <li class="breadcrumb-item active">Region Performance Report</li>
+                </ol>
+              
+            </div>
+
+        </div>
+    </div>
+    <div class="col-sm">
+        <div class="d-flex justify-content-sm-end gap-2">
+           
+            <i style="color:rgb(69, 43, 134)" class="bi bi-copy"></i><svg xmlns="http://www.w3.org/2000/svg"
+            width="18" height="18" fill="currentColor" class="bi bi-copy" viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z" />
+        </svg>
+
+        <i style="color:rgb(69, 43, 134)" class="bi bi-file-earmark-excel" width="18" height="18"></i>
+        <i style="color:rgb(69, 43, 134)" class="bi bi-file-earmark-pdf" width="18" height="18"></i>
+        <i style="color:rgb(69, 43, 134)" class="bi bi-file-earmark-text" width="18" height="18"></i>
+        <i style="color:rgb(69, 43, 134)" class="bi bi-printer icon-hover" [print]="['print',config]"
+            width="18" height="18"></i>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="container" id="print">
+<!-- <div style="font-weight:normal; font-size: 25px;">
+        Region Performance Report</div> -->
+    <!-- <div class=" col float-end d-flex gap-2 print-none">
+        <i style="color:rgb(69, 43, 134)" class="bi bi-copy"></i><svg xmlns="http://www.w3.org/2000/svg" width="18"
+            height="18" fill="currentColor" class="bi bi-copy" viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z" />
+        </svg>
+
+        <i style="color:rgb(69, 43, 134)" class="bi bi-file-earmark-excel" width="18" height="18"></i>
+        <i style="color:rgb(69, 43, 134)" class="bi bi-file-earmark-pdf" width="18" height="18"></i>
+        <i style="color:rgb(69, 43, 134)" class="bi bi-file-earmark-text" width="18" height="18"></i>
+        <i style="color:rgb(69, 43, 134)" class="bi bi-printer icon-hover" [print]="['print',config]" width="18"
+            height="18"></i>
+    </div> -->
+
+
+
+
+    <div class="container" style="background-color:white;
+box-shadow: 1px 1px 1px 1px #888888; height: 100%; width:100%;top:10px; position: relative;">
+        <table class="table table-striped" id="sortable-table">
+
+            <thead class="text-muted table-light">
+                <tr>
+                    <!-- <th scope="col" (click)="sortTable(0)">Branch Name<i class="fa-solid fa-sort"></i></th>
+                    <th scope="col" (click)="sortTable(1)">Total Contacts<i class="fa-solid fa-sort"></i></th>
+                    <th scope="col" (click)="sortTable(2)">Total Leads<i class="fa-solid fa-sort"></i></th>
+                    <th scope="col" (click)="sortTable(3)">Win(%)<i class="fa-solid fa-sort"></i></th>
+                    <th scope="col" (click)="sortTable(4)">Business Value<i class="fa-solid fa-sort"></i></th>
+                    <th scope="col" (click)="sortTable(5)">Pipeline<i class="fa-solid fa-sort"></i></th> -->
+
+                    <th scope="col" (click)="sortTable('Branch_Name')" style="cursor:pointer">
+                        Branch Name
+                        <span *ngIf="sortColumn === 'Branch_Name'">
+                            <!-- Show ascending or descending icon based on sortOrder -->
+                            <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                            <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                        </span>
+                        <span *ngIf="sortColumn !== 'Branch_Name'">
+                            <!-- Hide the default ascending icon when sorting by other columns -->
+                            <i [hidden]="true" class="fa fa-sort-up"></i>
+                        </span>
+                    </th>
+                   
+                    <th scope="col" (click)="sortTable('Total_Contacts')" style="cursor:pointer">
+                        Total Contacts
+                        <span *ngIf="sortColumn === 'Total_Contacts'">
+                            <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                            <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                        </span>
+                    </th>
+                    <th scope="col" (click)="sortTable('Total_Leads')" style="cursor:pointer">
+                        Total Leads
+                        <span *ngIf="sortColumn === 'Total_Leads'">
+                            <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                            <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                        </span>
+                    </th>
+                    <th scope="col" (click)="sortTable('Win')" style="cursor:pointer">
+                        Win(%)
+                        <span *ngIf="sortColumn === 'Win'">
+                            <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                            <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                        </span>
+                    </th>
+                    
+                    <th scope="col" (click)="sortTable('Business_Value')" style="cursor:pointer">
+                        Business Value
+                        <span *ngIf="sortColumn === 'Business_Value'">
+                            <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                            <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                        </span>
+                    </th>
+                    <th scope="col" (click)="sortTable('Pipeline')" style="cursor:pointer">
+                        Pipeline
+                        <span *ngIf="sortColumn === 'Pipeline'">
+                            <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                            <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                        </span>
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody style="position: relative;left:10px;">
+                @for (region of sortedRegionPerformanceList; track $index) {
+                <tr>
+                    <td>{{region.Branch_Name}}</td>
+                    <td>{{region.Total_Contacts}}</td>
+                    <td>{{region.Total_Leads}}</td>
+                    <td>{{region.Win}}</td>
+                    <td>{{region.Business_Value}}</td>
+                    <td>{{region.Pipeline}}</td>
+                </tr>
+                }
+            </tbody>
+
+        </table>
+        <i style="font-size:16px;color:navy;position: relative;left:10px" class="fa">&#xf021;</i>
+        <!-- <nav aria-label="Page navigation example"
+        style="margin-left: 350px;position: relative;top:-20px;border-radius: 30px;">
+        <ul class="pagination">
+            <li class="page-item" style="border-radius: 300px;"><a class="page-link"
+                    style="border-radius: 30px; width:30px"><i class="fas fa-chevron-left"></i></a>
+            </li>
+            <li class="page-item"><a class="page-link" style="background-color: yellow;border-radius: 30px;">1</a></li>
+            <li class="page-item"><a class="page-link" style="border-radius: 30px;">2</a></li>
+            <li class="page-item" style="border-radius: 30px;"><a class="page-link" style="border-radius: 30px;">3</a>
+            </li>
+            <li class="page-item"><a class="page-link" style="border-radius: 30px;width:30px"><i
+                        class="fas fa-chevron-right"></i></a></li>
+        </ul>
+    </nav> -->
+    </div>
+</div>

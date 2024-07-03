@@ -1,0 +1,351 @@
+<!-- <div class="row" >
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <div class="page-title-right" style="position: relative;">
+                <ol class="breadcrumb m-0">
+
+                    <li class="breadcrumb-item active text-primary">Administration</li>
+                    <li class="breadcrumb-item active">
+                        <a role="button" class="text-primary">Notification Settings</a>
+                    </li>
+
+
+                </ol>
+            </div>
+        
+        </div>
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4>Notification Settings</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item active">Administration</li>
+                    <li class="breadcrumb-item active">Notifications</li>
+                    <li class="breadcrumb-item active">Notification Settings</li>
+                </ol>
+                <br>
+
+            </div>
+
+
+        </div>
+    </div>
+    
+</div>
+<div class="tab-content  text-muted">
+
+    <tabset class="mb-3" >
+      <tab  heading="WhatsApp" class="nav-item">
+            <div class="card">
+                <div class="card-header">
+                    <div class="col-sm">
+                        <div class="d-flex justify-content-sm-end">
+                            <button  (click)="AddNotificationsetting()" style="cursor: pointer;" type="button"
+                                class="btn btn-warning add-btn me-2" id="create-btn"><i class="ri-add-line align-bottom me-1"></i>
+                                Add</button>
+                          
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="customerList">
+                        <div class="row g-4 mb-3">
+                            <div class="col-sm-auto">
+                            </div>
+                            <div class="table-responsive table-card mt-3 mb-1">
+
+                                <!-- <div class="row d-flex d-sm-flex mt-3 mb-2">
+                                    <div class="search-box  col-2">
+                                        <input type="text" class="form-control search" placeholder="Search With Name.."
+                                            [(ngModel)]="searchTermName" (input)="filterLeads()">
+                                        <i class="ri-search-line search-icon"></i>
+                                    </div>
+                                    <div class="search-box  col-3 justify-content-center">
+                                        <input type="text" class="form-control search" placeholder="Search With Description"
+                                            [(ngModel)]="searchTermPhone" (input)="filterLeads()">
+                                        <i class="ri-search-line search-icon"></i>
+                                    </div>
+    
+    
+    
+                                   
+                                </div> -->
+
+
+
+
+
+
+
+
+                                <table class="table align-middle table-nowrap" id="customerTable" id="sortable-table">
+                                    <thead class="table-light">
+                                        <tr>
+                                      
+                                            <th scope="col" (click)="sortTable('id')" style="cursor:pointer">
+                                                Id
+                                            <span *ngIf="sortColumn === 'id'">
+                                                <!-- Show ascending or descending icon based on sortOrder -->
+                                                <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                                            </span>
+                                            <span *ngIf="sortColumn !== 'id'">
+                                                <!-- Hide the default ascending icon when sorting by other columns -->
+                                                <i [hidden]="true" class="fa fa-sort-up"></i>
+                                            </span>
+                                        </th>
+                                        <th scope="col" (click)="sortTable('name')" style="cursor:pointer">
+                                            Name
+                                            <span *ngIf="sortColumn === 'name'">
+                                                <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                                            </span>
+                                        </th>
+                                        <th scope="col" (click)="sortTable('description')" style="cursor:pointer">
+                                            Description
+                                            <span *ngIf="sortColumn === 'description'">
+                                                <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                                            </span>
+                                        </th>
+                                            <!-- <th>Status</th> -->
+                                            <th class="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="list form-check-all">
+                                        @for (data of sortedNotificationWhtsappList; track $index) {
+                                        <tr>
+                                            <td>{{data.id}}</td>
+                                            <td>
+                                                {{data.name}}</td>
+                                            <td>{{data.description}}</td>
+
+                                            <!-- <td>{{data.active}}</td> -->
+                                            <td>
+                                                <div class="d-flex gap-2">
+
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-subtle-secondary btn-sm dropdown-toggle"
+                                                            data-bs-toggle="dropdown">
+                                                            <i class="bi bi-three-dots-vertical"></i>
+                                                        </button>
+
+                                                        <ul class="dropdown-menu dropdown-menu-end">
+
+                                                            <li><a (click)="editWhatsappForm(data.id)" class="dropdown-item edit-item-btn"><i
+                                                                        class="ph-pencil align-middle me-1"></i>
+                                                                    Edit</a></li>
+                                                            <li><a (click)="deleteForm(data.id)" class="dropdown-item remove-item-btn"
+                                                                    href="javascript:void(0);"><i
+                                                                        class="ph-trash align-middle me-1"></i>
+                                                                    Remove</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        }
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+        </tab>
+        <tab heading="SMS" class="nav-item">
+           
+            <div class="card">
+                <div class="card-header">
+                    <div class="col-sm">
+                        <div class="d-flex justify-content-sm-end">
+                            <button  (click)="AddSMSNotificationsetting()" style="cursor: pointer;" type="button"
+                                class="btn btn-warning add-btn me-2" id="create-btn"><i class="ri-add-line align-bottom me-1"></i>
+                                Add</button>
+                          
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="customerList">
+                        <div class="row g-4 mb-3">
+                            
+                            <div class="table-responsive table-card mt-3 mb-1">
+                                <table class="table align-middle table-nowrap" id="customerTable" id="sortable-table">
+                                    <thead class="table-light">
+                                        <tr>
+
+                                            
+                                            <th scope="col"  style="cursor:pointer">
+                                                Id
+                                                
+                                               
+                                            </th>
+                                            <th scope="col"  style="cursor:pointer">
+                                                Name
+                                            
+                                            </th>
+                                            <th scope="col"  style="cursor:pointer">
+                                                Description
+                                                
+                                            </th>
+                                            <!-- <th>Status</th> -->
+                                            <th class="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="list form-check-all">
+                                        @for (data of smsData; track $index) {
+                                        <tr>
+                                            <td>{{data.id}}</td>
+                                            <td>
+                                                {{data.name}}</td>
+                                            <td>{{data.description}}</td>
+
+                                            <!-- <td>{{data.active}}</td> -->
+                                            <td>
+                                                <div class="d-flex gap-2">
+
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-subtle-secondary btn-sm dropdown-toggle"
+                                                            data-bs-toggle="dropdown">
+                                                            <i class="bi bi-three-dots-vertical"></i>
+                                                        </button>
+
+                                                        <ul class="dropdown-menu dropdown-menu-end">
+
+                                                            <li><a (click)="updateSms(data.id)" class="dropdown-item edit-item-btn"><i
+                                                                        class="ph-pencil align-middle me-1"></i>
+                                                                    Edit</a></li>
+                                                            <li><a (click)="deleteSmslist(data.id)"class="dropdown-item remove-item-btn"
+                                                                    href="javascript:void(0);"><i
+                                                                        class="ph-trash align-middle me-1"></i>
+                                                                    Remove</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        }
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+                            <!-- <div class="d-flex justify-content-end">
+                                <div class="pagination-wrap hstack gap-2">
+                                    <pagination class="pagination-wrap hstack gap-2" [totalItems]="roleData2.length"
+                                        [itemsPerPage]="20" (pageChanged)="tablePageChanged($event)"></pagination>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+        </tab>
+        <tab  heading="E-mail"  class="nav-item" >
+            <div class="card">
+                <div class="card-header">
+                    <div class="col-sm">
+                        <div class="d-flex justify-content-sm-end">
+                            <button  (click)="addEmilnotification()" style="cursor: pointer;" type="button"
+                                class="btn btn-warning add-btn me-2" id="create-btn"><i class="ri-add-line align-bottom me-1"></i>
+                                Add</button>
+                          
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="customerList">
+                        <div class="row g-4 mb-3">
+                            
+                            <div class="table-responsive table-card mt-3 mb-1">
+                                <table class="table align-middle table-nowrap" id="customerTable" id="sortable-table">
+                                    <thead class="table-light">
+                                        <tr>
+
+                                            
+                                            <th scope="col"  style="cursor:pointer">
+                                                Id
+                                               
+                                            </th>
+                                            <th scope="col"  style="cursor:pointer">
+                                                Name
+                                               
+                                            </th>
+                                            <th scope="col"  style="cursor:pointer">
+                                                EmailId
+                                              
+                                            </th>
+                                            <th>userName</th>
+                                            <th>host</th>
+                                            <!-- <th>Status</th> -->
+                                            <th class="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="list form-check-all">
+                                        @for (data of getEmailData; track $index) {
+                                        <tr>
+                                            <td>{{data.id}}</td>
+                                            <td>{{data.displayName}}</td>
+                                            <td>
+                                                {{data.fromEmailId}}</td>
+                                            <td>{{data.userName}}</td>
+                                            <td>{{data.host}}</td>
+
+                                            <!-- <td>{{data.isActive}}</td> -->
+                                            <td>
+                                                <div class="d-flex gap-2">
+
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-subtle-secondary btn-sm dropdown-toggle"
+                                                            data-bs-toggle="dropdown">
+                                                            <i class="bi bi-three-dots-vertical"></i>
+                                                        </button>
+
+                                                        <ul class="dropdown-menu dropdown-menu-end">
+                                                            <!-- <li><a (click)="addEmilnotification()" class="dropdown-item edit-item-btn">
+                                                            Add</a></li> -->
+                                                            <li><a (click)="updateEmail(data.id)" class="dropdown-item edit-item-btn"><i
+                                                                        class="ph-pencil align-middle me-1"></i>
+                                                                    Edit</a></li>
+                                                            <li><a (click)="deleteEmailList(data.id)"class="dropdown-item remove-item-btn"
+                                                                    href="javascript:void(0);"><i
+                                                                        class="ph-trash align-middle me-1"></i>
+                                                                    Remove</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        }
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+                            <!-- <div class="d-flex justify-content-end">
+                                <div class="pagination-wrap hstack gap-2">
+                                    <pagination class="pagination-wrap hstack gap-2" [totalItems]="roleData2.length"
+                                        [itemsPerPage]="20" (pageChanged)="tablePageChanged($event)"></pagination>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+        </tab>
+
+    </tabset>
+</div>
+
+
+

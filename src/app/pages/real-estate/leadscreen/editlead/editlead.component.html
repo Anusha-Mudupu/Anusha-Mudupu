@@ -1,0 +1,422 @@
+<div class="tab-content  text-muted">
+    <tabset class="mb-3">
+        <tab heading="Edit Lead" class="nav-item">
+            <div class="tab-pane mt-3" id="home" role="tabpanel">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+
+                            <div class="page-title-right">
+
+                                <ol class="breadcrumb m-0">
+
+                                    <li class="breadcrumb-item active text-dark" (click)="Cancel()">Real Estate</li>
+                                    <li class="breadcrumb-item active">
+                                        <a role="button" class="text-primary">Edit Lead</a>
+                                    </li>
+
+
+                                </ol>
+
+                            </div>
+                            <h4 *ngIf="role ==='Agent'">Agent Branch:</h4>
+                            <h4 class="mb-sm-0">Edit Lead</h4>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+
+                            <form [formGroup]="updateFormBasedOnLabel()" class="tablelist-form">
+                                <div class="card-body">
+                                    <div class="row gy-2">
+                                        <!-- Name -->
+                                        <div class="col">
+                                            <div>
+                                                <label for="customername-field" class="form-label">Name</label>
+                                                <input type="text" id="customername-field" class="form-control"
+                                                    formControlName="leadName" placeholder="Enter Name" required />
+                                            </div>
+                                        </div>
+                                        <!-- Email -->
+                                        <div class="col">
+                                            <div>
+                                                <label for="email-field" class="form-label">Email</label>
+                                                <input type="email" id="email-field" class="form-control"
+                                                    placeholder="Enter Email" formControlName="emailId" />
+                                            </div>
+                                        </div>
+                                        <!-- Phone -->
+                                        <div class="col">
+                                            <div class="mb-3">
+                                                <label for="phone-field" class="form-label">Phone</label>
+                                                <input type="number" id="phone-field" class="form-control"
+                                                    placeholder="Enter Phone no." formControlName="contactNo" />
+                                            </div>
+                                        </div>
+                                        <!-- Enquired Date -->
+                                        <!-- <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="exampleInputPassword1" class="form-label">Enquired Date</label>
+                                                <input type="date" class="form-control" formControlName="dob">
+                                            </div>
+                                        </div> -->
+                                        <!-- Agent -->
+                                        <!-- <div class="col-md-6">
+                                            <label for="exampleInputPassword1" class="form-label">Agent</label>
+                                            <div class="input-group">
+                                                <select formControlName="assignTo" class="form-select mb-3"
+                                                    aria-label="Default select example">
+                                                    <option value="" disabled selected style="display:none;">Select Agent</option>
+                                                    <option *ngFor="let user of usersData" [value]="user.id">{{ user.firstName }} {{
+                                                        user.lastName }}</option>
+                                                </select>
+                                            </div>
+                                        </div> -->
+                                        <!-- Product -->
+
+
+
+
+
+
+
+                                    </div>
+
+
+
+                                    <div class="row gy-2">
+
+                                        <!-- <div class=" col-md-6">
+                                            <label for="exampleInputPassword1" class="form-label">Branch</label>
+                                            <div class="input-group">
+                
+                                                <select formControlName="branchId" class="form-select mb-3"
+                                                    aria-label="Default select example">
+                                                    @for(branch of brnachData; track $index){
+                                                    <option [value]="branch.id">{{branch.name}}</option>
+                                                    <option value="" disabled selected style="display:none;">Select Branch</option>
+                                                    }
+                                                </select>
+                                            </div>
+                
+                                        </div> -->
+
+
+                                        <div class="row gy-2">
+
+                                            <div class="col">
+                                                <label for="productCategory" class="form-label">Product Category</label>
+                                                <br>
+                                                <select id="productCategory" formControlName="productCategory"
+                                                    class="form-select" (change)="onProductTypeChange($event)">
+                                                    <option value="">Select Product Category</option>
+                                                    <option *ngFor="let category of productCategory"
+                                                        [value]="category.code">{{
+                                                        category.name }}</option>
+                                                </select>
+                                            </div>
+                                            <div class="col">
+                                                <label for="exampleInputPassword1" class="form-label">Source</label>
+                                                <div class="input-group">
+                                                    <select formControlName="sourceId" class="form-select mb-3"
+                                                        aria-label="Default select example">
+                                                        <option value="" disabled selected style="display:none;">Select
+                                                            Source</option>
+                                                        <option *ngFor="let source of SourceData"
+                                                            [value]="source.sourceId">
+                                                            {{ source.name
+                                                            }}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <label for="exampleInputPassword1" class="form-label"> Sub
+                                                    Source</label>
+                                                <div class="input-group">
+                                                    <select formControlName="sourceSubCategoryId"
+                                                        class="form-select mb-3" aria-label="Default select example">
+                                                        <option value="" disabled selected style="display:none;">Select
+                                                            Sub
+                                                            Source</option>
+                                                        <option *ngFor="let sub of Sourcesubcategorydata"
+                                                            [value]="sub.sourceSubCategoryId">
+                                                            {{ sub.name }}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row gy-2">
+
+
+
+
+                                            <div class="col" *ngIf="showOpenPlots">
+                                                <label for="product" class="form-label">Layout Name</label>
+
+                                                <select id="Type" formControlName="openPlots " class="form-select">
+                                                    <option value="">Select Layout Name </option>
+
+                                                    <option *ngFor="let product of openPlots "
+                                                        [value]="product.layoutCode">{{
+                                                        product.layoutName }}</option>
+                                                </select>
+                                            </div>
+                                            <div class="col" *ngIf="showApartmentArea || showVillaArea ">
+                                                <label for="product" class="form-label" *ngIf="showApartmentArea">
+                                                    Apartment
+                                                    Type</label>
+                                                <label for="product" class="form-label" *ngIf="showVillaArea">Villa
+                                                    Type</label>
+
+
+                                                <select id="Type" formControlName="Type" class="form-select">
+                                                    <option value="">Select Type</option>
+
+                                                    <option *ngFor="let product of apartType" [value]="product.name">{{
+                                                        product.name }}</option>
+                                                </select>
+                                            </div>
+                                            <!-- <div class="col" *ngIf="showVillaType">
+                                                    <label for="product" class="form-label">Villas Type</label>
+                                                    <br>
+                                                    <select id="Type" formControlName="Type" class="form-select"
+                                                        ">
+                                                        <option value="">Select Villa Type</option>
+                                                        <option *ngFor="let product of villaType" [value]="product.name">{{
+                                                            product.name }}</option>
+                                                    </select>
+                                                </div> -->
+                                            <div class="col"
+                                                *ngIf="showApartmentArea || showVillaArea || showOpenPlots">
+                                                <label for="product" class="form-label">Facing</label>
+                                                <select id="facing" formControlName="facing" class="form-select">
+                                                    <option value="">Select facing</option>
+                                                    <option *ngFor="let product of productFacing"
+                                                        [value]="product.name">{{
+                                                        product.name }}</option>
+                                                </select>
+                                            </div>
+
+
+                                            <div class="col" *ngIf="showApartmentArea || showOpenPlots">
+
+                                                <label for="product" class="form-label"> Area</label>
+                                                <select id="facing" formControlName="facing" class="form-select">
+                                                    <option value="">Select Area</option>
+                                                    <option *ngFor="let apartment of filteredApartments"
+                                                        [value]="apartment.Area">{{
+                                                        apartment.Area }}</option>
+                                                </select>
+                                            </div>
+                                            <div class="col" *ngIf="showVillaArea">
+                                                <label for="product" class="form-label">Villas Area</label>
+                                                <br>
+                                                <select id="facing" formControlName="facing" class="form-select">
+                                                    <option value="">Select Area</option>
+                                                    <option *ngFor="let villas of filterVillasArea"
+                                                        [value]="villas.Area">{{ villas.Area
+                                                        }}</option>
+                                                </select>
+                                            </div>
+
+
+                                            <div class="col" *ngIf="showcoworking">
+                                                <label for="coworking" class="form-label">Project Name</label>
+                                                <br>
+                                                <select id="facing" formControlName="coworking" class="form-select">
+                                                    <option value="">Select project</option>
+                                                    <option *ngFor="let product of coworking"
+                                                        [value]="product.prjectCode">{{
+                                                        product.prjectName }}</option>
+                                                </select>
+                                            </div>
+                                            <div class="col" *ngIf="showcoworking">
+                                                <label for="coworking" class="form-label">Product Name</label>
+                                                <br>
+                                                <select id="facing" formControlName="coworking" class="form-select">
+                                                    <option value="">Select project</option>
+                                                    <option *ngFor="let product of coworking"
+                                                        [value]="product.productCode">{{
+                                                        product.productName }}</option>
+                                                </select>
+                                            </div>
+                                            <!-- // commercialUnits -->
+                                            <div class="col" *ngIf="showCommercialUnits">
+                                                <label for="floorNo" class="form-label">Floor No.</label>
+
+                                                <select id="floorNo" formControlName="floorNo" class="form-select"
+                                                    (change)="onFloorNoChange($event)">
+                                                    <option value="">Select Floor No</option>
+                                                    <option *ngFor="let unit of commercialUnits" [value]="unit.floorNo">
+                                                        {{ unit.floorNo
+                                                        }}</option>
+                                                </select>
+                                            </div>
+                                            <div class="col" *ngIf="showCommercialUnits && selectedFloorNo">
+                                                <label for="floorUnit" class="form-label">Floor Unit</label>
+                                                <br>
+                                                <input type="text" id="floorUnit" class="form-control"
+                                                    [(ngModel)]="selectedUnit" [value]="getFloorUnit()" readonly>
+                                            </div>
+                                            <div class="col" *ngIf="showCommercialUnits">
+                                                <label for="product" class="form-label">Project Name</label>
+
+                                                <select id="facing" formControlName="productNames" class="form-select">
+                                                    <option value="">Select projectName</option>
+                                                    <option *ngFor="let product of commercialUnits"
+                                                        [value]="product.projectCode">{{
+                                                        product.projectName }}</option>
+                                                </select>
+                                            </div>
+
+
+
+
+
+
+
+
+                                            <!-- // commercial space -->
+
+                                            <div class="col" *ngIf="showCommercialSpace">
+                                                <label for="product" class="form-label">Project Name</label>
+                                                <br>
+                                                <select id="facing" formControlName="productNames" class="form-select">
+                                                    <option value="">Select projectName</option>
+                                                    <option *ngFor="let product of commercialSpace"
+                                                        [value]="product.projectCode">{{
+                                                        product.projectName }}</option>
+                                                </select>
+                                            </div>
+                                            <div class="col" *ngIf="showCommercialSpace">
+                                                <label for="product" class="form-label">Unit Size</label>
+                                                <br>
+                                                <select id="facing" formControlName="unitSize" class="form-select">
+                                                    <option value="">Select Unit Size</option>
+                                                    <option *ngFor="let product of commercialSpace"
+                                                        [value]="product.unitSize">{{
+                                                        product.unitSize}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="col" *ngIf="showCommercialSpace">
+                                                <label for="product" class="form-label">Value</label>
+                                                <br>
+                                                <select id="facing" formControlName="value" class="form-select">
+                                                    <option value="">Select Value</option>
+                                                    <option *ngFor="let product of commercialSpace"
+                                                        [value]="product.value">{{
+                                                        product.value}}</option>
+                                                </select>
+                                            </div>
+                                            <!-- <div class="col" *ngIf="showCommercialSpace">
+                                                <label for="product" class="form-label">Monthly Rent</label>
+                                                <br>
+                                                <select id="facing" formControlName="monthlyRent" class="form-select">
+                                                    <option value="">Select Monthly Rent</option>
+                                                    <option *ngFor="let product of commercialSpace" [value]="product.monthlyRent">{{
+                                                        product.monthlyRent}}</option>
+                                                </select>
+                                            </div> -->
+
+
+
+                                        </div>
+                                    </div>
+
+
+
+
+                                    <div class="mb-3 row">
+                                        <div class="col-6">
+                                            <label for="customername-field" class="form-label">Address</label>
+
+                                            <textarea class="form-control" id="exampleFormControlTextarea5"
+                                                formControlName="address" rows="3"></textarea>
+                                        </div>
+                                        <div class="mb-3 col-6">
+                                            <label for="exampleFormControlTextarea5" class="form-label">Query</label>
+                                            <textarea class="form-control" id="exampleFormControlTextarea5"
+                                                formControlName="employeeName" rows="3"></textarea>
+
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="modal-footer">
+                                        <div class="hstack gap-2 justify-content-end">
+                                            <button type="button" class="btn btn-light" (click)="Cancel()">Back</button>
+                                            <button type="submit" class="btn btn-success" (click)="saveUpdateLeadData()"
+                                                id="add-btn">Update Lead</button>
+                                            <!-- <button type="button" class="btn btn-success" id="edit-btn">Update</button> -->
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="z-index: 11">
+                    <div id="borderedToast4" class="toast toast-border-danger overflow-hidden mt-3" role="alert"
+                        aria-live="assertive" aria-atomic="true">
+                        <div class="toast-body">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-shrink-0 me-2">
+                                    <i class="ri-alert-line align-middle"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h6 class="mb-0">Something is very wrong! <a href="javascript:void(0);"
+                                            class="text-decoration-underline">See detailed report.</a></h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </tab>
+        <tab heading="Time Line" class="nav-item">
+
+
+            <div class="tab-pane active mt-3" id="product1" role="tabpanel">
+
+
+                <div class="card-body">
+                    <ul class="acitivity-timeline-2 list-unstyled mb-0">
+                        <li *ngFor="let data of followupget;">
+                            <!-- <h6 class="fs-md">Purchase by James Price</h6> -->
+                            <div class="">
+                                <p class=""> Remarks :
+                                    <span class="next">{{data.remarks}}</span>
+                                </p>
+                            </div>
+                            <div class="sm:text-left">
+                                <p class=""> Next FollowUp Date :
+                                    <span class="next">{{data.nextFollowUpDate}} by {{data.nextFollowupTypeName}}</span>
+                                </p>
+                            </div>
+                            <!-- <p class="mb-0">Product noise evolve smartwatch</p> -->
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+
+
+
+
+
+        </tab>
+
+    </tabset>
+</div>

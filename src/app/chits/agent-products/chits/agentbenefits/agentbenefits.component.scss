@@ -1,0 +1,59 @@
+/*
+ *   Copyright (c) 2024 Dmantz Technologies private limited
+ *   All rights reserved.
+ */
+ #addbtn {
+    width: 100px;
+    position: fixed;
+    right: 0px;
+    margin-right: 270px;
+    overflow: hidden;
+}
+.pagination{
+    // margin-left: 200px;
+    margin-top: 6px;
+   position: relative;
+   left:450px;
+}
+.drop-area {
+    border: 2px dashed #ccc;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 10px 20px rgba(1, 1, 1, 0.1);
+}
+.modal-footer{
+    margin-right: 20px;
+    position: relative;
+    overflow: hidden;
+}
+#dltModel{
+    margin-top: 250px;
+}
+#addModel{
+    margin-top: 150px;
+}
+#editModel{
+    margin-top: 150px;
+}
+.bi-download{
+ position: relative;
+ right:10px;
+}
+.dropdown-toggle::after{
+    display: none;
+  }
+
+
+.fa-sort {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 5px;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+}
+.asc { border-bottom: 6px solid black; }
+.desc { border-top: 6px solid black; }
+table td{
+    border-color: black;
+}

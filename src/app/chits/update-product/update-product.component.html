@@ -1,0 +1,107 @@
+<div class="" tabindex="-1">
+    <div class="">
+        <div class="">
+            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                <h4 class="mb-sm-0">Update Product</h4>
+ 
+
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+
+
+                        <li class="breadcrumb-item active">Chits</li>
+                        <li class="breadcrumb-item active" (click)="onCloseHandled()">
+                            <a role="button">Product</a>
+                        </li>
+
+
+                    </ol>
+                </div>
+               
+
+
+            </div>
+
+            <form [formGroup]="updateProductForm">
+                <div class="row gy-2">
+				
+                    <input type="number" placeholder="{{productDataById.id}}" [(ngModel)]="productDataById.id"
+                    formControlName="id"  hidden>
+
+                    <div class="col-md-6">
+                        <label for="exampleInputEmail1" class="form-label">Business Verticals</label>
+                        <input disabled type="text" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp" placeholder=" chit Fund" aria-placeholder="Chit Fund">
+                        <div id="emailHelp" class="form-text"></div>
+                    </div>
+
+
+                    <div class="col-md-6">
+                        <label for="exampleInputEmail1" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                            placeholder=" chit Fund" aria-placeholder="Chit Fund" formControlName="name"
+                            placeholder="{{productDataById.name}}" [(ngModel)]="productDataById.name">
+                        <div id="emailHelp" class="form-text"></div>
+                        
+                        
+                    </div>
+
+
+
+                    <div class="col-md-6">
+                        <label for="exampleInputPassword1" class="form-label">Chit value</label>
+                        <input type="number" class="form-control" id="exampleInputPassword1" formControlName="chitValue"
+                            placeholder="{{productDataById.chitValue}}" [(ngModel)]="productDataById.chitValue">
+                           
+                    </div>
+                    <div class="col-md-6">
+                        <label for="exampleInputPassword1" class="form-label">Months</label>
+                        <input type="number" class="form-control" id="exampleInputPassword1"
+                            placeholder="{{productDataById.tenureInMonths}}"
+                            [(ngModel)]="productDataById.tenureInMonths" formControlName="tenureInMonths">
+                           
+                    </div>
+
+
+                    <div class="col-md-6">
+                        <label for="exampleInputPassword1" class="form-label">Min.Installment</label>
+                        <input type="number" class="form-control" placeholder="{{productDataById.minInstallment}}"
+                            [(ngModel)]="productDataById.minInstallment" formControlName="minInstallment">
+                           
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="exampleInputPassword1" class="form-label">Max.Installment</label>
+                        <input type="number" class="form-control" placeholder="{{productDataById.maxInstallment}}"
+                            [(ngModel)]="productDataById.maxInstallment" formControlName="maxInstallment">
+                           
+                    </div>
+
+
+
+                    <div class="col-md-6">
+                        <label for="exampleInputPassword1" class="form-label">Min.Bid payable</label>
+                        <input type="number" class="form-control" placeholder="{{productDataById.minBidPayable}}"
+                            [(ngModel)]="productDataById.minBidPayable" formControlName="minBidPayable">
+                            
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="exampleInputPassword1" class="form-label">Max.Bid payable</label>
+                        <input type="number" class="form-control" placeholder="{{productDataById.maxBidPayable}}"
+                            [(ngModel)]="productDataById.maxBidPayable" formControlName="maxBidPayable">
+                           
+                    </div>
+
+
+                    <div class="d-flex gap-2  justify-content-end">
+                        <!-- <button type="submit" class="btn btn-primary">Save</button> -->
+                        <button type="button" class="btn btn-danger" (click)="onCloseHandled()">Cancel</button>
+                        <button type="button" class="btn btn-success" (click)="updateProduct()">Save</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

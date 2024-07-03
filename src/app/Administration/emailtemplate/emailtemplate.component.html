@@ -1,0 +1,186 @@
+
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4>Template</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item active">Chits</li>
+                    <li class="breadcrumb-item active">Notifications</li>
+                    <li class="breadcrumb-item active">Template</li>
+                </ol>
+                <br>
+
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+<div class="tab-content  text-muted">
+    <tabset>
+
+        <tab heading="WhatsApp" class="nav-item">
+            <form [formGroup]="editContentForm" (ngSubmit)="onSubmit()">
+                <div class="tab-pane mt-3" id="home" role="tabpanel">
+                    <div class="row align-items-start">
+
+                        <div class="col-sm-3  ">
+                            <ul class="list-unstyled chat-list chat-user-list card " id="userList">
+                                <li *ngFor="let data of whatsappdata; let i = index"
+                                    [ngClass]="{'active': selectedIndexWhatsApp === i}">
+                                    <a href="javascript: void(0);">
+                                        <div class="d-flex align-items-center">
+                                            <div class="text-truncate mb-0" (click)="selectUserWhatsApp(i)"
+                                                formControlName="name">{{data.name}}</div>
+                                            <div class="ms-auto"><span
+                                                    class="badge bg-dark-subtle text-dark rounded p-1"
+                                                    (click)="removeWhatsappData(data.id)"> &#10006; </span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="col-sm-9 mt-3 card">
+                            <div class="mt-2">
+                                <div class="mb-3 position-relative">
+                                    <input type="text" class="form-control email-compose-input" data-choices
+                                        data-choices-limit="15" value="" data-choices-removeItem placeholder="To">
+                                    <div class="position-absolute top-0 end-0">
+
+                                    </div>
+                                </div>
+
+
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" placeholder="Subject">
+                                </div>
+                                <ckeditor [editor]="Editor" data="{{whatsappConent}}" formControlName="content">
+
+                                </ckeditor>
+                                <button type="submit" class="btn btn-success float-end">Save</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </tab>
+        <tab heading="Sms" class="nav-item">
+            <form [formGroup]="editContentForm" (ngSubmit)="onSubmit()">
+                <div class="tab-pane active mt-3" id="product1" role="tabpanel">
+                    <div class="row align-items-start">
+
+                        <div class="col-sm-3  ">
+                            <ul class="list-unstyled chat-list chat-user-list card " id="userList">
+                                <li *ngFor="let data of smsData; let i = index"
+                                    [ngClass]="{'active': selectedIndexSms === i}">
+                                    <a href="javascript: void(0);">
+                                        <div class="d-flex align-items-center">
+                                            <div class="text-truncate mb-0" (click)="selectUserSms(i)"
+                                                formControlName="name">{{data.name}}</div>
+                                            <div class="ms-auto"><span
+                                                    class="badge bg-dark-subtle text-dark rounded p-1"
+                                                    (click)="removeSmsData(data.id)"> &#10006; </span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-9 mt-3 card">
+                            <div class="mt-2">
+                                <div class="mb-3 position-relative">
+                                    <input type="text" class="form-control email-compose-input" data-choices
+                                        data-choices-limit="15" value="" data-choices-removeItem placeholder="To">
+                                    <div class="position-absolute top-0 end-0">
+
+                                    </div>
+                                </div>
+
+
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" placeholder="Subject">
+                                </div>
+                                <ckeditor [editor]="Editor" data="{{smsConent}}"></ckeditor>
+                                <button type="submit" class="btn btn-success float-end">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </tab>
+        <tab heading="E-mail" class="nav-item">
+            <form [formGroup]="editContentForm" (ngSubmit)="onSubmit()">
+                <div class="tab-pane active mt-3" id="product11" role="tabpanel">
+                    <div class="row align-items-start">
+
+                        <div class="col-sm-3  ">
+                            <ul class="list-unstyled chat-list chat-user-list card " id="userList">
+                                <li *ngFor="let data of emailData; let i = index"
+                                    [ngClass]="{'active': selectedIndexEmail === i}">
+                                    <a href="javascript: void(0);">
+                                        <div class="d-flex align-items-center">
+                                            <div class="text-truncate mb-0" (click)="selectUserEmail(i)"
+                                                formControlName="name">{{data.name}}</div>
+                                            <div class="ms-auto"><span
+                                                    class="badge bg-dark-subtle text-dark rounded p-1"
+                                                    (click)="removeEmailData(data.id)"> &#10006; </span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-9 mt-3 card">
+                            <div class="mt-2">
+                                <div class="mb-3 position-relative">
+                                    <input type="text" class="form-control email-compose-input" data-choices
+                                        data-choices-limit="15" value="" data-choices-removeItem placeholder="To">
+                                    <div class="position-absolute top-0 end-0">
+                                        <div class="d-flex">
+                                            <button class="btn btn-link text-reset fw-semibold px-2" type="button"
+                                                (click)="collapse('CcRecipientsCollapse')">
+                                                Cc
+                                            </button>
+                                            <button class="btn btn-link text-reset fw-semibold px-2" type="button"
+                                                (click)="collapse('BccRecipientsCollapse')">
+                                                Bcc
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="collapse show" id="CcRecipientsCollapse">
+                                    <div class="mb-3">
+                                        <label>Cc:</label>
+                                        <input type="text" class="form-control" data-choices data-choices-limit="15"
+                                            data-choices-removeItem placeholder="Cc recipients">
+                                    </div>
+                                </div>
+                                <div class="collapse" id="BccRecipientsCollapse">
+                                    <div class="mb-3">
+                                        <label>Bcc:</label>
+                                        <input type="text" class="form-control" data-choices data-choices-limit="15"
+                                            data-choices-removeItem placeholder="Bcc recipients">
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" placeholder="Subject">
+                                </div>
+                                <ckeditor [editor]="Editor" data="{{emailContent}}" formControlName="content">
+                                </ckeditor>
+                                <button type="submit" class="btn btn-success float-end">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </tab>
+
+    </tabset>
+</div>

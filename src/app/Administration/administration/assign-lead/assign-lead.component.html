@@ -1,0 +1,139 @@
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+          
+            <div class="page-title-right">
+               
+                <ol class="breadcrumb m-0">
+
+                    <li class="breadcrumb-item active text-dark"  (click)="cancel()">Chits</li>
+                    <li class="breadcrumb-item active">
+                        <a role="button" class="text-primary">Assign Leads</a>
+                    </li>
+
+
+                </ol>
+                
+            </div>
+            <div class="col-sm">
+                <div class="d-flex justify-content-sm-end">
+                    <div class="search-box ms-2">
+                        <input type="text" class="form-control search" placeholder="Search..." [(ngModel)]="searchTerm"
+                            (input)="filterLeads()">
+                        <i class="ri-search-line search-icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="">
+
+            </div><!-- end card header -->
+
+            <div class="card-body">
+                <div id="customerList">
+                    <div class="row g-4 mb-3">
+
+                        <div class="m-0">
+                            <div class="row col-12 mt-2">
+                                <div class=" col-6">
+                                    <label for="exampleInputPassword1" class="form-label">Assign To</label>
+                                    <div class="input-group">
+
+                                        <select formControlName="user" class="form-select mb-3"
+                                            aria-label="Default select example"
+                                            (change)="updateAssignButtonState($event)">
+                                            @for(sub of users; track $index) {
+                                            <option [value]="sub.id">{{sub.firstName}} {{sub.lastName}}</option>
+                                            }
+                                        </select>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="col-6 mt-4" (click)="assignlead()">
+                                    <button type="button" class="btn btn-success add-btn me-2" id="create-btn"
+                                        [disabled]="!isAssignButtonEnabled"
+                                        [ngClass]="{'text-body-tertiary': !isAssignButtonEnabled}"
+                                        (click)="assignLead()">
+                                        Assign Lead
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive table-card mt-1 mb-1">
+                            <table class="table align-middle table-nowrap" id="customerTable">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th scope="col" style="width: 50px;">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="checkAll"
+                                                    value="option" [(ngModel)]="masterSelected"
+                                                    (change)="checkUncheckAll($event)">
+                                            </div>
+                                        </th>
+                                        <th class="sort">Lead Name
+                                        </th>
+                                        <th class="sort">Phone Number</th>
+                                        <th class="sort">Products</th>
+                                        <th class="sort">Branch</th>
+                                        <th class="sort ">Employee
+                                        </th>
+
+                                    </tr>
+                                </thead>
+                                <tbody class="list form-check-all">
+                                    @for (data of getSelectedData(); track $index) {
+                                    <tr id="a_{{data.id}}">
+                                        <th scope="row">
+
+
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="chk_child"
+                                                    value="{{data.id}}" [(ngModel)]="data.state"
+                                                    (change)="checkUncheckSingle($event, data?.id)">
+                                            </div>
+
+                                        </th>
+                                        <td class="id" style="display:none;"><a href="javascript:void(0);"
+                                                class="fw-medium link-primary">#VZ2101</a></td>
+                                        <td class="customer_name">{{data.leadName}}</td>
+                                        <td class="email">{{data.contactNo}}</td>
+                                        <td class="phone">{{data.productName}}</td>
+                                        <!-- <td class="date">{{Branch}}</td> -->
+                                        <td class="date">{{data.employeeName}}</td>
+
+
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                        <div class="d-flex justify-content-end">
+                            <div class="pagination-wrap hstack gap-2">
+                                <pagination class="pagination-wrap hstack gap-2" [totalItems]="getSelectedData().length"
+                                    [itemsPerPage]="15" (pageChanged)="tablepageChanged($event)"></pagination>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- end card -->
+            </div>
+            <!-- end col -->
+        </div>
+        <!-- end col -->
+    </div>
+    <!-- <div class="d-flex justify-content-center spinner-container" *ngIf="spinner">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div> -->
+</div>

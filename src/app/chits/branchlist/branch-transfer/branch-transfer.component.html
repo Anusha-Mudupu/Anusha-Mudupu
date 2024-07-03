@@ -1,0 +1,252 @@
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+
+            <h4 class="mb-sm-0">Branch Transfer</h4>
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+
+
+                    <li class="breadcrumb-item active">Branch Transfer</li>
+                    <li class="breadcrumb-item active" (click)="goToBranch()">Branch</li>
+                </ol>
+            </div>
+            
+
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+
+            <form class="tablelist-form" [formGroup]="leadTransferForm">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h3>From</h3>
+                        </div>
+                        <div class="col">
+                            <h3>To</h3>
+                        </div>
+                    </div>
+                    <div class="row gy-2 d-flex">
+                        <label for="exampleInputPassword1" class="form-label">Zone</label>
+                        <div class="col">
+
+                            <select class="form-select mb-3" (change)="onCategoryChange($event)"
+                                aria-label="Default select example" formControlName="fromId">
+                                <option>Select Branch</option>
+                                <option *ngFor="let data of zoneListData" [value]="data.id">
+                                    {{data.name}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col">
+
+                            <div class="input-group">
+
+                                <!-- <label class="input-group-text" for="inputGroupSelect01">Options</label> -->
+                                <select formControlName="toId" class="form-select mb-3"
+                                    aria-label="Default select example">
+                                    @for(data of branchListData;track $index){
+                                    <option value="" disabled selected style="display:none;">Select Brnch</option>
+
+                                    <option [value]="data.id">
+                                        {{data.name}}
+                                    </option>
+                                    }
+                                </select>
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+                    <div class="row gy-2 d-flex">
+                        <label for="exampleInputPassword1" class="form-label">Region</label>
+                        <div class="col">
+
+                            <select class="form-select mb-3" (change)="onCategoryChange($event)"
+                                aria-label="Default select example" formControlName="fromId">
+                                <option>Select Region</option>
+                                <option *ngFor="let data of regionListData" [value]="data.id">
+                                    {{data.name}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col">
+
+                            <div class="input-group">
+
+                                <!-- <label class="input-group-text" for="inputGroupSelect01">Options</label> -->
+                                <select formControlName="toId" class="form-select mb-3"
+                                    aria-label="Default select example">
+                                    @for(data of regionListData;track $index){
+                                    <option value="" disabled selected style="display:none;">Select Region</option>
+
+                                    <option [value]="data.id">
+                                        {{data.name}}
+                                    </option>
+                                    }
+                                </select>
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+
+                    <div style="width:450px">
+                        <label for="exampleInputPassword1" class="form-label">Branch</label>
+                        <div class="col">
+
+                            <select class="form-select mb-3" (change)="onCategoryChange($event)"
+                                aria-label="Default select example" formControlName="fromId">
+                                <option>Select Region</option>
+                                <option *ngFor="let data of branchListData" [value]="data.id">
+                                    {{data.name}}
+                                </option>
+                            </select>
+                        </div>
+
+
+
+
+                    </div>
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-centered align-middle table-nowrap mb-0">
+                                <thead class="table-active">
+                                    <tr>
+                                        
+                                        <th>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="option"
+                                                    [(ngModel)]="masterSelected" (change)="checkUncheckAll($event)"
+                                                    id="checkAll">
+                                                <label class="form-check-label" for="checkAll"></label>
+                                            </div>
+                                        </th>
+                                        <th class="sort cursor-pointer">Branch</th>
+                                        <th class="sort cursor-pointer">Region</th>
+                                        <th class="sort cursor-pointer">Zone</th>
+
+                                        <!-- <th class="sort cursor-pointer" >Published</th>
+                                        <th>Action</th> -->
+                                    </tr>
+                                </thead>
+                                <tbody class="list form-check-all">
+                                    @for ( data of branchListData; track $index) {
+                                    <tr id="p_{{data.id}}">
+                                        <td>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="checkAll"
+                                                    formControlName="leadIds" value="{{data.id}}"
+                                                    [(ngModel)]="data.states" (change)="onCheckboxChange($event)">
+                                                <label class="form-check-label"></label>
+                                            </div>
+                                        </td>
+                                        <td class="id">
+                                            {{data.name}}</td>
+
+                                                <td>{{data.regionName}}</td>
+                                        <td>{{data.zoneName}}</td>
+
+
+
+                                        <!-- <div class="d-flex align-items-center">
+                                                <div class="avatar-xs bg-light rounded p-1 me-2">
+                                                    <img src="{{data.img}}" alt="" class="img-fluid d-block">
+                                                </div>
+                                                <div>
+                                                    <h6 class="mb-0"><a routerLink="/ecommerce/product-details" class="text-reset products">{{data.title}}</a></h6>
+                                                </div>
+                                            </div> -->
+
+                                     
+                                        
+
+                                        <!-- <td class="rating">
+                                            <span class="badge bg-warning-subtle text-warning"><i class="bi bi-star-fill align-baseline me-1"></i> {{data.ratings}}</span>
+                                        </td> -->
+                                        <!-- <td class="published">{{data.publish}}</td> -->
+                                        <!-- <td>
+                                            <div dropdown class="dropdown">
+                                                <button dropdownToggle class="btn btn-subtle-secondary btn-sm btn-icon">
+                                                    <i class="bi bi-three-dots-vertical"></i>
+                                                </button>
+    
+                                                <ul *bsDropdownMenu class="dropdown-menu dropdown-menu-end">
+                                                    <li><a class="dropdown-item" routerLink="/ecommerce/product-details" href="javascript:void(0);"><i class="ph-eye align-middle me-1"></i> View</a></li>
+                                                    <li><a class="dropdown-item edit-item-btn" ><i class="ph-pencil align-middle me-1"></i>
+                                                            Edit</a></li>
+                                                    <li><a class="dropdown-item remove-item-btn" href="javascript:void(0);"><i class="ph-trash align-middle me-1"></i> Remove</a></li>
+                                                </ul>
+                                            </div>
+                                        </td> -->
+                                    </tr>
+                                    }
+                                </tbody>
+                                <!-- <div id="elmLoader">
+                                    <div class="spinner-border text-primary avatar-sm" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </div> -->
+                            </table>
+                        </div><!--end table-responsive-->
+
+                        <div class="noresult" style="display: none;">
+                            <div class="text-center py-4">
+                                <div class="avatar-md mx-auto mb-4">
+                                    <div class="avatar-title bg-light text-primary rounded-circle fs-4xl">
+                                        <i class="bi bi-search"></i>
+                                    </div>
+                                </div>
+                                <h5 class="mt-2">Sorry! No Result Found</h5>
+                                <p class="text-muted mb-0">We've searched more than 150+ products We did not find any
+                                    products for you search.</p>
+                            </div>
+                        </div>
+                        <!-- end noresult -->
+
+
+                        <!-- end pagination-element -->
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <div class="modal-footer">
+                        <div class="hstack gap-2 justify-content-end">
+                            <button type="button" class="btn btn-danger" (click)="close()">Close</button>
+                            <button type="submit" class="btn btn-success" id="add-btn"
+                                (click)="saveLeadTransfer()">Transfer
+                                Branch</button>
+                            <!-- <button type="button" class="btn btn-success" id="edit-btn">Update</button> -->
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

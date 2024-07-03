@@ -1,0 +1,457 @@
+<div class="container">
+
+    <div class="container">
+        <div class="row row-cols-2 row-cols-lg-3">
+
+            <div class="col-4 col-lg-2" style="font-weight:normal; font-size: 25px;">
+                Campaign </div>
+
+            <div class="col-4 col-lg-2" style="left:300px;position:relative"> 
+                <input type="search"  [(ngModel)]="searchText" 
+                    style="position: relative; top:10px; left: -130px;" placeholder="Search Name/Email"></div>
+            <div class="col-4 col-lg-2" style="left:480px;position:relative;cursor: pointer;">
+                <button type="button" data-toggle="tooltip" data-placement="top" title="click Search"
+                    class="btn btn-success"
+                    style="left:-290px;width:85px; position: relative; top:10px;border-radius: 5px;; height: 30px; padding-top:1px; color: white; font-weight: bold; padding-left:25px; cursor: pointer;">
+                    Search
+                    <i class="bi bi-search"
+                        style="position: relative; top:-19px ; left:-20px;font-weight: bold;font-size: 13px;"></i>
+                </button>
+
+
+            </div>
+            <!-- <div class="col-4 col-lg-2" style="left:20px;position:relative; cursor: pointer;" (click)="openModal()">
+                <button   class="btn btn-success" style="margin-left:100px;width: 70px; 
+                    position: relative; top:10px;border-radius: 5px;
+                    height: 30px; padding-top:1px;
+                     color: white; font-weight: bold;">+ADD</button>
+            </div> -->
+            <div>
+                <button class="btn btn-success" id="add" (click)="openModal()" data-toggle="tooltip" data-placement="top" title="click Add">+ADD</button>
+            </div>
+
+            <!-- <div class="col-4 col-lg-2" style="position:relative"><button class="btn btn-success"
+                    style="width:auto; position: relative; top:10px;border-radius: 5px;; height: 30px; padding-top:1px; color: white; font-weight: bold;">DOWNLOADEXCEL</button>
+            </div> -->
+        </div>
+    </div>
+</div>
+<div class="container" style="background-color:white;
+box-shadow: 1px 1px 1px 1px #888888; height: 100%; width:100%;top:40px; position: relative;">
+    <table class="table">
+
+        <thead style="background-color: whitesmoke;">
+            <tr>
+                <th scope="col">Campaign code</th>
+                <th scope="col">Campaign Name</th>
+                <th scope="col">From Date</th>
+                <th scope="col">To Date</th>
+                <th scope="col">Approved By</th>
+                <th scope="col">Actions</th>
+
+
+            </tr>
+        </thead>
+        @for (list of Userlist | orderBy: searchText; track $index) {
+        <tbody>
+            <tr>
+                <td>{{list.Name}}</td>
+                <td>{{list.Role}}</td>
+                <td>{{list.Username}}</td>
+                <td>{{list.Email}}</td>
+                <td>{{list.MobileNo}}</td>
+
+                <td>
+                    <i class="bi bi-pen" style="color:gray" (click)="EditModal()" data-toggle="tooltip" data-placement="top" title="click Edit"></i>
+                    <!-- <i class="bi bi-key" (click)="openModal()"></i>
+                    <i class="bi bi-x-square" style="color:red;border-radius:100px;"></i> -->
+                    <i class="bi bi-trash3" style="color:red" (click)="openDelete()" data-toggle="tooltip" data-placement="top" title="click Delete"></i>
+                </td>
+
+            </tr>
+
+        </tbody>
+        }
+    </table>
+</div>
+<!-- <i style="font-size:16px;color:navy;position: relative;left:10px" class="fa">&#xf021;</i> -->
+<!-- <nav aria-label="Page navigation example" style="margin-left: 350px;position: relative; top:40px;border-radius: 30px;">
+    <ul class="pagination">
+        <li class="page-item" style="border-radius: 300px;"><a class="page-link"
+                style="border-radius: 30px; width:30px"><i class="fas fa-chevron-left" (click)="openModal()"></i></a>
+        </li>
+        <li class="page-item"><a class="page-link" style="background-color: yellow;border-radius: 30px;">1</a></li>
+        <li class="page-item"><a class="page-link" style="border-radius: 30px;">2</a></li>
+        <li class="page-item" style="border-radius: 30px;"><a class="page-link" style="border-radius: 30px;">3</a></li>
+        <li class="page-item"><a class="page-link" style="border-radius: 30px;width:30px"><i
+                    class="fas fa-chevron-right"></i></a></li>
+    </ul>
+</nav> -->
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" style="position: relative;left:190px">Create Campaign</h4>
+                <span class="close" aria-label="Close" (click)="onCloseHandled()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <hr>
+            <div class="modal-body">
+
+                <form>
+                    <div class="row">
+                        <p style="font-weight: bold;">Details</p>
+
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Name</label>
+                            <input type="text" class="form-control"
+                                style=" position:relative;width:250px; height:30px;">
+                                <br>
+                            <label for="exampleInputPassword1" class="form-label">Approver</label>
+                            <input type="text" class="form-control"
+                                style=" position:relative;width:250px; height:30px ;">
+                            <select style="position: relative; left:200px; top:-30px">
+                                <option></option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                            </select>
+
+
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Status</label>
+
+                            <input type="text" class="form-control"
+                                style=" position:relative;width:200px; height:30px ;">
+                            <select style="position: relative; left:160px; top:-30px">
+                                <option></option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                            </select>
+                            <br>
+                            <label for="exampleInputPassword1" class="form-label"
+                                style="position: relative;">Budget</label>
+                            <input type="text" class="form-control" placeholder="0.00"
+                                style=" position:relative;width:200px; height:30px ;">
+                                <br>
+                            <label for="exampleInputPassword1" class="form-label">Products</label>
+                            <input type="text" class="form-control"
+                                style=" position:relative;width:200px; height:30px ;">
+                            <select style="position: relative; left:160px; top:-30px">
+                                <option></option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                            </select>
+                        </div>
+
+                    </div>
+                </form>
+                <hr>
+                <p style="font-weight: bold">Artifacts</p>
+                <table class="table">
+                    <thead style="font-weight: bold">
+                        <th>SL.NO</th>
+                        <th style="position: relative; left:20px;">Name</th>
+                        <th style="position: relative; left:30px;">Type</th>
+                        <th style="position: relative; left:10px;">Approver</th>
+                        <th style="position: relative; left:10px;">Verified By</th>
+                        <th>Status</th>
+                    </thead>
+                    <tbody>
+                        <tr style="border-color: black;">
+                            <td>1</td>
+                            <td>Final Brochure</td>
+                            <td>
+                                <input type="text" class="form-control" style="width:100px;height:30px;">
+                                <select style="position: relative; top:-30px">
+                                    <option></option>
+                                    <option>Brochure</option>
+                                    <option>video</option>
+                                    <option>image</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" style="width:100px;height:30px;">
+                                <select style="position: relative; top:-30px">
+                                    <option></option>
+                                    <option>Brochure</option>
+                                    <option>video</option>
+                                    <option>image</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" style="width:100px;height:30px;">
+                                <select style="position: relative; top:-30px">
+                                    <option></option>
+                                    <option>Brochure</option>
+                                    <option>video</option>
+                                    <option>image</option>
+                                </select>
+                            </td>
+                            <td><button>upload</button></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Trip Image</td>
+                            <td>
+                                <input type="text" class="form-control" style="width:100px;height:30px;">
+                                <select style="position: relative; top:-30px">
+                                    <option></option>
+                                    <option>Brochure</option>
+                                    <option>video</option>
+                                    <option>image</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" style="width:100px;height:30px;">
+                                <select style="position: relative; top:-30px">
+                                    <option></option>
+                                    <option>Brochure</option>
+                                    <option>video</option>
+                                    <option>image</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" style="width:100px;height:30px;">
+                                <select style="position: relative; top:-30px">
+                                    <option></option>
+                                    <option>Brochure</option>
+                                    <option>video</option>
+                                    <option>image</option>
+                                </select>
+                            </td>
+                            <td><button>upload</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <hr>
+                <p style="font-weight: bold;line-height:10px;">Points-commission & Bonous</p>
+                <div class="row" id="scroll">
+
+                    <div class="col">
+                        <a style="font-weight: bold;line-height:10px; text-decoration:underline">Particular</a>
+                        <p>1 month after 1st chits Auction</p>
+                        <p>One receipt of second installment</p>
+                        <p>One receipt of third installment</p>
+                        <p>One receipt of fourth installment</p>
+
+                    </div>
+                    <div class="col">
+                        <a style="font-weight: bold;line-height:10px; text-decoration:underline;">Commission payble-% chit value</a>
+                        <p>0.70%</p>
+                        <p>0.10%</p>
+                        <p>0.10%</p>
+                        <p>0.10%</p>
+                    </div>
+                </div>
+                <hr>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" (click)="onCloseHandled()">Submit</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display1}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" style="position: relative;left:190px">Edit Campaign</h4>
+                <span class="close" aria-label="Close" (click)="onCloseHandled1()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <hr>
+            <div class="modal-body">
+
+                <form>
+                    <div class="row">
+                        <p style="font-weight: bold;">Details-</p>
+
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Name</label>
+                            <input type="text" class="form-control"
+                                style=" position:relative;width:250px; height:30px;">
+                            <label for="exampleInputPassword1" class="form-label">Approver</label>
+                            <input type="text" class="form-control"
+                                style=" position:relative;width:250px; height:30px ;">
+                            <select style="position: relative; left:200px; top:-30px">
+                                <option></option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                            </select>
+
+
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Status</label>
+                            <input type="text" class="form-control"
+                                style=" position:relative;width:200px; height:30px ;">
+                            <select style="position: relative; left:160px; top:-30px">
+                                <option></option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                            </select>
+                            <label for="exampleInputPassword1" class="form-label"
+                                style="position: relative; left:-20px">Budget</label>
+                            <input type="text" class="form-control" placeholder="0.00"
+                                style=" position:relative;width:200px; height:30px ;">
+                            <label for="exampleInputPassword1" class="form-label">Products</label>
+                            <input type="text" class="form-control"
+                                style=" position:relative;width:200px; height:30px ;">
+                            <select style="position: relative; left:160px; top:-30px">
+                                <option></option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                            </select>
+                        </div>
+
+                    </div>
+                </form>
+                <hr>
+                <p style="font-weight: bold">Artifacts-</p>
+                <table class="table">
+                    <thead style="font-weight: bold">
+                        <th>SL.NO</th>
+                        <th style="position: relative; left:20px;">Name</th>
+                        <th style="position: relative; left:30px;">Type</th>
+                        <th style="position: relative; left:10px;">Approver</th>
+                        <th style="position: relative; left:10px;">Verified By</th>
+                        <th>Status</th>
+                    </thead>
+                    <tbody>
+                        <tr style="border-color: black;">
+                            <td>1</td>
+                            <td>Final Brochure</td>
+                            <td>
+                                <input type="text" class="form-control" style="width:100px;height:30px;">
+                                <select style="position: relative; top:-30px">
+                                    <option></option>
+                                    <option>Brochure</option>
+                                    <option>video</option>
+                                    <option>image</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" style="width:100px;height:30px;">
+                                <select style="position: relative; top:-30px">
+                                    <option></option>
+                                    <option>Brochure</option>
+                                    <option>video</option>
+                                    <option>image</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" style="width:100px;height:30px;">
+                                <select style="position: relative; top:-30px">
+                                    <option></option>
+                                    <option>Brochure</option>
+                                    <option>video</option>
+                                    <option>image</option>
+                                </select>
+                            </td>
+                            <td><button>upload</button></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Trip Image</td>
+                            <td>
+                                <input type="text" class="form-control" style="width:100px;height:30px;">
+                                <select style="position: relative; top:-30px">
+                                    <option></option>
+                                    <option>Brochure</option>
+                                    <option>video</option>
+                                    <option>image</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" style="width:100px;height:30px;">
+                                <select style="position: relative; top:-30px">
+                                    <option></option>
+                                    <option>Brochure</option>
+                                    <option>video</option>
+                                    <option>image</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" style="width:100px;height:30px;">
+                                <select style="position: relative; top:-30px">
+                                    <option></option>
+                                    <option>Brochure</option>
+                                    <option>video</option>
+                                    <option>image</option>
+                                </select>
+                            </td>
+                            <td><button>upload</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <hr>
+                <p style="font-weight: bold;line-height:10px;">Points-commission & Bonous</p>
+                <div class="row" id="scroll">
+
+                    <div class="col">
+                        <a style="font-weight: bold;line-height:10px; text-decoration:underline">Particular</a>
+                        <p>1 month after 1st chits Auction</p>
+                        <p>One receipt of second installment</p>
+                        <p>One receipt of third installment</p>
+                        <p>One receipt of fourth installment</p>
+
+                    </div>
+                    <div class="col">
+                        <a style="font-weight: bold;line-height:10px; text-decoration:underline;">Commission payble-% chit value</a>
+                        <p>0.70%</p>
+                        <p>0.10%</p>
+                        <p>0.10%</p>
+                        <p>0.10%</p>
+                    </div>
+                </div>
+                <hr>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" (click)="onCloseHandled()">Submit</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display2}" id="dltModel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <span style="font-weight: bold;margin-left: 130px;"> Do you want to delete record?</span>
+                <span class="close" aria-label="Close" (click)="onClosed()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <hr>
+            <div class="modal-body">
+
+                <form>
+                    <div class="row" id="fields">
+                        <div class="col">
+
+
+                        </div>
+
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" (click)="onClosed()">OK</button>
+                <button type="button" class="btn btn-danger" (click)="onClosed()">X Cancel</button>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,237 @@
+
+<div class="container">
+    <div class="row">
+
+    </div>
+    <div class="container">
+        <div class="row row-cols-2 row-cols-lg-3">
+
+            <div style="font-weight:normal; font-size: 25px;">
+                Request Category</div>
+
+            <div class="col-4 col-lg-1" style="left:350px;position:relative"> 
+                <input type="search" [(ngModel)]="searchText" 
+                    style="position: relative; top:10px;width:225px; left: -130px;" placeholder="Search name/code">
+            </div>
+            <div class="col-4 col-lg-1" style="left:480px;position:relative"><button type="button"
+                    class="btn btn-success" data-toggle="tooltip" data-placement="top" title="click Search"
+                    style="left:-110px;width:85px; position: relative; top:10px;border-radius: 5px;; height: 30px; padding-top:4px; color: white; font-weight: bold; padding-left:25px;">
+                    Search<i class="bi bi-search"
+                        style="position: relative; top:-19px ; left:-35px;font-weight: bold;font-size: 13px;"></i>
+                </button>
+                <button (click)="openModal()" class="btn btn-success"
+                data-toggle="tooltip" data-placement="top" title="click Add"
+                    style="left:-20px;width: 70px; position: relative; top:-18px;border-radius: 5px;; height: 30px; padding-top:4px; color: white; font-weight: bold;">+ADD</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="container" style="background-color:white;
+box-shadow: 1px 1px 1px 1px #888888; height: 100%; width:100%;top:40px; position: relative;">
+    <table class="table">
+
+        <thead style="background-color: whitesmoke;">
+            <tr>
+                <th scope="col">Order</th>
+                <th scope="col" style="position: relative;left:10px">Name</th>
+                <th scope="col"style="position: relative;left:10px">Code</th>
+                <th scope="col">Status</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        @for (Category of RequestCategory | orderBy:searchText; track $index) {
+        <tbody style="position: relative;left:10px;">
+            <tr>
+                <td>{{Category.Order}}</td>
+                <td>{{Category.Name}}</td>
+                <td>{{Category.Code}}</td>
+                <td>{{Category.Status}}</td>
+                <td>
+                    <i class="bi bi-pen" style="color:gray" data-toggle="tooltip" data-placement="top" title="click Edit"(click)="EditModal()"></i>
+                    <i class="bi bi-trash3" style="color:red" data-toggle="tooltip" data-placement="top" title="click Delete"(click)="openDelete()"></i>
+                </td>
+
+            </tr>
+           
+        </tbody>
+       }
+    </table>
+    <i style="font-size:16px;color:navy;position: relative;left:10px" class="fa">&#xf021;</i>
+    <nav aria-label="Page navigation example"
+        style="margin-left: 350px;position: relative;top:-20px;border-radius: 30px;">
+        <ul class="pagination">
+            <li class="page-item" style="border-radius: 300px;"><a class="page-link"
+                    style="border-radius: 30px; width:30px"><i style="position: relative; left:-15px;"
+                        class="fas fa-chevron-left"></i></a></li>
+            <li class="page-item"><a class="page-link" style="background-color: yellow;border-radius: 30px;">1</a></li>
+            <li class="page-item"><a class="page-link" style="border-radius: 30px;">2</a></li>
+            <li class="page-item" style="border-radius: 30px;"><a class="page-link" style="border-radius: 30px;">3</a>
+            </li>
+            <li class="page-item"><a class="page-link" style="border-radius: 30px;width:30px"><i
+                        class="fas fa-chevron-right" style="position: relative; left:-15px;"></i></a></li>
+        </ul>
+    </nav>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" style="position: relative;left:100px"> Add Request Category</h4>
+                <span class="close" aria-label="Close" (click)="onCloseHandled()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <hr>
+            <div class="modal-body">
+
+                <form>
+                    <div class="row">
+                        
+
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Order</label>
+                            <input type="text" class="form-control"
+                                style=" position:relative;width:250px; height:30px;">
+                            <select style="position: relative; left:210px; top:-28px">
+                                <option></option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                            </select>
+                            <br>
+                            <label for="exampleInputPassword1" class="form-label">Code</label>
+                            <input type="text" class="form-control"
+                                style=" position:relative;width:250px; height:30px ;">
+
+
+
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Name</label>
+                            <input type="text" class="form-control"
+                                style=" position:relative;width:200px; height:30px ;">
+                            <br>
+                            <div >
+                                <p>Status<span style="color:red">*</span></p>
+                              
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                        id="inlineRadio1" value="option1">
+                                    <label class="form-check-label" for="inlineRadio1">Active</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                        id="inlineRadio2" value="option2">
+                                    <label class="form-check-label" for="inlineRadio2">Inactive</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" (click)="onCloseHandled()">Submit</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display1}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" style="position: relative;left:100px">Edit Request Category</h4>
+                <span class="close" aria-label="Close" (click)="onCloseHandled1()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <hr>
+            <div class="modal-body">
+
+                <form>
+                    <div class="row">
+                        
+
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Order</label>
+                            <input type="text" class="form-control"
+                                style=" position:relative;width:250px; height:30px;">
+                            <select style="position: relative; left:210px; top:-28px">
+                                <option></option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                            </select>
+                            <br>
+                            <label for="exampleInputPassword1" class="form-label">Code</label>
+                            <input type="text" class="form-control"
+                                style=" position:relative;width:250px; height:30px ;">
+
+
+
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Name</label>
+                            <input type="text" class="form-control"
+                                style=" position:relative;width:200px; height:30px ;">
+                            <br>
+                            <div >
+                                <p>Status<span style="color:red">*</span></p>
+                              
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                        id="inlineRadio1" value="option1">
+                                    <label class="form-check-label" for="inlineRadio1">Active</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                        id="inlineRadio2" value="option2">
+                                    <label class="form-check-label" for="inlineRadio2">Inactive</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" (click)="onCloseHandled()">Submit</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display2}" id="dltModel" >
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <span style="font-weight: bold;margin-left: 130px;"> Do you want to delete record?</span>
+                <span class="close" aria-label="Close" (click)="onClosed()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <hr>
+            <div class="modal-body">
+
+                <form>
+                    <div class="row" id="fields">
+                        <div class="col">
+
+
+                        </div>
+
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" (click)="onClosed()">OK</button>
+                <button type="button" class="btn btn-danger" (click)="onClosed()">X Cancel</button>
+            </div>
+        </div>
+    </div>
+
+</div>

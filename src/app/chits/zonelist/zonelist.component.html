@@ -1,0 +1,213 @@
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4>Zones</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item active">Chits</li>
+                    <li class="breadcrumb-item active">Master</li>
+                    <li class="breadcrumb-item active">Zones</li>
+                </ol>
+              
+            </div>
+
+        </div>
+    </div>
+    <div class="col-sm">
+        <div class="d-flex justify-content-sm-end gap-2">
+            <button class="btn btn-success add-btn" (click)="openModal()"> +
+                &nbsp;Add</button>
+                 
+                <button class="btn btn-success" (click)="clearAllSearchFields()" >Clear All</button>
+
+
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="row">
+
+    </div>
+    <div class="container">
+        <div class="row row-cols-2 row-cols-lg-3">
+
+            <!-- <div class="col-4 col-lg-2" style="font-weight:normal; font-size: 25px;">
+                Zones </div> -->
+
+
+
+            <div class=" order-last justify-content-end">
+
+                <!-- <button type="button" class="btn btn-success add-btn float-end" id="create-btn" (click)="openModal()"
+                    data-toggle="tooltip" data-placement="top" title="click Add" style="color:black"><i
+                        class="ri-add-line align-bottom me-1"></i>
+                    Add</button> -->
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<div class="container" style="top: -30px;position: relative;">
+    <div class="row d-flex d-sm-flex mt-3 mb-2">
+        <div class="search-box  col-2">
+            <input type="text" class="form-control search" placeholder="Search for Zone.." [(ngModel)]="searchTermZone"
+                (input)="filterData()">
+            <i class="ri-search-line search-icon"></i>
+        </div>
+        <div class="search-box  col-2">
+            <input type="text" class="form-control search" placeholder="Search for code.." [(ngModel)]="searchTermCode"
+                (input)="filterData()">
+            <i class="ri-search-line search-icon"></i>
+        </div>
+
+    </div>
+    <table class="table table-striped" id="sortable-table">
+        <thead class="text-muted table-light">
+            <tr>
+
+                <th scope="col" (click)="sortTable('name')" style="cursor:pointer">
+                    Zone
+                    <span *ngIf="sortColumn === 'name'">
+
+                        <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                        <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                    </span>
+                    <span *ngIf="sortColumn !== 'name'">
+
+                        <i [hidden]="true" class="fa fa-sort-up"></i>
+                    </span>
+                </th>
+                <th scope="col" (click)="sortTable('code')" style="cursor:pointer">
+                    Code
+                    <span *ngIf="sortColumn === 'code'">
+
+                        <i *ngIf="sortOrder === 'asc'" class="fa fa-sort-up"></i>
+                        <i *ngIf="sortOrder === 'desc'" class="fa fa-sort-down"></i>
+                    </span>
+                    <span *ngIf="sortColumn !== 'code'">
+
+                        <i [hidden]="true" class="fa fa-sort-up"></i>
+                    </span>
+                </th>
+
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+
+
+        <tbody style="position: relative;left:10px;">
+            @for (list of sortedZoneList;track $index) {
+            <tr>
+                <td>{{list.vchzonename}}</td>
+                <td>{{list.code}}</td>
+
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-subtle-secondary btn-sm dropdown-toggle" type="button"
+                            data-bs-toggle="dropdown">
+                            <i class="bi bi-three-dots-vertical"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" style="cursor: pointer;">
+                            <li style="cursor: pointer;">
+                                <a class="dropdown-item" href="javascript:void(0);" style="cursor: pointer;"
+                                    (click)="EditModal(list.id)">Edit</a>
+                            </li>
+                            <li style="cursor: pointer;">
+                                <a class="dropdown-item" href="javascript:void(0);" style="cursor: pointer;"
+                                    (click)="openDelete(list.id)">Delete</a>
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+
+            </tr>
+            }
+        </tbody>
+
+    </table>
+    <i style="font-size:16px;color:navy;position: relative;left:10px" class="fa">&#xf021;</i>
+    <div class="d-flex justify-content-end">
+        <div class="pagination-wrap hstack gap-2">
+            <pagination class="pagination-wrap hstack gap-2" [totalItems]="zoneListData.length" [itemsPerPage]="15"
+                (pageChanged)="tablepageChanged($event)"></pagination>
+        </div>
+    </div>
+
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title"> Create Zone</h2>
+                <span class="close" aria-label="Close" (click)="onCloseHandled()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="zoneForm">
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Name<span
+                                class="text-danger">&nbsp;*</span></label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                            placeholder="Enter Name" aria-placeholder="Enter Name" formControlName="vchzonename">
+                        <div *ngIf="submitted && zoneForm.get('name').invalid">
+                            <div *ngIf="zoneForm.get('name').errors.required" style="color: red;"> Name is required.
+                            </div>
+                        </div>
+                        <div id="emailHelp" class="form-text"></div>
+
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Code<span
+                                class="text-danger">&nbsp;*</span></label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Code"
+                            formControlName="">
+                        <div *ngIf="submitted && zoneForm.get('code').invalid">
+                            <div *ngIf="zoneForm.get('code').errors.required" style="color: red;"> code is required.
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-danger" (click)="onCloseHandled()">Cancel</button>
+                    <button type="button" class="btn btn-success" (click)="onSubmit()">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display2}" id="dltModel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <span style="font-weight: bold;margin-left: 130px;"> Do you want to delete record ?</span>
+                <span class="close" aria-label="Close" (click)="onClosed()" aria-hidden="true"
+                    style="font-size: 30px; color: #888888; cursor: pointer;">&times;</span>
+            </div>
+            <hr>
+            <div class="modal-body">
+
+                <form>
+                    <div class="row" id="fields">
+                        <div class="col">
+
+
+                        </div>
+
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" (click)="deleteZone()">OK</button>
+                <button type="button" class="btn btn-danger" (click)="onClosed()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+</div>

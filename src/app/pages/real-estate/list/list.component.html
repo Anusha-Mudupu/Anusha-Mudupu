@@ -1,0 +1,193 @@
+<!-- Start Breadcrumbs -->
+<div class="row">
+    <div class="container">
+        <div class="row row-cols-2 row-cols-lg-3 d-flex">
+            <h2>Summary</h2>
+            <div class="page-title-right">
+                <ol class="breadcrumb " *ngIf="showChitsLeadData">
+
+                    <li class="breadcrumb-item active text-dark">Chits</li>
+                    <li class="breadcrumb-item active">
+                        <a role="button" class="text-primary">Summary</a>
+                    </li>
+
+
+                </ol>
+                <ol class="breadcrumb m-0" *ngIf="showRealEstateLeadData">
+
+                    <li class="breadcrumb-item active text-dark">Real Estate</li>
+                    <li class="breadcrumb-item active">
+                        <a role="button" class="text-primary">Summary</a>
+                    </li>
+
+
+                </ol>
+                <ol class="breadcrumb m-0" *ngIf="showAdminLeadData">
+
+                    <li class="breadcrumb-item active text-dark">Administration</li>
+                    <li class="breadcrumb-item active">
+                        <a role="button" class="text-primary">Summary</a>
+                    </li>
+
+
+                </ol>
+            </div>
+
+
+
+
+
+
+
+
+        </div>
+    </div>
+</div>
+<!-- <app-breadcrumbs title="Summary" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs> -->
+<!-- End Breadcrumbs -->
+
+<div class="row row-cols-xxl-5 row-cols-lg-5 row-cols-md-2 row-cols-1">
+    <!-- @for (data of productslist; track $index) { -->
+    <div class="col">
+        <div class="card border-bottom border-3 card-animate" style="width:180px">
+            <div class="card-body">
+                <i class="bi bi-person-lines-fill" style="color:mediumpurple;font-size:25px"></i>
+                <p class="text-muted fw-medium text-uppercase mb-0">Total Contacts</p>
+                <h3 class="fw-medium text-uppercase mb-0">5319</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card border-bottom border-3 card-animate" style="width:180px">
+            <div class="card-body">
+                <i class="bi bi-copy"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="40" fill="currentColor" class="bi bi-copy"
+                    viewBox="0 0 16 16" style="color:lightslategray;">
+                    <path fill-rule="evenodd"
+                        d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z" />
+                </svg>
+                <p class="text-muted fw-medium text-uppercase mb-0">Total Leads</p>
+                <h3 class="fw-medium text-uppercase mb-0">5449</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card border-bottom border-3 card-animate" style="width:180px">
+            <div class="card-body">
+                <i class="bi bi-copy"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="40" fill="currentColor" class="bi bi-copy"
+                    viewBox="0 0 16 16" style="color:lightseagreen;">
+                    <path fill-rule="evenodd"
+                        d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z" />
+                </svg>
+                <p class="text-muted fw-medium text-uppercase mb-0">Converted Leads</p>
+                <h3 class="fw-medium text-uppercase mb-0">50</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card border-bottom border-3 card-animate" style="width:180px">
+            <div class="card-body">
+                <i class="bi bi-cash-stack" style="font-size: 25px;color:mediumpurple"></i>
+
+                <p class="text-muted fw-medium text-uppercase mb-0">Business Value(₴)</p>
+                <h3 class="fw-medium text-uppercase mb-0">2,52,00,000</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card border-bottom border-3 card-animate" style="width:180px">
+            <div class="card-body">
+                <i class="bi bi-pip" style="font-size: 25px;color:lightslategray"></i>
+                <p class="text-muted fw-medium text-uppercase mb-0">Pipe Line(₴)</p>
+                <h3 class="fw-medium text-uppercase mb-0">70,90,00,00</h3>
+            </div>
+        </div>
+    </div>
+    <!-- } -->
+</div>
+
+
+<div class="card">
+    <div class="card-header">
+        <div class="card-body">
+            <table class="table align-middle table-nowrap" id="customerTable">
+                <thead class="table-light">
+                    <th scope="col" style="cursor:pointer">
+                        S.No
+
+                    </th>
+
+                    <th scope="col" style="cursor:pointer;left:10px;position: relative;">
+                        Lead Name
+
+                    </th>
+
+                    <th scope="col" style="cursor:pointer">
+                        Email Id
+
+                    </th>
+                    <th scope="col" style="cursor:pointer">
+                        Phone
+
+                    </th>
+                    <th scope="col" style="cursor:pointer" *ngIf="selectedLabel === 'Chits' ">
+                        Chit Value</th>
+                    <th scope="col" style="cursor:pointer" *ngIf="selectedLabel === 'Chits' ">
+                        Tenure(Months)</th>
+                    <th scope="col" style="cursor:pointer" *ngIf="showRealEstateLeadData">
+                        Category Name</th>
+                    <th scope="col" style="cursor:pointer" *ngIf="showRealEstateLeadData">
+                        Category Value</th>
+                    <th *ngIf="showAdminLeadData">Chit Value</th>
+                    <th scope="col" style="cursor:pointer">
+                        Branch
+
+                    </th>
+                    <th scope="col" style="cursor:pointer" *ngIf="hideEmployeeName">
+                        Employee
+
+                    </th>
+
+
+                    <th scope="col">
+                        Status
+
+                    </th>
+                    <!-- <th style="position: relative;left:50px;">Follow Up</th> -->
+                    <!-- <th style="position: relative;left:50px;">Action</th> -->
+
+                </thead>
+
+                <tbody class="list form-check-all">
+                    <ng-container>
+
+                        <tr *ngFor="let data of getSelectedData(); let index = index; trackBy: trackByFn"
+                            [attr.id]="'a_' + data.id">
+                            <!-- Adjust the ngIf condition as per your requirement -->
+                            <td>{{data.id}}</td>
+                            <!-- <td class="id" style="display:none;"><a href="javascript:void(0);"
+                                        class="fw-medium link-primary">#VZ2101</a></td> -->
+                            <td>{{data.leadName}}</td>
+                            <!-- <td>{{data.enquiredDate}}</td> -->
+                            <td>{{data.emailId}}</td>
+                            <td class="contactNo">{{data.contactNo}}</td>
+                            <td class="productName">{{data.productName}}</td>
+                            <td class="" *ngIf="selectedLabel === 'Chits'">9</td>
+                            <td class="" *ngIf="selectedLabel === 'Real Estate'">....</td>
+                            <td class="Branch">{{data.branchName}}</td>
+                            <td class="employeeName" *ngIf="hideEmployeeName">{{data.employeeName}}</td>
+
+                            <td class="employeeName">{{data.statusName}}</td>
+
+
+
+
+                        </tr>
+                    </ng-container>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>
